@@ -8,16 +8,53 @@
 
 import UIKit
 
+enum AppState {
+    case NotRunning
+    case Inactive
+    case Active
+    case Background
+    case Terminated
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
 
-
+    var currentState: AppState = .NotRunning
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        print("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
+        currentState = .Inactive
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        print("Application moved from '\(currentState)' to '\(AppState.Active)': \(#function)")
+        currentState = .Active
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        print("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
+        currentState = .Inactive
+    }
 
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        print("Application moved from '\(currentState)' to '\(AppState.Background)': \(#function)")
+        currentState = .Background
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        print("Application moved from '\(currentState)' to '\(AppState.Terminated)': \(#function)")
+        // no need to assign currentState because we are going to be terminated
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        print("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
+        currentState = .Inactive
+    }
+    
     // MARK: UISceneSession Lifecycle
     @available(iOS 13.0, *)
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
