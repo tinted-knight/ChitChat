@@ -24,6 +24,7 @@
 		394F867C250E518A00B703B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		394F867F250E518A00B703B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		394F8681250E518A00B703B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		394F8688250E659C00B703B3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +41,7 @@
 		394F8667250E518A00B703B3 = {
 			isa = PBXGroup;
 			children = (
+				394F8688250E659C00B703B3 /* README.md */,
 				394F8672250E518A00B703B3 /* ChitChat02 */,
 				394F8671250E518A00B703B3 /* Products */,
 			);
