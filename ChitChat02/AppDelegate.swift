@@ -8,7 +8,15 @@
 
 import UIKit
 
-enum AppState {
+let DEBUG_ENABLED = true
+
+func applog(_ message: String) {
+    if DEBUG_ENABLED {
+        print(message)
+    }
+}
+
+private enum AppState {
     case NotRunning
     case Inactive
     case Active
@@ -21,37 +29,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var currentState: AppState = .NotRunning
+    private var currentState: AppState = .NotRunning
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        print("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
+        applog("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
         currentState = .Inactive
         return true
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        print("Application moved from '\(currentState)' to '\(AppState.Active)': \(#function)")
+        applog("Application moved from '\(currentState)' to '\(AppState.Active)': \(#function)")
         currentState = .Active
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        print("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
+        applog("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
         currentState = .Inactive
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        print("Application moved from '\(currentState)' to '\(AppState.Background)': \(#function)")
+        applog("Application moved from '\(currentState)' to '\(AppState.Background)': \(#function)")
         currentState = .Background
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        print("Application moved from '\(currentState)' to '\(AppState.Terminated)': \(#function)")
+        applog("Application moved from '\(currentState)' to '\(AppState.Terminated)': \(#function)")
         // no need to assign currentState because we are going to be terminated
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        print("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
+        applog("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
         currentState = .Inactive
     }
     
