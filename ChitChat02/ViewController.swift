@@ -8,12 +8,20 @@
 
 import UIKit
 
+private let SEGUE_SHOW_PROFILE = "action_show_profile"
+
 class ViewController: UIViewController {
 
+    @IBOutlet weak var buttonShowProfile: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         applog(#function)
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func onShowProfileTap(_ sender: Any) {
+        performSegue(withIdentifier: SEGUE_SHOW_PROFILE, sender: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
