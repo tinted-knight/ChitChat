@@ -52,7 +52,7 @@ class ProfileViewController : ViewController {
     private func showChooseDialog() {
         let alertController = UIAlertController(title: nil, message: "Think twice. Everyone all over the Internet will see your face.", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Make a foto", style: .default) { UIAlertAction in
-            applog("camera")
+            self.chooseFromCamera()
         }
         let galleryAction = UIAlertAction(title: "From galley", style: .default) { UIAlertAction in
             self.chooseFromGallery()
@@ -75,10 +75,28 @@ class ProfileViewController : ViewController {
             picker.allowsEditing = false
             
             present(picker, animated: true, completion: nil)
+        } else {
+            showAlert("Device has no gallery")
         }
+    }
+    
+    private func chooseFromCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            picker.sourceType = .camera
+            present(picker, animated: true, completion: nil)
+        } else {
+            showAlert("No camera on device! You are in safe!")
+        }
+    }
+    
+    private func showAlert(_ message: String) {
+        let alertView = UIAlertController(title: "Don't worry, be puppy", message: message, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alertView, animated: true, completion: nil)
     }
 }
 
+// MARK: -UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
