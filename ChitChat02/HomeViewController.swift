@@ -10,7 +10,7 @@ import UIKit
 
 private let SEGUE_SHOW_PROFILE = "action_show_profile"
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

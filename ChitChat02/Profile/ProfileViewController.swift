@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ProfileViewController : ViewController {
+class ProfileViewController : HomeViewController {
     
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var buttonEdit: UIImageView!
