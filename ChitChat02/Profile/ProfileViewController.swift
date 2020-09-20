@@ -69,6 +69,15 @@ class ProfileViewController : HomeViewController {
         showChooseDialog()
     }
     
+    private func showAlert(_ message: String) {
+        let alertView = UIAlertController(title: "Don't worry, be puppy", message: message, preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alertView, animated: true, completion: nil)
+    }
+}
+
+//MARK: -Profile picture choose
+extension ProfileViewController {
     private func showChooseDialog() {
         let alertController = UIAlertController(title: nil, message: "Think twice. Everyone all over the Internet will see your face.", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Make a foto", style: .default) { [weak self] UIAlertAction in
@@ -107,12 +116,6 @@ class ProfileViewController : HomeViewController {
         } else {
             showAlert("No camera on device! You are in safe!")
         }
-    }
-    
-    private func showAlert(_ message: String) {
-        let alertView = UIAlertController(title: "Don't worry, be puppy", message: message, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        present(alertView, animated: true, completion: nil)
     }
 }
 
