@@ -22,8 +22,20 @@ class ProfileViewController : ViewController {
     
     private let picker = UIImagePickerController()
 
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+//        applog("\(buttonEdit.frame)")
+        // При попытке обращение к buttonEdit приложение падает
+        // с сообщением о том, что невозможно `расколупать` Optional
+        //
+        // В интернетах пишут, что `coder` нужен при работе с `iOS serialization APIs`
+        // Судя по всему, в момент вызова просто ещё ничего нет, поэтому и ссылка
+        // на кнопку `nil`
+    }
+    
     override func viewDidLoad() {
         applog("ProfileViewController::\(#function)")
+        applog("buttobEdit.frame: \(buttonEdit.frame)")
 
         prepareUi()
         populateUi()
@@ -51,14 +63,14 @@ class ProfileViewController : ViewController {
     
     private func showChooseDialog() {
         let alertController = UIAlertController(title: nil, message: "Think twice. Everyone all over the Internet will see your face.", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Make a foto", style: .default) { UIAlertAction in
-            self.chooseFromCamera()
+        let cameraAction = UIAlertAction(title: "Make a foto", style: .default) { [weak self] UIAlertAction in
+            self?.chooseFromCamera()
         }
-        let galleryAction = UIAlertAction(title: "From galley", style: .default) { UIAlertAction in
-            self.chooseFromGallery()
+        let galleryAction = UIAlertAction(title: "From galley", style: .default) { [weak self] UIAlertAction in
+            self?.chooseFromGallery()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { UIAlertAction in
-            applog("cancel")
+            // todo cancel handler
         }
         
         alertController.addAction(cameraAction)
@@ -101,7 +113,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[.originalImage] as? UIImage else {
-            applog("!!!!! Error")
+            showAlert("Something has gone very wrong")
             return
         }
         profilePicture.image = image

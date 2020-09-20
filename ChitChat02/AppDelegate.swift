@@ -8,10 +8,17 @@
 
 import UIKit
 
-let DEBUG_ENABLED = true
+let LYFECYCLE_LOG_ENABLED = false
+let APP_LOG_ENABLED = true
+
+func lifecycleLogs(_ message: String) {
+    if LYFECYCLE_LOG_ENABLED {
+        print(message)
+    }
+}
 
 func applog(_ message: String) {
-    if DEBUG_ENABLED {
+    if APP_LOG_ENABLED {
         print(message)
     }
 }
@@ -33,33 +40,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        applog("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
+        lifecycleLogs("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
         currentState = .Inactive
         return true
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        applog("Application moved from '\(currentState)' to '\(AppState.Active)': \(#function)")
+        lifecycleLogs("Application moved from '\(currentState)' to '\(AppState.Active)': \(#function)")
         currentState = .Active
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        applog("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
+        lifecycleLogs("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
         currentState = .Inactive
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        applog("Application moved from '\(currentState)' to '\(AppState.Background)': \(#function)")
+        lifecycleLogs("Application moved from '\(currentState)' to '\(AppState.Background)': \(#function)")
         currentState = .Background
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        applog("Application moved from '\(currentState)' to '\(AppState.Terminated)': \(#function)")
+        lifecycleLogs("Application moved from '\(currentState)' to '\(AppState.Terminated)': \(#function)")
         // no need to assign currentState because we are going to be terminated
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        applog("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
+        lifecycleLogs("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
         currentState = .Inactive
     }
     
