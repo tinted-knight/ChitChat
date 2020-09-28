@@ -38,5 +38,10 @@ extension ConversationCell: ConfigurableView {
     func configure(with model: ConversationCellModel) {
         name.text = model.name
         message.text = model.message
+        if model.isOnline {
+            backgroundColor = .yellow
+        } else {
+            backgroundColor = .white
+        }
     }
 }

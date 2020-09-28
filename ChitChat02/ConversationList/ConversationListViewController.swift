@@ -13,8 +13,10 @@ class ConversationListViewController: UIViewController {
     @IBOutlet weak var chatTableView: UITableView!
 
     private let cellReuseId = "chat-list-cell"
+    private let sectionOnlineId = 0
+    private let sectionOfflineId = 1
     
-    private let fakeChatList = [
+    private let fakeOnlineList = [
         ConversationCellModel(
             name: "name1",
             message: "message1",
@@ -26,11 +28,35 @@ class ConversationListViewController: UIViewController {
             name: "name2",
             message: "message2",
             date: Date(),
-            isOnline: false,
+            isOnline: true,
             hasUnreadMessages: false
         ),
     ]
     
+    private let fakeOfflineList = [
+        ConversationCellModel(
+            name: "name2",
+            message: "message2",
+            date: Date(),
+            isOnline: false,
+            hasUnreadMessages: false
+        ),
+    ]
+
+    private lazy var headerOnline: UIView = {
+        let headerOnline = UILabel()
+        headerOnline.text = "Online"
+
+        return headerOnline
+    }()
+    
+    private lazy var headerOffline: UIView = {
+        let headerOffline = UILabel()
+        headerOffline.text = "Offline"
+
+        return headerOffline
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,16 +78,34 @@ extension ConversationListViewController: UITableViewDataSource {
             as? ConversationCell else {
             return UITableViewCell()
         }
-        cell.configure(with: fakeChatList[indexPath.row])
+
+        if indexPath.section == sectionOnlineId {
+            cell.configure(with: fakeOnlineList[indexPath.row])
+        } else {
+            cell.configure(with: fakeOfflineList[indexPath.row])
+        }
+        
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == sectionOnlineId {
+            return headerOnline
+        } else {
+            return headerOffline
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fakeChatList.count
+        if section == sectionOnlineId {
+            return fakeOnlineList.count
+        } else {
+            return fakeOfflineList.count
+        }
     }
 }
 
