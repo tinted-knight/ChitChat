@@ -17,73 +17,55 @@
                 <rect key="frame" x="0.0" y="0.0" width="467" height="122"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="LIc-Zo-nmC">
-                        <rect key="frame" x="0.0" y="0.0" width="447" height="99.5"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SMh-s7-NUb">
-                                <rect key="frame" x="16" y="16" width="48" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="AlM-E8-fsE"/>
-                                    <constraint firstAttribute="width" constant="48" id="BqG-Ju-qzF"/>
-                                </constraints>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="vn4-v2-flF">
-                                <rect key="frame" x="76" y="8" width="355" height="75.5"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="LPB-bC-5VS">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="18"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Name Surname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xdr-TC-5dN">
-                                                <rect key="frame" x="0.0" y="0.0" width="294.5" height="18"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTg-LB-EB3">
-                                                <rect key="frame" x="322.5" y="0.0" width="32.5" height="18"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49O-50-Igr">
-                                        <rect key="frame" x="0.0" y="36" width="340.5" height="39.5"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="An suas viderer pro. Vis cu magna altera, ex his vivendo atomorum.">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" metaFont="system"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="LPB-bC-5VS" firstAttribute="leading" secondItem="vn4-v2-flF" secondAttribute="leading" id="5bw-F8-idy"/>
-                                    <constraint firstItem="LPB-bC-5VS" firstAttribute="top" secondItem="vn4-v2-flF" secondAttribute="top" id="nox-LY-BHK"/>
-                                    <constraint firstAttribute="trailing" secondItem="LPB-bC-5VS" secondAttribute="trailing" id="x21-rK-mFf"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SMh-s7-NUb">
+                        <rect key="frame" x="16" y="16" width="48" height="48"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="vn4-v2-flF" secondAttribute="trailing" constant="16" id="2id-wa-UhS"/>
-                            <constraint firstItem="vn4-v2-flF" firstAttribute="top" secondItem="LIc-Zo-nmC" secondAttribute="top" constant="8" id="D7q-n0-mf1"/>
-                            <constraint firstItem="SMh-s7-NUb" firstAttribute="centerY" secondItem="LIc-Zo-nmC" secondAttribute="centerY" id="DHS-gw-KuE"/>
-                            <constraint firstAttribute="bottom" secondItem="vn4-v2-flF" secondAttribute="bottom" constant="16" id="JZE-Jg-Zyp"/>
-                            <constraint firstItem="SMh-s7-NUb" firstAttribute="leading" secondItem="LIc-Zo-nmC" secondAttribute="leading" constant="16" id="YIn-y9-Cwf"/>
-                            <constraint firstItem="vn4-v2-flF" firstAttribute="leading" secondItem="SMh-s7-NUb" secondAttribute="trailing" constant="12" id="fEJ-qj-Ki5"/>
-                            <constraint firstItem="SMh-s7-NUb" firstAttribute="top" secondItem="LIc-Zo-nmC" secondAttribute="top" constant="16" id="kYF-Ew-fxB"/>
+                            <constraint firstAttribute="height" constant="48" id="AlM-E8-fsE"/>
+                            <constraint firstAttribute="width" constant="48" id="BqG-Ju-qzF"/>
                         </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="800" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49O-50-Igr">
+                        <rect key="frame" x="76" y="42" width="375" height="72"/>
+                        <attributedString key="attributedText">
+                            <fragment content="An suas viderer pro. Vis cu magna altera, ex his vivendo atomorum.">
+                                <attributes>
+                                    <color key="NSColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <font key="NSFont" metaFont="system"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="LPB-bC-5VS">
+                        <rect key="frame" x="76" y="16" width="375" height="18"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Name Surname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xdr-TC-5dN">
+                                <rect key="frame" x="0.0" y="0.0" width="314.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTg-LB-EB3">
+                                <rect key="frame" x="342.5" y="0.0" width="32.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="LIc-Zo-nmC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="OLm-Gq-1NM"/>
-                    <constraint firstAttribute="trailing" secondItem="LIc-Zo-nmC" secondAttribute="trailing" constant="20" id="a2a-hT-8zq"/>
-                    <constraint firstAttribute="bottom" secondItem="LIc-Zo-nmC" secondAttribute="bottom" id="qqE-sg-RSA"/>
-                    <constraint firstItem="LIc-Zo-nmC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="xF4-cl-ohK"/>
+                    <constraint firstAttribute="bottom" secondItem="49O-50-Igr" secondAttribute="bottom" constant="8" id="0HK-P1-brl"/>
+                    <constraint firstAttribute="trailing" secondItem="49O-50-Igr" secondAttribute="trailing" constant="16" id="DQg-AR-nMn"/>
+                    <constraint firstItem="Xdr-TC-5dN" firstAttribute="top" secondItem="SMh-s7-NUb" secondAttribute="top" id="Hwi-0Q-oxc"/>
+                    <constraint firstAttribute="trailing" secondItem="LPB-bC-5VS" secondAttribute="trailing" constant="16" id="Jwm-dj-6nf"/>
+                    <constraint firstItem="LPB-bC-5VS" firstAttribute="leading" secondItem="SMh-s7-NUb" secondAttribute="trailing" constant="12" id="NHk-ZN-MhO"/>
+                    <constraint firstItem="49O-50-Igr" firstAttribute="leading" secondItem="LPB-bC-5VS" secondAttribute="leading" id="X91-GV-CGN"/>
+                    <constraint firstItem="LPB-bC-5VS" firstAttribute="leading" secondItem="SMh-s7-NUb" secondAttribute="trailing" constant="12" id="ikW-cQ-eh7"/>
+                    <constraint firstItem="SMh-s7-NUb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="kEz-K8-EFd"/>
+                    <constraint firstItem="SMh-s7-NUb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="x1F-E0-mEQ"/>
+                    <constraint firstItem="49O-50-Igr" firstAttribute="top" secondItem="LPB-bC-5VS" secondAttribute="bottom" constant="8" id="yLg-xt-byi"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
