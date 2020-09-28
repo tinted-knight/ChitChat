@@ -10,6 +10,10 @@ import UIKit
 
 class ConversationViewController: UIViewController {
 
+    var contactName: String?
+    
+    private let nonameContact = "Noname"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,6 +21,6 @@ class ConversationViewController: UIViewController {
     }
     
     private func prepareUi() {
-        title = "Contact name"
+        title = contactName ?? nonameContact
     }
 }

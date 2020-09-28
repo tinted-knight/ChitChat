@@ -8,7 +8,7 @@
 
 import Foundation
 
-let fakeOnlineList = [
+let fakeChatList = [[
     ConversationCellModel(
         name: "Ostap Bender",
         message: "Make New Vasiuky great again. An suas viderer pro. Vis cu magna altera, ex his vivendo atomorum.",
@@ -79,9 +79,7 @@ let fakeOnlineList = [
         isOnline: true,
         hasUnreadMessages: false
     ),
-]
-
-let fakeOfflineList = [
+], [
     ConversationCellModel(
         name: "Artem Rozanov",
         message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
@@ -152,4 +150,5 @@ let fakeOfflineList = [
         isOnline: false,
         hasUnreadMessages: false
     ),
+    ]
 ]

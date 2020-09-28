@@ -12,6 +12,7 @@ class ConversationListViewController: UIViewController {
 
     @IBOutlet weak var chatTableView: UITableView!
 
+    private let segueConversation = "segue_single_conversation"
     private let cellReuseId = "chat-list-cell"
     private let sectionOnlineId = 0
     private let sectionHystoryId = 1
@@ -52,12 +53,7 @@ extension ConversationListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        if indexPath.section == sectionOnlineId {
-            cell.configure(with: fakeOnlineList[indexPath.row])
-        } else {
-            cell.configure(with: fakeOfflineList[indexPath.row])
-        }
-        
+        cell.configure(with: fakeChatList[indexPath.section][indexPath.row])
         return cell
     }
     
@@ -74,14 +70,22 @@ extension ConversationListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == sectionOnlineId {
-            return fakeOnlineList.count
-        } else {
-            return fakeOfflineList.count
-        }
+        return fakeChatList[section].count
     }
 }
 
 extension ConversationListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let contactName = fakeChatList[indexPath.section][indexPath.row].name
+        performSegue(withIdentifier: segueConversation, sender: contactName)
+    }
+}
+
+extension ConversationListViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? ConversationViewController,
+            let name = sender as? String {
+            controller.contactName = name
+        }
+    }
 }
