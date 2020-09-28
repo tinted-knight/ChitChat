@@ -21,6 +21,9 @@ class ConversationCell: UITableViewCell {
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     
+    private lazy var onlineColor: UIColor = UIColor.yellow.withAlphaComponent(0.2)
+    private lazy var offlineColor: UIColor = .white
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -35,13 +38,14 @@ class ConversationCell: UITableViewCell {
 }
 
 extension ConversationCell: ConfigurableView {
+    
     func configure(with model: ConversationCellModel) {
         name.text = model.name
         message.text = model.message
         if model.isOnline {
-            backgroundColor = .yellow
+            backgroundColor = onlineColor
         } else {
-            backgroundColor = .white
+            backgroundColor = offlineColor
         }
     }
 }
