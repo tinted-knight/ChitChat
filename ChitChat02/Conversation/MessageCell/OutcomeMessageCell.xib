@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="184" id="KGk-i7-Jjw" customClass="OutcomeMessageCell" customModule="ChitChat02" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="383" height="184"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="383" height="184"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gdx-Zs-gah">
+                        <rect key="frame" x="92" y="4" width="287" height="176"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RJ-d7-MFO">
+                                <rect key="frame" x="251" y="155.5" width="36" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="What is the most popular meal in Japan?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kiy-18-ceK">
+                                <rect key="frame" x="0.0" y="0.0" width="287" height="155.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="7RJ-d7-MFO" secondAttribute="bottom" id="8zO-ov-8cg"/>
+                            <constraint firstAttribute="trailing" secondItem="Kiy-18-ceK" secondAttribute="trailing" id="J6c-a0-CbP"/>
+                            <constraint firstItem="7RJ-d7-MFO" firstAttribute="top" secondItem="Kiy-18-ceK" secondAttribute="bottom" id="OqG-9d-AXs"/>
+                            <constraint firstAttribute="trailing" secondItem="7RJ-d7-MFO" secondAttribute="trailing" id="Q93-UA-c4c"/>
+                            <constraint firstItem="Kiy-18-ceK" firstAttribute="top" secondItem="gdx-Zs-gah" secondAttribute="top" id="T7z-6R-iPd"/>
+                            <constraint firstItem="Kiy-18-ceK" firstAttribute="leading" secondItem="gdx-Zs-gah" secondAttribute="leading" id="r5i-Hg-7OC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="gdx-Zs-gah" secondAttribute="bottom" constant="4" id="Abn-UU-8Vx"/>
+                    <constraint firstItem="gdx-Zs-gah" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.75" id="Dy3-4b-e6T"/>
+                    <constraint firstAttribute="trailing" secondItem="gdx-Zs-gah" secondAttribute="trailing" constant="4" id="j69-CY-cCB"/>
+                    <constraint firstItem="gdx-Zs-gah" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="mCx-SB-D7w"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="date" destination="7RJ-d7-MFO" id="VsM-lO-fd6"/>
+                <outlet property="message" destination="Kiy-18-ceK" id="WwJ-3O-zuZ"/>
+            </connections>
+            <point key="canvasLocation" x="-180" y="75"/>
+        </tableViewCell>
+    </objects>
+</document>

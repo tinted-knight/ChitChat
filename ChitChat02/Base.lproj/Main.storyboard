@@ -167,10 +167,25 @@
                     <view key="view" contentMode="scaleToFill" id="HJS-ae-f6w">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cdH-6X-exv">
+                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="zIV-g2-kHC" firstAttribute="bottom" secondItem="cdH-6X-exv" secondAttribute="bottom" id="IHc-uZ-tXY"/>
+                            <constraint firstItem="zIV-g2-kHC" firstAttribute="trailing" secondItem="cdH-6X-exv" secondAttribute="trailing" id="bOm-XE-GC9"/>
+                            <constraint firstItem="cdH-6X-exv" firstAttribute="leading" secondItem="zIV-g2-kHC" secondAttribute="leading" id="cZh-Nk-lAJ"/>
+                            <constraint firstItem="cdH-6X-exv" firstAttribute="top" secondItem="zIV-g2-kHC" secondAttribute="top" id="ohs-gw-ddx"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="zIV-g2-kHC"/>
                     </view>
                     <navigationItem key="navigationItem" title="Martha Craig" id="Tk8-Mu-yrd"/>
+                    <connections>
+                        <outlet property="messages" destination="cdH-6X-exv" id="ciQ-ev-QJD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vWI-Te-PAJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
