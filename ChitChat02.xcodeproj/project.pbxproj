@@ -14,6 +14,8 @@
 		394F867D250E518A00B703B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 394F867C250E518A00B703B3 /* Assets.xcassets */; };
 		394F8680250E518A00B703B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F867E250E518A00B703B3 /* LaunchScreen.storyboard */; };
 		396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */; };
+		39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */; };
+		39ED610E2521EE62006D8E0A /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610D2521EE62006D8E0A /* ConversationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		394F8681250E518A00B703B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		394F8688250E659C00B703B3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
+		39ED610D2521EE62006D8E0A /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 		394F8672250E518A00B703B3 /* ChitChat02 */ = {
 			isa = PBXGroup;
 			children = (
+				39ED610C2521EE3C006D8E0A /* Conversation */,
+				39ED61092521EB00006D8E0A /* ConversationList */,
 				396F5EA32517AF1F0070F2BD /* Profile */,
 				394F8673250E518A00B703B3 /* AppDelegate.swift */,
 				394F8675250E518A00B703B3 /* SceneDelegate.swift */,
@@ -78,6 +84,22 @@
 				396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		39ED61092521EB00006D8E0A /* ConversationList */ = {
+			isa = PBXGroup;
+			children = (
+				39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */,
+			);
+			path = ConversationList;
+			sourceTree = "<group>";
+		};
+		39ED610C2521EE3C006D8E0A /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				39ED610D2521EE62006D8E0A /* ConversationViewController.swift */,
+			);
+			path = Conversation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +175,8 @@
 			files = (
 				394F8678250E518A00B703B3 /* HomeViewController.swift in Sources */,
 				394F8674250E518A00B703B3 /* AppDelegate.swift in Sources */,
+				39ED610E2521EE62006D8E0A /* ConversationViewController.swift in Sources */,
+				39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
 				394F8676250E518A00B703B3 /* SceneDelegate.swift in Sources */,
 			);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NSq-gf-i2W">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -111,6 +111,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhf-pa-Hoy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1130" y="139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Jzd-LS-8dR">
+            <objects>
+                <navigationController id="NSq-gf-i2W" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Khb-Px-9I6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="mLB-XE-ehy" kind="relationship" relationship="rootViewController" id="y5o-Ng-QPQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CUu-LE-BR0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="207" y="878"/>
+        </scene>
+        <!--Tinkoff Chat-->
+        <scene sceneID="zW6-ss-cd2">
+            <objects>
+                <viewController id="mLB-XE-ehy" customClass="ConversationListViewController" customModule="ChitChat02" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pxa-aX-Mwh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jPi-cU-LLC">
+                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jPi-cU-LLC" firstAttribute="trailing" secondItem="cTl-Kz-7CA" secondAttribute="trailing" id="gbb-dy-9nm"/>
+                            <constraint firstItem="jPi-cU-LLC" firstAttribute="top" secondItem="cTl-Kz-7CA" secondAttribute="top" id="o8T-Qz-DrU"/>
+                            <constraint firstItem="jPi-cU-LLC" firstAttribute="bottom" secondItem="cTl-Kz-7CA" secondAttribute="bottom" id="tDH-Dv-3bI"/>
+                            <constraint firstItem="jPi-cU-LLC" firstAttribute="leading" secondItem="cTl-Kz-7CA" secondAttribute="leading" id="z9B-R1-wgD"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cTl-Kz-7CA"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tinkoff Chat" id="kGS-lf-jsc"/>
+                    <connections>
+                        <outlet property="chatTableView" destination="jPi-cU-LLC" id="m4I-v6-N70"/>
+                        <segue destination="OIn-fe-geF" kind="show" identifier="segue_single_conversation" id="1we-QB-y8D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CSV-tY-Wgx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1111" y="878"/>
+        </scene>
+        <!--Martha Craig-->
+        <scene sceneID="tP1-Ft-pM1">
+            <objects>
+                <viewController id="OIn-fe-geF" customClass="ConversationViewController" customModule="ChitChat02" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HJS-ae-f6w">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="zIV-g2-kHC"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Martha Craig" id="Tk8-Mu-yrd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vWI-Te-PAJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1982" y="878"/>
         </scene>
     </scenes>
     <resources>
