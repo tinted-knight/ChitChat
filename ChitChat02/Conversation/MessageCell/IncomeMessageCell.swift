@@ -14,10 +14,12 @@ class IncomeMessageCell: UITableViewCell {
 
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var background: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        background.layer.cornerRadius = 8.0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

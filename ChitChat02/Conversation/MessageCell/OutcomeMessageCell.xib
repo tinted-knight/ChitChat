@@ -21,13 +21,13 @@
                         <rect key="frame" x="92" y="4" width="287" height="176"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RJ-d7-MFO">
-                                <rect key="frame" x="251" y="155.5" width="36" height="20.5"/>
+                                <rect key="frame" x="247" y="151.5" width="36" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="What is the most popular meal in Japan?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kiy-18-ceK">
-                                <rect key="frame" x="0.0" y="0.0" width="287" height="155.5"/>
+                                <rect key="frame" x="4" y="4" width="279" height="145.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -35,12 +35,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="7RJ-d7-MFO" secondAttribute="bottom" id="8zO-ov-8cg"/>
-                            <constraint firstAttribute="trailing" secondItem="Kiy-18-ceK" secondAttribute="trailing" id="J6c-a0-CbP"/>
-                            <constraint firstItem="7RJ-d7-MFO" firstAttribute="top" secondItem="Kiy-18-ceK" secondAttribute="bottom" id="OqG-9d-AXs"/>
-                            <constraint firstAttribute="trailing" secondItem="7RJ-d7-MFO" secondAttribute="trailing" id="Q93-UA-c4c"/>
-                            <constraint firstItem="Kiy-18-ceK" firstAttribute="top" secondItem="gdx-Zs-gah" secondAttribute="top" id="T7z-6R-iPd"/>
-                            <constraint firstItem="Kiy-18-ceK" firstAttribute="leading" secondItem="gdx-Zs-gah" secondAttribute="leading" id="r5i-Hg-7OC"/>
+                            <constraint firstAttribute="bottom" secondItem="7RJ-d7-MFO" secondAttribute="bottom" constant="4" id="8zO-ov-8cg"/>
+                            <constraint firstAttribute="trailing" secondItem="Kiy-18-ceK" secondAttribute="trailing" constant="4" id="J6c-a0-CbP"/>
+                            <constraint firstItem="7RJ-d7-MFO" firstAttribute="top" secondItem="Kiy-18-ceK" secondAttribute="bottom" constant="2" id="OqG-9d-AXs"/>
+                            <constraint firstAttribute="trailing" secondItem="7RJ-d7-MFO" secondAttribute="trailing" constant="4" id="Q93-UA-c4c"/>
+                            <constraint firstItem="Kiy-18-ceK" firstAttribute="top" secondItem="gdx-Zs-gah" secondAttribute="top" constant="4" id="T7z-6R-iPd"/>
+                            <constraint firstItem="Kiy-18-ceK" firstAttribute="leading" secondItem="gdx-Zs-gah" secondAttribute="leading" constant="4" id="r5i-Hg-7OC"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -53,6 +53,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="background" destination="gdx-Zs-gah" id="ZGb-35-KoC"/>
                 <outlet property="date" destination="7RJ-d7-MFO" id="VsM-lO-fd6"/>
                 <outlet property="message" destination="Kiy-18-ceK" id="WwJ-3O-zuZ"/>
             </connections>

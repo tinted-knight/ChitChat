@@ -25,6 +25,7 @@
 		39ED612125221684006D8E0A /* MessageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED612025221684006D8E0A /* MessageCellModel.swift */; };
 		39ED6124252219BA006D8E0A /* OutcomeMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED6122252219BA006D8E0A /* OutcomeMessageCell.swift */; };
 		39ED6125252219BA006D8E0A /* OutcomeMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED6123252219BA006D8E0A /* OutcomeMessageCell.xib */; };
+		39ED612725223323006D8E0A /* fake_conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED612625223323006D8E0A /* fake_conversation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		39ED612025221684006D8E0A /* MessageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
 		39ED6122252219BA006D8E0A /* OutcomeMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutcomeMessageCell.swift; sourceTree = "<group>"; };
 		39ED6123252219BA006D8E0A /* OutcomeMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutcomeMessageCell.xib; sourceTree = "<group>"; };
+		39ED612625223323006D8E0A /* fake_conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fake_conversation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				39ED611B2522163B006D8E0A /* MessageCell */,
 				39ED610D2521EE62006D8E0A /* ConversationViewController.swift */,
+				39ED612625223323006D8E0A /* fake_conversation.swift */,
 			);
 			path = Conversation;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				394F8674250E518A00B703B3 /* AppDelegate.swift in Sources */,
 				39ED611A25220D34006D8E0A /* fake_data.swift in Sources */,
 				39ED61182521F7AE006D8E0A /* ConversationCellModel.swift in Sources */,
+				39ED612725223323006D8E0A /* fake_conversation.swift in Sources */,
 				39ED610E2521EE62006D8E0A /* ConversationViewController.swift in Sources */,
 				39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */,
 				39ED6124252219BA006D8E0A /* OutcomeMessageCell.swift in Sources */,

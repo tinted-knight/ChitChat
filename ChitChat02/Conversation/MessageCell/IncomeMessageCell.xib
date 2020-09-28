@@ -21,13 +21,13 @@
                         <rect key="frame" x="4" y="4" width="292.5" height="145"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gC6-1c-mbM">
-                                <rect key="frame" x="256.5" y="124.5" width="36" height="20.5"/>
+                                <rect key="frame" x="252.5" y="120.5" width="36" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="What is the most popular meal in Japan?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIx-Ni-hsr">
-                                <rect key="frame" x="0.0" y="0.0" width="292.5" height="124.5"/>
+                                <rect key="frame" x="4" y="4" width="284.5" height="114.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -35,12 +35,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="aIx-Ni-hsr" firstAttribute="top" secondItem="pel-lH-dYB" secondAttribute="top" id="EWj-If-dgG"/>
-                            <constraint firstAttribute="trailing" secondItem="aIx-Ni-hsr" secondAttribute="trailing" id="L6m-rw-8Yd"/>
-                            <constraint firstAttribute="bottom" secondItem="gC6-1c-mbM" secondAttribute="bottom" id="NNX-rq-mWm"/>
-                            <constraint firstAttribute="trailing" secondItem="gC6-1c-mbM" secondAttribute="trailing" id="W7U-ZC-cJr"/>
-                            <constraint firstItem="aIx-Ni-hsr" firstAttribute="leading" secondItem="pel-lH-dYB" secondAttribute="leading" id="a3t-w4-KDX"/>
-                            <constraint firstItem="gC6-1c-mbM" firstAttribute="top" secondItem="aIx-Ni-hsr" secondAttribute="bottom" id="cgI-1J-4VQ"/>
+                            <constraint firstItem="aIx-Ni-hsr" firstAttribute="top" secondItem="pel-lH-dYB" secondAttribute="top" constant="4" id="EWj-If-dgG"/>
+                            <constraint firstAttribute="trailing" secondItem="aIx-Ni-hsr" secondAttribute="trailing" constant="4" id="L6m-rw-8Yd"/>
+                            <constraint firstAttribute="bottom" secondItem="gC6-1c-mbM" secondAttribute="bottom" constant="4" id="NNX-rq-mWm"/>
+                            <constraint firstAttribute="trailing" secondItem="gC6-1c-mbM" secondAttribute="trailing" constant="4" id="W7U-ZC-cJr"/>
+                            <constraint firstItem="aIx-Ni-hsr" firstAttribute="leading" secondItem="pel-lH-dYB" secondAttribute="leading" constant="4" id="a3t-w4-KDX"/>
+                            <constraint firstItem="gC6-1c-mbM" firstAttribute="top" secondItem="aIx-Ni-hsr" secondAttribute="bottom" constant="2" id="cgI-1J-4VQ"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -54,6 +54,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="background" destination="pel-lH-dYB" id="3K4-fM-RFJ"/>
                 <outlet property="date" destination="gC6-1c-mbM" id="8Gn-ba-CzH"/>
                 <outlet property="message" destination="aIx-Ni-hsr" id="znb-YF-99w"/>
             </connections>
