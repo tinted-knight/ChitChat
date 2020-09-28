@@ -19,6 +19,7 @@
 		39ED61152521F76E006D8E0A /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61132521F76E006D8E0A /* ConversationCell.swift */; };
 		39ED61162521F76E006D8E0A /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED61142521F76E006D8E0A /* ConversationCell.xib */; };
 		39ED61182521F7AE006D8E0A /* ConversationCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61172521F7AD006D8E0A /* ConversationCellModel.swift */; };
+		39ED611A25220D34006D8E0A /* fake_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED611925220D34006D8E0A /* fake_data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		39ED61132521F76E006D8E0A /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		39ED61142521F76E006D8E0A /* ConversationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
 		39ED61172521F7AD006D8E0A /* ConversationCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCellModel.swift; sourceTree = "<group>"; };
+		39ED611925220D34006D8E0A /* fake_data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fake_data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			children = (
 				39ED61122521F734006D8E0A /* ConversationCell */,
 				39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */,
+				39ED611925220D34006D8E0A /* fake_data.swift */,
 			);
 			path = ConversationList;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			files = (
 				394F8678250E518A00B703B3 /* HomeViewController.swift in Sources */,
 				394F8674250E518A00B703B3 /* AppDelegate.swift in Sources */,
+				39ED611A25220D34006D8E0A /* fake_data.swift in Sources */,
 				39ED61182521F7AE006D8E0A /* ConversationCellModel.swift in Sources */,
 				39ED610E2521EE62006D8E0A /* ConversationViewController.swift in Sources */,
 				39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */,

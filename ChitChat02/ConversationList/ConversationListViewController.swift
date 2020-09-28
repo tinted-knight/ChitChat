@@ -14,35 +14,8 @@ class ConversationListViewController: UIViewController {
 
     private let cellReuseId = "chat-list-cell"
     private let sectionOnlineId = 0
-    private let sectionOfflineId = 1
+    private let sectionHystoryId = 1
     
-    private let fakeOnlineList = [
-        ConversationCellModel(
-            name: "name1",
-            message: "message1",
-            date: Date(),
-            isOnline: true,
-            hasUnreadMessages: true
-        ),
-        ConversationCellModel(
-            name: "name2",
-            message: "message2",
-            date: Date(),
-            isOnline: true,
-            hasUnreadMessages: false
-        ),
-    ]
-    
-    private let fakeOfflineList = [
-        ConversationCellModel(
-            name: "name2",
-            message: "message2",
-            date: Date(),
-            isOnline: false,
-            hasUnreadMessages: false
-        ),
-    ]
-
     private lazy var headerOnline: UIView = {
         let headerOnline = UILabel()
         headerOnline.text = "Online"
@@ -52,7 +25,7 @@ class ConversationListViewController: UIViewController {
     
     private lazy var headerOffline: UIView = {
         let headerOffline = UILabel()
-        headerOffline.text = "Offline"
+        headerOffline.text = "History"
 
         return headerOffline
     }()
