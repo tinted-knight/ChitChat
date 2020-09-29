@@ -27,7 +27,13 @@ class ConversationCell: UITableViewCell {
     private lazy var offlineColor: UIColor = .white
     
     private lazy var boldMessage = UIFont.systemFont(ofSize: 15, weight: .bold)
-
+    private lazy var noMessageFont: UIFont = {
+        guard let font = UIFont(name: "Comfortaa-Light", size: 13) else {
+            return UIFont.systemFont(ofSize: 13)
+        }
+        return UIFontMetrics.default.scaledFont(for: font)
+    }()
+    
     private let formatter = DateFormatter()
     private let calendar = Calendar.current
 
@@ -60,6 +66,8 @@ extension ConversationCell: ConfigurableView {
     private func populateLastMessage(with value: String, hasUnread: Bool) {
         if value.isEmpty {
             messageView.text = emptyMessage
+            messageView.font = noMessageFont
+            messageView.adjustsFontForContentSizeCategory = true
         } else {
             messageView.text = value
             if hasUnread {
