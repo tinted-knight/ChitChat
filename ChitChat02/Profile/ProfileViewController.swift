@@ -34,16 +34,16 @@ class ProfileViewController : HomeViewController {
     }
     
     override func viewDidLoad() {
-        applog("ProfileViewController::\(#function)")
-        applog("buttonEdit.frame: \(buttonEdit.frame)")
+//        applog("ProfileViewController::\(#function)")
+//        applog("buttonEdit.frame: \(buttonEdit.frame)")
 
         prepareUi()
         populateUi()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        applog("ProfileViewController::\(#function)")
-        applog("buttonEdit.frame: \(buttonEdit.frame)")
+//        applog("ProfileViewController::\(#function)")
+//        applog("buttonEdit.frame: \(buttonEdit.frame)")
         // frame отличается, потому что здесь размер view
         // пересчитан с учётом констрейнтов,
         // расположения и размера родительских и соседних view

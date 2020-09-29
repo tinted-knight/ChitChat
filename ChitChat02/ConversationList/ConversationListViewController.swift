@@ -13,6 +13,8 @@ class ConversationListViewController: UIViewController {
     @IBOutlet weak var chatTableView: UITableView!
 
     private let segueConversation = "segue_single_conversation"
+    private let segueProfile = "segue_show_profile"
+    
     private let cellReuseId = "chat-list-cell"
     private let sectionOnlineId = 0
     private let sectionHystoryId = 1
@@ -43,6 +45,19 @@ class ConversationListViewController: UIViewController {
         chatTableView.register(UINib(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: cellReuseId)
         chatTableView.dataSource = self
         chatTableView.delegate = self
+        
+        let profilePicture = UIImage(named: "ProfileIcon")?.withRenderingMode(.alwaysOriginal)
+        let profileNavItem = UIBarButtonItem(
+            image: profilePicture,
+            style: .plain,
+            target: self,
+            action: #selector(profileOnTap)
+        )
+        navigationItem.rightBarButtonItem = profileNavItem
+    }
+    
+    @objc private func profileOnTap() {
+        performSegue(withIdentifier: segueProfile, sender: nil)
     }
 }
 // MARK: -UITableViewDataSource

@@ -100,6 +100,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vCj-Ah-e7a"/>
                     </view>
+                    <navigationItem key="navigationItem" id="FXo-hd-Ltb"/>
                     <connections>
                         <outlet property="buttonEdit" destination="ulK-2g-l7I" id="3w9-OH-V9Q"/>
                         <outlet property="buttonSave" destination="3Bg-On-FVf" id="q8p-UW-Gc2"/>
@@ -110,14 +111,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhf-pa-Hoy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1130" y="139"/>
+            <point key="canvasLocation" x="1982" y="164"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jzd-LS-8dR">
             <objects>
                 <navigationController id="NSq-gf-i2W" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Khb-Px-9I6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Khb-Px-9I6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -137,7 +138,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jPi-cU-LLC">
-                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
                                 <sections/>
                             </tableView>
                         </subviews>
@@ -150,10 +151,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cTl-Kz-7CA"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="kGS-lf-jsc"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="chatTableView" destination="jPi-cU-LLC" id="m4I-v6-N70"/>
                         <segue destination="OIn-fe-geF" kind="show" identifier="segue_single_conversation" id="1we-QB-y8D"/>
+                        <segue destination="3yT-PA-3m6" kind="presentation" identifier="segue_show_profile" id="Jt0-vv-KfN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSV-tY-Wgx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -169,7 +173,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cdH-6X-exv">
-                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
@@ -192,6 +196,9 @@
             <point key="canvasLocation" x="1982" y="878"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Jt0-vv-KfN"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Profile temp" width="240" height="240"/>
     </resources>
