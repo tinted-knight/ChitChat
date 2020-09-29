@@ -18,13 +18,16 @@ private let emptyMessage = "No messages yet"
 
 class ConversationCell: UITableViewCell {
 
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var message: UILabel!
+    @IBOutlet weak var nameView: UILabel!
+    @IBOutlet weak var dateView: UILabel!
+    @IBOutlet weak var messageView: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     
     private lazy var onlineColor: UIColor = UIColor.yellow.withAlphaComponent(0.2)
     private lazy var offlineColor: UIColor = .white
+
+    private let formatter = DateFormatter()
+    private let calendar = Calendar.current
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,16 +45,21 @@ class ConversationCell: UITableViewCell {
 extension ConversationCell: ConfigurableView {
     
     func configure(with model: ConversationCellModel) {
-        name.text = model.name
+        nameView.text = model.name
         populateLastMessage(with: model.message)
         reflectOnlineStatus(with: model.isOnline)
+        // Debug: log last message date for each contact
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "dd MMM"
+//        applog("\(model.name): \(formatter.string(from: model.date))")
+        populateDateTime(with: model.date)
     }
     
     private func populateLastMessage(with value: String) {
         if value.isEmpty {
-            message.text = emptyMessage
+            messageView.text = emptyMessage
         } else {
-            message.text = value
+            messageView.text = value
         }
     }
     
@@ -61,5 +69,15 @@ extension ConversationCell: ConfigurableView {
         } else {
             backgroundColor = offlineColor
         }
+    }
+    
+    private func populateDateTime(with date: Date) {
+        if calendar.startOfDay(for: date) != calendar.startOfDay(for: Date()) {
+            formatter.dateFormat = "dd MMM"
+        } else {
+            formatter.dateFormat = "HH:mm"
+        }
+        
+        dateView.text = formatter.string(from: date)
     }
 }
