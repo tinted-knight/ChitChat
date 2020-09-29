@@ -8,42 +8,48 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+private let SEGUE_SHOW_PROFILE = "action_show_profile"
+
+class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        applog(#function)
+        lifecycleLogs(#function)
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func onShowProfileTap(_ sender: Any) {
+        performSegue(withIdentifier: SEGUE_SHOW_PROFILE, sender: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        applog(#function)
+        lifecycleLogs(#function)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        applog(#function)
+        lifecycleLogs(#function)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        applog(#function)
+        lifecycleLogs(#function)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        applog(#function)
+        lifecycleLogs(#function)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        applog(#function)
+        lifecycleLogs(#function)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        applog(#function)
+        lifecycleLogs(#function)
     }
 
 }
