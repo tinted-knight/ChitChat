@@ -27,6 +27,9 @@ class ConversationCell: UITableViewCell {
     private lazy var offlineColor: UIColor = .white
     
     private lazy var boldMessage = UIFont.systemFont(ofSize: 15, weight: .bold)
+
+    private lazy var defaultFont: UIFont = UIFont.systemFont(ofSize: 13, weight: .regular)
+
     private lazy var noMessageFont: UIFont = {
         guard let font = UIFont(name: "Comfortaa-Light", size: 13) else {
             return UIFont.systemFont(ofSize: 13)
@@ -46,6 +49,11 @@ class ConversationCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func prepareForReuse() {
+        backgroundColor = .white
+        messageView.font = defaultFont
     }
     
 }
@@ -79,8 +87,6 @@ extension ConversationCell: ConfigurableView {
     private func reflectOnlineStatus(with isOnline: Bool) {
         if isOnline {
             backgroundColor = onlineColor
-        } else {
-            backgroundColor = offlineColor
         }
     }
     

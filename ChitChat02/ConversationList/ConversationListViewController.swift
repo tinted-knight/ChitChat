@@ -8,41 +8,41 @@
 
 import UIKit
 
+private enum TableSections: Int {
+    case online = 0
+    case history = 1
+}
+
 class ConversationListViewController: UIViewController {
-
+    
     @IBOutlet weak var chatTableView: UITableView!
-
+    
     private let segueConversation = "segue_single_conversation"
     private let segueProfile = "segue_show_profile"
     
     private let cellReuseId = "chat-list-cell"
+    private let headerReuseId = "header-online-reuse-id"
+    
     private let sectionOnlineId = 0
-    private let sectionHystoryId = 1
+    private let sectionHistoryId = 1
     
-    private lazy var headerOnline: UIView = {
-        let headerOnline = UILabel()
-        headerOnline.text = "Online"
-
-        return headerOnline
-    }()
+    private lazy var simpleSectionHeader: UIView = UILabel()
     
-    private lazy var headerOffline: UIView = {
-        let headerOffline = UILabel()
-        headerOffline.text = "History"
-
-        return headerOffline
-    }()
-
+    private let onlineString = "Online"
+    private let historyString = "History"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareUi()
     }
-
+    
     private func prepareUi() {
         title = "Tinkoff Chat"
-
+        
         chatTableView.register(UINib(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: cellReuseId)
+        chatTableView.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: headerReuseId)
+        
         chatTableView.dataSource = self
         chatTableView.delegate = self
         
@@ -65,9 +65,9 @@ extension ConversationListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = chatTableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
             as? ConversationCell else {
-            return UITableViewCell()
+                return UITableViewCell()
         }
-
+        
         cell.configure(with: fakeChatList[indexPath.section][indexPath.row])
         return cell
     }
@@ -76,12 +76,29 @@ extension ConversationListViewController: UITableViewDataSource {
         return 2
     }
     
+    private func simpleHeader(_ text: String) -> UIView {
+        let view = UILabel()
+        view.text = text
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == sectionOnlineId {
-            return headerOnline
-        } else {
-            return headerOffline
+        switch TableSections.init(rawValue: section) {
+            case .online:
+                return buildSectionHeader(tableView, with: onlineString)
+            case .history:
+                return buildSectionHeader(tableView, with: historyString)
+            case .none:
+                return UIView()
         }
+    }
+    
+    private func buildSectionHeader(_ tableView: UITableView, with text: String) -> UIView {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: headerReuseId) as? HeaderCell else {
+            return simpleHeader(text)
+        }
+        cell.configure(with: text)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
