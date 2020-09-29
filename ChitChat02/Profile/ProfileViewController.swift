@@ -14,11 +14,23 @@ class ProfileViewController : HomeViewController {
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var buttonEdit: UIImageView!
     @IBOutlet weak var labelUserName: UILabel!
-    @IBOutlet weak var labelUserDescription: UILabel!
+    @IBOutlet weak var textUserDescription: UITextView!
     @IBOutlet weak var buttonSave: UIButton!
     
     private let fakeUserName = "Timur Tharkahov"
-    private let fakeUserDescription = "UX/UI designer, web-designer, Moscow, Russia"
+    private let fakeUserDescription = """
+UX/UI designer, web-designer, Moscow, Russia
+UX/UI designer, web-designer, Moscow, Russia
+UX/UI designer, web-designer, Moscow, Russia
+UX/UI designer, web-designer, Moscow, Russia
+UX/UI designer, web-designer, Moscow, Russia
+UX/UI designer, web-designer, Moscow, Russia
+UX/UI designer, web-designer, Moscow, Russia
+UX/UI designer, web-designer, Moscow, Russia
+UX/UI designer, web-designer, Moscow, Russia
+UX/UI designer, web-designer, Moscow, Russia
+UX/UI designer, web-designer, Moscow, Russia
+"""
     
     private let picker = UIImagePickerController()
 
@@ -62,10 +74,13 @@ class ProfileViewController : HomeViewController {
     
     private func populateUi() {
         labelUserName.text = fakeUserName
-        labelUserDescription.text = fakeUserDescription
+        textUserDescription.text = fakeUserDescription
     }
     
     @objc private func onProfilePictureTap() {
+        showChooseDialog()
+    }
+    @IBAction func onEditButtonTap(_ sender: Any) {
         showChooseDialog()
     }
     
