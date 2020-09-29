@@ -8,7 +8,7 @@
 
 import Foundation
 
-let fakeChatList = [[
+let fakeChatList = [[ // MARK: -Online
     ConversationCellModel(
         name: "Ostap Bender",
         message: "Make New Vasiuky great again. An suas viderer pro. Vis cu magna altera, ex his vivendo atomorum.",
@@ -25,7 +25,7 @@ let fakeChatList = [[
     ),
     ConversationCellModel(
         name: "Курганова Саша",
-        message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
+        message: "",
         date: Date(),
         isOnline: true,
         hasUnreadMessages: false
@@ -79,10 +79,10 @@ let fakeChatList = [[
         isOnline: true,
         hasUnreadMessages: false
     ),
-], [
+], [ // MARK: -History
     ConversationCellModel(
         name: "Artem Rozanov",
-        message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
+        message: "",
         date: Date(),
         isOnline: false,
         hasUnreadMessages: false

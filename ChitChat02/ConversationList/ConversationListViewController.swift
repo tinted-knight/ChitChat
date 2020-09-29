@@ -45,7 +45,7 @@ class ConversationListViewController: UIViewController {
         chatTableView.delegate = self
     }
 }
-
+// MARK: -UITableViewDataSource
 extension ConversationListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = chatTableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
@@ -73,14 +73,14 @@ extension ConversationListViewController: UITableViewDataSource {
         return fakeChatList[section].count
     }
 }
-
+// MARK: -UITableViewDelegate
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contactName = fakeChatList[indexPath.section][indexPath.row].name
         performSegue(withIdentifier: segueConversation, sender: contactName)
     }
 }
-
+// MARK: -Navigation helpers
 extension ConversationListViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? ConversationViewController,

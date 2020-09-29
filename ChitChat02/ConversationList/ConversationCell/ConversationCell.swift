@@ -14,6 +14,8 @@ protocol ConfigurableView {
     func configure(with model: ConfigurationModel)
 }
 
+private let emptyMessage = "No messages yet"
+
 class ConversationCell: UITableViewCell {
 
     @IBOutlet weak var name: UILabel!
@@ -41,8 +43,20 @@ extension ConversationCell: ConfigurableView {
     
     func configure(with model: ConversationCellModel) {
         name.text = model.name
-        message.text = model.message
-        if model.isOnline {
+        populateLastMessage(with: model.message)
+        reflectOnlineStatus(with: model.isOnline)
+    }
+    
+    private func populateLastMessage(with value: String) {
+        if value.isEmpty {
+            message.text = emptyMessage
+        } else {
+            message.text = value
+        }
+    }
+    
+    private func reflectOnlineStatus(with isOnline: Bool) {
+        if isOnline {
             backgroundColor = onlineColor
         } else {
             backgroundColor = offlineColor
