@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class IncomeMessageCell: UITableViewCell {
+class IncomeMessageCell: BaseMessageCell {
 
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var date: UILabel!
@@ -33,5 +33,6 @@ class IncomeMessageCell: UITableViewCell {
 extension IncomeMessageCell: ConfigurableView {
     func configure(with model: MessageCellModel) {
         message.text = model.text
+        date.text = formatDateTime(with: model.date)
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OutcomeMessageCell: UITableViewCell {
+class OutcomeMessageCell: BaseMessageCell {
 
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var date: UILabel!
@@ -30,5 +30,6 @@ class OutcomeMessageCell: UITableViewCell {
 extension OutcomeMessageCell: ConfigurableView {
     func configure(with model: MessageCellModel) {
         message.text = model.text
+        date.text = formatDateTime(with: model.date)
     }
 }

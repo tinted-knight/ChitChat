@@ -15,6 +15,7 @@
 		394F8680250E518A00B703B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F867E250E518A00B703B3 /* LaunchScreen.storyboard */; };
 		396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */; };
 		39E4D49F252347AD00BF6BC4 /* fake_random_date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E4D49E252347AD00BF6BC4 /* fake_random_date.swift */; };
+		39E4D4A12523482000BF6BC4 /* BaseMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E4D4A02523482000BF6BC4 /* BaseMessageCell.swift */; };
 		39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */; };
 		39ED610E2521EE62006D8E0A /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610D2521EE62006D8E0A /* ConversationViewController.swift */; };
 		39ED61152521F76E006D8E0A /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61132521F76E006D8E0A /* ConversationCell.swift */; };
@@ -41,6 +42,7 @@
 		394F8688250E659C00B703B3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		39E4D49E252347AD00BF6BC4 /* fake_random_date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fake_random_date.swift; sourceTree = "<group>"; };
+		39E4D4A02523482000BF6BC4 /* BaseMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMessageCell.swift; sourceTree = "<group>"; };
 		39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		39ED610D2521EE62006D8E0A /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		39ED61132521F76E006D8E0A /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				39ED612025221684006D8E0A /* MessageCellModel.swift */,
 				39ED6122252219BA006D8E0A /* OutcomeMessageCell.swift */,
 				39ED6123252219BA006D8E0A /* OutcomeMessageCell.xib */,
+				39E4D4A02523482000BF6BC4 /* BaseMessageCell.swift */,
 			);
 			path = MessageCell;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */,
 				39E4D49F252347AD00BF6BC4 /* fake_random_date.swift in Sources */,
 				39ED6124252219BA006D8E0A /* OutcomeMessageCell.swift in Sources */,
+				39E4D4A12523482000BF6BC4 /* BaseMessageCell.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
 				394F8676250E518A00B703B3 /* SceneDelegate.swift in Sources */,
 				39ED61152521F76E006D8E0A /* ConversationCell.swift in Sources */,
