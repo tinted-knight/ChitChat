@@ -25,6 +25,8 @@ class ConversationCell: UITableViewCell {
     
     private lazy var onlineColor: UIColor = UIColor.yellow.withAlphaComponent(0.2)
     private lazy var offlineColor: UIColor = .white
+    
+    private lazy var boldMessage = UIFont.systemFont(ofSize: 15, weight: .bold)
 
     private let formatter = DateFormatter()
     private let calendar = Calendar.current
@@ -46,7 +48,7 @@ extension ConversationCell: ConfigurableView {
     
     func configure(with model: ConversationCellModel) {
         nameView.text = model.name
-        populateLastMessage(with: model.message)
+        populateLastMessage(with: model.message, hasUnread: model.hasUnreadMessages)
         reflectOnlineStatus(with: model.isOnline)
         // Debug: log last message date for each contact
 //        let formatter = DateFormatter()
@@ -55,11 +57,14 @@ extension ConversationCell: ConfigurableView {
         populateDateTime(with: model.date)
     }
     
-    private func populateLastMessage(with value: String) {
+    private func populateLastMessage(with value: String, hasUnread: Bool) {
         if value.isEmpty {
             messageView.text = emptyMessage
         } else {
             messageView.text = value
+            if hasUnread {
+                messageView.font = boldMessage
+            }
         }
     }
     
