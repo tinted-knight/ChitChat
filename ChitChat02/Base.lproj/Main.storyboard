@@ -17,14 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="240" image="Profile temp" translatesAutoresizingMaskIntoConstraints="NO" id="ulK-2g-l7I">
-                                <rect key="frame" x="67.5" y="45" width="240" height="240"/>
+                                <rect key="frame" x="67.5" y="124" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="9eg-Ph-RaP"/>
                                     <constraint firstAttribute="width" constant="240" id="BAu-an-yBz"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Od3-Bg-gM0">
-                                <rect key="frame" x="131.5" y="317" width="112" height="29"/>
+                                <rect key="frame" x="131.5" y="396" width="112" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -38,31 +38,47 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="onSaveTap:" destination="3yT-PA-3m6" eventType="touchUpInside" id="qYM-af-wgC"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIq-bK-iqF">
-                                <rect key="frame" x="277.5" y="255" width="30" height="30"/>
+                                <rect key="frame" x="277.5" y="334" width="30" height="30"/>
                                 <state key="normal" title="Edit"/>
                                 <connections>
                                     <action selector="onEditButtonTap:" destination="3yT-PA-3m6" eventType="touchUpInside" id="qL0-ap-dRI"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mgL-XO-LVl">
-                                <rect key="frame" x="16" y="378" width="343" height="183"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="Profile description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mgL-XO-LVl">
+                                <rect key="frame" x="16" y="457" width="343" height="104"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <navigationBar contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q9m-3L-y8h">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
+                                <items>
+                                    <navigationItem title="My Profile" id="nDO-YV-mzT">
+                                        <barButtonItem key="rightBarButtonItem" title="Close" id="cyj-pH-kBe">
+                                            <connections>
+                                                <action selector="onCloseTap:" destination="3yT-PA-3m6" id="sf9-u1-0XN"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Q9m-3L-y8h" firstAttribute="top" secondItem="vCj-Ah-e7a" secondAttribute="top" id="ACH-t2-jqD"/>
                             <constraint firstItem="3Bg-On-FVf" firstAttribute="top" secondItem="mgL-XO-LVl" secondAttribute="bottom" constant="16" id="Fod-Zd-J84"/>
+                            <constraint firstItem="Q9m-3L-y8h" firstAttribute="trailing" secondItem="vCj-Ah-e7a" secondAttribute="trailing" id="K7Q-SJ-pfq"/>
                             <constraint firstItem="mgL-XO-LVl" firstAttribute="leading" secondItem="vCj-Ah-e7a" secondAttribute="leading" constant="16" id="Nvu-YO-xc9"/>
                             <constraint firstItem="vCj-Ah-e7a" firstAttribute="trailing" secondItem="mgL-XO-LVl" secondAttribute="trailing" constant="16" id="Nxg-fx-NCb"/>
                             <constraint firstItem="ulK-2g-l7I" firstAttribute="bottom" secondItem="AIq-bK-iqF" secondAttribute="bottom" id="QZv-NK-ntY"/>
                             <constraint firstItem="Od3-Bg-gM0" firstAttribute="centerX" secondItem="Bpe-hX-Zo5" secondAttribute="centerX" id="T2T-G4-Bre"/>
-                            <constraint firstItem="ulK-2g-l7I" firstAttribute="top" secondItem="vCj-Ah-e7a" secondAttribute="top" constant="45" id="TWL-RD-eLW"/>
+                            <constraint firstItem="Q9m-3L-y8h" firstAttribute="leading" secondItem="vCj-Ah-e7a" secondAttribute="leading" id="Zl1-bp-FdM"/>
                             <constraint firstItem="Od3-Bg-gM0" firstAttribute="top" secondItem="ulK-2g-l7I" secondAttribute="bottom" constant="32" id="anx-zb-7G4"/>
                             <constraint firstItem="3Bg-On-FVf" firstAttribute="centerX" secondItem="Bpe-hX-Zo5" secondAttribute="centerX" id="cXI-Wv-dCL"/>
                             <constraint firstItem="mgL-XO-LVl" firstAttribute="centerX" secondItem="Bpe-hX-Zo5" secondAttribute="centerX" id="cbB-G7-BWR"/>
@@ -70,13 +86,13 @@
                             <constraint firstItem="AIq-bK-iqF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vCj-Ah-e7a" secondAttribute="leading" symbolic="YES" id="iXs-ai-83n"/>
                             <constraint firstItem="mgL-XO-LVl" firstAttribute="top" secondItem="Od3-Bg-gM0" secondAttribute="bottom" constant="32" id="oMd-KE-Nlf"/>
                             <constraint firstItem="ulK-2g-l7I" firstAttribute="trailing" secondItem="AIq-bK-iqF" secondAttribute="trailing" id="oYz-8S-h1K"/>
+                            <constraint firstItem="ulK-2g-l7I" firstAttribute="top" secondItem="Q9m-3L-y8h" secondAttribute="bottom" constant="16" id="qAB-ZL-qJA"/>
                             <constraint firstItem="3Bg-On-FVf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vCj-Ah-e7a" secondAttribute="leading" constant="56" id="uq7-fu-7Tp"/>
                             <constraint firstItem="vCj-Ah-e7a" firstAttribute="bottom" secondItem="3Bg-On-FVf" secondAttribute="bottom" constant="30" id="y0Y-8U-xtC"/>
                             <constraint firstItem="vCj-Ah-e7a" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Bg-On-FVf" secondAttribute="trailing" constant="56" id="y6m-p6-C9s"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vCj-Ah-e7a"/>
                     </view>
-                    <navigationItem key="navigationItem" id="FXo-hd-Ltb"/>
                     <connections>
                         <outlet property="buttonEdit" destination="ulK-2g-l7I" id="3w9-OH-V9Q"/>
                         <outlet property="buttonSave" destination="3Bg-On-FVf" id="q8p-UW-Gc2"/>
