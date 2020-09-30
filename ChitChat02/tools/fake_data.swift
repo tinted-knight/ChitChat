@@ -13,37 +13,42 @@ private func hasUnread() -> Bool {
 }
 
 let fakeChatList = [[ // MARK: -Online
+    // today, has unread
     ConversationCellModel(
         name: "Ostap Bender",
         message: "Make New Vasiuky great again. An suas viderer pro. Vis cu magna altera, ex his vivendo atomorum.",
-        date: fakeDate(),
+        date: Date(timeIntervalSinceNow: -60 * 60),
         isOnline: true,
-        hasUnreadMessages: hasUnread()
+        hasUnreadMessages: true
     ),
+    // today, no unread
     ConversationCellModel(
         name: "Анацкий Стас",
         message: "Reprehenderit mollit excepteur labore deserunt officia laboris eiusmod cillum eu duis",
-        date: fakeDate(),
+        date: Date(timeIntervalSinceNow: -60 * 60),
         isOnline: true,
-        hasUnreadMessages: hasUnread()
+        hasUnreadMessages: false
     ),
+    // yesterday, has unread
     ConversationCellModel(
         name: "Курганова Саша",
-        message: "",
-        date: fakeDate(),
+        message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
+        date: Date(timeIntervalSinceNow: -60 * 60 * 36),
         isOnline: true,
-        hasUnreadMessages: hasUnread()
+        hasUnreadMessages: true
     ),
+    // yesterday, no unread
     ConversationCellModel(
         name: "Дмитрий Попов",
         message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
-        date: fakeDate(),
+        date: Date(timeIntervalSinceNow: -60 * 60 * 36),
         isOnline: true,
-        hasUnreadMessages: hasUnread()
+        hasUnreadMessages: false
     ),
+    // no last message
     ConversationCellModel(
         name: "Алексей Кудряшов",
-        message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
+        message: "",
         date: fakeDate(),
         isOnline: true,
         hasUnreadMessages: hasUnread()
@@ -84,37 +89,42 @@ let fakeChatList = [[ // MARK: -Online
         hasUnreadMessages: hasUnread()
     ),
 ], [ // MARK: -History
+    // today, has unread
     ConversationCellModel(
         name: "Artem Rozanov",
-        message: "",
-        date: fakeDate(),
+        message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
+        date: Date(timeIntervalSinceNow: -60 * 60),
         isOnline: false,
-        hasUnreadMessages: hasUnread()
+        hasUnreadMessages: true
     ),
+    // today, no unread
     ConversationCellModel(
         name: "Victoria Bunyaeva",
         message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
-        date: fakeDate(),
+        date: Date(timeIntervalSinceNow: -60 * 60),
         isOnline: false,
-        hasUnreadMessages: hasUnread()
+        hasUnreadMessages: false
     ),
+    // yesterday, has unread
     ConversationCellModel(
         name: "Maxim Matuzko",
         message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
-        date: fakeDate(),
+        date: Date(timeIntervalSinceNow: -60 * 60 * 36),
         isOnline: false,
-        hasUnreadMessages: hasUnread()
+        hasUnreadMessages: true
     ),
+    // yesterday, no unread
     ConversationCellModel(
         name: "Anna Vondrukhova",
         message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
-        date: fakeDate(),
+        date: Date(timeIntervalSinceNow: -60 * 60 * 36),
         isOnline: false,
-        hasUnreadMessages: hasUnread()
+        hasUnreadMessages: false
     ),
+    // no last message - show not be visible
     ConversationCellModel(
         name: "Александр Саушев",
-        message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
+        message: "",
         date: fakeDate(),
         isOnline: false,
         hasUnreadMessages: hasUnread()

@@ -62,26 +62,30 @@ extension ConversationCell: ConfigurableView {
     
     func configure(with model: ConversationCellModel) {
         nameView.text = model.name
-        populateLastMessage(with: model.message, hasUnread: model.hasUnreadMessages)
+
         reflectOnlineStatus(with: model.isOnline)
-        // Debug: log last message date for each contact
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "dd MMM"
-//        applog("\(model.name): \(formatter.string(from: model.date))")
-        populateDateTime(with: model.date)
+
+        if model.message.isEmpty {
+            renderNoLastMessage()
+        } else {
+            renderHasLastMessage(with: model)
+        }
     }
     
-    private func populateLastMessage(with value: String, hasUnread: Bool) {
-        if value.isEmpty {
-            messageView.text = emptyMessage
-            messageView.font = noMessageFont
-            messageView.adjustsFontForContentSizeCategory = true
-        } else {
-            messageView.text = value
-            if hasUnread {
-                messageView.font = boldMessage
-            }
+    private func renderHasLastMessage(with model: ConversationCellModel) {
+        messageView.text = model.message
+        if model.hasUnreadMessages {
+            messageView.font = boldMessage
         }
+        displayDateTime(with: model.date)
+    }
+    
+    private func renderNoLastMessage() {
+        messageView.text = emptyMessage
+        messageView.font = noMessageFont
+        messageView.adjustsFontForContentSizeCategory = true
+        
+        dateView.isHidden = true
     }
     
     private func reflectOnlineStatus(with isOnline: Bool) {
@@ -90,7 +94,7 @@ extension ConversationCell: ConfigurableView {
         }
     }
     
-    private func populateDateTime(with date: Date) {
+    private func displayDateTime(with date: Date) {
         if calendar.startOfDay(for: date) != calendar.startOfDay(for: Date()) {
             formatter.dateFormat = "dd MMM"
         } else {
@@ -98,5 +102,6 @@ extension ConversationCell: ConfigurableView {
         }
         
         dateView.text = formatter.string(from: date)
+        dateView.isHidden = false
     }
 }
