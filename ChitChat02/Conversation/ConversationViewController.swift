@@ -46,23 +46,26 @@ extension ConversationViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch fakeMessages[indexPath.row].direction {
-            case .income:
-                guard let cell = messages.dequeueReusableCell(withIdentifier: incomeCellId, for: indexPath) as? IncomeMessageCell else {
-                    return UITableViewCell()
-                }
-                cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-                cell.configure(with: fakeMessages[indexPath.row])
-                return cell
-            case .outcome:
-                guard let cell = messages.dequeueReusableCell(withIdentifier: outcomeCellId, for: indexPath) as? OutcomeMessageCell else {
-                    return UITableViewCell()
-                }
-                cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-                cell.configure(with: fakeMessages[indexPath.row])
-                return cell
+        let message = fakeMessages[indexPath.row]
+
+        guard let cell = messages.dequeueReusableCell(
+            withIdentifier: cellReuseId(for: message.direction),
+            for: indexPath) as? MessageCell else {
+                return UITableViewCell()
         }
+
+        cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        cell.configure(with: message)
+
+        return cell
     }
     
-    
+    private func cellReuseId(for direction: MessageDirection) -> String {
+        switch direction {
+            case .income:
+                return incomeCellId
+            case .outcome:
+                return outcomeCellId
+        }
+    }
 }
