@@ -31,10 +31,14 @@ class ConversationListViewController: UIViewController {
     private let onlineString = "Online"
     private let historyString = "History"
     
+    private var onlineData: [ConversationCellModel] = []
+    private var historyData: [ConversationCellModel] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareUi()
+        prepareData(with: fakeChatList)
     }
     
     private func prepareUi() {
@@ -56,6 +60,11 @@ class ConversationListViewController: UIViewController {
         navigationItem.rightBarButtonItem = profileNavItem
     }
     
+    private func prepareData(with values: [[ConversationCellModel]]) {
+        onlineData = values[0]
+        historyData = values[1].filter {!$0.message.isEmpty}
+    }
+    
     @objc private func profileOnTap() {
         performSegue(withIdentifier: segueProfile, sender: nil)
     }
@@ -68,7 +77,15 @@ extension ConversationListViewController: UITableViewDataSource {
                 return UITableViewCell()
         }
         
-        cell.configure(with: fakeChatList[indexPath.section][indexPath.row])
+        switch TableSections.init(rawValue: indexPath.section) {
+            case .online:
+                cell.configure(with: onlineData[indexPath.row])
+            case .history:
+                cell.configure(with: historyData[indexPath.row])
+            default:
+             return UITableViewCell()
+        }
+
         return cell
     }
     
@@ -102,13 +119,30 @@ extension ConversationListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fakeChatList[section].count
+        switch TableSections.init(rawValue: section) {
+            case .online:
+                return onlineData.count
+            case .history:
+                return historyData.count
+            default:
+                return 0
+        }
     }
 }
 // MARK: -UITableViewDelegate
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contactName = fakeChatList[indexPath.section][indexPath.row].name
+        switch TableSections.init(rawValue: indexPath.section) {
+            case .online:
+                openConversation(with: onlineData[indexPath.row].name)
+            case .history:
+                openConversation(with: historyData[indexPath.row].name)
+            default:
+                applog("Something has gone wrong")
+        }
+    }
+    
+    private func openConversation(with contactName: String) {
         performSegue(withIdentifier: segueConversation, sender: contactName)
     }
 }
