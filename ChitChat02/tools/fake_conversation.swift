@@ -8,10 +8,28 @@
 
 import Foundation
 
+private func randomDirection() -> MessageDirection {
+    if Bool.random() {
+        return .income
+    } else {
+        return .outcome
+    }
+}
+
 let fakeMessages = [
-    MessageCellModel(text: "message text 0", date: fakeDate(), direction: .income),
-    MessageCellModel(text: "message text 1", date: fakeDate(), direction: .income),
-    MessageCellModel(text: "message text 2", date: fakeDate(), direction: .outcome),
-    MessageCellModel(text: "message text 3", date: fakeDate(), direction: .income),
-    MessageCellModel(text: "message text 4", date: fakeDate(), direction: .outcome),
+    MessageCellModel(text: "message text newest", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text 1", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text 2", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text 3", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text\nmessage text\nmessage text\n", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text\nmessage text\nmessage text\n", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text\nmessage text\nmessage text\n", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text\nmessage text\nmessage text\n", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text\nmessage text\nmessage text\n", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text\nmessage text\nmessage text\n", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text\nmessage text\nmessage text\n", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text\nmessage text\nmessage text\n", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text\nmessage text\nmessage text\n", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text\nmessage text\nmessage text\n", date: fakeDate(), direction: randomDirection()),
+    MessageCellModel(text: "message text oldest\nmessage text\nmessage text\n", date: fakeDate(), direction: randomDirection()),
 ]

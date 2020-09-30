@@ -32,6 +32,7 @@ class ConversationViewController: UIViewController {
         messages.register(UINib(nibName: "OutcomeMessageCell", bundle: nil), forCellReuseIdentifier: outcomeCellId)
         messages.delegate = self
         messages.dataSource = self
+        messages.transform = CGAffineTransform(scaleX: 1, y: -1)
     }
 }
 
@@ -50,12 +51,14 @@ extension ConversationViewController: UITableViewDataSource {
                 guard let cell = messages.dequeueReusableCell(withIdentifier: incomeCellId, for: indexPath) as? IncomeMessageCell else {
                     return UITableViewCell()
                 }
+                cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
                 cell.configure(with: fakeMessages[indexPath.row])
                 return cell
             case .outcome:
                 guard let cell = messages.dequeueReusableCell(withIdentifier: outcomeCellId, for: indexPath) as? OutcomeMessageCell else {
                     return UITableViewCell()
                 }
+                cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
                 cell.configure(with: fakeMessages[indexPath.row])
                 return cell
         }
