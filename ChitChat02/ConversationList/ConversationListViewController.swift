@@ -50,6 +50,10 @@ class ConversationListViewController: UIViewController {
         chatTableView.dataSource = self
         chatTableView.delegate = self
         
+        setupNavBarButtons()
+    }
+    
+    private func setupNavBarButtons() {
         let profilePicture = UIImage(named: "ProfileIcon")?.withRenderingMode(.alwaysOriginal)
         let profileNavItem = UIBarButtonItem(
             image: profilePicture,
@@ -58,6 +62,11 @@ class ConversationListViewController: UIViewController {
             action: #selector(profileOnTap)
         )
         navigationItem.rightBarButtonItem = profileNavItem
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .save,
+            target: self,
+            action: #selector(settingsOnTap))
     }
     
     private func prepareData(with values: [[ConversationCellModel]]) {
@@ -67,6 +76,12 @@ class ConversationListViewController: UIViewController {
     
     @objc private func profileOnTap() {
         performSegue(withIdentifier: segueProfile, sender: nil)
+    }
+    
+    @objc private func settingsOnTap() {
+        if let themesViewController = ThemesViewController.instance() {
+            navigationController?.pushViewController(themesViewController, animated: true)
+        }
     }
 }
 // MARK: -UITableViewDataSource
