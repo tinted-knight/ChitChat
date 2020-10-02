@@ -65,9 +65,12 @@
                         <viewLayoutGuide key="safeArea" id="TuZ-3z-Dgc"/>
                     </view>
                     <connections>
-                        <outlet property="buttonTheme01" destination="Jui-4Y-mYS" id="8NB-mM-fnM"/>
-                        <outlet property="buttonTheme02" destination="K2y-SC-DCn" id="O1n-Ec-uks"/>
-                        <outlet property="buttonTheme03" destination="dug-vB-I2O" id="YYk-tV-k0Z"/>
+                        <outlet property="buttonGreen" destination="dug-vB-I2O" id="YYk-tV-k0Z"/>
+                        <outlet property="buttonRed" destination="Jui-4Y-mYS" id="8NB-mM-fnM"/>
+                        <outlet property="buttonYellow" destination="K2y-SC-DCn" id="O1n-Ec-uks"/>
+                        <outlet property="imageGreen" destination="cVI-sx-whQ" id="wdV-K2-ELj"/>
+                        <outlet property="imageRed" destination="rTV-DY-6Wx" id="Z0L-lZ-Yex"/>
+                        <outlet property="imageYellow" destination="pGl-b6-SQ3" id="ZrY-oB-Ywf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o5d-be-QYP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

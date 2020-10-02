@@ -17,7 +17,7 @@ struct ThemeModel {
 }
 
 let fakeThemeData = [
-    ThemeModel(name: "LightBlueRed", backgroundColor: .white, incomeBgColor: .blue, outcomeBgColor: .red),
-    ThemeModel(name: "LightOrangeGreen", backgroundColor: .white, incomeBgColor: .orange, outcomeBgColor: .green),
-    ThemeModel(name: "DarkBlueGreen", backgroundColor: .black, incomeBgColor: .blue, outcomeBgColor: .green)
+    ThemeModel(name: "Red", backgroundColor: .red, incomeBgColor: .blue, outcomeBgColor: .red),
+    ThemeModel(name: "Yellow", backgroundColor: .yellow, incomeBgColor: .orange, outcomeBgColor: .green),
+    ThemeModel(name: "Green", backgroundColor: .green, incomeBgColor: .blue, outcomeBgColor: .green)
 ]

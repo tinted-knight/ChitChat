@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum Theme: Int {
+    case red = 0
+    case yellow = 1
+    case green = 2
+    case none = -1
+}
+
 class ThemesViewController: UIViewController {
     
     static func instance() -> ThemesViewController? {
@@ -15,25 +22,101 @@ class ThemesViewController: UIViewController {
         return storyboard.instantiateInitialViewController() as? ThemesViewController
     }
     
-    @IBOutlet weak var buttonTheme01: UIButton!
-    @IBOutlet weak var buttonTheme02: UIButton!
-    @IBOutlet weak var buttonTheme03: UIButton!
+    @IBOutlet weak var buttonRed: UIButton!
+    @IBOutlet weak var buttonYellow: UIButton!
+    @IBOutlet weak var buttonGreen: UIButton!
     
+    @IBOutlet weak var imageRed: UIImageView!
+    @IBOutlet weak var imageYellow: UIImageView!
+    @IBOutlet weak var imageGreen: UIImageView!
+    
+    private var selectedTheme: Theme = .none
+    private var selectedImageView: UIImageView? {
+        switch selectedTheme {
+            case .red:
+                return imageRed
+            case .yellow:
+                return imageYellow
+            case .green:
+                return imageGreen
+            case .none:
+                return nil
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareUi()
-        buttonTheme01.addTarget(self, action: #selector(themeOnTap(_:)), for: .touchUpInside)
-        buttonTheme02.addTarget(self, action: #selector(themeOnTap(_:)), for: .touchUpInside)
-        buttonTheme03.addTarget(self, action: #selector(themeOnTap(_:)), for: .touchUpInside)
+        setupListeners()
     }
     
     private func prepareUi() {
         title = "Settings"
+        
+        buttonRed.setTitle(fakeThemeData[0].name, for: .normal)
+        buttonYellow.setTitle(fakeThemeData[1].name, for: .normal)
+        buttonGreen.setTitle(fakeThemeData[2].name, for: .normal)
+        
+        imageRed.layer.cornerRadius = 14
+        imageYellow.layer.cornerRadius = 14
+        imageGreen.layer.cornerRadius = 14
+        
+        setSelectedTheme(.red)
     }
     
-    @objc private func themeOnTap(_ sender: UIView?) {
-        applog(#function)
+    private func setupListeners() {
+        buttonRed.addTarget(self, action: #selector(selectRedTheme), for: .touchUpInside)
+        buttonYellow.addTarget(self, action: #selector(selectYellowTheme), for: .touchUpInside)
+        buttonGreen.addTarget(self, action: #selector(selectGreenTheme), for: .touchUpInside)
+        
+        imageRed.isUserInteractionEnabled = true
+        imageRed.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(selectRedTheme))
+        )
+        
+        imageYellow.isUserInteractionEnabled = true
+        imageYellow.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(selectYellowTheme))
+        )
+        
+        imageGreen.isUserInteractionEnabled = true
+        imageGreen.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(selectGreenTheme))
+        )
     }
     
+    @objc private func selectRedTheme() {
+        setSelectedTheme(.red)
+    }
+    
+    @objc private func selectYellowTheme() {
+        setSelectedTheme(.yellow)
+    }
+    
+    @objc private func selectGreenTheme() {
+        setSelectedTheme(.green)
+    }
+    
+    private func setSelectedTheme(_ value: Theme) {
+        guard value != selectedTheme else {
+            return
+        }
+        view.backgroundColor = fakeThemeData[value.rawValue].backgroundColor
+        selectedImageView?.isChoosed(false)
+        selectedTheme = value
+        selectedImageView?.isChoosed(true)
+    }
+}
+
+extension UIImageView {
+    func isChoosed(_ value: Bool) {
+        if value {
+            self.layer.borderWidth = 3
+            self.layer.borderColor = UIColor.blue.cgColor
+        } else {
+            self.layer.borderWidth = 1
+            self.layer.borderColor = UIColor.gray.cgColor
+        }
+    }
 }
