@@ -33,6 +33,8 @@ class ConversationListViewController: UIViewController {
     
     private var onlineData: [ConversationCellModel] = []
     private var historyData: [ConversationCellModel] = []
+    
+    private var currentTheme: Theme = .red
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +43,13 @@ class ConversationListViewController: UIViewController {
         prepareData(with: fakeChatList)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        view.backgroundColor = ThemeManager.get().backgroundColor
+    }
+    
     private func prepareUi() {
+        ThemeManager.apply(theme: currentTheme)
+        
         title = "Tinkoff Chat"
         
         chatTableView.register(UINib(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: cellReuseId)
@@ -80,10 +88,13 @@ class ConversationListViewController: UIViewController {
     
     @objc private func settingsOnTap() {
         if let themesViewController = ThemesViewController.instance() {
+            themesViewController.selectedTheme = currentTheme
             navigationController?.pushViewController(themesViewController, animated: true)
-            themesViewController.delegate = self
-            themesViewController.themePicked = { value in
-                applog("from closure : \(value)")
+//            themesViewController.delegate = self
+            themesViewController.themePicked = { [weak self] value in
+//                applog("from closure : \(value)")
+                self?.currentTheme = value
+                ThemeManager.apply(theme: value)
             }
         }
     }

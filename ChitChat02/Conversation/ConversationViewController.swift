@@ -25,6 +25,10 @@ class ConversationViewController: UIViewController {
         prepareUi()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        view.backgroundColor = ThemeManager.get().backgroundColor
+    }
+    
     private func prepareUi() {
         title = contactName ?? nonameContact
         

@@ -54,6 +54,10 @@ mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odio
         populateUi()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        view.backgroundColor = ThemeManager.get().backgroundColor
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
 //        applog("ProfileViewController::\(#function)")
 //        applog("buttonEdit.frame: \(buttonEdit.frame)")

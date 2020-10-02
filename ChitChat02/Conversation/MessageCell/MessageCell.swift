@@ -43,5 +43,11 @@ extension MessageCell: ConfigurableView {
     func configure(with model: MessageCellModel) {
         message.text = model.text
         date.text = formatDateTime(with: model.date)
+        switch model.direction {
+            case .income:
+                background.backgroundColor = ThemeManager.get().incomeBgColor
+            case .outcome:
+                background.backgroundColor = ThemeManager.get().outcomeBgColor
+        }
     }
 }

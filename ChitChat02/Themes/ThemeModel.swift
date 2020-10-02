@@ -9,15 +9,39 @@
 import Foundation
 import UIKit
 
+enum Brightness {
+    case light
+    case dark
+}
+
 struct ThemeModel {
     let name: String
     let backgroundColor: UIColor
     let incomeBgColor: UIColor
     let outcomeBgColor: UIColor
+    let brightness: Brightness
 }
 
 let fakeThemeData = [
-    ThemeModel(name: "Red", backgroundColor: .red, incomeBgColor: .blue, outcomeBgColor: .red),
-    ThemeModel(name: "Yellow", backgroundColor: .yellow, incomeBgColor: .orange, outcomeBgColor: .green),
-    ThemeModel(name: "Green", backgroundColor: .green, incomeBgColor: .blue, outcomeBgColor: .green)
+    ThemeModel(
+        name: "Classic",
+        backgroundColor: .white,
+        incomeBgColor: .green,
+        outcomeBgColor: .lightGray,
+        brightness: .light
+    ),
+    ThemeModel(
+        name: "Yellow",
+        backgroundColor: .yellow,
+        incomeBgColor: .orange,
+        outcomeBgColor: .red,
+        brightness: .light
+    ),
+    ThemeModel(
+        name: "Dark",
+        backgroundColor: .darkGray,
+        incomeBgColor: .gray,
+        outcomeBgColor: .white,
+        brightness: .dark
+    ),
 ]

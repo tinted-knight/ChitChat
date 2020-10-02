@@ -12,7 +12,6 @@ enum Theme: Int {
     case red = 0
     case yellow = 1
     case green = 2
-    case none = -1
 }
 
 protocol ThemesPickerDelegate {
@@ -38,7 +37,7 @@ class ThemesViewController: UIViewController {
     @IBOutlet weak var imageYellow: UIImageView!
     @IBOutlet weak var imageGreen: UIImageView!
     
-    private var selectedTheme: Theme = .none
+    var selectedTheme: Theme = .red
     private var selectedImageView: UIImageView? {
         switch selectedTheme {
             case .red:
@@ -47,8 +46,6 @@ class ThemesViewController: UIViewController {
                 return imageYellow
             case .green:
                 return imageGreen
-            case .none:
-                return nil
         }
     }
 
@@ -70,7 +67,7 @@ class ThemesViewController: UIViewController {
         imageYellow.layer.cornerRadius = 14
         imageGreen.layer.cornerRadius = 14
         
-        setSelectedTheme(.red)
+        setSelectedTheme(selectedTheme, force: true)
     }
     
     private func setupListeners() {
@@ -106,8 +103,8 @@ class ThemesViewController: UIViewController {
         setSelectedTheme(.green)
     }
     
-    private func setSelectedTheme(_ value: Theme) {
-        guard value != selectedTheme else {
+    private func setSelectedTheme(_ value: Theme, force: Bool = false) {
+        guard force || value != selectedTheme else {
             return
         }
         view.backgroundColor = fakeThemeData[value.rawValue].backgroundColor
