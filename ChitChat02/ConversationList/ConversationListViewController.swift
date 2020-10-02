@@ -81,9 +81,20 @@ class ConversationListViewController: UIViewController {
     @objc private func settingsOnTap() {
         if let themesViewController = ThemesViewController.instance() {
             navigationController?.pushViewController(themesViewController, animated: true)
+            themesViewController.delegate = self
+            themesViewController.themePicked = { value in
+                applog("from closure : \(value)")
+            }
         }
     }
 }
+
+extension ConversationListViewController: ThemesPickerDelegate {
+    func theme(picked value: Theme) {
+        applog("from delegate : \(value)")
+    }
+}
+
 // MARK: -UITableViewDataSource
 extension ConversationListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

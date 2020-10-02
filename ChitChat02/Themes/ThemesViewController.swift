@@ -15,12 +15,20 @@ enum Theme: Int {
     case none = -1
 }
 
+protocol ThemesPickerDelegate {
+    func theme(picked value: Theme)
+}
+
 class ThemesViewController: UIViewController {
     
     static func instance() -> ThemesViewController? {
         let storyboard = UIStoryboard(name: String.init(describing: self), bundle: nil)
         return storyboard.instantiateInitialViewController() as? ThemesViewController
     }
+    
+    var delegate: ThemesPickerDelegate?
+    
+    var themePicked: ((Theme) -> Void)?
     
     @IBOutlet weak var buttonRed: UIButton!
     @IBOutlet weak var buttonYellow: UIButton!
@@ -106,6 +114,9 @@ class ThemesViewController: UIViewController {
         selectedImageView?.isChoosed(false)
         selectedTheme = value
         selectedImageView?.isChoosed(true)
+
+        delegate?.theme(picked: value)
+        themePicked?(value)
     }
 }
 
