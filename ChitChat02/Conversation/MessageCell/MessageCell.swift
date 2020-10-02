@@ -46,8 +46,10 @@ extension MessageCell: ConfigurableView {
         switch model.direction {
             case .income:
                 background.backgroundColor = ThemeManager.get().incomeBgColor
+                message.textColor = ThemeManager.get().incomeTextColor
             case .outcome:
                 background.backgroundColor = ThemeManager.get().outcomeBgColor
+                message.textColor = ThemeManager.get().outcomeTextColor
         }
     }
 }

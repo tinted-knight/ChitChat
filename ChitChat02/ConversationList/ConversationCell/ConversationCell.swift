@@ -23,6 +23,7 @@ class ConversationCell: UITableViewCell {
     @IBOutlet weak var messageView: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     
+    // deprecated
     private lazy var onlineColor: UIColor = UIColor.yellow.withAlphaComponent(0.2)
     private lazy var offlineColor: UIColor = .white
     
@@ -52,7 +53,7 @@ class ConversationCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        backgroundColor = .white
+        backgroundColor = ThemeManager.get().historyBgColor
         messageView.font = defaultFont
     }
     
@@ -90,7 +91,7 @@ extension ConversationCell: ConfigurableView {
     
     private func reflectOnlineStatus(with isOnline: Bool) {
         if isOnline {
-            backgroundColor = onlineColor
+            backgroundColor = ThemeManager.get().onlineBgColor
         }
     }
     

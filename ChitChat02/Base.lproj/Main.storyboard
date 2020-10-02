@@ -49,11 +49,10 @@
                                     <action selector="onEditButtonTap:" destination="3yT-PA-3m6" eventType="touchUpInside" id="qL0-ap-dRI"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="Profile description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mgL-XO-LVl">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="Profile description" translatesAutoresizingMaskIntoConstraints="NO" id="mgL-XO-LVl">
                                 <rect key="frame" x="16" y="457" width="343" height="104"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <navigationBar contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q9m-3L-y8h">

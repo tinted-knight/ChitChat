@@ -34,7 +34,7 @@ class ConversationListViewController: UIViewController {
     private var onlineData: [ConversationCellModel] = []
     private var historyData: [ConversationCellModel] = []
     
-    private var currentTheme: Theme = .red
+    private var currentTheme: Theme = .green
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +45,10 @@ class ConversationListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = ThemeManager.get().backgroundColor
+        ThemeManager.apply(theme: currentTheme)
     }
     
     private func prepareUi() {
-        ThemeManager.apply(theme: currentTheme)
-        
         title = "Tinkoff Chat"
         
         chatTableView.register(UINib(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: cellReuseId)
@@ -59,6 +58,7 @@ class ConversationListViewController: UIViewController {
         chatTableView.delegate = self
         
         setupNavBarButtons()
+        setupNavBarTheme()
     }
     
     private func setupNavBarButtons() {
@@ -70,9 +70,10 @@ class ConversationListViewController: UIViewController {
             action: #selector(profileOnTap)
         )
         navigationItem.rightBarButtonItem = profileNavItem
-        
+
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .save,
+            image: UIImage(named: "Gear"),
+            style: .plain,
             target: self,
             action: #selector(settingsOnTap))
     }
@@ -95,8 +96,16 @@ class ConversationListViewController: UIViewController {
 //                applog("from closure : \(value)")
                 self?.currentTheme = value
                 ThemeManager.apply(theme: value)
+                self?.chatTableView.reloadData()
+                self?.setupNavBarTheme()
             }
         }
+    }
+    
+    private func setupNavBarTheme() {
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
+        navigationController?.navigationBar.barTintColor = ThemeManager.get().backgroundColor
     }
 }
 
@@ -109,7 +118,7 @@ extension ConversationListViewController: ThemesPickerDelegate {
 // MARK: -UITableViewDataSource
 extension ConversationListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = chatTableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
             as? ConversationCell else {
                 return UITableViewCell()
         }

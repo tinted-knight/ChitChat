@@ -16,9 +16,11 @@ class ThemeManager {
         current = theme
         MessageCell.appearance().backgroundColor = get().backgroundColor
         HeaderCell.appearance().backgroundColor = get().backgroundColor
+        UILabel.appearance().textColor = get().textColor
+        UITextView.appearance().textColor = get().textColor
     }
     
     static func get() -> ThemeModel {
-        return fakeThemeData[current?.rawValue ?? 0]
+        return fakeThemeData[current?.rawValue ?? 2]
     }
 }

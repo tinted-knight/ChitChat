@@ -59,6 +59,12 @@ class ThemesViewController: UIViewController {
     private func prepareUi() {
         title = "Settings"
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Cancel",
+            style: .plain,
+            target: self, action: #selector(cancelOnTap)
+        )
+        
         buttonRed.setTitle(fakeThemeData[0].name, for: .normal)
         buttonYellow.setTitle(fakeThemeData[1].name, for: .normal)
         buttonGreen.setTitle(fakeThemeData[2].name, for: .normal)
@@ -89,6 +95,10 @@ class ThemesViewController: UIViewController {
         imageGreen.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(selectGreenTheme))
         )
+    }
+    
+    @objc private func cancelOnTap() {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func selectRedTheme() {
