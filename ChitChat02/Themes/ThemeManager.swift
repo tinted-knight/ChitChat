@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class ThemeManager {
+    static let key = "key-theme"
+    
     static private var current: Theme?
     
     static func apply(theme: Theme) {

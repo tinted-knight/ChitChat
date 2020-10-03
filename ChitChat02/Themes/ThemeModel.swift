@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+enum Theme: Int {
+    case classic = 0
+    case yellow = 1
+    case black = 2
+}
+
 enum Brightness {
     case light
     case dark
@@ -67,10 +73,9 @@ let fakeThemeData = [
         outcomeBgColor: UIColor(displayP3Red: 0.1, green: 0.1, blue: 0.1, alpha: 1),
         incomeTextColor: .white,
         outcomeTextColor: .white,
-//        onlineBgColor: UIColor(displayP3Red: 0.95, green: 0.76, blue: 0.20, alpha: 1),
         onlineBgColor: .darkGray,
         historyBgColor: .black,
-        tintColor: .white,
+        tintColor: .systemBlue,
         buttonBgColor: UIColor(displayP3Red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
     ),
 ]

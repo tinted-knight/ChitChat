@@ -8,14 +8,9 @@
 
 import UIKit
 
-enum Theme: Int {
-    case red = 0
-    case yellow = 1
-    case green = 2
-}
-
 protocol ThemesPickerDelegate {
     func theme(picked value: Theme)
+    func result(_ value: Theme, _ saveChoice: Bool)
 }
 
 class ThemesViewController: UIViewController {
@@ -28,6 +23,9 @@ class ThemesViewController: UIViewController {
     var delegate: ThemesPickerDelegate?
     
     var themePicked: ((Theme) -> Void)?
+    var result: ((Theme, Bool) -> Void)?
+    
+    private var saveChoice = true
     
     @IBOutlet weak var buttonRed: UIButton!
     @IBOutlet weak var buttonYellow: UIButton!
@@ -37,14 +35,15 @@ class ThemesViewController: UIViewController {
     @IBOutlet weak var imageYellow: UIImageView!
     @IBOutlet weak var imageGreen: UIImageView!
     
-    var selectedTheme: Theme = .red
+    var activeTheme: Theme = .classic
+    var selectedTheme: Theme = .classic
     private var selectedImageView: UIImageView? {
         switch selectedTheme {
-            case .red:
+            case .classic:
                 return imageRed
             case .yellow:
                 return imageYellow
-            case .green:
+            case .black:
                 return imageGreen
         }
     }
@@ -52,8 +51,17 @@ class ThemesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        selectedTheme = activeTheme
+        
         prepareUi()
         setupListeners()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        result?(selectedTheme, saveChoice)
+        delegate?.result(selectedTheme, saveChoice)
+        
+        super.viewWillDisappear(animated)
     }
     
     private func prepareUi() {
@@ -64,7 +72,7 @@ class ThemesViewController: UIViewController {
             style: .plain,
             target: self, action: #selector(cancelOnTap)
         )
-        
+
         buttonRed.setTitle(fakeThemeData[0].name, for: .normal)
         buttonYellow.setTitle(fakeThemeData[1].name, for: .normal)
         buttonGreen.setTitle(fakeThemeData[2].name, for: .normal)
@@ -98,11 +106,12 @@ class ThemesViewController: UIViewController {
     }
     
     @objc private func cancelOnTap() {
+        saveChoice = false
         navigationController?.popViewController(animated: true)
     }
     
     @objc private func selectRedTheme() {
-        setSelectedTheme(.red)
+        setSelectedTheme(.classic)
     }
     
     @objc private func selectYellowTheme() {
@@ -110,29 +119,32 @@ class ThemesViewController: UIViewController {
     }
     
     @objc private func selectGreenTheme() {
-        setSelectedTheme(.green)
+        setSelectedTheme(.black)
     }
     
     private func setSelectedTheme(_ value: Theme, force: Bool = false) {
         guard force || value != selectedTheme else {
             return
         }
-        applyThemeHereImmediate(value)
+        applyThemeForPreview(value)
         selectedImageView?.isChoosed(false)
         selectedTheme = value
         selectedImageView?.isChoosed(true)
-
+        
         delegate?.theme(picked: value)
         themePicked?(value)
     }
     
-    private func applyThemeHereImmediate(_ value: Theme) {
+    private func applyThemeForPreview(_ value: Theme) {
         view.backgroundColor = fakeThemeData[value.rawValue].backgroundColor
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: fakeThemeData[value.rawValue].textColor]
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: fakeThemeData[value.rawValue].textColor]
         navigationController?.navigationBar.tintColor = fakeThemeData[value.rawValue].tintColor
     }
 }
 
 extension UIImageView {
+    // Display blue border around selected button
     func isChoosed(_ value: Bool) {
         if value {
             self.layer.borderWidth = 3

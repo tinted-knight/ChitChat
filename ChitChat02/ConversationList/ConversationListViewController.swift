@@ -34,12 +34,12 @@ class ConversationListViewController: UIViewController {
     private var onlineData: [ConversationCellModel] = []
     private var historyData: [ConversationCellModel] = []
     
-    private var currentTheme: Theme = .green
+    private var currentTheme: Theme = .black
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ThemeManager.apply(theme: currentTheme)
+        currentTheme = loadAppTheme()
         
         prepareUi()
         prepareData(with: fakeChatList)
@@ -59,7 +59,7 @@ class ConversationListViewController: UIViewController {
         chatTableView.delegate = self
         
         setupNavBarButtons()
-        setupNavBarTheme()
+        applyTheme(currentTheme)
     }
     
     private func setupNavBarButtons() {
@@ -83,27 +83,29 @@ class ConversationListViewController: UIViewController {
         onlineData = values[0]
         historyData = values[1].filter {!$0.message.isEmpty}
     }
-    
-    @objc private func profileOnTap() {
-        performSegue(withIdentifier: segueProfile, sender: nil)
+}
+// MARK: -ThemesPickerDelegate and stuff
+extension ConversationListViewController: ThemesPickerDelegate {
+    func theme(picked value: Theme) {
+        applog("delegate : \(value)")
+        applyTheme(value)
     }
-    
-    @objc private func settingsOnTap() {
-        if let themesViewController = ThemesViewController.instance() {
-            themesViewController.selectedTheme = currentTheme
-            navigationController?.pushViewController(themesViewController, animated: true)
-            //            themesViewController.delegate = self
-            themesViewController.themePicked = { [weak self] value in
-                //                applog("from closure : \(value)")
-                self?.currentTheme = value
-                ThemeManager.apply(theme: value)
-                self?.chatTableView.reloadData()
-                self?.setupNavBarTheme()
-            }
+
+    func result(_ value: Theme, _ saveChoice: Bool) {
+        if saveChoice {
+            applog("delegate: yay! new theme")
+            applyTheme(value)
+        } else {
+            applog("delegate: no new theme")
         }
     }
     
-    private func setupNavBarTheme() {
+    private func applyTheme(_ value: Theme) {
+        currentTheme = value
+        chatTableView.reloadData()
+        
+        ThemeManager.apply(theme: value)
+        
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
         navigationController?.navigationBar.tintColor = ThemeManager.get().tintColor
@@ -113,15 +115,44 @@ class ConversationListViewController: UIViewController {
             case .light:
                 navigationController?.navigationBar.barStyle = .default
         }
+        saveAppTheme(value)
+    }
+    
+    private func saveAppTheme(_ value: Theme) {
+        let pref = UserDefaults.standard
+        pref.set(value.rawValue, forKey: ThemeManager.key)
+    }
+    
+    private func loadAppTheme() -> Theme {
+        let prefs = UserDefaults.standard
+        return Theme(rawValue: prefs.integer(forKey: ThemeManager.key)) ?? Theme.classic
     }
 }
+//MARK: -UI Actions
+extension ConversationListViewController {
+        @objc private func profileOnTap() {
+            performSegue(withIdentifier: segueProfile, sender: nil)
+        }
+        
+        @objc private func settingsOnTap() {
+            if let themesViewController = ThemesViewController.instance() {
+                themesViewController.activeTheme = currentTheme
 
-extension ConversationListViewController: ThemesPickerDelegate {
-    func theme(picked value: Theme) {
-        applog("from delegate : \(value)")
-    }
+//                themesViewController.delegate = self
+                
+                themesViewController.result = { [weak self] value, saveChoice in
+                    if saveChoice {
+                        applog("closure: yay! new theme")
+                        self?.applyTheme(value)
+                    } else {
+                        applog("closure: no new theme")
+                    }
+                }
+
+                navigationController?.pushViewController(themesViewController, animated: true)
+            }
+        }
 }
-
 // MARK: -UITableViewDataSource
 extension ConversationListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
