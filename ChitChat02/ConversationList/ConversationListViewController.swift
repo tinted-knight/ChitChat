@@ -106,8 +106,7 @@ extension ConversationListViewController: ThemesPickerDelegate {
         
         ThemeManager.apply(theme: value)
         
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
-        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
+        updateNavbarAppearence()
         navigationController?.navigationBar.tintColor = ThemeManager.get().tintColor
         switch ThemeManager.get().brightness {
             case .dark:
@@ -116,6 +115,11 @@ extension ConversationListViewController: ThemesPickerDelegate {
                 navigationController?.navigationBar.barStyle = .default
         }
         saveAppTheme(value)
+    }
+    
+    private func updateNavbarAppearence() {
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
     }
     
     private func saveAppTheme(_ value: Theme) {
@@ -146,6 +150,8 @@ extension ConversationListViewController {
                         self?.applyTheme(value)
                     } else {
                         applog("closure: no new theme")
+                        // need to call to fix navbar text color
+                        self?.updateNavbarAppearence()
                     }
                 }
 
