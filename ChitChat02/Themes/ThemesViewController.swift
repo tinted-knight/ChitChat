@@ -117,13 +117,18 @@ class ThemesViewController: UIViewController {
         guard force || value != selectedTheme else {
             return
         }
-        view.backgroundColor = fakeThemeData[value.rawValue].backgroundColor
+        applyThemeHereImmediate(value)
         selectedImageView?.isChoosed(false)
         selectedTheme = value
         selectedImageView?.isChoosed(true)
 
         delegate?.theme(picked: value)
         themePicked?(value)
+    }
+    
+    private func applyThemeHereImmediate(_ value: Theme) {
+        view.backgroundColor = fakeThemeData[value.rawValue].backgroundColor
+        navigationController?.navigationBar.tintColor = fakeThemeData[value.rawValue].tintColor
     }
 }
 

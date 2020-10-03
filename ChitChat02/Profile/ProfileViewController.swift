@@ -35,35 +35,20 @@ mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odio
     
     private let picker = UIImagePickerController()
 
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-//        applog("\(buttonEdit.frame)")
-        // При попытке обращение к buttonEdit приложение падает
-        // с сообщением о том, что невозможно `расколупать` Optional
-        //
-        // В интернетах пишут, что `coder` нужен при работе с `iOS serialization APIs`
-        // Судя по всему, в момент вызова просто ещё ничего нет, поэтому и ссылка
-        // на кнопку `nil`
-    }
-    
     override func viewDidLoad() {
-//        applog("ProfileViewController::\(#function)")
-//        applog("buttonEdit.frame: \(buttonEdit.frame)")
-
         prepareUi()
         populateUi()
+        
+        view.backgroundColor = ThemeManager.get().backgroundColor
+        buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        view.backgroundColor = ThemeManager.get().backgroundColor
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-//        applog("ProfileViewController::\(#function)")
-//        applog("buttonEdit.frame: \(buttonEdit.frame)")
-        // frame отличается, потому что здесь размер view
-        // пересчитан с учётом констрейнтов,
-        // расположения и размера родительских и соседних view
+//        if ThemeManager.get().name == "Dark" {
+//            navigationController?.navigationBar.barStyle = .black
+//        } else {
+//            navigationController?.navigationBar.barStyle = .default
+//        }
     }
     
     private func prepareUi() {

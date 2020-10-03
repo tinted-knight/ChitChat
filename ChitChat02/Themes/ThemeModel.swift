@@ -16,6 +16,7 @@ enum Brightness {
 
 struct ThemeModel {
     let name: String
+    let brightness: Brightness
     let backgroundColor: UIColor
     let textColor: UIColor
     let incomeBgColor: UIColor
@@ -24,11 +25,14 @@ struct ThemeModel {
     let outcomeTextColor: UIColor
     let onlineBgColor: UIColor
     let historyBgColor: UIColor
+    let tintColor: UIColor
+    let buttonBgColor: UIColor
 }
 
 let fakeThemeData = [
     ThemeModel(
         name: "Classic",
+        brightness: .light,
         backgroundColor: .white,
         textColor: .black,
         incomeBgColor: .green,
@@ -36,28 +40,37 @@ let fakeThemeData = [
         incomeTextColor: .black,
         outcomeTextColor: .black,
         onlineBgColor: UIColor.yellow.withAlphaComponent(0.2),
-        historyBgColor: .white
+        historyBgColor: .white,
+        tintColor: .systemBlue,
+        buttonBgColor: .lightGray
     ),
     ThemeModel(
         name: "Yellow",
+        brightness: .light,
         backgroundColor: .yellow,
-        textColor: .black,
+        textColor: UIColor(red: 0, green: 0.0627, blue: 0.6392, alpha: 1.0),
         incomeBgColor: .orange,
         outcomeBgColor: .red,
         incomeTextColor: .white,
         outcomeTextColor: .white,
         onlineBgColor: UIColor.yellow.withAlphaComponent(0.2),
-        historyBgColor: .yellow
+        historyBgColor: .yellow,
+        tintColor: .systemRed,
+        buttonBgColor: .white
     ),
     ThemeModel(
         name: "Dark",
-        backgroundColor: .darkGray,
+        brightness: .dark,
+        backgroundColor: .black,
         textColor: .white,
-        incomeBgColor: .gray,
-        outcomeBgColor: .black,
+        incomeBgColor: UIColor(displayP3Red: 0.2, green: 0.2, blue: 0.2, alpha: 1),
+        outcomeBgColor: UIColor(displayP3Red: 0.1, green: 0.1, blue: 0.1, alpha: 1),
         incomeTextColor: .white,
-        outcomeTextColor: .lightGray,
-        onlineBgColor: UIColor(displayP3Red: 0.95, green: 0.76, blue: 0.20, alpha: 1),
-        historyBgColor: .darkGray
+        outcomeTextColor: .white,
+//        onlineBgColor: UIColor(displayP3Red: 0.95, green: 0.76, blue: 0.20, alpha: 1),
+        onlineBgColor: .darkGray,
+        historyBgColor: .black,
+        tintColor: .white,
+        buttonBgColor: UIColor(displayP3Red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
     ),
 ]

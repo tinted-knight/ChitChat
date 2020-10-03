@@ -14,10 +14,19 @@ class ThemeManager {
     
     static func apply(theme: Theme) {
         current = theme
-        MessageCell.appearance().backgroundColor = get().backgroundColor
-        HeaderCell.appearance().backgroundColor = get().backgroundColor
-        UILabel.appearance().textColor = get().textColor
-        UITextView.appearance().textColor = get().textColor
+        let themeData = get()
+        MessageCell.appearance().backgroundColor = themeData.backgroundColor
+        HeaderCell.appearance().backgroundColor = themeData.backgroundColor
+        UILabel.appearance().textColor = themeData.textColor
+        UITextView.appearance().textColor = themeData.textColor
+        UIView.appearance().tintColor = themeData.tintColor
+        UIBarButtonItem.appearance().tintColor = themeData.tintColor
+        switch themeData.brightness {
+            case .light:
+                UINavigationBar.appearance().barStyle = .default
+            case .dark:
+                UINavigationBar.appearance().barStyle = .black
+        }
     }
     
     static func get() -> ThemeModel {

@@ -35,9 +35,11 @@ class ConversationListViewController: UIViewController {
     private var historyData: [ConversationCellModel] = []
     
     private var currentTheme: Theme = .green
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ThemeManager.apply(theme: currentTheme)
         
         prepareUi()
         prepareData(with: fakeChatList)
@@ -45,7 +47,6 @@ class ConversationListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = ThemeManager.get().backgroundColor
-        ThemeManager.apply(theme: currentTheme)
     }
     
     private func prepareUi() {
@@ -70,7 +71,7 @@ class ConversationListViewController: UIViewController {
             action: #selector(profileOnTap)
         )
         navigationItem.rightBarButtonItem = profileNavItem
-
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "Gear"),
             style: .plain,
@@ -91,9 +92,9 @@ class ConversationListViewController: UIViewController {
         if let themesViewController = ThemesViewController.instance() {
             themesViewController.selectedTheme = currentTheme
             navigationController?.pushViewController(themesViewController, animated: true)
-//            themesViewController.delegate = self
+            //            themesViewController.delegate = self
             themesViewController.themePicked = { [weak self] value in
-//                applog("from closure : \(value)")
+                //                applog("from closure : \(value)")
                 self?.currentTheme = value
                 ThemeManager.apply(theme: value)
                 self?.chatTableView.reloadData()
@@ -105,7 +106,13 @@ class ConversationListViewController: UIViewController {
     private func setupNavBarTheme() {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
-        navigationController?.navigationBar.barTintColor = ThemeManager.get().backgroundColor
+        navigationController?.navigationBar.tintColor = ThemeManager.get().tintColor
+        switch ThemeManager.get().brightness {
+            case .dark:
+                navigationController?.navigationBar.barStyle = .black
+            case .light:
+                navigationController?.navigationBar.barStyle = .default
+        }
     }
 }
 
@@ -129,9 +136,9 @@ extension ConversationListViewController: UITableViewDataSource {
             case .history:
                 cell.configure(with: historyData[indexPath.row])
             default:
-             return UITableViewCell()
+                return UITableViewCell()
         }
-
+        
         return cell
     }
     
