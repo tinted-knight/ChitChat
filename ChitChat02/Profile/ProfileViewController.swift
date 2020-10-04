@@ -12,7 +12,6 @@ import UIKit
 class ProfileViewController : UIViewController {
     
     @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var buttonEdit: UIImageView!
     @IBOutlet weak var labelUserName: UILabel!
     @IBOutlet weak var textUserDescription: UITextView!
     @IBOutlet weak var buttonSave: UIButton!
@@ -43,18 +42,10 @@ mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odio
         buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-//        if ThemeManager.get().name == "Dark" {
-//            navigationController?.navigationBar.barStyle = .black
-//        } else {
-//            navigationController?.navigationBar.barStyle = .default
-//        }
-    }
-    
     private func prepareUi() {
         buttonSave.layer.cornerRadius = 14.0
-        
-        profilePicture.layer.cornerRadius = profilePicture.bounds.height / 2
+
+        profilePicture.layer.cornerRadius = view.frame.width / 4
         profilePicture.layer.masksToBounds = true
         
         profilePicture.isUserInteractionEnabled = true
