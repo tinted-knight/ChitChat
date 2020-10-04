@@ -107,6 +107,7 @@ extension ConversationListViewController: ThemesPickerDelegate {
         
         updateNavbarAppearence()
         navigationController?.navigationBar.tintColor = ThemeManager.get().tintColor
+        // inspite of setting NavBarStyle in ThemeManager need to duplicate here
         switch ThemeManager.get().brightness {
             case .dark:
                 navigationController?.navigationBar.barStyle = .black
@@ -133,34 +134,34 @@ extension ConversationListViewController: ThemesPickerDelegate {
 }
 //MARK: -UI Actions
 extension ConversationListViewController {
-        @objc private func profileOnTap() {
-            performSegue(withIdentifier: segueProfile, sender: nil)
-        }
-        
-        @objc private func settingsOnTap() {
-            if let themesViewController = ThemesViewController.instance() {
-                themesViewController.activeTheme = currentTheme
-
-//                themesViewController.delegate = self
-
-                themesViewController.themePicked = { value in
-                    applog("closure themePicked")
-                }
-
-                themesViewController.result = { [weak self] value, saveChoice in
-                    if saveChoice {
-                        applog("closure: yay! new theme")
-                        self?.applyTheme(value)
-                    } else {
-                        applog("closure: no new theme")
-                        // need to call to fix navbar text color
-                        self?.updateNavbarAppearence()
-                    }
-                }
-
-                navigationController?.pushViewController(themesViewController, animated: true)
+    @objc private func profileOnTap() {
+        performSegue(withIdentifier: segueProfile, sender: nil)
+    }
+    
+    @objc private func settingsOnTap() {
+        if let themesViewController = ThemesViewController.instance() {
+            themesViewController.activeTheme = currentTheme
+            
+//            themesViewController.delegate = self
+            
+            themesViewController.themePicked = { value in
+                applog("closure themePicked")
             }
+            
+            themesViewController.result = { [weak self] value, saveChoice in
+                if saveChoice {
+                    applog("closure: yay! new theme")
+                    self?.applyTheme(value)
+                } else {
+                    applog("closure: no new theme")
+                    // need to call to fix navbar text color
+                    self?.updateNavbarAppearence()
+                }
+            }
+            
+            navigationController?.pushViewController(themesViewController, animated: true)
         }
+    }
 }
 // MARK: -UITableViewDataSource
 extension ConversationListViewController: UITableViewDataSource {

@@ -19,7 +19,6 @@
 		39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFB82527616C00ECECCC /* ThemesViewController.swift */; };
 		39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */; };
 		39BDCFBF252767B100ECECCC /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFBE252767B100ECECCC /* ThemeModel.swift */; };
-		39BDCFC425276A4100ECECCC /* ThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39BDCFC225276A4100ECECCC /* ThemeCell.xib */; };
 		39BDCFC82527A37A00ECECCC /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFC72527A37A00ECECCC /* ThemeManager.swift */; };
 		39E4D49F252347AD00BF6BC4 /* fake_random_date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E4D49E252347AD00BF6BC4 /* fake_random_date.swift */; };
 		39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */; };
@@ -50,7 +49,6 @@
 		39BDCFB82527616C00ECECCC /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		39BDCFBE252767B100ECECCC /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
-		39BDCFC225276A4100ECECCC /* ThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeCell.xib; sourceTree = "<group>"; };
 		39BDCFC72527A37A00ECECCC /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		39E4D49E252347AD00BF6BC4 /* fake_random_date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fake_random_date.swift; sourceTree = "<group>"; };
 		39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
@@ -130,21 +128,12 @@
 		39BDCFB72527614400ECECCC /* Themes */ = {
 			isa = PBXGroup;
 			children = (
-				39BDCFC025276A2500ECECCC /* ThemeCell */,
 				39BDCFB82527616C00ECECCC /* ThemesViewController.swift */,
 				39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */,
 				39BDCFBE252767B100ECECCC /* ThemeModel.swift */,
 				39BDCFC72527A37A00ECECCC /* ThemeManager.swift */,
 			);
 			path = Themes;
-			sourceTree = "<group>";
-		};
-		39BDCFC025276A2500ECECCC /* ThemeCell */ = {
-			isa = PBXGroup;
-			children = (
-				39BDCFC225276A4100ECECCC /* ThemeCell.xib */,
-			);
-			path = ThemeCell;
 			sourceTree = "<group>";
 		};
 		39E4D49D2523478A00BF6BC4 /* tools */ = {
@@ -259,7 +248,6 @@
 				3995893425239D50003C62C8 /* HeaderCell.xib in Resources */,
 				39ED611F25221658006D8E0A /* IncomeMessageCell.xib in Resources */,
 				39ED61162521F76E006D8E0A /* ConversationCell.xib in Resources */,
-				39BDCFC425276A4100ECECCC /* ThemeCell.xib in Resources */,
 				39ED6125252219BA006D8E0A /* OutcomeMessageCell.xib in Resources */,
 				39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */,
 				394F8680250E518A00B703B3 /* LaunchScreen.storyboard in Resources */,

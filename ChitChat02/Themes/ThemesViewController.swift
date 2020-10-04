@@ -114,6 +114,7 @@ class ThemesViewController: UIViewController {
     
     @objc private func cancelOnTap() {
         saveChoice = false
+        revertTheme(to: activeTheme)
         navigationController?.popViewController(animated: true)
     }
     
@@ -140,6 +141,10 @@ class ThemesViewController: UIViewController {
         
         delegate?.theme(picked: value)
         themePicked?(value)
+    }
+    
+    private func revertTheme(to value: Theme) {
+        applyThemeForPreview(value)
     }
     
     private func applyThemeForPreview(_ value: Theme) {
