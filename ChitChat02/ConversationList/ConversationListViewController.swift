@@ -184,7 +184,7 @@ extension ConversationListViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return fakeChatList.count
     }
     
     private func simpleHeader(_ text: String) -> UIView {
@@ -234,6 +234,7 @@ extension ConversationListViewController: UITableViewDelegate {
             default:
                 applog("Something has gone wrong")
         }
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     private func openConversation(with contactName: String) {

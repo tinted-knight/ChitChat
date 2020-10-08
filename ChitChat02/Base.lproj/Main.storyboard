@@ -163,7 +163,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cdH-6X-exv">
-                                <rect key="frame" x="0.0" y="96" width="375" height="522"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
@@ -176,7 +176,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zIV-g2-kHC"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Martha Craig" id="Tk8-Mu-yrd"/>
+                    <navigationItem key="navigationItem" title="Martha Craig" largeTitleDisplayMode="never" id="Tk8-Mu-yrd"/>
                     <connections>
                         <outlet property="messages" destination="cdH-6X-exv" id="ciQ-ev-QJD"/>
                     </connections>
