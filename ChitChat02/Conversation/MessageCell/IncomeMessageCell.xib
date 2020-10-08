@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="153" id="KGk-i7-Jjw" customClass="MessageCell" customModule="ChitChat02" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="153"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="390" height="153"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pel-lH-dYB">
+                        <rect key="frame" x="4" y="4" width="292.5" height="145"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gC6-1c-mbM">
+                                <rect key="frame" x="263.5" y="127.5" width="25" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.25171232876712329" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="What is the most popular meal in Japan?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIx-Ni-hsr">
+                                <rect key="frame" x="4" y="4" width="284.5" height="121.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="0.20478381849315069" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="aIx-Ni-hsr" firstAttribute="top" secondItem="pel-lH-dYB" secondAttribute="top" constant="4" id="EWj-If-dgG"/>
+                            <constraint firstAttribute="trailing" secondItem="aIx-Ni-hsr" secondAttribute="trailing" constant="4" id="L6m-rw-8Yd"/>
+                            <constraint firstAttribute="bottom" secondItem="gC6-1c-mbM" secondAttribute="bottom" constant="4" id="NNX-rq-mWm"/>
+                            <constraint firstAttribute="trailing" secondItem="gC6-1c-mbM" secondAttribute="trailing" constant="4" id="W7U-ZC-cJr"/>
+                            <constraint firstItem="aIx-Ni-hsr" firstAttribute="leading" secondItem="pel-lH-dYB" secondAttribute="leading" constant="4" id="a3t-w4-KDX"/>
+                            <constraint firstItem="gC6-1c-mbM" firstAttribute="top" secondItem="aIx-Ni-hsr" secondAttribute="bottom" constant="2" id="cgI-1J-4VQ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="pel-lH-dYB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="3cd-ez-AZ5"/>
+                    <constraint firstAttribute="bottom" secondItem="pel-lH-dYB" secondAttribute="bottom" constant="4" id="EId-aA-ZZs"/>
+                    <constraint firstItem="pel-lH-dYB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="JGA-e2-t9V"/>
+                    <constraint firstItem="pel-lH-dYB" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.75" id="Oer-lN-6QE"/>
+                    <constraint firstItem="pel-lH-dYB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="m6z-3Y-7C6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="background" destination="pel-lH-dYB" id="xHY-o6-I6X"/>
+                <outlet property="date" destination="gC6-1c-mbM" id="pc9-th-Q0L"/>
+                <outlet property="message" destination="aIx-Ni-hsr" id="TRi-TP-v6W"/>
+            </connections>
+            <point key="canvasLocation" x="163.768115942029" y="98.102678571428569"/>
+        </tableViewCell>
+    </objects>
+</document>

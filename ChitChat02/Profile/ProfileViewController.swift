@@ -9,16 +9,29 @@
 import Foundation
 import UIKit
 
-class ProfileViewController : HomeViewController {
+class ProfileViewController : UIViewController {
     
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var buttonEdit: UIImageView!
     @IBOutlet weak var labelUserName: UILabel!
-    @IBOutlet weak var labelUserDescription: UILabel!
+    @IBOutlet weak var textUserDescription: UITextView!
     @IBOutlet weak var buttonSave: UIButton!
     
     private let fakeUserName = "Timur Tharkahov"
-    private let fakeUserDescription = "UX/UI designer, web-designer, Moscow, Russia"
+    private let fakeUserDescription = """
+Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.
+Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.
+"""
     
     private let picker = UIImagePickerController()
 
@@ -34,16 +47,16 @@ class ProfileViewController : HomeViewController {
     }
     
     override func viewDidLoad() {
-        applog("ProfileViewController::\(#function)")
-        applog("buttonEdit.frame: \(buttonEdit.frame)")
+//        applog("ProfileViewController::\(#function)")
+//        applog("buttonEdit.frame: \(buttonEdit.frame)")
 
         prepareUi()
         populateUi()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        applog("ProfileViewController::\(#function)")
-        applog("buttonEdit.frame: \(buttonEdit.frame)")
+//        applog("ProfileViewController::\(#function)")
+//        applog("buttonEdit.frame: \(buttonEdit.frame)")
         // frame отличается, потому что здесь размер view
         // пересчитан с учётом констрейнтов,
         // расположения и размера родительских и соседних view
@@ -62,11 +75,22 @@ class ProfileViewController : HomeViewController {
     
     private func populateUi() {
         labelUserName.text = fakeUserName
-        labelUserDescription.text = fakeUserDescription
+        textUserDescription.text = fakeUserDescription
     }
     
     @objc private func onProfilePictureTap() {
         showChooseDialog()
+    }
+    @IBAction func onEditButtonTap(_ sender: Any) {
+        showChooseDialog()
+    }
+    
+    @IBAction func onCloseTap(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func onSaveTap(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     private func showAlert(_ message: String) {
