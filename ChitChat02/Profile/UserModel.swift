@@ -12,6 +12,7 @@ struct UserModel {
     let name: String
     let description: String
 }
+let newUser = UserModel(name: "new user name", description: "new user desc")
 
 let fakeUser = UserModel(
     name: "Timur Tharkahov",

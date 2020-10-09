@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-private enum UILoadState {
+private enum UIState {
     case loading
     case hasLoaded
     case saving
@@ -17,11 +17,6 @@ private enum UILoadState {
     case error
     case modeEdit
 }
-
-//private struct UIState {
-//    let viewState: UILoadState
-//    let user: UserModel
-//}
 
 class ProfileViewController : UIViewController {
     
@@ -35,9 +30,7 @@ class ProfileViewController : UIViewController {
     
     private let picker = UIImagePickerController()
     
-    private var state: UILoadState = .loading
-    
-    private var user = UserModel(name: "noname", description: "nodesc")
+    private var state: UIState = .loading
     
     private let repo: Repository = GCDRepo()
 
@@ -71,8 +64,8 @@ class ProfileViewController : UIViewController {
     
     private func populateUi() {
         if (state == .hasLoaded) {
-            textUserName.text = user.name
-            textUserDescription.text = user.description
+            textUserName.text = repo.user.name
+            textUserDescription.text = repo.user.description
         }
     }
     
@@ -96,11 +89,11 @@ class ProfileViewController : UIViewController {
 // MARK: -TextField change handler
 extension ProfileViewController: UITextViewDelegate {
     @objc private func nameTextHandler(_ textField: UITextField) {
-        compare(textField.text, with: user.name)
+        compare(textField.text, with: repo.user.name)
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        compare(textView.text, with: user.description)
+        compare(textView.text, with: repo.user.description)
     }
     
     private func compare(_ text: String?, with source: String) {
@@ -114,8 +107,8 @@ extension ProfileViewController {
         //            name != state.user.name || description != state.user.description else {
         //            return
         //        }
-        let name = textUserName.text ?? user.name
-        let description = textUserDescription.text ??  user.description
+        let name = textUserName.text ?? repo.user.name
+        let description = textUserDescription.text ??  repo.user.description
         setSavingState()
         repo.save(
             UserModel(name: name, description: description),
@@ -135,6 +128,7 @@ extension ProfileViewController {
     private func setSavingState() {
         state = .saving
         showLoadingControls(true)
+        buttonUserEdit.setTitle("Edit", for: .normal)
     }
     
     private func onSaveSucces() {
@@ -179,10 +173,9 @@ extension ProfileViewController {
     
     private func setLoadedState(_ model: UserModel) {
         state = .hasLoaded
-        user = model
-        showLoadingControls(false)
         textUserName.text = model.name
         textUserDescription.text = model.description
+        showLoadingControls(false)
     }
     
     private func showLoadingControls(_ isLoading: Bool) {
@@ -190,6 +183,7 @@ extension ProfileViewController {
             activityIndicator.startAnimating()
             buttonSave.isEnabled = false
             buttonEditPicture.isEnabled = false
+            buttonUserEdit.isEnabled = false
             textUserName.isEnabled = false
             textUserDescription.isEditable = false
             profilePicture.isUserInteractionEnabled = false
@@ -198,6 +192,7 @@ extension ProfileViewController {
             buttonSave.isEnabled = false
             buttonEditPicture.isEnabled = true
             profilePicture.isUserInteractionEnabled = true
+            buttonUserEdit.isEnabled = true
         }
     }
     
@@ -216,21 +211,29 @@ extension ProfileViewController {
             textUserDescription.isEditable = false
             buttonSave.isEnabled = false
             
-            textUserName.text = user.name
-            textUserDescription.text = user.description
+            textUserName.text = repo.user.name
+            textUserDescription.text = repo.user.description
         }
     }
 
     private func setLoadError(_ message: String) {
         showLoadingControls(false)
-        showRetryAlert(message) { [weak self] in
-            self?.loadUserData()
-        }
+        showRetryAlert(
+            message,
+            onOk: { [weak self] in
+                self?.setLoadedState(newUser)
+            },
+            onRetry: { [weak self] in
+                self?.loadUserData()
+            }
+        )
     }
 
-    private func showRetryAlert(_ message: String, onRetry: @escaping () -> Void) {
+    private func showRetryAlert(_ message: String, onOk: (() -> Void)? = nil, onRetry: @escaping () -> Void) {
         let alertView = UIAlertController(title: "Don't worry, be puppy", message: message, preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Close", style: .default)
+        let doneAction = UIAlertAction(title: "Close", style: .default) { action in
+            onOk?()
+        }
         let retryAction = UIAlertAction(title: "Retry", style: .default) { action in
             onRetry()
         }
