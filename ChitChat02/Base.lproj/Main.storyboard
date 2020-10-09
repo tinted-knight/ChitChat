@@ -22,12 +22,6 @@
                                     <constraint firstAttribute="width" secondItem="ulK-2g-l7I" secondAttribute="height" multiplier="1:1" id="aEl-e9-rey"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Od3-Bg-gM0">
-                                <rect key="frame" x="131.5" y="343.5" width="112" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Bg-On-FVf">
                                 <rect key="frame" x="57.5" y="577" width="260" height="40"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -48,8 +42,8 @@
                                     <action selector="onEditButtonTap:" destination="3yT-PA-3m6" eventType="touchUpInside" id="qL0-ap-dRI"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="Profile description" translatesAutoresizingMaskIntoConstraints="NO" id="mgL-XO-LVl">
-                                <rect key="frame" x="16" y="404.5" width="343" height="156.5"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgL-XO-LVl">
+                                <rect key="frame" x="16" y="409.5" width="343" height="151.5"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -58,6 +52,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                 <items>
                                     <navigationItem title="My Profile" id="nDO-YV-mzT">
+                                        <barButtonItem key="leftBarButtonItem" title="Edit" id="1yb-RU-0hm">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7bx-cA-HzR">
+                                                <rect key="frame" x="16" y="13" width="83" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Edit"/>
+                                            </button>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Close" id="cyj-pH-kBe">
                                             <connections>
                                                 <action selector="onCloseTap:" destination="3yT-PA-3m6" id="sf9-u1-0XN"/>
@@ -66,26 +67,38 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mLi-ES-maa">
+                                <rect key="frame" x="16" y="343.5" width="343" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Wyp-8A-xiq">
+                                <rect key="frame" x="177.5" y="315.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="mLi-ES-maa" firstAttribute="leading" secondItem="vCj-Ah-e7a" secondAttribute="leading" constant="16" id="18Z-ub-cJ8"/>
                             <constraint firstItem="Q9m-3L-y8h" firstAttribute="top" secondItem="vCj-Ah-e7a" secondAttribute="top" id="ACH-t2-jqD"/>
                             <constraint firstItem="3Bg-On-FVf" firstAttribute="top" secondItem="mgL-XO-LVl" secondAttribute="bottom" constant="16" id="Fod-Zd-J84"/>
                             <constraint firstItem="ulK-2g-l7I" firstAttribute="width" secondItem="Bpe-hX-Zo5" secondAttribute="width" multiplier="0.5" id="Hlx-JJ-VTs"/>
                             <constraint firstItem="Q9m-3L-y8h" firstAttribute="trailing" secondItem="vCj-Ah-e7a" secondAttribute="trailing" id="K7Q-SJ-pfq"/>
                             <constraint firstItem="mgL-XO-LVl" firstAttribute="leading" secondItem="vCj-Ah-e7a" secondAttribute="leading" constant="16" id="Nvu-YO-xc9"/>
                             <constraint firstItem="vCj-Ah-e7a" firstAttribute="trailing" secondItem="mgL-XO-LVl" secondAttribute="trailing" constant="16" id="Nxg-fx-NCb"/>
+                            <constraint firstItem="Wyp-8A-xiq" firstAttribute="centerX" secondItem="Bpe-hX-Zo5" secondAttribute="centerX" id="QJD-QC-Z7U"/>
                             <constraint firstItem="ulK-2g-l7I" firstAttribute="bottom" secondItem="AIq-bK-iqF" secondAttribute="bottom" id="QZv-NK-ntY"/>
-                            <constraint firstItem="Od3-Bg-gM0" firstAttribute="centerX" secondItem="Bpe-hX-Zo5" secondAttribute="centerX" id="T2T-G4-Bre"/>
+                            <constraint firstItem="mLi-ES-maa" firstAttribute="top" secondItem="ulK-2g-l7I" secondAttribute="bottom" constant="32" id="S4x-ez-ceq"/>
                             <constraint firstItem="Q9m-3L-y8h" firstAttribute="leading" secondItem="vCj-Ah-e7a" secondAttribute="leading" id="Zl1-bp-FdM"/>
-                            <constraint firstItem="Od3-Bg-gM0" firstAttribute="top" secondItem="ulK-2g-l7I" secondAttribute="bottom" constant="32" id="anx-zb-7G4"/>
+                            <constraint firstItem="mLi-ES-maa" firstAttribute="top" secondItem="Wyp-8A-xiq" secondAttribute="bottom" constant="8" id="Zly-kr-rOf"/>
+                            <constraint firstItem="mLi-ES-maa" firstAttribute="centerX" secondItem="Bpe-hX-Zo5" secondAttribute="centerX" id="Zxg-ka-Na7"/>
                             <constraint firstItem="3Bg-On-FVf" firstAttribute="centerX" secondItem="Bpe-hX-Zo5" secondAttribute="centerX" id="cXI-Wv-dCL"/>
                             <constraint firstItem="mgL-XO-LVl" firstAttribute="centerX" secondItem="Bpe-hX-Zo5" secondAttribute="centerX" id="cbB-G7-BWR"/>
                             <constraint firstItem="ulK-2g-l7I" firstAttribute="centerX" secondItem="Bpe-hX-Zo5" secondAttribute="centerX" id="gfa-Fl-9Vr"/>
+                            <constraint firstItem="mgL-XO-LVl" firstAttribute="top" secondItem="mLi-ES-maa" secondAttribute="bottom" constant="32" id="grp-mV-ugw"/>
                             <constraint firstItem="AIq-bK-iqF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vCj-Ah-e7a" secondAttribute="leading" symbolic="YES" id="iXs-ai-83n"/>
-                            <constraint firstItem="mgL-XO-LVl" firstAttribute="top" secondItem="Od3-Bg-gM0" secondAttribute="bottom" constant="32" id="oMd-KE-Nlf"/>
                             <constraint firstItem="ulK-2g-l7I" firstAttribute="trailing" secondItem="AIq-bK-iqF" secondAttribute="trailing" id="oYz-8S-h1K"/>
                             <constraint firstItem="ulK-2g-l7I" firstAttribute="top" secondItem="Q9m-3L-y8h" secondAttribute="bottom" constant="16" id="qAB-ZL-qJA"/>
+                            <constraint firstItem="vCj-Ah-e7a" firstAttribute="trailing" secondItem="mLi-ES-maa" secondAttribute="trailing" constant="16" id="sVc-kt-tPK"/>
                             <constraint firstItem="3Bg-On-FVf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vCj-Ah-e7a" secondAttribute="leading" constant="56" id="uq7-fu-7Tp"/>
                             <constraint firstItem="vCj-Ah-e7a" firstAttribute="bottom" secondItem="3Bg-On-FVf" secondAttribute="bottom" constant="30" id="y0Y-8U-xtC"/>
                             <constraint firstItem="vCj-Ah-e7a" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Bg-On-FVf" secondAttribute="trailing" constant="56" id="y6m-p6-C9s"/>
@@ -93,10 +106,13 @@
                         <viewLayoutGuide key="safeArea" id="vCj-Ah-e7a"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Wyp-8A-xiq" id="yhR-wl-U8E"/>
+                        <outlet property="buttonEditPicture" destination="AIq-bK-iqF" id="QPP-7f-JQx"/>
                         <outlet property="buttonSave" destination="3Bg-On-FVf" id="q8p-UW-Gc2"/>
-                        <outlet property="labelUserName" destination="Od3-Bg-gM0" id="sZC-xN-dvt"/>
+                        <outlet property="buttonUserEdit" destination="7bx-cA-HzR" id="Wpt-cT-uHF"/>
                         <outlet property="profilePicture" destination="ulK-2g-l7I" id="8M3-H2-st5"/>
                         <outlet property="textUserDescription" destination="mgL-XO-LVl" id="Nxb-Ap-hIF"/>
+                        <outlet property="textUserName" destination="mLi-ES-maa" id="b85-li-1a8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhf-pa-Hoy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

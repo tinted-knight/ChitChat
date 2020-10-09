@@ -87,15 +87,15 @@ class ConversationListViewController: UIViewController {
 // MARK: -ThemesPickerDelegate and stuff
 extension ConversationListViewController: ThemesPickerDelegate {
     func theme(picked value: Theme) {
-        applog("delegate : \(value)")
+//        applog("delegate : \(value)")
     }
 
     func result(_ value: Theme, _ saveChoice: Bool) {
         if saveChoice {
-            applog("delegate: yay! new theme")
+//            applog("delegate: yay! new theme")
             applyTheme(value)
         } else {
-            applog("delegate: no new theme")
+//            applog("delegate: no new theme")
         }
     }
     
@@ -145,15 +145,15 @@ extension ConversationListViewController {
 //            themesViewController.delegate = self
             
             themesViewController.themePicked = { value in
-                applog("closure themePicked")
+//                applog("closure themePicked")
             }
             
             themesViewController.result = { [weak self] value, saveChoice in
                 if saveChoice {
-                    applog("closure: yay! new theme")
+//                    applog("closure: yay! new theme")
                     self?.applyTheme(value)
                 } else {
-                    applog("closure: no new theme")
+//                    applog("closure: no new theme")
                     // need to call to fix navbar text color
                     self?.updateNavbarAppearence()
                 }

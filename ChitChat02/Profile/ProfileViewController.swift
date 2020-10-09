@@ -9,30 +9,37 @@
 import Foundation
 import UIKit
 
+private enum UILoadState {
+    case loading
+    case hasLoaded
+    case saving
+    case hasSaved
+    case error
+    case modeEdit
+}
+
+//private struct UIState {
+//    let viewState: UILoadState
+//    let user: UserModel
+//}
+
 class ProfileViewController : UIViewController {
     
     @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var labelUserName: UILabel!
     @IBOutlet weak var textUserDescription: UITextView!
     @IBOutlet weak var buttonSave: UIButton!
-    
-    private let fakeUserName = "Timur Tharkahov"
-    private let fakeUserDescription = """
-Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu,
-sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.
-Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu,
-sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.
-"""
+    @IBOutlet weak var buttonUserEdit: UIButton!
+    @IBOutlet weak var buttonEditPicture: UIButton!
+    @IBOutlet weak var textUserName: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private let picker = UIImagePickerController()
+    
+    private var state: UILoadState = .loading
+    
+    private var user = UserModel(name: "noname", description: "nodesc")
+    
+    private let repo: Repository = GCDRepo()
 
     override func viewDidLoad() {
         prepareUi()
@@ -40,6 +47,8 @@ mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odio
         
         view.backgroundColor = ThemeManager.get().backgroundColor
         buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
+
+        loadUserData()
     }
     
     private func prepareUi() {
@@ -51,16 +60,24 @@ mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odio
         profilePicture.isUserInteractionEnabled = true
         profilePicture.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(onProfilePictureTap)))
+
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.stopAnimating()
+
+        buttonUserEdit.addTarget(self, action: #selector(setEditUser(_:)), for: .touchUpInside)
     }
     
     private func populateUi() {
-        labelUserName.text = fakeUserName
-        textUserDescription.text = fakeUserDescription
+        if (state == .hasLoaded) {
+            textUserName.text = user.name
+            textUserDescription.text = user.description
+        }
     }
     
     @objc private func onProfilePictureTap() {
         showChooseDialog()
     }
+    
     @IBAction func onEditButtonTap(_ sender: Any) {
         showChooseDialog()
     }
@@ -70,16 +87,94 @@ mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odio
     }
     
     @IBAction func onSaveTap(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
+//        guard let name = textUserName.text, let description = textUserDescription.text,
+//            name != state.user.name || description != state.user.description else {
+//            return
+//        }
+        let name = textUserName.text ?? user.name
+        let description = textUserDescription.text ??  user.description
+        activityIndicator.startAnimating()
+        repo.save(UserModel(name: name, description: description)) { result in
+            applog("saving \(result)")
+            DispatchQueue.main.async { [weak self] in
+                self?.activityIndicator.stopAnimating()
+            }
+        }
+    }
+}
+// MARK: -Edit mode, save/load user data
+extension ProfileViewController {
+    @objc private func setEditUser(_ sender: UIBarButtonItem) {
+        switchEditState()
     }
     
+    private func loadUserData() {
+        setLoadingState()
+        repo.load(
+            onLoaded: { value in
+                applog("onLoaded: \(value)")
+                DispatchQueue.main.async { [weak self] in
+                    self?.setLoadedState(value)
+                }
+        },
+            onError: { message in
+                applog("onError: \(message)")
+                DispatchQueue.main.async { [weak self] in
+                    self?.showAlert(message)
+                }
+        }
+        )
+    }
+    
+    private func setLoadingState() {
+        state = .loading
+        
+        activityIndicator.startAnimating()
+        buttonSave.isEnabled = false
+        buttonEditPicture.isEnabled = false
+        textUserName.isEnabled = false
+        textUserDescription.isEditable = false
+        profilePicture.isUserInteractionEnabled = false
+    }
+    
+    private func setLoadedState(_ model: UserModel) {
+        state = .hasLoaded
+        user = model
+        
+        activityIndicator.stopAnimating()
+        buttonSave.isEnabled = true
+        buttonEditPicture.isEnabled = true
+        profilePicture.isUserInteractionEnabled = true
+
+        textUserName.text = model.name
+        textUserDescription.text = model.description
+    }
+    
+    private func switchEditState() {
+        if state == .hasLoaded {
+            state = .modeEdit
+            buttonUserEdit.setTitle("Cancel", for: .normal)
+
+            textUserName.isEnabled = true
+            textUserDescription.isEditable = true
+        } else if state == .modeEdit {
+            state = .hasLoaded
+            buttonUserEdit.setTitle("Edit", for: .normal)
+            
+            textUserName.isEnabled = false
+            textUserDescription.isEditable = false
+        }
+    }
+
     private func showAlert(_ message: String) {
+        state = .error
+        
         let alertView = UIAlertController(title: "Don't worry, be puppy", message: message, preferredStyle: .alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alertView, animated: true, completion: nil)
     }
 }
-
 //MARK: -Profile picture choose
 extension ProfileViewController {
     private func showChooseDialog() {
