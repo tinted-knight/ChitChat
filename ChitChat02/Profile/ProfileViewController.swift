@@ -88,23 +88,45 @@ class ProfileViewController : UIViewController {
     
     @IBAction func onSaveTap(_ sender: Any) {
 //        dismiss(animated: true, completion: nil)
-//        guard let name = textUserName.text, let description = textUserDescription.text,
-//            name != state.user.name || description != state.user.description else {
-//            return
-//        }
-        let name = textUserName.text ?? user.name
-        let description = textUserDescription.text ??  user.description
-        activityIndicator.startAnimating()
-        repo.save(UserModel(name: name, description: description)) { result in
-            applog("saving \(result)")
-            DispatchQueue.main.async { [weak self] in
-                self?.activityIndicator.stopAnimating()
-            }
-        }
+        saveUserData()
     }
 }
 // MARK: -Edit mode, save/load user data
 extension ProfileViewController {
+    private func saveUserData() {
+        //        guard let name = textUserName.text, let description = textUserDescription.text,
+        //            name != state.user.name || description != state.user.description else {
+        //            return
+        //        }
+        let name = textUserName.text ?? user.name
+        let description = textUserDescription.text ??  user.description
+        setSavingState()
+        repo.save(
+            UserModel(name: name, description: description),
+            onDone: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.onSaveSucces()
+                }
+        },
+            onError: { [weak self] error in
+                DispatchQueue.main.async {
+                    self?.showAlert(error)
+                }
+        }
+        )
+    }
+    
+    private func setSavingState() {
+        state = .saving
+        showLoadingControls(true)
+    }
+    
+    private func onSaveSucces() {
+        showAlert("Saved")
+        state = .hasSaved
+        showLoadingControls(false)
+    }
+    
     @objc private func setEditUser(_ sender: UIBarButtonItem) {
         switchEditState()
     }
@@ -129,26 +151,31 @@ extension ProfileViewController {
     
     private func setLoadingState() {
         state = .loading
-        
-        activityIndicator.startAnimating()
-        buttonSave.isEnabled = false
-        buttonEditPicture.isEnabled = false
-        textUserName.isEnabled = false
-        textUserDescription.isEditable = false
-        profilePicture.isUserInteractionEnabled = false
+        showLoadingControls(true)
     }
     
     private func setLoadedState(_ model: UserModel) {
         state = .hasLoaded
         user = model
-        
-        activityIndicator.stopAnimating()
-        buttonSave.isEnabled = true
-        buttonEditPicture.isEnabled = true
-        profilePicture.isUserInteractionEnabled = true
-
+        showLoadingControls(false)
         textUserName.text = model.name
         textUserDescription.text = model.description
+    }
+    
+    private func showLoadingControls(_ isLoading: Bool) {
+        if isLoading {
+            activityIndicator.startAnimating()
+            buttonSave.isEnabled = false
+            buttonEditPicture.isEnabled = false
+            textUserName.isEnabled = false
+            textUserDescription.isEditable = false
+            profilePicture.isUserInteractionEnabled = false
+        } else {
+            activityIndicator.stopAnimating()
+            buttonSave.isEnabled = true
+            buttonEditPicture.isEnabled = true
+            profilePicture.isUserInteractionEnabled = true
+        }
     }
     
     private func switchEditState() {

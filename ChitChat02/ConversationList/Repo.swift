@@ -10,7 +10,7 @@ import Foundation
 
 protocol Repository {
     //
-    func save(_ model: UserModel, _ onDone: @escaping (Bool) -> Void)
+    func save(_ model: UserModel, onDone: @escaping () -> Void, onError: @escaping (String) -> Void)
     func load(onLoaded: @escaping (UserModel) -> Void, onError: @escaping (String) -> Void)
 }
 
@@ -18,18 +18,18 @@ class GCDRepo: Repository {
     private let queue = DispatchQueue(label: "file-operations", qos: .utility)
     let fakeDelay = 3.0
 
-    func save(_ model: UserModel, _ onDone: @escaping (Bool) -> Void) {
+    func save(_ model: UserModel, onDone: @escaping () -> Void, onError: @escaping (String) -> Void) {
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
             guard let storageUrl = self?.storageUrl else {
-                onDone(false)
+                onError("find storage error")
                 return
             }
             do {
                 let value = model.name + "|" + model.description
                 try value.write(to: storageUrl, atomically: true, encoding: .utf8)
-                onDone(true)
+                onDone()
             } catch {
-                onDone(false)
+                onError("write error")
             }
         }
     }
