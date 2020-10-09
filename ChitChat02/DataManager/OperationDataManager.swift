@@ -24,14 +24,17 @@ class OperationDataManager: DataManager {
             loadDescOp: descOp
         )
         loadCompletion.completionBlock = { [weak self] in
-            applog("all completion")
-            guard let name = loadCompletion.userName, let desc = loadCompletion.userDesc else {
-                self?.delegate?.onLoadError(loadCompletion.error)
+            guard let result = loadCompletion.result else {
+                self?.delegate?.onLoadError("load error")
                 return
             }
-            let loaded = UserModel(name: name, description: desc)
-            self?.user = loaded
-            self?.delegate?.onLoaded(loaded)
+            switch result {
+                case .error(let value):
+                    self?.delegate?.onLoadError(value)
+                case .success(let value):
+                    self?.delegate?.onLoaded(value)
+                    self?.user = value
+            }
         }
         loadCompletion.addDependency(nameOp)
         loadCompletion.addDependency(descOp)
@@ -62,39 +65,64 @@ class OperationDataManager: DataManager {
     }
 }
 
+private enum SaveOperationResult {
+    case success
+    case error(value: String)
+}
+
 private class SaveStringOperation: Operation {
-    var saveTo: URL?
+    var to: URL?
     var value: String?
+    private(set) var result: SaveOperationResult?
     
     override func main() {
+        guard let to = to, !isCancelled else {
+            result = .error(value: "save error")
+            return
+        }
+        do {
+            try value?.write(to: to, atomically: true, encoding: .utf8)
+        } catch {
+            result = .error(value: error.localizedDescription)
+        }
     }
+}
+
+private enum LoadStringResult {
+    case success(_ value: String)
+    case error(_ error: String)
 }
 
 private class LoadStringOperation: Operation {
     var from: URL?
-    var error: String?
-    var value: String?
+    private(set) var result: LoadStringResult?
     
     override func main() {
         guard let from = from, !isCancelled else {
-            error = "load error"
+            result = .error("load error")
             return
         }
         do {
             let value = try String(contentsOf: from)
-            self.value = value
+            result = .success(value)
         } catch {
-            self.error = error.localizedDescription
+            result = .error(error.localizedDescription)
         }
     }
+}
+
+private enum LoadUserResult {
+    case success(_ model: UserModel)
+    case error(_ error: String)
 }
 
 private class LoadCompletionOperation: Operation {
     var userName: String?
     var userDesc: String?
-    var error: String = ""
+    var error: String?
     private var loadName: LoadStringOperation
     private var loadDesc: LoadStringOperation
+    private(set) var result: LoadUserResult?
 
     init(loadNameOp: LoadStringOperation, loadDescOp: LoadStringOperation) {
         loadName = loadNameOp
@@ -103,12 +131,32 @@ private class LoadCompletionOperation: Operation {
     }
     
     override func main() {
-        guard let name = loadName.value, let desc = loadDesc.value else {
-            let summary: String = loadName.error ?? "" + (loadDesc.error ?? "")
-            error = summary
+        guard let nameRes = loadName.result, let descRes = loadDesc.result else {
+            result = .error("load error")
             return
         }
-        userName = name
-        userDesc = desc
+
+        switch nameRes {
+            case .success(let value):
+                userName = value
+            case .error(let value):
+                error = value
+        }
+
+        switch descRes {
+            case .success(let value):
+                userDesc = value
+            case .error(let value):
+                error?.append(value)
+        }
+
+        if let error = error {
+            result = .error(error)
+            return
+        }
+
+        if let name = userName, let desc = userDesc {
+            result = .success(UserModel(name: name, description: desc))
+        }
     }
 }
