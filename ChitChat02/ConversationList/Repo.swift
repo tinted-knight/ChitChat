@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol Repository {
+protocol DataManager {
     var user: UserModel { get }
     func save(_ model: UserModel, onDone: @escaping () -> Void, onError: @escaping (String) -> Void)
     func load(onLoaded: @escaping (UserModel) -> Void, onError: @escaping (String) -> Void)
 }
 
-class GCDRepo: Repository {
+class GCDDataManager: DataManager {
     private let queue = DispatchQueue(label: "file-operations", qos: .utility)
     let fakeDelay = 1.0
 
@@ -23,7 +23,7 @@ class GCDRepo: Repository {
     func save(_ model: UserModel, onDone: @escaping () -> Void, onError: @escaping (String) -> Void) {
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self, user] in
             guard let nameUrl = self?.nameUrl, let descriptionUrl = self?.descriptionUrl else {
-                onError("find storage error")
+                onError("Не удалось сохранить данные")
                 return
             }
             do {
@@ -45,7 +45,7 @@ class GCDRepo: Repository {
                 )
                 onDone()
             } catch {
-                onError("write error")
+                onError("Не удалось сохранить данные")
             }
         }
     }

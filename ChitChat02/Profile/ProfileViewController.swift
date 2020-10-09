@@ -32,7 +32,7 @@ class ProfileViewController : UIViewController {
     
     private var state: UIState = .loading
     
-    private let repo: Repository = GCDRepo()
+    private let repo: DataManager = GCDDataManager()
 
     override func viewDidLoad() {
         prepareUi()
@@ -132,7 +132,7 @@ extension ProfileViewController {
     }
     
     private func onSaveSucces() {
-        showAlert("Saved")
+        showAlert("Данные сохранены")
         state = .hasSaved
         showLoadingControls(false)
     }
@@ -230,11 +230,11 @@ extension ProfileViewController {
     }
 
     private func showRetryAlert(_ message: String, onOk: (() -> Void)? = nil, onRetry: @escaping () -> Void) {
-        let alertView = UIAlertController(title: "Don't worry, be puppy", message: message, preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Close", style: .default) { action in
+        let alertView = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "Ok", style: .default) { action in
             onOk?()
         }
-        let retryAction = UIAlertAction(title: "Retry", style: .default) { action in
+        let retryAction = UIAlertAction(title: "Повторить", style: .default) { action in
             onRetry()
         }
         alertView.addAction(doneAction)
@@ -242,8 +242,8 @@ extension ProfileViewController {
         present(alertView, animated: true, completion: nil)
     }
     
-    private func showAlert(_ message: String) {
-        let alertView = UIAlertController(title: "Don't worry, be puppy", message: message, preferredStyle: .alert)
+    private func showAlert(_ title: String, message: String? = nil) {
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alertView, animated: true, completion: nil)
     }
@@ -277,7 +277,7 @@ extension ProfileViewController {
             
             present(picker, animated: true, completion: nil)
         } else {
-            showAlert("Device has no gallery")
+            showAlert("Error", message: "Device has no gallery")
         }
     }
     
@@ -286,7 +286,7 @@ extension ProfileViewController {
             picker.sourceType = .camera
             present(picker, animated: true, completion: nil)
         } else {
-            showAlert("No camera on device! You are in safe!")
+            showAlert("Error", message: "No camera on device! You are in safe!")
         }
     }
 }
@@ -296,7 +296,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[.originalImage] as? UIImage else {
-            showAlert("Something has gone very wrong")
+            showAlert("Error", message: "Something has gone very wrong")
             return
         }
         profilePicture.image = image
