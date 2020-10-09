@@ -21,15 +21,28 @@ class GCDRepo: Repository {
     var user: UserModel = newUser
     
     func save(_ model: UserModel, onDone: @escaping () -> Void, onError: @escaping (String) -> Void) {
-        queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
+        queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self, user] in
             guard let nameUrl = self?.nameUrl, let descriptionUrl = self?.descriptionUrl else {
                 onError("find storage error")
                 return
             }
             do {
-                try model.name.write(to: nameUrl, atomically: true, encoding: .utf8)
-                try model.description.write(to: descriptionUrl, atomically: true, encoding: .utf8)
-                self?.user = UserModel(name: model.name, description: model.description)
+                var nameUpdated: String?
+                var descUpdated: String?
+                if model.name != user.name {
+                    try model.name.write(to: nameUrl, atomically: true, encoding: .utf8)
+                    nameUpdated = model.name
+                    applog("name saved")
+                }
+                if model.description != user.description {
+                    try model.description.write(to: descriptionUrl, atomically: true, encoding: .utf8)
+                    descUpdated = model.description
+                    applog("desc saved")
+                }
+                self?.user = UserModel(
+                    name: nameUpdated ?? user.name,
+                    description: descUpdated ?? user.description
+                )
                 onDone()
             } catch {
                 onError("write error")

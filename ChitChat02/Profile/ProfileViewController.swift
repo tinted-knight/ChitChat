@@ -197,7 +197,7 @@ extension ProfileViewController {
     }
     
     private func switchEditState() {
-        if state == .hasLoaded {
+        if state == .hasLoaded || state == .hasSaved {
             state = .modeEdit
             buttonUserEdit.setTitle("Cancel", for: .normal)
 
