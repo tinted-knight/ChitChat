@@ -65,6 +65,8 @@ class ProfileViewController : UIViewController {
         activityIndicator.stopAnimating()
 
         buttonUserEdit.addTarget(self, action: #selector(setEditUser(_:)), for: .touchUpInside)
+        textUserName.addTarget(self, action: #selector(nameTextHandler(_:)), for: .editingChanged)
+        textUserDescription.delegate = self
     }
     
     private func populateUi() {
@@ -89,6 +91,20 @@ class ProfileViewController : UIViewController {
     @IBAction func onSaveTap(_ sender: Any) {
 //        dismiss(animated: true, completion: nil)
         saveUserData()
+    }
+}
+// MARK: -TextField change handler
+extension ProfileViewController: UITextViewDelegate {
+    @objc private func nameTextHandler(_ textField: UITextField) {
+        compare(textField.text, with: user.name)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        compare(textView.text, with: user.description)
+    }
+    
+    private func compare(_ text: String?, with source: String) {
+        buttonSave.isEnabled = text != source
     }
 }
 // MARK: -Edit mode, save/load user data
@@ -198,6 +214,7 @@ extension ProfileViewController {
             
             textUserName.isEnabled = false
             textUserDescription.isEditable = false
+            buttonSave.isEnabled = false
             
             textUserName.text = user.name
             textUserDescription.text = user.description

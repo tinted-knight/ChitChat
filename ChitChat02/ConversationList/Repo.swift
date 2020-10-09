@@ -16,7 +16,7 @@ protocol Repository {
 
 class GCDRepo: Repository {
     private let queue = DispatchQueue(label: "file-operations", qos: .utility)
-    let fakeDelay = 3.0
+    let fakeDelay = 1.0
 
     func save(_ model: UserModel, onDone: @escaping () -> Void, onError: @escaping (String) -> Void) {
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
@@ -41,14 +41,13 @@ class GCDRepo: Repository {
                 return
             }
             do {
-                onError("test error")
-//                let loaded = try String(contentsOf: storageUrl)
-//                let values = loaded.components(separatedBy: "|")
-//                if (values.count != 2) {
-//                    onError("split error")
-//                    return
-//                }
-//                onLoaded(UserModel(name: values[0], description: values[1]))
+                let loaded = try String(contentsOf: storageUrl)
+                let values = loaded.components(separatedBy: "|")
+                if (values.count != 2) {
+                    onError("split error")
+                    return
+                }
+                onLoaded(UserModel(name: values[0], description: values[1]))
             } catch {
                 onError("catch|catch")
             }
