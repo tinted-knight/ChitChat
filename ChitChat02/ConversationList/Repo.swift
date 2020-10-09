@@ -41,13 +41,14 @@ class GCDRepo: Repository {
                 return
             }
             do {
-                let loaded = try String(contentsOf: storageUrl)
-                let values = loaded.components(separatedBy: "|")
-                if (values.count != 2) {
-                    onError("split error")
-                    return
-                }
-                onLoaded(UserModel(name: values[0], description: values[1]))
+                onError("test error")
+//                let loaded = try String(contentsOf: storageUrl)
+//                let values = loaded.components(separatedBy: "|")
+//                if (values.count != 2) {
+//                    onError("split error")
+//                    return
+//                }
+//                onLoaded(UserModel(name: values[0], description: values[1]))
             } catch {
                 onError("catch|catch")
             }

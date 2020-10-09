@@ -110,7 +110,7 @@ extension ProfileViewController {
         },
             onError: { [weak self] error in
                 DispatchQueue.main.async {
-                    self?.showAlert(error)
+                    self?.onSaveError(error)
                 }
         }
         )
@@ -125,6 +125,13 @@ extension ProfileViewController {
         showAlert("Saved")
         state = .hasSaved
         showLoadingControls(false)
+    }
+    
+    private func onSaveError(_ message: String) {
+        showLoadingControls(false)
+        showRetryAlert(message) { [weak self] in
+            self?.saveUserData()
+        }
     }
     
     @objc private func setEditUser(_ sender: UIBarButtonItem) {
@@ -143,7 +150,7 @@ extension ProfileViewController {
             onError: { message in
                 applog("onError: \(message)")
                 DispatchQueue.main.async { [weak self] in
-                    self?.showAlert(message)
+                    self?.setLoadError(message)
                 }
         }
         )
@@ -172,7 +179,7 @@ extension ProfileViewController {
             profilePicture.isUserInteractionEnabled = false
         } else {
             activityIndicator.stopAnimating()
-            buttonSave.isEnabled = true
+            buttonSave.isEnabled = false
             buttonEditPicture.isEnabled = true
             profilePicture.isUserInteractionEnabled = true
         }
@@ -191,12 +198,31 @@ extension ProfileViewController {
             
             textUserName.isEnabled = false
             textUserDescription.isEditable = false
+            
+            textUserName.text = user.name
+            textUserDescription.text = user.description
         }
     }
 
+    private func setLoadError(_ message: String) {
+        showLoadingControls(false)
+        showRetryAlert(message) { [weak self] in
+            self?.loadUserData()
+        }
+    }
+
+    private func showRetryAlert(_ message: String, onRetry: @escaping () -> Void) {
+        let alertView = UIAlertController(title: "Don't worry, be puppy", message: message, preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "Close", style: .default)
+        let retryAction = UIAlertAction(title: "Retry", style: .default) { action in
+            onRetry()
+        }
+        alertView.addAction(doneAction)
+        alertView.addAction(retryAction)
+        present(alertView, animated: true, completion: nil)
+    }
+    
     private func showAlert(_ message: String) {
-        state = .error
-        
         let alertView = UIAlertController(title: "Don't worry, be puppy", message: message, preferredStyle: .alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alertView, animated: true, completion: nil)
