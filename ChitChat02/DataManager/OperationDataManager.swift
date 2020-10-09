@@ -19,10 +19,14 @@ class OperationDataManager: DataManager {
     func load() {
         let nameOp = loadOperation(from: nameUrl())
         let descOp = loadOperation(from: descriptionUrl())
-        let loadCompletion = BlockOperation { [weak self] in
-            guard let name = nameOp.value, let desc = descOp.value else {
-                let summary = (nameOp.error ?? "name error") + (descOp.error ?? "desc error")
-                self?.delegate?.onLoadError(summary)
+        let loadCompletion = LoadCompletionOperation(
+            loadNameOp: nameOp,
+            loadDescOp: descOp
+        )
+        loadCompletion.completionBlock = { [weak self] in
+            applog("all completion")
+            guard let name = loadCompletion.userName, let desc = loadCompletion.userDesc else {
+                self?.delegate?.onLoadError(loadCompletion.error)
                 return
             }
             let loaded = UserModel(name: name, description: desc)
@@ -31,7 +35,7 @@ class OperationDataManager: DataManager {
         }
         loadCompletion.addDependency(nameOp)
         loadCompletion.addDependency(descOp)
-        queue.addOperations([nameOp, descOp, loadCompletion], waitUntilFinished: true)
+        queue.addOperations([nameOp, descOp, loadCompletion], waitUntilFinished: false)
     }
     
     private func loadOperation(from: URL) -> LoadStringOperation {
@@ -82,5 +86,29 @@ private class LoadStringOperation: Operation {
         } catch {
             self.error = error.localizedDescription
         }
+    }
+}
+
+private class LoadCompletionOperation: Operation {
+    var userName: String?
+    var userDesc: String?
+    var error: String = ""
+    private var loadName: LoadStringOperation
+    private var loadDesc: LoadStringOperation
+
+    init(loadNameOp: LoadStringOperation, loadDescOp: LoadStringOperation) {
+        loadName = loadNameOp
+        loadDesc = loadDescOp
+        super.init()
+    }
+    
+    override func main() {
+        guard let name = loadName.value, let desc = loadDesc.value else {
+            let summary: String = loadName.error ?? "" + (loadDesc.error ?? "")
+            error = summary
+            return
+        }
+        userName = name
+        userDesc = desc
     }
 }
