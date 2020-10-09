@@ -32,7 +32,8 @@ class ProfileViewController : UIViewController {
     
     private var state: UIState = .loading
     
-    private let repo: DataManager = GCDDataManager()
+//    private var repo: DataManager = GCDDataManager()
+    private var repo: DataManager = OperationDataManager()
 
     override func viewDidLoad() {
         prepareUi()
@@ -100,6 +101,33 @@ extension ProfileViewController: UITextViewDelegate {
         buttonSave.isEnabled = text != source
     }
 }
+// MARK: -DataManagerDelegate
+extension ProfileViewController: DataManagerDelegate {
+    func onLoaded(_ model: UserModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.setLoadedState(model)
+        }
+    }
+    
+    func onLoadError(_ message: String) {
+        applog("onError: \(message)")
+        DispatchQueue.main.async { [weak self] in
+            self?.setLoadError(message)
+        }
+    }
+    
+    func onSaved() {
+        DispatchQueue.main.async { [weak self] in
+            self?.onSaveSucces()
+        }
+    }
+
+    func onSaveError(_ message: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.onSaveError(message)
+        }
+    }
+}
 // MARK: -Edit mode, save/load user data
 extension ProfileViewController {
     private func saveUserData() {
@@ -110,19 +138,7 @@ extension ProfileViewController {
         let name = textUserName.text ?? repo.user.name
         let description = textUserDescription.text ??  repo.user.description
         setSavingState()
-        repo.save(
-            UserModel(name: name, description: description),
-            onDone: { [weak self] in
-                DispatchQueue.main.async {
-                    self?.onSaveSucces()
-                }
-        },
-            onError: { [weak self] error in
-                DispatchQueue.main.async {
-                    self?.onSaveError(error)
-                }
-        }
-        )
+        repo.save(UserModel(name: name, description: description))
     }
     
     private func setSavingState() {
@@ -137,7 +153,7 @@ extension ProfileViewController {
         showLoadingControls(false)
     }
     
-    private func onSaveError(_ message: String) {
+    private func onMySaveError(_ message: String) {
         showLoadingControls(false)
         showRetryAlert(message) { [weak self] in
             self?.saveUserData()
@@ -150,20 +166,8 @@ extension ProfileViewController {
     
     private func loadUserData() {
         setLoadingState()
-        repo.load(
-            onLoaded: { value in
-                applog("onLoaded: \(value)")
-                DispatchQueue.main.async { [weak self] in
-                    self?.setLoadedState(value)
-                }
-        },
-            onError: { message in
-                applog("onError: \(message)")
-                DispatchQueue.main.async { [weak self] in
-                    self?.setLoadError(message)
-                }
-        }
-        )
+        repo.delegate = self
+        repo.load()
     }
     
     private func setLoadingState() {
