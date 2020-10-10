@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-private enum UIState {
+enum UIState {
     case loading
     case hasLoaded
     case saving
@@ -30,15 +30,14 @@ class ProfileViewController : UIViewController {
     
     private let picker = UIImagePickerController()
     
-    private var state: UIState = .loading
+    var state: UIState = .loading
     
-//    private var repo: DataManager = GCDDataManager()
-    private var repo: DataManager = OperationDataManager()
+    var repo: DataManager = GCDDataManager()
+//    var repo: DataManager = OperationDataManager()
 
     override func viewDidLoad() {
         prepareUi()
-        populateUi()
-        
+
         view.backgroundColor = ThemeManager.get().backgroundColor
         buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
 
@@ -63,13 +62,6 @@ class ProfileViewController : UIViewController {
         textUserDescription.delegate = self
     }
     
-    private func populateUi() {
-        if (state == .hasLoaded) {
-            textUserName.text = repo.user.name
-            textUserDescription.text = repo.user.description
-        }
-    }
-    
     @objc private func onProfilePictureTap() {
         showChooseDialog()
     }
@@ -86,6 +78,10 @@ class ProfileViewController : UIViewController {
 //        dismiss(animated: true, completion: nil)
         saveUserData()
     }
+    @objc private func setEditUser(_ sender: UIBarButtonItem) {
+        switchEditState()
+    }
+
 }
 // MARK: -TextField change handler
 extension ProfileViewController: UITextViewDelegate {
@@ -110,148 +106,21 @@ extension ProfileViewController: DataManagerDelegate {
     }
     
     func onLoadError(_ message: String) {
-        applog("onError: \(message)")
         DispatchQueue.main.async { [weak self] in
             self?.setLoadError(message)
         }
     }
     
     func onSaved() {
-        applog("onSaved")
         DispatchQueue.main.async { [weak self] in
             self?.onSaveSucces()
         }
     }
 
     func onSaveError(_ message: String) {
-        applog("onSaveError")
         DispatchQueue.main.async { [weak self] in
             self?.userSaveError(message)
         }
-    }
-}
-// MARK: -Edit mode, save/load user data
-extension ProfileViewController {
-    private func saveUserData() {
-        //        guard let name = textUserName.text, let description = textUserDescription.text,
-        //            name != state.user.name || description != state.user.description else {
-        //            return
-        //        }
-        let name = textUserName.text ?? repo.user.name
-        let description = textUserDescription.text ??  repo.user.description
-        setSavingState()
-        repo.save(UserModel(name: name, description: description))
-    }
-    
-    private func setSavingState() {
-        state = .saving
-        showLoadingControls(true)
-        buttonUserEdit.setTitle("Edit", for: .normal)
-    }
-    
-    private func onSaveSucces() {
-        showAlert("Данные сохранены")
-        state = .hasSaved
-        showLoadingControls(false)
-    }
-    
-    private func userSaveError(_ message: String) {
-        showLoadingControls(false)
-        showRetryAlert(message) { [weak self] in
-            self?.saveUserData()
-        }
-    }
-    
-    @objc private func setEditUser(_ sender: UIBarButtonItem) {
-        switchEditState()
-    }
-    
-    private func loadUserData() {
-        setLoadingState()
-        repo.delegate = self
-        repo.load()
-    }
-    
-    private func setLoadingState() {
-        state = .loading
-        showLoadingControls(true)
-    }
-    
-    private func setLoadedState(_ model: UserModel) {
-        state = .hasLoaded
-        textUserName.text = model.name
-        textUserDescription.text = model.description
-        showLoadingControls(false)
-    }
-    
-    private func showLoadingControls(_ isLoading: Bool) {
-        if isLoading {
-            activityIndicator.startAnimating()
-            buttonSave.isEnabled = false
-            buttonEditPicture.isEnabled = false
-            buttonUserEdit.isEnabled = false
-            textUserName.isEnabled = false
-            textUserDescription.isEditable = false
-            profilePicture.isUserInteractionEnabled = false
-        } else {
-            activityIndicator.stopAnimating()
-            buttonSave.isEnabled = false
-            buttonEditPicture.isEnabled = true
-            profilePicture.isUserInteractionEnabled = true
-            buttonUserEdit.isEnabled = true
-        }
-    }
-    
-    private func switchEditState() {
-        if state == .hasLoaded || state == .hasSaved {
-            state = .modeEdit
-            buttonUserEdit.setTitle("Cancel", for: .normal)
-
-            textUserName.isEnabled = true
-            textUserDescription.isEditable = true
-        } else if state == .modeEdit {
-            state = .hasLoaded
-            buttonUserEdit.setTitle("Edit", for: .normal)
-            
-            textUserName.isEnabled = false
-            textUserDescription.isEditable = false
-            buttonSave.isEnabled = false
-            
-            textUserName.text = repo.user.name
-            textUserDescription.text = repo.user.description
-        }
-    }
-
-    private func setLoadError(_ message: String) {
-        showLoadingControls(false)
-        showRetryAlert(
-            message,
-            onOk: { [weak self] in
-                self?.setLoadedState(newUser)
-            },
-            onRetry: { [weak self] in
-                self?.loadUserData()
-            }
-        )
-    }
-
-    private func showRetryAlert(_ message: String, onOk: (() -> Void)? = nil, onRetry: @escaping () -> Void) {
-        let alertView = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Ok", style: .default) { action in
-            onOk?()
-        }
-        let retryAction = UIAlertAction(title: "Повторить", style: .default) { action in
-            onRetry()
-        }
-        alertView.addAction(doneAction)
-        alertView.addAction(retryAction)
-        present(alertView, animated: true, completion: nil)
-    }
-    
-    private func showAlert(_ title: String, message: String? = nil) {
-        let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        present(alertView, animated: true, completion: nil)
     }
 }
 //MARK: -Profile picture choose

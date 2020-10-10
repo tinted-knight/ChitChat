@@ -24,6 +24,9 @@
 		39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */; };
 		39BDCFBF252767B100ECECCC /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFBE252767B100ECECCC /* ThemeModel.swift */; };
 		39BDCFC82527A37A00ECECCC /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFC72527A37A00ECECCC /* ThemeManager.swift */; };
+		39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C12531C1D20068C875 /* LoadOperation.swift */; };
+		39DE12C42531C2280068C875 /* SaveOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C32531C2280068C875 /* SaveOperation.swift */; };
+		39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C52531C4290068C875 /* SaveLoadExtension.swift */; };
 		39E4D49F252347AD00BF6BC4 /* fake_random_date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E4D49E252347AD00BF6BC4 /* fake_random_date.swift */; };
 		39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */; };
 		39ED610E2521EE62006D8E0A /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610D2521EE62006D8E0A /* ConversationViewController.swift */; };
@@ -58,6 +61,9 @@
 		39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		39BDCFBE252767B100ECECCC /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
 		39BDCFC72527A37A00ECECCC /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		39DE12C12531C1D20068C875 /* LoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
+		39DE12C32531C2280068C875 /* SaveOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOperation.swift; sourceTree = "<group>"; };
+		39DE12C52531C4290068C875 /* SaveLoadExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadExtension.swift; sourceTree = "<group>"; };
 		39E4D49E252347AD00BF6BC4 /* fake_random_date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fake_random_date.swift; sourceTree = "<group>"; };
 		39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		39ED610D2521EE62006D8E0A /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +129,7 @@
 			children = (
 				396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */,
 				39B7FDBC253062F500B5F280 /* UserModel.swift */,
+				39DE12C52531C4290068C875 /* SaveLoadExtension.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -138,8 +145,8 @@
 		39B7FDC02530AFCA00B5F280 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				39DE12C02531C1B20068C875 /* OperationDataManager */,
 				39B7FDBE25306CB800B5F280 /* Repo.swift */,
-				39B7FDC12530AFF100B5F280 /* OperationDataManager.swift */,
 				39B7FDC32530B00200B5F280 /* GCDDataManager.swift */,
 			);
 			path = DataManager;
@@ -154,6 +161,16 @@
 				39BDCFC72527A37A00ECECCC /* ThemeManager.swift */,
 			);
 			path = Themes;
+			sourceTree = "<group>";
+		};
+		39DE12C02531C1B20068C875 /* OperationDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				39B7FDC12530AFF100B5F280 /* OperationDataManager.swift */,
+				39DE12C12531C1D20068C875 /* LoadOperation.swift */,
+				39DE12C32531C2280068C875 /* SaveOperation.swift */,
+			);
+			path = OperationDataManager;
 			sourceTree = "<group>";
 		};
 		39E4D49D2523478A00BF6BC4 /* tools */ = {
@@ -285,12 +302,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				39ED612125221684006D8E0A /* MessageCellModel.swift in Sources */,
+				39DE12C42531C2280068C875 /* SaveOperation.swift in Sources */,
 				394F8674250E518A00B703B3 /* AppDelegate.swift in Sources */,
 				39BDCFC82527A37A00ECECCC /* ThemeManager.swift in Sources */,
 				39ED611A25220D34006D8E0A /* fake_data.swift in Sources */,
 				39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */,
 				39ED61182521F7AE006D8E0A /* ConversationCellModel.swift in Sources */,
 				39ED612725223323006D8E0A /* fake_conversation.swift in Sources */,
+				39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */,
 				3995893325239D50003C62C8 /* HeaderCell.swift in Sources */,
 				39B7FDC42530B00200B5F280 /* GCDDataManager.swift in Sources */,
 				39B7FDBF25306CB800B5F280 /* Repo.swift in Sources */,
@@ -299,6 +318,7 @@
 				39B7FDBD253062F500B5F280 /* UserModel.swift in Sources */,
 				39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */,
 				39E4D49F252347AD00BF6BC4 /* fake_random_date.swift in Sources */,
+				39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */,
 				3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
 				39ED61152521F76E006D8E0A /* ConversationCell.swift in Sources */,
