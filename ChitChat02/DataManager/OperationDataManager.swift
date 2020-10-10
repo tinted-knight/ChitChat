@@ -14,6 +14,36 @@ class OperationDataManager: DataManager {
     var delegate: DataManagerDelegate?
 
     func save(_ model: UserModel) {
+        let nameOperation = model.name != user.name ? saveOperation(model.name, to: nameUrl()) : ResultOperation()
+        let descOperation = model.description != user.description ? saveOperation(model.description, to: descriptionUrl()) : ResultOperation()
+        let saveCompletion = SaveCompletionOperation(
+            nameOp: nameOperation,
+            descOp: descOperation
+        )
+        saveCompletion.completionBlock = { [weak self] in
+            applog("save completion")
+            guard let result = saveCompletion.result else {
+                self?.delegate?.onSaveError("save error")
+                return
+            }
+            switch result {
+                case .errorName(let value), .errorDesc(let value):
+                    self?.delegate?.onSaveError(value)
+                case .success:
+                    self?.delegate?.onSaved()
+                    self?.user = model
+            }
+        }
+        saveCompletion.addDependency(nameOperation)
+        saveCompletion.addDependency(descOperation)
+        queue.addOperations([nameOperation, descOperation, saveCompletion], waitUntilFinished: false)
+    }
+    
+    private func saveOperation(_ value: String, to: URL) -> ResultOperation {
+        let operation = SaveStringOperation()
+        operation.value = value
+        operation.to = to
+        return operation
     }
     
     func load() {
@@ -67,23 +97,82 @@ class OperationDataManager: DataManager {
 
 private enum SaveOperationResult {
     case success
-    case error(value: String)
+    case error(_ value: String)
 }
 
-private class SaveStringOperation: Operation {
+private class ResultOperation: Operation{
+    var result: SaveOperationResult?
+    override func main() {
+        applog("default success")
+        result = .success
+    }
+}
+
+private class SaveStringOperation: ResultOperation {
     var to: URL?
     var value: String?
-    private(set) var result: SaveOperationResult?
     
     override func main() {
+        applog("save string main")
         guard let to = to, !isCancelled else {
-            result = .error(value: "save error")
+            applog("canceled or to = nil")
+            result = .error("save error")
             return
         }
         do {
             try value?.write(to: to, atomically: true, encoding: .utf8)
+            result = .success
         } catch {
-            result = .error(value: error.localizedDescription)
+            applog("catch \(error.localizedDescription)")
+            result = .error(error.localizedDescription)
+        }
+    }
+}
+
+private enum SaveUserResult {
+    case success
+    case errorName(_ value: String)
+    case errorDesc(_ value: String)
+}
+
+private class SaveCompletionOperation: Operation {
+    private var saveName: ResultOperation
+    private var saveDesc: ResultOperation
+    private var error: String = ""
+    private(set) var result: SaveUserResult?
+
+    init(nameOp: ResultOperation, descOp: ResultOperation) {
+        saveName = nameOp
+        saveDesc = descOp
+        
+        super.init()
+    }
+    
+    override func main() {
+        guard let nameRes = saveName.result else {
+            applog("save name guard")
+            result = .errorName("save name error")
+            return
+        }
+        guard let descRes = saveDesc.result else {
+            applog("save desc guard")
+            result = .errorDesc("save desc error")
+            return
+        }
+        switch nameRes {
+            case .error(let value):
+                result = .errorName(value)
+                return
+            case .success:
+                result = .success
+        }
+        
+        switch descRes {
+            case .error(let value):
+                result = .errorDesc(value)
+                return
+            case .success:
+                result = .success
         }
     }
 }
@@ -117,9 +206,9 @@ private enum LoadUserResult {
 }
 
 private class LoadCompletionOperation: Operation {
-    var userName: String?
-    var userDesc: String?
-    var error: String?
+    private var userName: String?
+    private var userDesc: String?
+    private var error: String = ""
     private var loadName: LoadStringOperation
     private var loadDesc: LoadStringOperation
     private(set) var result: LoadUserResult?
@@ -140,23 +229,25 @@ private class LoadCompletionOperation: Operation {
             case .success(let value):
                 userName = value
             case .error(let value):
-                error = value
+                error.append(value)
         }
 
         switch descRes {
             case .success(let value):
                 userDesc = value
             case .error(let value):
-                error?.append(value)
+                error.append(value)
         }
 
-        if let error = error {
+        if !error.isEmpty {
             result = .error(error)
             return
         }
 
         if let name = userName, let desc = userDesc {
             result = .success(UserModel(name: name, description: desc))
+        } else {
+            result = .error("load error")
         }
     }
 }

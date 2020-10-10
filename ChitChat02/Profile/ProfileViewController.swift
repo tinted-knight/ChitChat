@@ -117,14 +117,16 @@ extension ProfileViewController: DataManagerDelegate {
     }
     
     func onSaved() {
+        applog("onSaved")
         DispatchQueue.main.async { [weak self] in
             self?.onSaveSucces()
         }
     }
 
     func onSaveError(_ message: String) {
+        applog("onSaveError")
         DispatchQueue.main.async { [weak self] in
-            self?.onSaveError(message)
+            self?.userSaveError(message)
         }
     }
 }
@@ -153,7 +155,7 @@ extension ProfileViewController {
         showLoadingControls(false)
     }
     
-    private func onMySaveError(_ message: String) {
+    private func userSaveError(_ message: String) {
         showLoadingControls(false)
         showRetryAlert(message) { [weak self] in
             self?.saveUserData()
