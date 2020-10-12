@@ -12,7 +12,6 @@ class ThemeDataManager {
     private let queue = DispatchQueue(label: "theme", qos: .utility)
     
     func save(_ theme: ThemeModel) {
-        applog("tdm save")
         queue.async { [weak self] in
             guard let themeUrl = self?.themeUrl() else {
                 applog("ThemeDataManager return error")

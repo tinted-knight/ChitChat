@@ -88,16 +88,15 @@ class ConversationListViewController: UIViewController {
 // MARK: -ThemesPickerDelegate and stuff
 extension ConversationListViewController: ThemesPickerDelegate {
     func theme(picked value: Theme) {
-//        applog("delegate : \(value)")
+        //
     }
 
     func result(_ value: Theme, _ saveChoice: Bool) {
         if saveChoice {
-//            applog("delegate: yay! new theme")
             applyTheme(value)
             saveCurrentTheme()
         } else {
-//            applog("delegate: no new theme")
+            //
         }
     }
     
@@ -148,7 +147,7 @@ extension ConversationListViewController {
 //            themesViewController.delegate = self
             
             themesViewController.themePicked = { value in
-//                applog("closure themePicked")
+                //
             }
             
             themesViewController.result = { [weak self] value, saveChoice in
