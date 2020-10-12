@@ -11,16 +11,15 @@ import UIKit
 
 // MARK: -Edit mode, save/load user data
 extension ProfileViewController {
-    func saveUserData() {
+    func saveUserData(with dataManagerType: DataManagerType) {
         guard userDataWasModified || avatarWasModified else { return }
 
         let name = textUserName.text ?? repo.user.name
         let description = textUserDescription.text ?? repo.user.description
         setSavingState()
-        repo.save(
-            UserModel(name: name, description: description),
-            avatar: avatarWasModified ? profilePicture.image?.pngData() : nil
-        )
+        let userData = UserModel(name: name, description: description)
+        let avatarData = avatarWasModified ? profilePicture.image?.pngData() : nil
+        repo.save(user: userData, avatar: avatarData, with: dataManagerType)
     }
     
     func setSavingState() {
@@ -43,7 +42,7 @@ extension ProfileViewController {
                 self.setLoadedState(self.repo.user)
             },
             onRetry: {[weak self] in
-                self?.saveUserData()
+//                self?.saveUserData()
             })
     }
     
@@ -72,6 +71,7 @@ extension ProfileViewController {
         if isLoading {
             activityIndicator.startAnimating()
             buttonSave.isEnabled = false
+            buttonSaveOperation.isEnabled = false
             buttonEditPicture.isEnabled = false
             buttonUserEdit.isEnabled = false
             textUserName.isEnabled = false
@@ -79,7 +79,7 @@ extension ProfileViewController {
             profilePicture.isUserInteractionEnabled = false
         } else {
             activityIndicator.stopAnimating()
-            buttonSave.isEnabled = false
+//            buttonSave.isEnabled = false
             buttonEditPicture.isEnabled = true
             profilePicture.isUserInteractionEnabled = true
             buttonUserEdit.isEnabled = true
@@ -108,6 +108,7 @@ extension ProfileViewController {
     func showSaveControls() {
         if avatarWasModified || userDataWasModified {
             buttonSave.isEnabled = true
+            buttonSaveOperation.isEnabled = true
         }
     }
     

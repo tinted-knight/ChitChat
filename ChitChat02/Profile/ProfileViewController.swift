@@ -23,6 +23,7 @@ class ProfileViewController : UIViewController {
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var textUserDescription: UITextView!
     @IBOutlet weak var buttonSave: UIButton!
+    @IBOutlet weak var buttonSaveOperation: UIButton!
     @IBOutlet weak var buttonUserEdit: UIButton!
     @IBOutlet weak var buttonEditPicture: UIButton!
     @IBOutlet weak var textUserName: UITextField!
@@ -34,15 +35,16 @@ class ProfileViewController : UIViewController {
     var avatarWasModified = false
     var userDataWasModified = false
     
-    var repo: DataManager = GCDDataManager()
-//    var repo: DataManager = OperationDataManager()
+    var repo: SmartDataManager = SmartDataManager(dataManagerType: .gcd)
 
     override func viewDidLoad() {
         prepareUi()
 
         view.backgroundColor = ThemeManager.get().backgroundColor
         buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
+        buttonSaveOperation.backgroundColor = ThemeManager.get().buttonBgColor
 
+        repo.delegate = self
         loadUserData()
         
         NotificationCenter.default.addObserver(
@@ -58,6 +60,7 @@ class ProfileViewController : UIViewController {
     
     private func prepareUi() {
         buttonSave.layer.cornerRadius = 14.0
+        buttonSaveOperation.layer.cornerRadius = 14.0
 
         profilePicture.layer.cornerRadius = view.frame.width / 4
         profilePicture.layer.masksToBounds = true
@@ -72,6 +75,17 @@ class ProfileViewController : UIViewController {
         buttonUserEdit.addTarget(self, action: #selector(setEditUser(_:)), for: .touchUpInside)
         textUserName.addTarget(self, action: #selector(nameTextHandler(_:)), for: .editingChanged)
         textUserDescription.delegate = self
+        
+        buttonSave.addTarget(self, action: #selector(onSaveViaGcd), for: .touchUpInside)
+        buttonSaveOperation.addTarget(self, action: #selector(onSaveViaOperation), for: .touchUpInside)
+    }
+    
+    @objc private func onSaveViaGcd() {
+        saveUserData(with: .gcd)
+    }
+    
+    @objc private func onSaveViaOperation() {
+        saveUserData(with: .operation)
     }
     
     @objc private func onProfilePictureTap() {
@@ -84,11 +98,6 @@ class ProfileViewController : UIViewController {
     
     @IBAction func onCloseTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func onSaveTap(_ sender: Any) {
-//        dismiss(animated: true, completion: nil)
-        saveUserData()
     }
     
     @objc private func setEditUser(_ sender: UIBarButtonItem) {
@@ -126,7 +135,7 @@ extension ProfileViewController: DataManagerDelegate {
     
     func onSaved() {
         DispatchQueue.main.async { [weak self] in
-            self?.saveSucces()
+            self?.saveSuccess()
         }
     }
 

@@ -28,6 +28,7 @@ class GCDDataManager: DataManager {
     var delegate: DataManagerDelegate?
 
     func save(_ model: UserModel, avatar: Data?) {
+        applog("gcd save")
         var nameResult: SaveResult = .success
         var descResult: SaveResult = .success
         var avatarResult: SaveResult = .success
@@ -113,6 +114,7 @@ class GCDDataManager: DataManager {
     }
 
     func load() {
+        applog("gcd load")
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
             guard let nameUrl = self?.nameUrl(), let descriptionUrl = self?.descriptionUrl() else {
                 self?.delegate?.onLoadError("load: find storage error")

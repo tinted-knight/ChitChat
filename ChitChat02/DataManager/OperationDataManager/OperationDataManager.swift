@@ -14,6 +14,7 @@ class OperationDataManager: DataManager {
     var delegate: DataManagerDelegate?
 
     func save(_ model: UserModel, avatar: Data?) {
+        applog("operation save")
         let nameOperation = model.name != user.name ? saveOperation(model.name, to: nameUrl()) : ResultOperation()
         let descOperation = model.description != user.description ? saveOperation(model.description, to: descriptionUrl()) : ResultOperation()
         let saveCompletion = SaveCompletionOperation(
@@ -46,6 +47,7 @@ class OperationDataManager: DataManager {
     }
     
     func load() {
+        applog("operation load")
         let nameOp = loadOperation(from: nameUrl())
         let descOp = loadOperation(from: descriptionUrl())
         let loadCompletion = LoadCompletionOperation(
