@@ -39,19 +39,10 @@ class ProfileViewController : UIViewController {
 
     override func viewDidLoad() {
         prepareUi()
-
-        view.backgroundColor = ThemeManager.get().backgroundColor
-        buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
-        buttonSaveOperation.backgroundColor = ThemeManager.get().buttonBgColor
+        setupActions()
 
         repo.delegate = self
         loadUserData()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(onKeyboardHide(_:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil)
     }
 
     @objc private func onKeyboardHide(_ notification: NSNotification) {
@@ -64,13 +55,19 @@ class ProfileViewController : UIViewController {
 
         profilePicture.layer.cornerRadius = view.frame.width / 4
         profilePicture.layer.masksToBounds = true
-        
-        profilePicture.isUserInteractionEnabled = true
-        profilePicture.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(onProfilePictureTap)))
 
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
+
+        view.backgroundColor = ThemeManager.get().backgroundColor
+        buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
+        buttonSaveOperation.backgroundColor = ThemeManager.get().buttonBgColor
+    }
+    
+    private func setupActions() {
+        profilePicture.isUserInteractionEnabled = true
+        profilePicture.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(onProfilePictureTap)))
 
         buttonUserEdit.addTarget(self, action: #selector(setEditUser(_:)), for: .touchUpInside)
         textUserName.addTarget(self, action: #selector(nameTextHandler(_:)), for: .editingChanged)
@@ -78,6 +75,12 @@ class ProfileViewController : UIViewController {
         
         buttonSave.addTarget(self, action: #selector(onSaveViaGcd), for: .touchUpInside)
         buttonSaveOperation.addTarget(self, action: #selector(onSaveViaOperation), for: .touchUpInside)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onKeyboardHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
     }
     
     @objc private func onSaveViaGcd() {

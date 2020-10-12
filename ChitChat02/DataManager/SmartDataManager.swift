@@ -23,6 +23,9 @@ class SmartDataManager {
         }
         get { nil }
     }
+    
+    private var lastSavedUser: UserModel? = nil
+    private var lastSavedAvatar: Data? = nil
 
     init(dataManagerType: DataManagerType = .gcd) {
         self.dataManagerType = dataManagerType
@@ -30,6 +33,10 @@ class SmartDataManager {
     
     func save(user model: UserModel, avatar: Data? = nil, with type: DataManagerType? = nil) {
         if let type = type { self.dataManagerType = type }
+        
+        lastSavedUser = model
+        lastSavedAvatar = avatar
+        
         dataManager.save(model, avatar: avatar)
     }
     
@@ -42,6 +49,13 @@ class SmartDataManager {
             case .operation:
                 operationDataManager.load()
         }
+    }
+    
+    // retry save operation
+    func retry() {
+        guard let user = lastSavedUser else { return }
+        
+        save(user: user, avatar: lastSavedAvatar)
     }
     
     var user: UserModel {

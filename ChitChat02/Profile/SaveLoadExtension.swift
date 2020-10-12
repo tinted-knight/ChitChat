@@ -42,7 +42,7 @@ extension ProfileViewController {
                 self.setLoadedState(self.repo.user)
             },
             onRetry: {[weak self] in
-//                self?.saveUserData()
+                self?.repo.retry()
             })
     }
     
