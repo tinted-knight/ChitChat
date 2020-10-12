@@ -16,19 +16,16 @@ class SmartDataManager {
 
     private var dataManagerType: DataManagerType
     
-    var delegate: DataManagerDelegate? {
-        set {
-            gcdDataManager.delegate = newValue
-            operationDataManager.delegate = newValue
-        }
-        get { nil }
-    }
+    var delegate: DataManagerDelegate? = nil
     
+    var user: UserModel = newUser
     private var lastSavedUser: UserModel? = nil
     private var lastSavedAvatar: Data? = nil
 
     init(dataManagerType: DataManagerType = .gcd) {
         self.dataManagerType = dataManagerType
+        gcdDataManager.delegate = self
+        operationDataManager.delegate = self
     }
     
     func save(user model: UserModel, avatar: Data? = nil, with type: DataManagerType? = nil) {
@@ -58,15 +55,6 @@ class SmartDataManager {
         save(user: user, avatar: lastSavedAvatar)
     }
     
-    var user: UserModel {
-        switch dataManagerType {
-            case .gcd:
-                return gcdDataManager.user
-            case .operation:
-                return operationDataManager.user
-        }
-    }
-    
     private var dataManager: DataManager {
         switch dataManagerType {
             case .gcd:
@@ -74,5 +62,25 @@ class SmartDataManager {
             case .operation:
                 return operationDataManager
         }
+    }
+}
+
+extension SmartDataManager: DataManagerDelegate {
+    func onLoaded(_ model: UserModel) {
+        user = model
+        delegate?.onLoaded(model)
+    }
+    
+    func onLoadError(_ message: String) {
+        delegate?.onLoadError(message)
+    }
+    
+    func onSaved(_ model: UserModel) {
+        user = model
+        delegate?.onSaved(model)
+    }
+    
+    func onSaveError(_ message: String) {
+        delegate?.onSaveError(message)
     }
 }

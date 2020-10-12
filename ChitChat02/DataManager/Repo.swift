@@ -20,7 +20,7 @@ protocol DataManagerDelegate {
     func onLoaded(_ model: UserModel)
     func onLoadError(_ message: String)
 
-    func onSaved()
+    func onSaved(_ model: UserModel)
     func onSaveError(_ message: String)
 }
 

@@ -27,10 +27,12 @@ class OperationDataManager: DataManager {
                 return
             }
             switch result {
-                case .errorName(let value), .errorDesc(let value):
+                case .errorName(let value):
+                    self?.delegate?.onSaveError(value)
+                case .errorDesc(let value):
                     self?.delegate?.onSaveError(value)
                 case .success:
-                    self?.delegate?.onSaved()
+                    self?.delegate?.onSaved(model)
                     self?.user = model
             }
         }

@@ -45,6 +45,7 @@ class GCDDataManager: DataManager {
                 }
                 do {
                     try avatarData.write(to: avatarUrl)
+//                    avatarResult = .error
                     group.leave()
                 } catch {
                     avatarResult = .error
@@ -63,6 +64,7 @@ class GCDDataManager: DataManager {
                 }
                 do {
                     try model.name.write(to: nameUrl, atomically: true, encoding: .utf8)
+//                    nameResult = .error
                     group.leave()
                 } catch {
                     nameResult = .error
@@ -82,6 +84,7 @@ class GCDDataManager: DataManager {
                 }
                 do {
                     try model.description.write(to: descUrl, atomically: true, encoding: .utf8)
+//                    descResult = .error
                     group.leave()
                 } catch {
                     descResult = .error
@@ -103,13 +106,7 @@ class GCDDataManager: DataManager {
                 self?.delegate?.onSaveError("Не все данные удалось сохранить")
                 return
             }
-            // все поля удалось сохранить
-            self?.user = UserModel(
-                    name: model.name,
-                    description: model.description,
-                    avatar: model.avatar
-            )
-            self?.delegate?.onSaved()
+            self?.delegate?.onSaved(model)
         }
     }
 

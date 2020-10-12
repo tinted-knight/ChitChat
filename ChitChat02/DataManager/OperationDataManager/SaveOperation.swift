@@ -13,14 +13,14 @@ internal enum SaveOperationResult {
     case error(_ value: String)
 }
 
-internal class ResultOperation: Operation{
+class ResultOperation: Operation{
     var result: SaveOperationResult?
     override func main() {
         result = .success
     }
 }
 
-internal class SaveStringOperation: ResultOperation {
+class SaveStringOperation: ResultOperation {
     var to: URL?
     var value: String?
     
@@ -32,19 +32,20 @@ internal class SaveStringOperation: ResultOperation {
         do {
             try value?.write(to: to, atomically: true, encoding: .utf8)
             result = .success
+//            result = .error("operation save error")
         } catch {
             result = .error(error.localizedDescription)
         }
     }
 }
 
-internal enum SaveUserResult {
+enum SaveUserResult {
     case success
     case errorName(_ value: String)
     case errorDesc(_ value: String)
 }
 
-internal class SaveCompletionOperation: Operation {
+class SaveCompletionOperation: Operation {
     private var saveName: ResultOperation
     private var saveDesc: ResultOperation
     private var error: String = ""
@@ -62,10 +63,12 @@ internal class SaveCompletionOperation: Operation {
             result = .errorName("save name error")
             return
         }
+        
         guard let descRes = saveDesc.result else {
             result = .errorDesc("save desc error")
             return
         }
+        
         switch nameRes {
             case .error(let value):
                 result = .errorName(value)

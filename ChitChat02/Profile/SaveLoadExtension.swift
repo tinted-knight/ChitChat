@@ -38,8 +38,7 @@ extension ProfileViewController {
         showRetryAlert(
             message,
             onOk: { [weak self] in
-                guard let self = self else { return }
-                self.setLoadedState(self.repo.user)
+                self?.setLoadedState()
             },
             onRetry: {[weak self] in
                 self?.repo.retry()
@@ -57,11 +56,11 @@ extension ProfileViewController {
         showLoadingControls(true)
     }
     
-    func setLoadedState(_ model: UserModel) {
+    func setLoadedState() {
         state = .hasLoaded
-        textUserName.text = model.name
-        textUserDescription.text = model.description
-        if let avatarUrl = model.avatar {
+        textUserName.text = repo.user.name
+        textUserDescription.text = repo.user.description
+        if let avatarUrl = repo.user.avatar {
             profilePicture.image = UIImage(contentsOfFile: avatarUrl.path)
         }
         showLoadingControls(false)
@@ -117,7 +116,7 @@ extension ProfileViewController {
         showRetryAlert(
             message,
             onOk: { [weak self] in
-                self?.setLoadedState(newUser)
+                self?.setLoadedState()
             },
             onRetry: { [weak self] in
                 self?.loadUserData()

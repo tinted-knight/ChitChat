@@ -124,9 +124,10 @@ extension ProfileViewController: UITextViewDelegate {
 }
 // MARK: -DataManagerDelegate
 extension ProfileViewController: DataManagerDelegate {
+    
     func onLoaded(_ model: UserModel) {
         DispatchQueue.main.async { [weak self] in
-            self?.setLoadedState(model)
+            self?.setLoadedState()
         }
     }
     
@@ -136,7 +137,7 @@ extension ProfileViewController: DataManagerDelegate {
         }
     }
     
-    func onSaved() {
+    func onSaved(_ model: UserModel) {
         DispatchQueue.main.async { [weak self] in
             self?.saveSuccess()
         }
