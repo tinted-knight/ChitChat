@@ -34,7 +34,11 @@ class SmartDataManager {
         lastSavedUser = model
         lastSavedAvatar = avatar
         
-        dataManager.save(model, avatar: avatar)
+        dataManager.save(
+            name: model.name != user.name ? model.name : nil,
+            description: model.description != user.description ? model.description : nil,
+            avatar: avatar
+        )
     }
     
     func load(with type: DataManagerType? = nil) {
@@ -67,6 +71,7 @@ class SmartDataManager {
 
 extension SmartDataManager: DataManagerDelegate {
     func onLoaded(_ model: UserModel) {
+        applog("smart load, \(model)")
         user = model
         delegate?.onLoaded(model)
     }
@@ -75,9 +80,9 @@ extension SmartDataManager: DataManagerDelegate {
         delegate?.onLoadError(message)
     }
     
-    func onSaved(_ model: UserModel) {
-        user = model
-        delegate?.onSaved(model)
+    func onSaved() {
+        applog("smart saved")
+        delegate?.onSaved()
     }
     
     func onSaveError(_ message: String) {

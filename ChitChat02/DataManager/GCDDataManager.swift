@@ -24,43 +24,38 @@ class GCDDataManager: DataManager {
     let fakeDelay = 1.0
     let doubleDelay = 2.0
 
-    var user: UserModel = newUser
+//    var user: UserModel = newUser
     var delegate: DataManagerDelegate?
 
     private var nameResult: SaveResult = .success
     private var descResult: SaveResult = .success
     private var avatarResult: SaveResult = .success
 
-    func save(_ model: UserModel, avatar: Data?) {
+    func save(name: String?, description: String?, avatar: Data?) {
         applog("gcd save")
 
         let group = DispatchGroup()
-        if avatar != nil {
+        if let avatar = avatar {
             performAvatarTask(group, avatar: avatar)
         }
         
-        if model.name != user.name {
-            perforNameTask(group, name: model.name)
+        if let name = name {
+            perforNameTask(group, name: name)
         }
 
-        if model.description != user.description {
-            perforDescriptionTask(group, description: model.description)
+        if let description = description {
+            perforDescriptionTask(group, description: description)
         }
 
-        group.notify(queue: queue) { [weak self, user] in
+        group.notify(queue: queue) { [weak self] in
             guard self?.nameResult == .success, self?.descResult == .success,
                 self?.avatarResult == .success else {
                 // если одно из полей удалось сохранить,
                 // запишем в user, чтобы показать пользователю
-                self?.user = UserModel(
-                    name: self?.nameResult == .success ? model.name : user.name,
-                    description: self?.descResult == .success ? model.description : user.description,
-                    avatar: self?.avatarResult == .success ? model.avatar : user.avatar
-                )
                 self?.delegate?.onSaveError("Не все данные удалось сохранить")
                 return
             }
-            self?.delegate?.onSaved(model)
+            self?.delegate?.onSaved()
         }
     }
 
@@ -77,7 +72,6 @@ class GCDDataManager: DataManager {
                 let description = try String(contentsOf: descriptionUrl)
 
                 let loaded = UserModel(name: name, description: description, avatar: self?.avatarUrl())
-                self?.user = loaded
                 self?.delegate?.onLoaded(loaded)
 //            } catch TestError.name {
 //                self?.delegate?.onLoadError("name error")
@@ -89,16 +83,16 @@ class GCDDataManager: DataManager {
         }
     }
     
-    private func performAvatarTask(_ group: DispatchGroup, avatar: Data?) {
+    private func performAvatarTask(_ group: DispatchGroup, avatar: Data) {
         group.enter()
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
-            guard let avatarUrl = self?.avatarUrl(), let avatarData = avatar else {
+            guard let avatarUrl = self?.avatarUrl() else {
                 self?.avatarResult = .error
                 group.leave()
                 return
             }
             do {
-                try avatarData.write(to: avatarUrl)
+                try avatar.write(to: avatarUrl)
                 //                    avatarResult = .error
                 group.leave()
             } catch {
@@ -118,7 +112,7 @@ class GCDDataManager: DataManager {
             }
             do {
                 try name.write(to: nameUrl, atomically: true, encoding: .utf8)
-                //                    nameResult = .error
+//                self?.nameResult = .error
                 group.leave()
             } catch {
                 self?.nameResult = .error

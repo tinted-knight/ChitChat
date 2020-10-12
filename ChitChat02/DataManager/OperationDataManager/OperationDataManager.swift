@@ -10,13 +10,19 @@ import Foundation
 
 class OperationDataManager: DataManager {
     private let queue = OperationQueue()
-    var user: UserModel = newUser
     var delegate: DataManagerDelegate?
 
-    func save(_ model: UserModel, avatar: Data?) {
+    private var nameOperation: ResultOperation = ResultOperation()
+    private var descOperation: ResultOperation = ResultOperation()
+    
+    func save(name: String?, description: String?, avatar: Data?) {
         applog("operation save")
-        let nameOperation = model.name != user.name ? saveOperation(model.name, to: nameUrl()) : ResultOperation()
-        let descOperation = model.description != user.description ? saveOperation(model.description, to: descriptionUrl()) : ResultOperation()
+        if let name = name {
+            nameOperation  = saveOperation(name, to: nameUrl())
+        }
+        if let description = description {
+            descOperation = saveOperation(description, to: descriptionUrl())
+        }
         let saveCompletion = SaveCompletionOperation(
             nameOp: nameOperation,
             descOp: descOperation
@@ -32,8 +38,7 @@ class OperationDataManager: DataManager {
                 case .errorDesc(let value):
                     self?.delegate?.onSaveError(value)
                 case .success:
-                    self?.delegate?.onSaved(model)
-                    self?.user = model
+                    self?.delegate?.onSaved()
             }
         }
         saveCompletion.addDependency(nameOperation)
@@ -70,7 +75,6 @@ class OperationDataManager: DataManager {
                     self?.delegate?.onLoadError(value)
                 case .success(let value):
                     self?.delegate?.onLoaded(value)
-                    self?.user = value
             }
         }
         loadCompletion.addDependency(nameOp)

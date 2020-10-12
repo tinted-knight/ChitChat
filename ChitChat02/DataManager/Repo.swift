@@ -9,10 +9,11 @@
 import Foundation
 
 protocol DataManager {
-    var user: UserModel { get }
+//    var user: UserModel { get }
     var delegate: DataManagerDelegate? { get set }
     
-    func save(_ model: UserModel, avatar: Data?)
+//    func save(_ model: UserModel, avatar: Data?)
+    func save(name: String?, description: String?, avatar: Data?)
     func load()
 }
 
@@ -20,7 +21,7 @@ protocol DataManagerDelegate {
     func onLoaded(_ model: UserModel)
     func onLoadError(_ message: String)
 
-    func onSaved(_ model: UserModel)
+    func onSaved()
     func onSaveError(_ message: String)
 }
 

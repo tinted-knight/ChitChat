@@ -137,7 +137,7 @@ extension ProfileViewController: DataManagerDelegate {
         }
     }
     
-    func onSaved(_ model: UserModel) {
+    func onSaved() {
         DispatchQueue.main.async { [weak self] in
             self?.saveSuccess()
         }

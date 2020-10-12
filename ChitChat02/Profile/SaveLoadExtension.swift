@@ -31,14 +31,16 @@ extension ProfileViewController {
     func saveSuccess() {
         showAlert("Данные сохранены")
         state = .hasSaved
-        showLoadingControls(false)
+        repo.load()
+//        showLoadingControls(false)
     }
     
     func userSaveError(_ message: String) {
         showRetryAlert(
             message,
             onOk: { [weak self] in
-                self?.setLoadedState()
+                self?.repo.load()
+//                self?.setLoadedState()
             },
             onRetry: {[weak self] in
                 self?.repo.retry()
