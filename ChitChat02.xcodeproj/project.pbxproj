@@ -27,6 +27,7 @@
 		39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C12531C1D20068C875 /* LoadOperation.swift */; };
 		39DE12C42531C2280068C875 /* SaveOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C32531C2280068C875 /* SaveOperation.swift */; };
 		39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C52531C4290068C875 /* SaveLoadExtension.swift */; };
+		39DE12C82531E5DA0068C875 /* ThemeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */; };
 		39E4D49F252347AD00BF6BC4 /* fake_random_date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E4D49E252347AD00BF6BC4 /* fake_random_date.swift */; };
 		39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */; };
 		39ED610E2521EE62006D8E0A /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610D2521EE62006D8E0A /* ConversationViewController.swift */; };
@@ -64,6 +65,7 @@
 		39DE12C12531C1D20068C875 /* LoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
 		39DE12C32531C2280068C875 /* SaveOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOperation.swift; sourceTree = "<group>"; };
 		39DE12C52531C4290068C875 /* SaveLoadExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadExtension.swift; sourceTree = "<group>"; };
+		39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataManager.swift; sourceTree = "<group>"; };
 		39E4D49E252347AD00BF6BC4 /* fake_random_date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fake_random_date.swift; sourceTree = "<group>"; };
 		39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		39ED610D2521EE62006D8E0A /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				39DE12C02531C1B20068C875 /* OperationDataManager */,
 				39B7FDBE25306CB800B5F280 /* Repo.swift */,
 				39B7FDC32530B00200B5F280 /* GCDDataManager.swift */,
+				39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				39B7FDBF25306CB800B5F280 /* Repo.swift in Sources */,
 				39BDCFBF252767B100ECECCC /* ThemeModel.swift in Sources */,
 				39ED610E2521EE62006D8E0A /* ConversationViewController.swift in Sources */,
+				39DE12C82531E5DA0068C875 /* ThemeDataManager.swift in Sources */,
 				39B7FDBD253062F500B5F280 /* UserModel.swift in Sources */,
 				39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */,
 				39E4D49F252347AD00BF6BC4 /* fake_random_date.swift in Sources */,
