@@ -26,13 +26,30 @@ class GCDDataManager: DataManager {
 
     var user: UserModel = newUser
     var delegate: DataManagerDelegate?
-    
-    func save(_ model: UserModel) {
+
+    func save(_ model: UserModel, avatar: Data?) {
         var name: SaveResult = .success
         var desc: SaveResult = .success
-        
+
         let group = DispatchGroup()
-        
+
+        group.enter()
+        queue.async() { [weak self] in
+            guard let avatarUrl = self?.avatarUrl(), let avatarData = avatar else {
+                applog("avatar get file error")
+                group.leave()
+                return
+            }
+            do {
+                try avatarData.write(to: avatarUrl)
+                applog("avatar file write success, \(avatarUrl.path)")
+                group.leave()
+            } catch {
+                applog("avatar error writing file")
+                group.leave()
+            }
+        }
+
         if model.name != user.name {
             group.enter()
             queue.asyncAfter(deadline: .now() + doubleDelay) { [weak self] in
@@ -51,7 +68,7 @@ class GCDDataManager: DataManager {
                 }
             }
         }
-        
+
         if model.description != user.description {
             group.enter()
             queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
@@ -70,30 +87,31 @@ class GCDDataManager: DataManager {
                 }
             }
         }
-        
+
         group.notify(queue: queue) { [weak self, user] in
             guard name == .success, desc == .success else {
                 // если одно из полей удалось сохранить,
                 // запишем в user, чтобы показать пользователю
                 self?.user = UserModel(
-                    name: name == .success ? model.name : user.name,
-                    description: desc == .success ? model.description : user.description
+                        name: name == .success ? model.name : user.name,
+                        description: desc == .success ? model.description : user.description
                 )
                 self?.delegate?.onSaveError("Не все данные удалось сохранить")
                 return
             }
             // оба поля удалось сохранить
             self?.user = UserModel(
-                name: model.name,
-                description: model.description
+                    name: model.name,
+                    description: model.description
             )
             self?.delegate?.onSaved()
         }
     }
-    
+
     func load() {
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
-            guard let nameUrl = self?.nameUrl(), let descriptionUrl = self?.descriptionUrl() else {
+            guard let nameUrl = self?.nameUrl(), let descriptionUrl = self?.descriptionUrl(),
+                  let avatarUrl = self?.avatarUrl() else {
                 self?.delegate?.onLoadError("load: find storage error")
                 return
             }
@@ -101,14 +119,16 @@ class GCDDataManager: DataManager {
                 let name = try String(contentsOf: nameUrl)
 //                throw TestError.name
                 let description = try String(contentsOf: descriptionUrl)
+//                let avatar = try? Data(contentsOf: avatarUrl)
+//                applog("load avatar: \(avatar)")
 
-                let loaded = UserModel(name: name, description: description)
+                let loaded = UserModel(name: name, description: description, avatar: avatarUrl)
                 self?.user = loaded
                 self?.delegate?.onLoaded(loaded)
-            } catch TestError.name {
-                self?.delegate?.onLoadError("name error")
-            } catch TestError.desc {
-                self?.delegate?.onLoadError("desc error")
+//            } catch TestError.name {
+//                self?.delegate?.onLoadError("name error")
+//            } catch TestError.desc {
+//                self?.delegate?.onLoadError("desc error")
             } catch {
                 self?.delegate?.onLoadError(error.localizedDescription)
             }

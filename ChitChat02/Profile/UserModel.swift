@@ -11,6 +11,7 @@ import Foundation
 struct UserModel {
     let name: String
     let description: String
+    var avatar: URL? = nil
 }
 let newUser = UserModel(name: "new user name", description: "new user desc")
 

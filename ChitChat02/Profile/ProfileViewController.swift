@@ -31,6 +31,8 @@ class ProfileViewController : UIViewController {
     private let picker = UIImagePickerController()
     
     var state: UIState = .loading
+    var avatarWasModified = false
+    var userDataWasModified = false
     
     var repo: DataManager = GCDDataManager()
 //    var repo: DataManager = OperationDataManager()
@@ -42,6 +44,16 @@ class ProfileViewController : UIViewController {
         buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
 
         loadUserData()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onKeyboardHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
+
+    @objc private func onKeyboardHide(_ notification: NSNotification) {
+        showSaveControls()
     }
     
     private func prepareUi() {
@@ -94,7 +106,7 @@ extension ProfileViewController: UITextViewDelegate {
     }
     
     private func compare(_ text: String?, with source: String) {
-        buttonSave.isEnabled = text != source
+        userDataWasModified = text != source
     }
 }
 // MARK: -DataManagerDelegate
@@ -170,11 +182,14 @@ extension ProfileViewController {
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
+        applog("\(info[.imageURL] ?? "nothing")")
         guard let image = info[.originalImage] as? UIImage else {
             showAlert("Error", message: "Something has gone very wrong")
             return
         }
         profilePicture.image = image
+        avatarWasModified = true
+        showSaveControls()
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

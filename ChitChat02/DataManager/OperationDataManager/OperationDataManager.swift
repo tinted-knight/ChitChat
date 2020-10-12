@@ -13,7 +13,7 @@ class OperationDataManager: DataManager {
     var user: UserModel = newUser
     var delegate: DataManagerDelegate?
 
-    func save(_ model: UserModel) {
+    func save(_ model: UserModel, avatar: Data?) {
         let nameOperation = model.name != user.name ? saveOperation(model.name, to: nameUrl()) : ResultOperation()
         let descOperation = model.description != user.description ? saveOperation(model.description, to: descriptionUrl()) : ResultOperation()
         let saveCompletion = SaveCompletionOperation(

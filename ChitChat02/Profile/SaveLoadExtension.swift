@@ -12,12 +12,16 @@ import UIKit
 // MARK: -Edit mode, save/load user data
 extension ProfileViewController {
     func saveUserData() {
-        guard let name = textUserName.text, let description = textUserDescription.text,
-            name != repo.user.name || description != repo.user.description else {
-                return
-        }
+        guard userDataWasModified || avatarWasModified else { return }
+//        guard let name = textUserName.text, let description = textUserDescription.text,
+//            name != repo.user.name || description != repo.user.description else {
+//                return
+//        }
+
+        let name = textUserName.text ?? repo.user.name
+        let description = textUserDescription.text ?? repo.user.description
         setSavingState()
-        repo.save(UserModel(name: name, description: description))
+        repo.save(UserModel(name: name, description: description), avatar: profilePicture.image?.pngData())
     }
     
     func setSavingState() {
@@ -59,6 +63,10 @@ extension ProfileViewController {
         state = .hasLoaded
         textUserName.text = model.name
         textUserDescription.text = model.description
+        if let avatarUrl = model.avatar {
+            applog("loaded profile pic \(avatarUrl.path)")
+            profilePicture.image = UIImage(contentsOfFile: avatarUrl.path)
+        }
         showLoadingControls(false)
     }
     
@@ -93,13 +101,18 @@ extension ProfileViewController {
             
             textUserName.isEnabled = false
             textUserDescription.isEditable = false
-            buttonSave.isEnabled = false
             
             textUserName.text = repo.user.name
             textUserDescription.text = repo.user.description
         }
     }
 
+    func showSaveControls() {
+        if avatarWasModified || userDataWasModified {
+            buttonSave.isEnabled = true
+        }
+    }
+    
     func setLoadError(_ message: String) {
         showLoadingControls(false)
         showRetryAlert(

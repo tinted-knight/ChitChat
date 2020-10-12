@@ -12,7 +12,7 @@ protocol DataManager {
     var user: UserModel { get }
     var delegate: DataManagerDelegate? { get set }
     
-    func save(_ model: UserModel)
+    func save(_ model: UserModel, avatar: Data?)
     func load()
 }
 
@@ -33,12 +33,21 @@ extension DataManager {
     func nameUrl() -> URL {
         var url = storageUrl()
         url.appendPathComponent("user_name.txt")
+        applog("nameUrl: \(url.path)")
         return url
     }
 
     func descriptionUrl() -> URL {
         var url = storageUrl()
         url.appendPathComponent("user_description.txt")
+        applog("descriptionUrl: \(url.path)")
+        return url
+    }
+
+    func avatarUrl() -> URL {
+        var url = storageUrl()
+        url.appendPathComponent("user_avatar.txt")
+        applog("avatarUrl: \(url.path)")
         return url
     }
 }
