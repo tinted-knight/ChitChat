@@ -28,25 +28,27 @@ class GCDDataManager: DataManager {
     var delegate: DataManagerDelegate?
 
     func save(_ model: UserModel, avatar: Data?) {
-        var name: SaveResult = .success
-        var desc: SaveResult = .success
+        var nameResult: SaveResult = .success
+        var descResult: SaveResult = .success
+        var avatarResult: SaveResult = .success
 
         let group = DispatchGroup()
 
-        group.enter()
-        queue.async() { [weak self] in
-            guard let avatarUrl = self?.avatarUrl(), let avatarData = avatar else {
-                applog("avatar get file error")
-                group.leave()
-                return
-            }
-            do {
-                try avatarData.write(to: avatarUrl)
-                applog("avatar file write success, \(avatarUrl.path)")
-                group.leave()
-            } catch {
-                applog("avatar error writing file")
-                group.leave()
+        if avatar != nil {
+            group.enter()
+            queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
+                guard let avatarUrl = self?.avatarUrl(), let avatarData = avatar else {
+                    avatarResult = .error
+                    group.leave()
+                    return
+                }
+                do {
+                    try avatarData.write(to: avatarUrl)
+                    group.leave()
+                } catch {
+                    avatarResult = .error
+                    group.leave()
+                }
             }
         }
 
@@ -54,7 +56,7 @@ class GCDDataManager: DataManager {
             group.enter()
             queue.asyncAfter(deadline: .now() + doubleDelay) { [weak self] in
                 guard let nameUrl = self?.nameUrl() else {
-                    name = .error
+                    nameResult = .error
                     group.leave()
                     return
                 }
@@ -62,7 +64,7 @@ class GCDDataManager: DataManager {
                     try model.name.write(to: nameUrl, atomically: true, encoding: .utf8)
                     group.leave()
                 } catch {
-                    name = .error
+                    nameResult = .error
                     group.leave()
                     return
                 }
@@ -73,7 +75,7 @@ class GCDDataManager: DataManager {
             group.enter()
             queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
                 guard let descUrl = self?.descriptionUrl() else {
-                    desc = .error
+                    descResult = .error
                     group.leave()
                     return
                 }
@@ -81,7 +83,7 @@ class GCDDataManager: DataManager {
                     try model.description.write(to: descUrl, atomically: true, encoding: .utf8)
                     group.leave()
                 } catch {
-                    desc = .error
+                    descResult = .error
                     group.leave()
                     return
                 }
@@ -89,20 +91,22 @@ class GCDDataManager: DataManager {
         }
 
         group.notify(queue: queue) { [weak self, user] in
-            guard name == .success, desc == .success else {
+            guard nameResult == .success, descResult == .success, avatarResult == .success else {
                 // если одно из полей удалось сохранить,
                 // запишем в user, чтобы показать пользователю
                 self?.user = UserModel(
-                        name: name == .success ? model.name : user.name,
-                        description: desc == .success ? model.description : user.description
+                        name: nameResult == .success ? model.name : user.name,
+                        description: descResult == .success ? model.description : user.description,
+                        avatar: avatarResult == .success ? model.avatar : user.avatar
                 )
                 self?.delegate?.onSaveError("Не все данные удалось сохранить")
                 return
             }
-            // оба поля удалось сохранить
+            // все поля удалось сохранить
             self?.user = UserModel(
                     name: model.name,
-                    description: model.description
+                    description: model.description,
+                    avatar: model.avatar
             )
             self?.delegate?.onSaved()
         }
@@ -110,8 +114,7 @@ class GCDDataManager: DataManager {
 
     func load() {
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
-            guard let nameUrl = self?.nameUrl(), let descriptionUrl = self?.descriptionUrl(),
-                  let avatarUrl = self?.avatarUrl() else {
+            guard let nameUrl = self?.nameUrl(), let descriptionUrl = self?.descriptionUrl() else {
                 self?.delegate?.onLoadError("load: find storage error")
                 return
             }
@@ -119,10 +122,8 @@ class GCDDataManager: DataManager {
                 let name = try String(contentsOf: nameUrl)
 //                throw TestError.name
                 let description = try String(contentsOf: descriptionUrl)
-//                let avatar = try? Data(contentsOf: avatarUrl)
-//                applog("load avatar: \(avatar)")
 
-                let loaded = UserModel(name: name, description: description, avatar: avatarUrl)
+                let loaded = UserModel(name: name, description: description, avatar: self?.avatarUrl())
                 self?.user = loaded
                 self?.delegate?.onLoaded(loaded)
 //            } catch TestError.name {

@@ -13,15 +13,14 @@ import UIKit
 extension ProfileViewController {
     func saveUserData() {
         guard userDataWasModified || avatarWasModified else { return }
-//        guard let name = textUserName.text, let description = textUserDescription.text,
-//            name != repo.user.name || description != repo.user.description else {
-//                return
-//        }
 
         let name = textUserName.text ?? repo.user.name
         let description = textUserDescription.text ?? repo.user.description
         setSavingState()
-        repo.save(UserModel(name: name, description: description), avatar: profilePicture.image?.pngData())
+        repo.save(
+            UserModel(name: name, description: description),
+            avatar: avatarWasModified ? profilePicture.image?.pngData() : nil
+        )
     }
     
     func setSavingState() {
@@ -30,7 +29,7 @@ extension ProfileViewController {
         buttonUserEdit.setTitle("Edit", for: .normal)
     }
     
-    func onSaveSucces() {
+    func saveSuccess() {
         showAlert("Данные сохранены")
         state = .hasSaved
         showLoadingControls(false)
@@ -64,7 +63,6 @@ extension ProfileViewController {
         textUserName.text = model.name
         textUserDescription.text = model.description
         if let avatarUrl = model.avatar {
-            applog("loaded profile pic \(avatarUrl.path)")
             profilePicture.image = UIImage(contentsOfFile: avatarUrl.path)
         }
         showLoadingControls(false)

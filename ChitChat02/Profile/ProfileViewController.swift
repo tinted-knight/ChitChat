@@ -90,6 +90,7 @@ class ProfileViewController : UIViewController {
 //        dismiss(animated: true, completion: nil)
         saveUserData()
     }
+    
     @objc private func setEditUser(_ sender: UIBarButtonItem) {
         switchEditState()
     }
@@ -125,7 +126,7 @@ extension ProfileViewController: DataManagerDelegate {
     
     func onSaved() {
         DispatchQueue.main.async { [weak self] in
-            self?.onSaveSucces()
+            self?.saveSucces()
         }
     }
 
