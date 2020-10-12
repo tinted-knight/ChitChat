@@ -88,10 +88,6 @@ class OperationDataManager: DataManager {
             switch result {
                 case .error(let value):
                     self?.delegate?.onLoadError(value)
-                case .nameError(let value):
-                    self?.delegate?.onLoadError(value)
-                case .descError(let value):
-                    self?.delegate?.onLoadError(value)
                 case .success(let value):
                     self?.delegate?.onLoaded(value)
             }
