@@ -14,40 +14,59 @@ class OperationDataManager: DataManager {
 
     private var nameOperation: ResultOperation = ResultOperation()
     private var descOperation: ResultOperation = ResultOperation()
+    private var avatarOperation: ResultOperation = ResultOperation()
     
     func save(name: String?, description: String?, avatar: Data?) {
         applog("operation save")
         if let name = name {
-            nameOperation  = saveOperation(name, to: nameUrl())
+            nameOperation  = saveStringOperation(name, to: nameUrl())
         }
+        
         if let description = description {
-            descOperation = saveOperation(description, to: descriptionUrl())
+            descOperation = saveStringOperation(description, to: descriptionUrl())
         }
+        
+        if let avatar = avatar {
+            avatarOperation = saveDataOperation(avatar, to: avatarUrl())
+        }
+        
         let saveCompletion = SaveCompletionOperation(
             nameOp: nameOperation,
-            descOp: descOperation
+            descOp: descOperation,
+            avatarOp: avatarOperation
         )
+        
         saveCompletion.completionBlock = { [weak self] in
             guard let result = saveCompletion.result else {
                 self?.delegate?.onSaveError("save error")
                 return
             }
             switch result {
-                case .errorName(let value):
-                    self?.delegate?.onSaveError(value)
-                case .errorDesc(let value):
+                case .error(let value):
                     self?.delegate?.onSaveError(value)
                 case .success:
                     self?.delegate?.onSaved()
             }
         }
+        
         saveCompletion.addDependency(nameOperation)
         saveCompletion.addDependency(descOperation)
-        queue.addOperations([nameOperation, descOperation, saveCompletion], waitUntilFinished: false)
+        saveCompletion.addDependency(avatarOperation)
+        queue.addOperations(
+            [nameOperation, descOperation, avatarOperation, saveCompletion],
+            waitUntilFinished: false
+        )
     }
     
-    private func saveOperation(_ value: String, to: URL) -> ResultOperation {
+    private func saveStringOperation(_ value: String, to: URL) -> ResultOperation {
         let operation = SaveStringOperation()
+        operation.value = value
+        operation.to = to
+        return operation
+    }
+    
+    private func saveDataOperation(_ value: Data, to: URL) -> ResultOperation {
+        let operation = SaveDataOperation()
         operation.value = value
         operation.to = to
         return operation
@@ -86,22 +105,5 @@ class OperationDataManager: DataManager {
         let operation = LoadStringOperation()
         operation.from = from
         return operation
-    }
-
-    private func storageUrl() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
-    }
-    
-    private func nameUrl() -> URL {
-        var url = storageUrl()
-        url.appendPathComponent("user_name.txt")
-        return url
-    }
-
-    private func descriptionUrl() -> URL {
-        var url = storageUrl()
-        url.appendPathComponent("user_description.txt")
-        return url
     }
 }
