@@ -12,14 +12,12 @@ import UIKit
 // MARK: -Edit mode, save/load user data
 extension ProfileViewController {
     func saveUserData(with dataManagerType: DataManagerType) {
-        guard userDataWasModified || avatarWasModified else { return }
-
         let name = textUserName.text ?? repo.user.name
         let description = textUserDescription.text ?? repo.user.description
         setSavingState()
         let userData = UserModel(name: name, description: description)
         if avatarWasModified {
-            DispatchQueue.global().asyncAfter(deadline: .now() + 2.0) { [weak profileImage, weak repo] in
+            DispatchQueue.global().async { [weak profileImage, weak repo] in
                 // https://stackoverflow.com/a/10632187
                 let jpegData = profileImage?.jpegData(compressionQuality: 1.0)
                 repo?.save(user: userData, avatar: jpegData, with: dataManagerType)
@@ -116,6 +114,7 @@ extension ProfileViewController {
     func checkSaveControls() {
         let userDataWasModified = repo.wasModified(name: textUserName.text, description: textUserDescription.text)
         let userDataIsValid = repo.isValid(name: textUserName.text, description: textUserDescription.text)
+        applog("\(#function), avatar \(avatarWasModified), data \(userDataWasModified), valid \(userDataIsValid)")
         if (avatarWasModified && userDataIsValid) || userDataWasModified {
             buttonSave.isEnabled = true
             buttonSaveOperation.isEnabled = true
