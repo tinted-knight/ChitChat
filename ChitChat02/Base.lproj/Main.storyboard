@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="240" image="Profile temp" translatesAutoresizingMaskIntoConstraints="NO" id="ulK-2g-l7I">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="240" image="Profile temp" translatesAutoresizingMaskIntoConstraints="NO" id="ulK-2g-l7I">
                                 <rect key="frame" x="94" y="124" width="187.5" height="187.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ulK-2g-l7I" secondAttribute="height" multiplier="1:1" id="aEl-e9-rey"/>
@@ -115,7 +115,7 @@
                         <outlet property="buttonSave" destination="3Bg-On-FVf" id="q8p-UW-Gc2"/>
                         <outlet property="buttonSaveOperation" destination="ZXL-7O-hoe" id="rB8-r9-i5s"/>
                         <outlet property="buttonUserEdit" destination="7bx-cA-HzR" id="Wpt-cT-uHF"/>
-                        <outlet property="profilePicture" destination="ulK-2g-l7I" id="8M3-H2-st5"/>
+                        <outlet property="profileImageView" destination="ulK-2g-l7I" id="8M3-H2-st5"/>
                         <outlet property="textUserDescription" destination="mgL-XO-LVl" id="Nxb-Ap-hIF"/>
                         <outlet property="textUserName" destination="mLi-ES-maa" id="b85-li-1a8"/>
                     </connections>

@@ -18,8 +18,14 @@ extension ProfileViewController {
         let description = textUserDescription.text ?? repo.user.description
         setSavingState()
         let userData = UserModel(name: name, description: description)
-        let avatarData = avatarWasModified ? profilePicture.image?.pngData() : nil
-        repo.save(user: userData, avatar: avatarData, with: dataManagerType)
+        if avatarWasModified {
+            DispatchQueue.global().asyncAfter(deadline: .now() + 2.0) { [weak profileImage, weak repo] in
+                let pngData = profileImage?.pngData()
+                repo?.save(user: userData, avatar: pngData, with: dataManagerType)
+            }
+        } else {
+            repo.save(user: userData, with: dataManagerType)
+        }
     }
     
     func setSavingState() {
@@ -32,7 +38,6 @@ extension ProfileViewController {
         showAlert("Данные сохранены")
         state = .hasSaved
         repo.load()
-//        showLoadingControls(false)
     }
     
     func userSaveError(_ message: String) {
@@ -40,7 +45,6 @@ extension ProfileViewController {
             message,
             onOk: { [weak self] in
                 self?.repo.load()
-//                self?.setLoadedState()
             },
             onRetry: {[weak self] in
                 self?.repo.retry()
@@ -63,8 +67,9 @@ extension ProfileViewController {
         textUserName.text = repo.user.name
         textUserDescription.text = repo.user.description
         if let avatarUrl = repo.user.avatar {
-            profilePicture.image = UIImage(contentsOfFile: avatarUrl.path)
+            profileImage = UIImage(contentsOfFile: avatarUrl.path)
         }
+        profileImageView.image = profileImage
         showLoadingControls(false)
     }
     
@@ -77,12 +82,12 @@ extension ProfileViewController {
             buttonUserEdit.isEnabled = false
             textUserName.isEnabled = false
             textUserDescription.isEditable = false
-            profilePicture.isUserInteractionEnabled = false
+            profileImageView.isUserInteractionEnabled = false
         } else {
             activityIndicator.stopAnimating()
 //            buttonSave.isEnabled = false
             buttonEditPicture.isEnabled = true
-            profilePicture.isUserInteractionEnabled = true
+            profileImageView.isUserInteractionEnabled = true
             buttonUserEdit.isEnabled = true
         }
     }

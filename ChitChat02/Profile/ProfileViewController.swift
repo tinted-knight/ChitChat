@@ -20,7 +20,7 @@ enum UIState {
 
 class ProfileViewController : UIViewController {
     
-    @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var textUserDescription: UITextView!
     @IBOutlet weak var buttonSave: UIButton!
     @IBOutlet weak var buttonSaveOperation: UIButton!
@@ -30,6 +30,7 @@ class ProfileViewController : UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private let picker = UIImagePickerController()
+    var profileImage: UIImage?
     
     var state: UIState = .loading
     var avatarWasModified = false
@@ -53,8 +54,9 @@ class ProfileViewController : UIViewController {
         buttonSave.layer.cornerRadius = 14.0
         buttonSaveOperation.layer.cornerRadius = 14.0
 
-        profilePicture.layer.cornerRadius = view.frame.width / 4
-        profilePicture.layer.masksToBounds = true
+        profileImageView.layer.cornerRadius = view.frame.width / 4
+        profileImageView.layer.masksToBounds = true
+        profileImage = UIImage(named: "Profile temp")
 
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
@@ -65,8 +67,8 @@ class ProfileViewController : UIViewController {
     }
     
     private func setupActions() {
-        profilePicture.isUserInteractionEnabled = true
-        profilePicture.addGestureRecognizer(
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(onProfilePictureTap)))
 
         buttonUserEdit.addTarget(self, action: #selector(setEditUser(_:)), for: .touchUpInside)
@@ -82,7 +84,7 @@ class ProfileViewController : UIViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
     }
-    
+    // MARK: -UI Actions
     @objc private func onSaveViaGcd() {
         saveUserData(with: .gcd)
     }
@@ -201,7 +203,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             showAlert("Error", message: "Something has gone very wrong")
             return
         }
-        profilePicture.image = image
+        profileImage = image
+        profileImageView.image = profileImage
         avatarWasModified = true
         showSaveControls()
     }

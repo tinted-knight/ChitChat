@@ -24,7 +24,6 @@ class GCDDataManager: DataManager {
     let fakeDelay = 1.0
     let doubleDelay = 2.0
 
-//    var user: UserModel = newUser
     var delegate: DataManagerDelegate?
 
     private var nameResult: SaveResult = .success
