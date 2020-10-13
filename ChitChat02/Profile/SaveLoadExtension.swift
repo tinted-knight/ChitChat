@@ -20,8 +20,9 @@ extension ProfileViewController {
         let userData = UserModel(name: name, description: description)
         if avatarWasModified {
             DispatchQueue.global().asyncAfter(deadline: .now() + 2.0) { [weak profileImage, weak repo] in
-                let pngData = profileImage?.pngData()
-                repo?.save(user: userData, avatar: pngData, with: dataManagerType)
+                // https://stackoverflow.com/a/10632187
+                let jpegData = profileImage?.jpegData(compressionQuality: 1.0)
+                repo?.save(user: userData, avatar: jpegData, with: dataManagerType)
             }
         } else {
             repo.save(user: userData, with: dataManagerType)
