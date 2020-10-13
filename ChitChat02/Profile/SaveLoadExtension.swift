@@ -67,8 +67,9 @@ extension ProfileViewController {
         state = .hasLoaded
         textUserName.text = repo.user.name
         textUserDescription.text = repo.user.description
-        if let avatarUrl = repo.user.avatar {
-            profileImage = UIImage(contentsOfFile: avatarUrl.path)
+        if let avatarUrl = repo.user.avatar,
+            let image = UIImage(contentsOfFile: avatarUrl.path) {
+            profileImage = image
         }
         profileImageView.image = profileImage
         showLoadingControls(false)
@@ -112,8 +113,10 @@ extension ProfileViewController {
         }
     }
 
-    func showSaveControls() {
-        if avatarWasModified || userDataWasModified {
+    func checkSaveControls() {
+        let userDataWasModified = repo.wasModified(name: textUserName.text, description: textUserDescription.text)
+        let userDataIsValid = repo.isValid(name: textUserName.text, description: textUserDescription.text)
+        if (avatarWasModified && userDataIsValid) || userDataWasModified {
             buttonSave.isEnabled = true
             buttonSaveOperation.isEnabled = true
         }
@@ -121,15 +124,8 @@ extension ProfileViewController {
     
     func setLoadError(_ message: String) {
         showLoadingControls(false)
-        showRetryAlert(
-            message,
-            onOk: { [weak self] in
-                self?.setLoadedState()
-            },
-            onRetry: { [weak self] in
-                self?.loadUserData()
-            }
-        )
+        showAlert("Похоже, что  ты новенький", message: "Введи свои данные и сохрани")
+        setLoadedState()
     }
 
     func showRetryAlert(_ message: String, onOk: (() -> Void)? = nil, onRetry: @escaping () -> Void) {

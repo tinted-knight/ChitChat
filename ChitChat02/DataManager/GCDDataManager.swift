@@ -49,8 +49,6 @@ class GCDDataManager: DataManager {
         group.notify(queue: queue) { [weak self] in
             guard self?.nameResult == .success, self?.descResult == .success,
                 self?.avatarResult == .success else {
-                // если одно из полей удалось сохранить,
-                // запишем в user, чтобы показать пользователю
                 self?.delegate?.onSaveError("Не все данные удалось сохранить")
                 return
             }
@@ -67,8 +65,10 @@ class GCDDataManager: DataManager {
             }
             do {
                 let name = try String(contentsOf: nameUrl)
+                applog("gcd load name: \(name)")
 //                throw TestError.name
                 let description = try String(contentsOf: descriptionUrl)
+                applog("gcd load desc: \(description)")
 
                 let loaded = UserModel(name: name, description: description, avatar: self?.avatarUrl())
                 self?.delegate?.onLoaded(loaded)
@@ -83,6 +83,7 @@ class GCDDataManager: DataManager {
     }
     
     private func performAvatarTask(_ group: DispatchGroup, avatar: Data) {
+        applog("avatar task")
         group.enter()
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
             guard let avatarUrl = self?.avatarUrl() else {
@@ -93,6 +94,7 @@ class GCDDataManager: DataManager {
             do {
                 try avatar.write(to: avatarUrl)
                 //                    avatarResult = .error
+                self?.avatarResult = .success
                 group.leave()
             } catch {
                 self?.avatarResult = .error
@@ -102,6 +104,7 @@ class GCDDataManager: DataManager {
     }
 
     private func perforNameTask(_ group: DispatchGroup, name: String) {
+        applog("name task: \(name)")
         group.enter()
         queue.asyncAfter(deadline: .now() + doubleDelay) { [weak self] in
             guard let nameUrl = self?.nameUrl() else {
@@ -112,6 +115,7 @@ class GCDDataManager: DataManager {
             do {
                 try name.write(to: nameUrl, atomically: true, encoding: .utf8)
 //                self?.nameResult = .error
+                self?.nameResult = .success
                 group.leave()
             } catch {
                 self?.nameResult = .error
@@ -122,6 +126,7 @@ class GCDDataManager: DataManager {
     }
 
     private func perforDescriptionTask(_ group: DispatchGroup, description: String) {
+        applog("description task")
         group.enter()
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
             guard let descUrl = self?.descriptionUrl() else {
@@ -132,6 +137,7 @@ class GCDDataManager: DataManager {
             do {
                 try description.write(to: descUrl, atomically: true, encoding: .utf8)
                 //                    descResult = .error
+                self?.descResult = .success
                 group.leave()
             } catch {
                 self?.descResult = .error

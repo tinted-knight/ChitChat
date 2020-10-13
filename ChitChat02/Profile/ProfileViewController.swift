@@ -28,13 +28,15 @@ class ProfileViewController : UIViewController {
     @IBOutlet weak var buttonEditPicture: UIButton!
     @IBOutlet weak var textUserName: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    private var activeFiled: UIView? = nil
     
     private let picker = UIImagePickerController()
     var profileImage: UIImage?
     
     var state: UIState = .loading
     var avatarWasModified = false
-    var userDataWasModified = false
     
     var repo: SmartDataManager = SmartDataManager(dataManagerType: .gcd)
 
@@ -46,10 +48,6 @@ class ProfileViewController : UIViewController {
         loadUserData()
     }
 
-    @objc private func onKeyboardHide(_ notification: NSNotification) {
-        showSaveControls()
-    }
-    
     private func prepareUi() {
         buttonSave.layer.cornerRadius = 14.0
         buttonSaveOperation.layer.cornerRadius = 14.0
@@ -65,6 +63,8 @@ class ProfileViewController : UIViewController {
         buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
         buttonSaveOperation.backgroundColor = ThemeManager.get().buttonBgColor
         textUserName.textColor = ThemeManager.get().textColor
+        
+        scrollView.isScrollEnabled = false
     }
     
     private func setupActions() {
@@ -73,8 +73,8 @@ class ProfileViewController : UIViewController {
             UITapGestureRecognizer(target: self, action: #selector(onProfilePictureTap)))
 
         buttonUserEdit.addTarget(self, action: #selector(setEditUser(_:)), for: .touchUpInside)
-        textUserName.addTarget(self, action: #selector(nameTextHandler(_:)), for: .editingChanged)
         textUserDescription.delegate = self
+        textUserName.delegate = self
         
         buttonSave.addTarget(self, action: #selector(onSaveViaGcd), for: .touchUpInside)
         buttonSaveOperation.addTarget(self, action: #selector(onSaveViaOperation), for: .touchUpInside)
@@ -84,8 +84,42 @@ class ProfileViewController : UIViewController {
             selector: #selector(onKeyboardHide(_:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardDidShow(_:)),
+            name: UIResponder.keyboardDidShowNotification,
+            object: nil)
     }
     // MARK: -UI Actions
+    @objc private func keyboardDidShow(_ notification: Notification) {
+        scrollView.isScrollEnabled = true
+        let info  = notification.userInfo!
+        let kbSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize!.height, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        var aRect = view.frame
+        aRect.size.height -= kbSize!.height
+        if let activeFiled = activeFiled {
+            if !aRect.contains(activeFiled.frame.origin) {
+                scrollView.scrollRectToVisible(activeFiled.frame, animated: true)
+            }
+        }
+    }
+    
+    @objc private func onKeyboardHide(_ notification: NSNotification) {
+        let info  = notification.userInfo!
+        let kbSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -kbSize!.height, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        view.endEditing(true)
+        scrollView.isScrollEnabled = false
+
+        checkSaveControls()
+    }
+    
     @objc private func onSaveViaGcd() {
         saveUserData(with: .gcd)
     }
@@ -112,17 +146,23 @@ class ProfileViewController : UIViewController {
 
 }
 // MARK: -TextField change handler
-extension ProfileViewController: UITextViewDelegate {
-    @objc private func nameTextHandler(_ textField: UITextField) {
-        compare(textField.text, with: repo.user.name)
+extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeFiled = textField
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        compare(textView.text, with: repo.user.description)
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeFiled = nil
+        checkSaveControls()
+    }
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        activeFiled = textView
     }
     
-    private func compare(_ text: String?, with source: String) {
-        userDataWasModified = text != source
+    func textViewDidEndEditing(_ textView: UITextView) {
+        activeFiled = nil
+        checkSaveControls()
     }
 }
 // MARK: -DataManagerDelegate
@@ -207,7 +247,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         profileImage = image
         profileImageView.image = profileImage
         avatarWasModified = true
-        showSaveControls()
+        checkSaveControls()
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

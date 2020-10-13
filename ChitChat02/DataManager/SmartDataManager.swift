@@ -16,6 +16,15 @@ class SmartDataManager {
 
     private var dataManagerType: DataManagerType
     
+    private var dataManager: DataManager {
+        switch dataManagerType {
+            case .gcd:
+                return gcdDataManager
+            case .operation:
+                return operationDataManager
+        }
+    }
+
     var delegate: DataManagerDelegate? = nil
     
     var user: UserModel = newUser
@@ -29,6 +38,7 @@ class SmartDataManager {
     }
     
     func save(user model: UserModel, avatar: Data? = nil, with type: DataManagerType? = nil) {
+        applog("smart will save \(model)")
         if let type = type { self.dataManagerType = type }
         
         lastSavedUser = model
@@ -59,13 +69,15 @@ class SmartDataManager {
         save(user: user, avatar: lastSavedAvatar)
     }
     
-    private var dataManager: DataManager {
-        switch dataManagerType {
-            case .gcd:
-                return gcdDataManager
-            case .operation:
-                return operationDataManager
-        }
+    func isValid(name: String?, description: String) -> Bool {
+        guard let name = name else { return false }
+        guard !name.isEmpty, !description.isEmpty else { return false }
+        return true
+    }
+    
+    func wasModified(name: String?, description: String) -> Bool {
+        guard isValid(name: name, description: description) else { return false }
+        return name != user.name || description != user.description
     }
 }
 

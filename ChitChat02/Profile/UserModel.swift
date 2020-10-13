@@ -13,7 +13,7 @@ struct UserModel {
     let description: String
     var avatar: URL? = nil
 }
-let newUser = UserModel(name: "new user name", description: "new user desc")
+let newUser = UserModel(name: "", description: "")
 
 let fakeUser = UserModel(
     name: "Timur Tharkahov",
