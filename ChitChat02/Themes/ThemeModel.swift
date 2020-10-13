@@ -143,7 +143,7 @@ let fakeThemeData = [
         onlineBgColor: UIColor.yellow.withAlphaComponent(0.2),
         historyBgColor: .white,
         tintColor: .systemBlue,
-        buttonBgColor: .lightGray
+        buttonBgColor: UIColor(displayP3Red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
     ),
     ThemeModel(
         name: "Yellow",

@@ -64,6 +64,7 @@ class ProfileViewController : UIViewController {
         view.backgroundColor = ThemeManager.get().backgroundColor
         buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
         buttonSaveOperation.backgroundColor = ThemeManager.get().buttonBgColor
+        textUserName.textColor = ThemeManager.get().textColor
     }
     
     private func setupActions() {
