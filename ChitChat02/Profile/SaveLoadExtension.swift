@@ -65,14 +65,28 @@ extension ProfileViewController {
         state = .hasLoaded
         textUserName.text = repo.user.name
         textUserDescription.text = repo.user.description
-        if let avatarUrl = repo.user.avatar,
-            let image = UIImage(contentsOfFile: avatarUrl.path) {
-            profileImage = image
+        if let avatarUrl = repo.user.avatar {
+            DispatchQueue.global().async { [weak self] in
+                do {
+                    let data = try Data(contentsOf: avatarUrl)
+                    let image = UIImage(data: data)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.profileImage = image
+                        self?.profileImageView.image = self?.profileImage
+                        self?.showLoadingControls(false)
+                    }
+                } catch {
+                    applog("cannot convert avatar's Data to UIImage")
+                    DispatchQueue.main.async { [weak self] in
+                        self?.showLoadingControls(false)
+                    }
+                }
+            }
+        } else {
+            showLoadingControls(false)
         }
-        profileImageView.image = profileImage
-        showLoadingControls(false)
     }
-    
+
     func showLoadingControls(_ isLoading: Bool) {
         if isLoading {
             activityIndicator.startAnimating()
