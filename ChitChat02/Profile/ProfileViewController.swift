@@ -12,7 +12,6 @@ import UIKit
 class ProfileViewController : UIViewController {
     
     @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var buttonEdit: UIImageView!
     @IBOutlet weak var labelUserName: UILabel!
     @IBOutlet weak var textUserDescription: UITextView!
     @IBOutlet weak var buttonSave: UIButton!
@@ -35,37 +34,18 @@ mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odio
     
     private let picker = UIImagePickerController()
 
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-//        applog("\(buttonEdit.frame)")
-        // При попытке обращение к buttonEdit приложение падает
-        // с сообщением о том, что невозможно `расколупать` Optional
-        //
-        // В интернетах пишут, что `coder` нужен при работе с `iOS serialization APIs`
-        // Судя по всему, в момент вызова просто ещё ничего нет, поэтому и ссылка
-        // на кнопку `nil`
-    }
-    
     override func viewDidLoad() {
-//        applog("ProfileViewController::\(#function)")
-//        applog("buttonEdit.frame: \(buttonEdit.frame)")
-
         prepareUi()
         populateUi()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-//        applog("ProfileViewController::\(#function)")
-//        applog("buttonEdit.frame: \(buttonEdit.frame)")
-        // frame отличается, потому что здесь размер view
-        // пересчитан с учётом констрейнтов,
-        // расположения и размера родительских и соседних view
+        
+        view.backgroundColor = ThemeManager.get().backgroundColor
+        buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
     }
     
     private func prepareUi() {
         buttonSave.layer.cornerRadius = 14.0
-        
-        profilePicture.layer.cornerRadius = profilePicture.bounds.height / 2
+
+        profilePicture.layer.cornerRadius = view.frame.width / 4
         profilePicture.layer.masksToBounds = true
         
         profilePicture.isUserInteractionEnabled = true

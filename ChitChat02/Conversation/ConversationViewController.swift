@@ -21,8 +21,9 @@ class ConversationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         prepareUi()
+        applyTheme()
     }
     
     private func prepareUi() {
@@ -33,6 +34,10 @@ class ConversationViewController: UIViewController {
         messages.delegate = self
         messages.dataSource = self
         messages.transform = CGAffineTransform(scaleX: 1, y: -1)
+    }
+    
+    private func applyTheme() {
+        view.backgroundColor = ThemeManager.get().backgroundColor
     }
 }
 

@@ -42,6 +42,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         lifecycleLogs("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
         currentState = .Inactive
+        
+        let prefs = UserDefaults.standard
+        if let theme = prefs.integer(forKey: ThemeManager.key) as Int? {
+            applog("prefs not empty: \(theme)")
+        } else {
+            applog("prefs empty, looks like first run")
+            prefs.set(Theme.classic.rawValue, forKey: ThemeManager.key)
+        }
+        
         return true
     }
     

@@ -17,14 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="240" image="Profile temp" translatesAutoresizingMaskIntoConstraints="NO" id="ulK-2g-l7I">
-                                <rect key="frame" x="67.5" y="124" width="240" height="240"/>
+                                <rect key="frame" x="94" y="124" width="187.5" height="187.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="9eg-Ph-RaP"/>
-                                    <constraint firstAttribute="width" constant="240" id="BAu-an-yBz"/>
+                                    <constraint firstAttribute="width" secondItem="ulK-2g-l7I" secondAttribute="height" multiplier="1:1" id="aEl-e9-rey"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Od3-Bg-gM0">
-                                <rect key="frame" x="131.5" y="396" width="112" height="29"/>
+                                <rect key="frame" x="131.5" y="343.5" width="112" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -43,17 +42,16 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIq-bK-iqF">
-                                <rect key="frame" x="277.5" y="334" width="30" height="30"/>
+                                <rect key="frame" x="251.5" y="281.5" width="30" height="30"/>
                                 <state key="normal" title="Edit"/>
                                 <connections>
                                     <action selector="onEditButtonTap:" destination="3yT-PA-3m6" eventType="touchUpInside" id="qL0-ap-dRI"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="Profile description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mgL-XO-LVl">
-                                <rect key="frame" x="16" y="457" width="343" height="104"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="Profile description" translatesAutoresizingMaskIntoConstraints="NO" id="mgL-XO-LVl">
+                                <rect key="frame" x="16" y="404.5" width="343" height="156.5"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <navigationBar contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q9m-3L-y8h">
@@ -73,6 +71,7 @@
                         <constraints>
                             <constraint firstItem="Q9m-3L-y8h" firstAttribute="top" secondItem="vCj-Ah-e7a" secondAttribute="top" id="ACH-t2-jqD"/>
                             <constraint firstItem="3Bg-On-FVf" firstAttribute="top" secondItem="mgL-XO-LVl" secondAttribute="bottom" constant="16" id="Fod-Zd-J84"/>
+                            <constraint firstItem="ulK-2g-l7I" firstAttribute="width" secondItem="Bpe-hX-Zo5" secondAttribute="width" multiplier="0.5" id="Hlx-JJ-VTs"/>
                             <constraint firstItem="Q9m-3L-y8h" firstAttribute="trailing" secondItem="vCj-Ah-e7a" secondAttribute="trailing" id="K7Q-SJ-pfq"/>
                             <constraint firstItem="mgL-XO-LVl" firstAttribute="leading" secondItem="vCj-Ah-e7a" secondAttribute="leading" constant="16" id="Nvu-YO-xc9"/>
                             <constraint firstItem="vCj-Ah-e7a" firstAttribute="trailing" secondItem="mgL-XO-LVl" secondAttribute="trailing" constant="16" id="Nxg-fx-NCb"/>
@@ -94,7 +93,6 @@
                         <viewLayoutGuide key="safeArea" id="vCj-Ah-e7a"/>
                     </view>
                     <connections>
-                        <outlet property="buttonEdit" destination="ulK-2g-l7I" id="3w9-OH-V9Q"/>
                         <outlet property="buttonSave" destination="3Bg-On-FVf" id="q8p-UW-Gc2"/>
                         <outlet property="labelUserName" destination="Od3-Bg-gM0" id="sZC-xN-dvt"/>
                         <outlet property="profilePicture" destination="ulK-2g-l7I" id="8M3-H2-st5"/>
@@ -165,7 +163,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cdH-6X-exv">
-                                <rect key="frame" x="0.0" y="96" width="375" height="522"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
@@ -178,7 +176,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zIV-g2-kHC"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Martha Craig" id="Tk8-Mu-yrd"/>
+                    <navigationItem key="navigationItem" title="Martha Craig" largeTitleDisplayMode="never" id="Tk8-Mu-yrd"/>
                     <connections>
                         <outlet property="messages" destination="cdH-6X-exv" id="ciQ-ev-QJD"/>
                     </connections>
