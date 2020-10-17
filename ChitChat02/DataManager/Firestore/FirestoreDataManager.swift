@@ -55,7 +55,7 @@ class FirestoreDataManager {
                 }) ?? []
 
             channels.forEach { (channel) in
-                print("id = \(channel.indentifier), name = \(channel.name)")
+                print("id = \(channel.indentifier), name = \(channel.name), lastMessage = \(channel.lastMessage)")
             }
             
             self?.delegate?.onData(channels)

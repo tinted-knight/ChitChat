@@ -43,13 +43,10 @@ class ConversationCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     override func prepareForReuse() {
@@ -62,24 +59,19 @@ class ConversationCell: UITableViewCell {
 
 extension ConversationCell: ConfigurableView {
     
-    func configure(with model: ConversationCellModel) {
+    func configure(with model: Channel) {
         nameView.text = model.name
 
-        reflectOnlineStatus(with: model.isOnline)
-
-        if model.message.isEmpty {
-            renderNoLastMessage()
-        } else {
+        if let lastMessage = model.lastMessage, !lastMessage.isEmpty {
             renderHasLastMessage(with: model)
+        } else {
+            renderNoLastMessage()
         }
     }
     
-    private func renderHasLastMessage(with model: ConversationCellModel) {
-        messageView.text = model.message
-        if model.hasUnreadMessages {
-            messageView.font = boldMessage
-        }
-        displayDateTime(with: model.date)
+    private func renderHasLastMessage(with model: Channel) {
+        messageView.text = model.lastMessage ?? "!!! no last message"
+        displayDateTime(with: model.lastActivity)
     }
     
     private func renderNoLastMessage() {
@@ -90,13 +82,11 @@ extension ConversationCell: ConfigurableView {
         dateView.isHidden = true
     }
     
-    private func reflectOnlineStatus(with isOnline: Bool) {
-        if isOnline {
-            backgroundColor = ThemeManager.get().onlineBgColor
+    private func displayDateTime(with date: Date?) {
+        guard let date = date else {
+            dateView.isHidden = true
+            return
         }
-    }
-    
-    private func displayDateTime(with date: Date) {
         if calendar.startOfDay(for: date) != calendar.startOfDay(for: Date()) {
             formatter.dateFormat = "dd MMM"
         } else {

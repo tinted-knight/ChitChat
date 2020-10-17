@@ -41,7 +41,6 @@
 		39ED61152521F76E006D8E0A /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61132521F76E006D8E0A /* ConversationCell.swift */; };
 		39ED61162521F76E006D8E0A /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED61142521F76E006D8E0A /* ConversationCell.xib */; };
 		39ED61182521F7AE006D8E0A /* ConversationCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61172521F7AD006D8E0A /* ConversationCellModel.swift */; };
-		39ED611A25220D34006D8E0A /* fake_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED611925220D34006D8E0A /* fake_data.swift */; };
 		39ED611F25221658006D8E0A /* IncomeMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED611D25221658006D8E0A /* IncomeMessageCell.xib */; };
 		39ED612125221684006D8E0A /* MessageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED612025221684006D8E0A /* MessageCellModel.swift */; };
 		39ED6125252219BA006D8E0A /* OutcomeMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED6123252219BA006D8E0A /* OutcomeMessageCell.xib */; };
@@ -85,7 +84,6 @@
 		39ED61132521F76E006D8E0A /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		39ED61142521F76E006D8E0A /* ConversationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
 		39ED61172521F7AD006D8E0A /* ConversationCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCellModel.swift; sourceTree = "<group>"; };
-		39ED611925220D34006D8E0A /* fake_data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fake_data.swift; sourceTree = "<group>"; };
 		39ED611D25221658006D8E0A /* IncomeMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomeMessageCell.xib; sourceTree = "<group>"; };
 		39ED612025221684006D8E0A /* MessageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
 		39ED6123252219BA006D8E0A /* OutcomeMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutcomeMessageCell.xib; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 		39E4D49D2523478A00BF6BC4 /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				39ED611925220D34006D8E0A /* fake_data.swift */,
 				39ED612625223323006D8E0A /* fake_conversation.swift */,
 				39E4D49E252347AD00BF6BC4 /* fake_random_date.swift */,
 			);
@@ -422,7 +419,6 @@
 				394F8674250E518A00B703B3 /* AppDelegate.swift in Sources */,
 				39ABED452534F99100EDCA7C /* LoadCompletionOperation.swift in Sources */,
 				39BDCFC82527A37A00ECECCC /* ThemeManager.swift in Sources */,
-				39ED611A25220D34006D8E0A /* fake_data.swift in Sources */,
 				39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */,
 				39ED61182521F7AE006D8E0A /* ConversationCellModel.swift in Sources */,
 				39ABED432534F83400EDCA7C /* SaveCompletionOperation.swift in Sources */,

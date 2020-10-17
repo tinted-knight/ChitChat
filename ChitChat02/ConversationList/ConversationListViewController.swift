@@ -27,12 +27,8 @@ class ConversationListViewController: UIViewController {
     private let sectionHistoryId = 1
     
     private lazy var simpleSectionHeader: UIView = UILabel()
-    
-    private let onlineString = "Online"
-    private let historyString = "History"
-    
-    private var onlineData: [ConversationCellModel] = []
-    private var historyData: [ConversationCellModel] = []
+
+    var channels: [Channel] = []
     
     private var currentTheme: Theme = .black
     private let themeDataManager = ThemeDataManager()
@@ -45,10 +41,7 @@ class ConversationListViewController: UIViewController {
         currentTheme = loadAppTheme()
         
         prepareUi()
-        prepareData(with: fakeChatList)
-        
-        firestore.delegate = self
-        firestore.load()
+        setupFirestore()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,9 +79,9 @@ class ConversationListViewController: UIViewController {
             action: #selector(settingsOnTap))
     }
     
-    private func prepareData(with values: [[ConversationCellModel]]) {
-        onlineData = values[0]
-        historyData = values[1].filter {!$0.message.isEmpty}
+    private func setupFirestore() {
+        firestore.delegate = self
+        firestore.load()
     }
 }
 // MARK: ThemesPickerDelegate and stuff
@@ -180,7 +173,7 @@ extension ConversationListViewController: UITableViewDataSource {
                 return UITableViewCell()
         }
         
-        cell.configure(with: fakeChatList[0][indexPath.row])
+        cell.configure(with: channels[indexPath.row])
         return cell
     }
     
@@ -211,13 +204,13 @@ extension ConversationListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fakeChatList[0].count
+        return channels.count
     }
 }
 // MARK: UITableViewDelegate
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        openConversation(with: fakeChatList[0][indexPath.row].name)
+        openConversation(with: channels[indexPath.row].name)
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
