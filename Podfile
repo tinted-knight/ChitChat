@@ -6,5 +6,6 @@ target 'ChitChat02' do
   use_frameworks!
 
   # Pods for ChitChat02
-  pod 'SwiftLint'	
+  pod 'SwiftLint'
+  pod 'Firebase/Firestore'
 end

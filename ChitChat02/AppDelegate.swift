@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 let LYFECYCLE_LOG_ENABLED = false
 let APP_LOG_ENABLED = true
@@ -42,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         lifecycleLogs("Application moved from '\(currentState)' to '\(AppState.Inactive)': \(#function)")
         currentState = .Inactive
+        
+        FirebaseApp.configure()
         
         let prefs = UserDefaults.standard
         if (prefs.integer(forKey: ThemeManager.key) as Int?) == nil {
