@@ -16,6 +16,7 @@ protocol ChannelsManager {
 
 protocol MessagesManager {
     func loadMessageList(onData: @escaping ([Message]) -> Void)
+    func add(message: String)
 }
 
 struct Channel {
@@ -32,8 +33,8 @@ struct Message {
     let senderName: String
 }
 
-let fakeUserName = "Timur"
-let fakeSenderId = "sender-id-42"
+let mySenderName = "Timur"
+let mySenderId = "sender-id-42"
 
 class FirestoreDataManager {
     internal lazy var db = Firestore.firestore()
@@ -100,8 +101,7 @@ class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
     
     func loadMessageList(onData: @escaping ([Message]) -> Void) {
         applog("\(#function) from \(channel.name)")
-        let messages = db.collection("channels").document(channel.indentifier).collection("messages")
-        messages.addSnapshotListener { (snapshot, error) in
+        channelMessages.addSnapshotListener { (snapshot, error) in
             let messages: [Message] = snapshot?.documents
                 .map({ (document) in
                     let content = document.data()["content"] as? String ?? "no content"
@@ -119,7 +119,25 @@ class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
             onData(messages)
         }
     }
-    func add(message: Message, to channel: Channel) {
-        
+
+    func add(message: String) {
+        let newMessageData: [String: Any] = [
+            "content": message,
+            "created": Timestamp(date: Date()),
+            "senderName": mySenderName,
+            "senderId": mySenderId
+        ]
+        channelMessages.addDocument(data: newMessageData) { (error) in
+            if let error = error {
+                Log.fire("adding message error: \(error.localizedDescription)")
+                return
+            } else {
+                Log.fire("adding message success")
+            }
+        }
+    }
+    
+    private var channelMessages: CollectionReference {
+        return db.collection("channels").document(channel.indentifier).collection("messages")
     }
 }

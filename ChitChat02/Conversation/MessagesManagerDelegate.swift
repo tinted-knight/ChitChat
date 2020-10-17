@@ -24,7 +24,10 @@ extension ConversationViewController {
                     }
                     .map { (message) in
                         let senderId = message.senderId
-                        let direction: MessageDirection = senderId == "42" ? .outcome : .income
+                        let direction: MessageDirection =
+                            senderId == mySenderId
+                                ? .outcome
+                                : .income
 
                         return MessageCellModel(
                             text: message.content,
@@ -50,7 +53,7 @@ extension ConversationViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] (_) in
             guard let textField = alert.textFields?[0], let text = textField.text else { return }
             if !text.isEmpty {
-                Log.fire("new message: \(text)")
+                self?.messageManager?.add(message: text)
             }
         }))
 
