@@ -48,6 +48,7 @@ class ConversationListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = ThemeManager.get().backgroundColor
+        super.viewWillAppear(animated)
     }
     
     private func prepareUi() {
@@ -85,7 +86,7 @@ class ConversationListViewController: UIViewController {
         historyData = values[1].filter {!$0.message.isEmpty}
     }
 }
-// MARK: -ThemesPickerDelegate and stuff
+// MARK: ThemesPickerDelegate and stuff
 extension ConversationListViewController: ThemesPickerDelegate {
     func theme(picked value: Theme) {
         //
@@ -110,10 +111,10 @@ extension ConversationListViewController: ThemesPickerDelegate {
         navigationController?.navigationBar.tintColor = ThemeManager.get().tintColor
         // inspite of setting NavBarStyle in ThemeManager need to duplicate here
         switch ThemeManager.get().brightness {
-            case .dark:
-                navigationController?.navigationBar.barStyle = .black
-            case .light:
-                navigationController?.navigationBar.barStyle = .default
+        case .dark:
+            navigationController?.navigationBar.barStyle = .black
+        case .light:
+            navigationController?.navigationBar.barStyle = .default
         }
     }
     
@@ -134,7 +135,7 @@ extension ConversationListViewController: ThemesPickerDelegate {
         return Theme(rawValue: prefs.integer(forKey: ThemeManager.key)) ?? Theme.classic
     }
 }
-//MARK: -UI Actions
+// MARK: UI Actions
 extension ConversationListViewController {
     @objc private func profileOnTap() {
         performSegue(withIdentifier: segueProfile, sender: nil)
@@ -166,7 +167,7 @@ extension ConversationListViewController {
         }
     }
 }
-// MARK: -UITableViewDataSource
+// MARK: UITableViewDataSource
 extension ConversationListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
@@ -174,20 +175,12 @@ extension ConversationListViewController: UITableViewDataSource {
                 return UITableViewCell()
         }
         
-        switch TableSections.init(rawValue: indexPath.section) {
-            case .online:
-                cell.configure(with: onlineData[indexPath.row])
-            case .history:
-                cell.configure(with: historyData[indexPath.row])
-            default:
-                return UITableViewCell()
-        }
-        
+        cell.configure(with: fakeChatList[0][indexPath.row])
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return fakeChatList.count
+        return 1
     }
     
     private func simpleHeader(_ text: String) -> UIView {
@@ -197,46 +190,29 @@ extension ConversationListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch TableSections.init(rawValue: section) {
-            case .online:
-                return buildSectionHeader(tableView, with: onlineString)
-            case .history:
-                return buildSectionHeader(tableView, with: historyString)
-            case .none:
-                return UIView()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: headerReuseId) as? HeaderCell else {
+            return simpleHeader("Channels")
         }
+        cell.configure(with: "Channels")
+        return cell
     }
     
     private func buildSectionHeader(_ tableView: UITableView, with text: String) -> UIView {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: headerReuseId) as? HeaderCell else {
-            return simpleHeader(text)
+            return simpleHeader("Channels")
         }
-        cell.configure(with: text)
+        cell.configure(with: "Channels")
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch TableSections.init(rawValue: section) {
-            case .online:
-                return onlineData.count
-            case .history:
-                return historyData.count
-            default:
-                return 0
-        }
+        return fakeChatList[0].count
     }
 }
-// MARK: -UITableViewDelegate
+// MARK: UITableViewDelegate
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch TableSections.init(rawValue: indexPath.section) {
-            case .online:
-                openConversation(with: onlineData[indexPath.row].name)
-            case .history:
-                openConversation(with: historyData[indexPath.row].name)
-            default:
-                applog("Something has gone wrong")
-        }
+        openConversation(with: fakeChatList[0][indexPath.row].name)
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
@@ -244,7 +220,7 @@ extension ConversationListViewController: UITableViewDelegate {
         performSegue(withIdentifier: segueConversation, sender: contactName)
     }
 }
-// MARK: -Navigation helpers
+// MARK: Navigation helpers
 extension ConversationListViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? ConversationViewController,

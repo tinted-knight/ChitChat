@@ -44,12 +44,12 @@ extension MessageCell: ConfigurableView {
         message.text = model.text
         date.text = formatDateTime(with: model.date)
         switch model.direction {
-            case .income:
-                background.backgroundColor = ThemeManager.get().incomeBgColor
-                message.textColor = ThemeManager.get().incomeTextColor
-            case .outcome:
-                background.backgroundColor = ThemeManager.get().outcomeBgColor
-                message.textColor = ThemeManager.get().outcomeTextColor
+        case .income:
+            background.backgroundColor = ThemeManager.get().incomeBgColor
+            message.textColor = ThemeManager.get().incomeTextColor
+        case .outcome:
+            background.backgroundColor = ThemeManager.get().outcomeBgColor
+            message.textColor = ThemeManager.get().outcomeTextColor
         }
     }
 }

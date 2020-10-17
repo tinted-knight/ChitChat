@@ -19,7 +19,7 @@ class OperationDataManager: DataManager {
     func save(name: String?, description: String?, avatar: Data?) {
         applog("operation save")
         if let name = name {
-            nameOperation  = saveStringOperation(name, to: nameUrl())
+            nameOperation = saveStringOperation(name, to: nameUrl())
         }
         
         if let description = description {
@@ -42,10 +42,10 @@ class OperationDataManager: DataManager {
                 return
             }
             switch result {
-                case .error(let value):
-                    self?.delegate?.onSaveError(value)
-                case .success:
-                    self?.delegate?.onSaved()
+            case .error(let value):
+                self?.delegate?.onSaveError(value)
+            case .success:
+                self?.delegate?.onSaved()
             }
         }
         
@@ -86,10 +86,10 @@ class OperationDataManager: DataManager {
                 return
             }
             switch result {
-                case .error(let value):
-                    self?.delegate?.onLoadError(value)
-                case .success(let value):
-                    self?.delegate?.onLoaded(value)
+            case .error(let value):
+                self?.delegate?.onLoadError(value)
+            case .success(let value):
+                self?.delegate?.onLoaded(value)
             }
         }
         loadCompletion.addDependency(nameOp)

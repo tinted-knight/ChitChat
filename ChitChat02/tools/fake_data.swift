@@ -11,8 +11,8 @@ import Foundation
 private func hasUnread() -> Bool {
     return Bool.random()
 }
-
-let fakeChatList = [[ // MARK: -Online
+// MARK: Online
+let fakeChatList = [[
     // today, has unread
     ConversationCellModel(
         name: "Ostap Bender",
@@ -87,8 +87,8 @@ let fakeChatList = [[ // MARK: -Online
         date: fakeDate(),
         isOnline: true,
         hasUnreadMessages: hasUnread()
-    ),
-], [ // MARK: -History
+    )
+], [ // MARK: History
     // today, has unread
     ConversationCellModel(
         name: "Artem Rozanov",
@@ -163,6 +163,6 @@ let fakeChatList = [[ // MARK: -Online
         date: fakeDate(),
         isOnline: false,
         hasUnreadMessages: hasUnread()
-    ),
+    )
     ]
 ]

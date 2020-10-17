@@ -13,7 +13,7 @@ internal enum SaveOperationResult {
     case error(_ value: String)
 }
 
-class ResultOperation: Operation{
+class ResultOperation: Operation {
     var result: SaveOperationResult?
     override func main() {
         result = .success

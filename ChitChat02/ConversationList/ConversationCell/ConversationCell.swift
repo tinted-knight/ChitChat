@@ -55,6 +55,7 @@ class ConversationCell: UITableViewCell {
     override func prepareForReuse() {
         backgroundColor = ThemeManager.get().historyBgColor
         messageView.font = defaultFont
+        super.prepareForReuse()
     }
     
 }

@@ -67,10 +67,10 @@ extension ConversationViewController: UITableViewDataSource {
     
     private func cellReuseId(for direction: MessageDirection) -> String {
         switch direction {
-            case .income:
-                return incomeCellId
-            case .outcome:
-                return outcomeCellId
+        case .income:
+            return incomeCellId
+        case .outcome:
+            return outcomeCellId
         }
     }
 }

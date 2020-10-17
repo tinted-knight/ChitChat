@@ -45,26 +45,26 @@ class SaveCompletionOperation: Operation {
         }
         
         switch nameRes {
-            case .error(let value):
-                result = .error(value)
-                return
-            case .success:
-                result = .success
+        case .error(let value):
+            result = .error(value)
+            return
+        case .success:
+            result = .success
         }
         
         switch descRes {
-            case .error(let value):
-                result = .error(value)
-                return
-            case .success:
-                result = .success
+        case .error(let value):
+            result = .error(value)
+            return
+        case .success:
+            result = .success
         }
         
         switch avatarRes {
-            case .error(let value):
-                result = .error(value)
-            case .success:
-                result = .success
+        case .error(let value):
+            result = .error(value)
+        case .success:
+            result = .success
         }
     }
 }

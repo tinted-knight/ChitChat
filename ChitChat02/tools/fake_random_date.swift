@@ -9,5 +9,5 @@
 import Foundation
 
 func fakeDate() -> Date {
-    return Date(timeIntervalSinceNow: -Double.random(in: 1...60) * Double.random(in: 30...60) * Double.random(in: 1...3) * 26);
+    return Date(timeIntervalSinceNow: -Double.random(in: 1...60) * Double.random(in: 30...60) * Double.random(in: 1...3) * 26)
 }

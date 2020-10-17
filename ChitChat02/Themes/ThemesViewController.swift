@@ -23,7 +23,8 @@ protocol ThemesPickerDelegate {
 class ThemesViewController: UIViewController {
     
     static func instance() -> ThemesViewController? {
-        let storyboard = UIStoryboard(name: String.init(describing: self), bundle: nil)
+//        let storyboard = UIStoryboard(name: String.init(describing: self), bundle: nil)
+        let storyboard = UIStoryboard(name: "ThemesViewController", bundle: nil)
         return storyboard.instantiateInitialViewController() as? ThemesViewController
     }
     
@@ -46,12 +47,12 @@ class ThemesViewController: UIViewController {
     var selectedTheme: Theme = .classic
     private var selectedImageView: UIImageView? {
         switch selectedTheme {
-            case .classic:
-                return imageRed
-            case .yellow:
-                return imageYellow
-            case .black:
-                return imageGreen
+        case .classic:
+            return imageRed
+        case .yellow:
+            return imageYellow
+        case .black:
+            return imageGreen
         }
     }
 

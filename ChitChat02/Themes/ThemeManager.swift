@@ -29,10 +29,10 @@ class ThemeManager {
         UIView.appearance().tintColor = themeData.tintColor
         UIBarButtonItem.appearance().tintColor = themeData.tintColor
         switch themeData.brightness {
-            case .light:
-                UINavigationBar.appearance().barStyle = .default
-            case .dark:
-                UINavigationBar.appearance().barStyle = .black
+        case .light:
+            UINavigationBar.appearance().barStyle = .default
+        case .dark:
+            UINavigationBar.appearance().barStyle = .black
         }
     }
     

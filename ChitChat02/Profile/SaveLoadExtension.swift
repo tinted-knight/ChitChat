@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-// MARK: -Edit mode, save/load user data
+// MARK: Edit mode, save/load user data
 extension ProfileViewController {
     func saveUserData(with dataManagerType: DataManagerType) {
         let name = textUserName.text ?? repo.user.name
@@ -143,10 +143,10 @@ extension ProfileViewController {
 
     func showRetryAlert(_ message: String, onOk: (() -> Void)? = nil, onRetry: @escaping () -> Void) {
         let alertView = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Ok", style: .default) { action in
+        let doneAction = UIAlertAction(title: "Ok", style: .default) { _ in
             onOk?()
         }
-        let retryAction = UIAlertAction(title: "Повторить", style: .default) { action in
+        let retryAction = UIAlertAction(title: "Повторить", style: .default) { _ in
             onRetry()
         }
         alertView.addAction(doneAction)

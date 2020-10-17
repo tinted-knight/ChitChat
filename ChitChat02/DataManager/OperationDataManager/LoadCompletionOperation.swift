@@ -34,19 +34,19 @@ class LoadCompletionOperation: Operation {
         }
 
         switch nameRes {
-            case .success(let value):
-                userName = value
-            case .error(let value):
-                result = .error(value)
-                return
+        case .success(let value):
+            userName = value
+        case .error(let value):
+            result = .error(value)
+            return
         }
 
         switch descRes {
-            case .success(let value):
-                userDesc = value
-            case .error(let value):
-                result = .error(value)
-                return
+        case .success(let value):
+            userDesc = value
+        case .error(let value):
+            result = .error(value)
+            return
         }
 
         if let name = userName, let desc = userDesc {
