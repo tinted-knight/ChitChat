@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,9 @@
 		394F867B250E518A00B703B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F8679250E518A00B703B3 /* Main.storyboard */; };
 		394F867D250E518A00B703B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 394F867C250E518A00B703B3 /* Assets.xcassets */; };
 		394F8680250E518A00B703B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F867E250E518A00B703B3 /* LaunchScreen.storyboard */; };
+		3958B3B7253AFDF500801E6D /* FirestoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3B6253AFDF500801E6D /* FirestoreDataManager.swift */; };
+		3958B3B9253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */; };
+		3958B3BB253B00E700801E6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3958B3BA253B00E700801E6D /* GoogleService-Info.plist */; };
 		396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */; };
 		3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3994BFB325248EB6001AB5E7 /* MessageCell.swift */; };
 		3995893025234FBB003C62C8 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */; };
@@ -53,6 +56,9 @@
 		394F867F250E518A00B703B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		394F8681250E518A00B703B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		394F8688250E659C00B703B3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3958B3B6253AFDF500801E6D /* FirestoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDataManager.swift; sourceTree = "<group>"; };
+		3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsFirestoreDelegate.swift; sourceTree = "<group>"; };
+		3958B3BA253B00E700801E6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3994BFB325248EB6001AB5E7 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
@@ -112,6 +118,7 @@
 		394F8667250E518A00B703B3 = {
 			isa = PBXGroup;
 			children = (
+				3958B3BA253B00E700801E6D /* GoogleService-Info.plist */,
 				394F8688250E659C00B703B3 /* README.md */,
 				394F8672250E518A00B703B3 /* ChitChat02 */,
 				394F8671250E518A00B703B3 /* Products */,
@@ -147,6 +154,14 @@
 			path = ChitChat02;
 			sourceTree = "<group>";
 		};
+		3958B3B5253AFDE200801E6D /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				3958B3B6253AFDF500801E6D /* FirestoreDataManager.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
 		396F5EA32517AF1F0070F2BD /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +183,7 @@
 		39B7FDC02530AFCA00B5F280 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				3958B3B5253AFDE200801E6D /* Firestore */,
 				39DE12C02531C1B20068C875 /* OperationDataManager */,
 				39B7FDBE25306CB800B5F280 /* Repo.swift */,
 				39B7FDC32530B00200B5F280 /* GCDDataManager.swift */,
@@ -215,6 +231,7 @@
 			children = (
 				39ED61122521F734006D8E0A /* ConversationCell */,
 				39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */,
+				3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */,
 			);
 			path = ConversationList;
 			sourceTree = "<group>";
@@ -328,6 +345,7 @@
 				39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */,
 				394F8680250E518A00B703B3 /* LaunchScreen.storyboard in Resources */,
 				3995893025234FBB003C62C8 /* Comfortaa-Light.ttf in Resources */,
+				3958B3BB253B00E700801E6D /* GoogleService-Info.plist in Resources */,
 				394F867D250E518A00B703B3 /* Assets.xcassets in Resources */,
 				394F867B250E518A00B703B3 /* Main.storyboard in Resources */,
 			);
@@ -411,6 +429,7 @@
 				39ED612725223323006D8E0A /* fake_conversation.swift in Sources */,
 				39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */,
 				3995893325239D50003C62C8 /* HeaderCell.swift in Sources */,
+				3958B3B7253AFDF500801E6D /* FirestoreDataManager.swift in Sources */,
 				39B7FDC42530B00200B5F280 /* GCDDataManager.swift in Sources */,
 				39B7FDBF25306CB800B5F280 /* Repo.swift in Sources */,
 				39BDCFBF252767B100ECECCC /* ThemeModel.swift in Sources */,
@@ -422,6 +441,7 @@
 				39E4D49F252347AD00BF6BC4 /* fake_random_date.swift in Sources */,
 				39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */,
 				3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */,
+				3958B3B9253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
 				39ED61152521F76E006D8E0A /* ConversationCell.swift in Sources */,
 				39B7FDC22530AFF100B5F280 /* OperationDataManager.swift in Sources */,
@@ -578,7 +598,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.timun.ChitChat02;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.Tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -600,7 +620,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.timun.ChitChat02;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.Tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

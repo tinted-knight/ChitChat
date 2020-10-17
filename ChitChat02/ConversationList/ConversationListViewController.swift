@@ -37,6 +37,8 @@ class ConversationListViewController: UIViewController {
     private var currentTheme: Theme = .black
     private let themeDataManager = ThemeDataManager()
     
+    private let firestore = FirestoreDataManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +46,8 @@ class ConversationListViewController: UIViewController {
         
         prepareUi()
         prepareData(with: fakeChatList)
+        
+        firestore.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
