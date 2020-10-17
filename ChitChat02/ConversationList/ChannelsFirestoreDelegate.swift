@@ -28,7 +28,7 @@ extension ConversationListViewController {
         let alert = UIAlertController(title: "New channel", message: "Input channel name", preferredStyle: .alert)
 
         alert.addTextField { (textField) in
-            textField.text = "new channel"
+            textField.text = ""
         }
 
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] (_) in
