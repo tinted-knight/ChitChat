@@ -34,4 +34,17 @@ extension UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    func retryAlert(title: String, message: String? = nil, onOk: @escaping () -> Void, onRetry: @escaping () -> Void) {
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "Ok", style: .default) { _ in
+            onOk()
+        }
+        let retryAction = UIAlertAction(title: "Повторить", style: .default) { _ in
+            onRetry()
+        }
+        alertView.addAction(doneAction)
+        alertView.addAction(retryAction)
+        present(alertView, animated: true, completion: nil)
+    }
 }

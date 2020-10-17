@@ -40,14 +40,15 @@ extension ProfileViewController {
     }
     
     func userSaveError(_ message: String) {
-        showRetryAlert(
-            message,
+        retryAlert(
+            title: "Save error",
+            message: message,
             onOk: { [weak self] in
                 self?.repo.load()
             },
             onRetry: {[weak self] in
                 self?.repo.retry()
-            })
+        })
     }
     
     func loadUserData() {
@@ -139,18 +140,5 @@ extension ProfileViewController {
         showLoadingControls(false)
         showAlert(title: "Похоже, что  ты новенький", message: "Введи свои данные и сохрани")
         setLoadedState()
-    }
-
-    func showRetryAlert(_ message: String, onOk: (() -> Void)? = nil, onRetry: @escaping () -> Void) {
-        let alertView = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Ok", style: .default) { _ in
-            onOk?()
-        }
-        let retryAction = UIAlertAction(title: "Повторить", style: .default) { _ in
-            onRetry()
-        }
-        alertView.addAction(doneAction)
-        alertView.addAction(retryAction)
-        present(alertView, animated: true, completion: nil)
     }
 }
