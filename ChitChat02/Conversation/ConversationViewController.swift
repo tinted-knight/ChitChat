@@ -26,6 +26,8 @@ class ConversationViewController: UIViewController {
     private let outcomeCellId = "outcome-cell-id"
 
     @IBOutlet weak var messagesTableView: UITableView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var emptyLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,12 @@ class ConversationViewController: UIViewController {
     }
     
     private func prepareUi() {
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.startAnimating()
+        
+        emptyLabel.isHidden = true
+        emptyLabel.text = "Looks like there are no messages in this channel"
+        
         title = channel?.name ?? nonameContact
         
         messagesTableView.register(UINib(nibName: "IncomeMessageCell", bundle: nil), forCellReuseIdentifier: incomeCellId)
@@ -49,21 +57,28 @@ class ConversationViewController: UIViewController {
         guard let channel = channel else { return }
         
         dataManager?.loadMessageList(from: channel) { [weak self] (values) in
-            self?.messages = values
-                .sorted { (prev, next) in
-                    prev.created > next.created 
-                }
-                .map { (message) in
-                let senderId = message.senderId
-                let direction: MessageDirection = senderId == "42" ? .outcome : .income
+            guard let self = self else { return }
+            
+            if !values.isEmpty {
+                self.messages = values
+                    .sorted { (prev, next) in
+                        prev.created > next.created
+                    }
+                    .map { (message) in
+                        let senderId = message.senderId
+                        let direction: MessageDirection = senderId == "42" ? .outcome : .income
 
-                return MessageCellModel(
-                    text: message.content,
-                    date: message.created,
-                    sender: senderId,
-                    direction: direction)
+                        return MessageCellModel(
+                            text: message.content,
+                            date: message.created,
+                            sender: senderId,
+                            direction: direction)
+                }
+            } else {
+                self.emptyLabel.isHidden = false
             }
-            self?.messagesTableView.reloadData()
+            self.loadingIndicator.stopAnimating()
+            self.messagesTableView.reloadData()
         }
     }
     

@@ -12,8 +12,15 @@ import Firebase
 extension ConversationListViewController {
     func loadChannelList() {
         channelsManager?.loadChannelList { [weak self] (values) in
-            self?.channels = values
-            self?.chatTableView.reloadData()
+            guard let self = self else { return }
+
+            if !values.isEmpty {
+                self.channels = values
+            } else {
+                self.emptyLabel.isHidden = false
+            }
+            self.chatTableView.reloadData()
+            self.loadingIndicator.stopAnimating()
         }
     }
 }

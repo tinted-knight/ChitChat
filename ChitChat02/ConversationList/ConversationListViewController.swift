@@ -15,7 +15,9 @@ private enum TableSections: Int {
 
 class ConversationListViewController: UIViewController {
     
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var chatTableView: UITableView!
+    @IBOutlet weak var emptyLabel: UILabel!
     
     private let segueConversation = "segue_single_conversation"
     private let segueProfile = "segue_show_profile"
@@ -55,6 +57,12 @@ class ConversationListViewController: UIViewController {
     }
     
     private func prepareUi() {
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.startAnimating()
+
+        emptyLabel.isHidden = true
+        emptyLabel.text = "Looks like there are no messages in this channel"
+
         title = "Tinkoff Chat"
         
         chatTableView.register(UINib(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: cellReuseId)
