@@ -35,15 +35,17 @@ class ConversationListViewController: UIViewController {
     private var currentTheme: Theme = .black
     private let themeDataManager = ThemeDataManager()
     
+    private var myData: UserData?
+    
     var channelsManager: ChannelsManager = FirestoreChannelManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         currentTheme = loadAppTheme()
+        myData = loadUserData()
         
         prepareUi()
-        
         loadChannelList()
     }
     
@@ -69,6 +71,13 @@ class ConversationListViewController: UIViewController {
         
         setupNavBarButtons()
         applyTheme(currentTheme)
+    }
+    
+    private func loadUserData() -> UserData? {
+        let prefs = UserDefaults.standard
+        guard let uuid = prefs.string(forKey: UserData.keyUUID) as String? else { return nil }
+        
+        return UserData(uuid: uuid)
     }
     
     private func setupNavBarButtons() {
@@ -226,6 +235,7 @@ extension ConversationListViewController: UITableViewDelegate {
     private func openConversation(for channel: Channel) {
         if let viewController = ConversationViewController.instance() {
             viewController.channel = channel
+            viewController.myData = myData
             navigationController?.pushViewController(viewController, animated: true)
         }
     }

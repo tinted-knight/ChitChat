@@ -17,6 +17,7 @@ class ConversationViewController: UIViewController {
     
     var channel: Channel?
     var messageManager: MessagesManager?
+    var myData: UserData?
     
     var messages: [MessageCellModel] = []
     

@@ -34,9 +34,18 @@ private enum AppState {
 
 class Log {
     private static var FIRE_ENABLED = true
-    
+    private static var PREFS_ENABLED = true
+
     static func fire(_ message: String) {
-        if FIRE_ENABLED {
+        log(message, FIRE_ENABLED)
+    }
+    
+    static func prefs(_ message: String) {
+        log(message, PREFS_ENABLED)
+    }
+    
+    private static func log(_ message: String, _ condition: Bool) {
+        if condition {
             print(message)
         }
     }
@@ -59,6 +68,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let prefs = UserDefaults.standard
         if (prefs.integer(forKey: ThemeManager.key) as Int?) == nil {
             prefs.set(Theme.classic.rawValue, forKey: ThemeManager.key)
+        }
+
+        if let uuid = prefs.string(forKey: UserData.keyUUID) as String? {
+            Log.prefs("existing uuid = \(uuid)")
+        } else {
+            let uuid = UUID().uuidString
+            Log.prefs("new uuid = \(uuid)")
+            prefs.set(uuid, forKey: UserData.keyUUID)
         }
         
         return true

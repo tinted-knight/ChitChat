@@ -33,11 +33,16 @@ struct Message {
     let senderName: String
 }
 
-let mySenderName = "Timur"
-let mySenderId = "sender-id-42"
+struct UserData {
+    let uuid: String
+    let name = "Timur"
+
+    static let keyUUID = "key-uuid"
+}
 
 class FirestoreDataManager {
     internal lazy var db = Firestore.firestore()
+    static var uuid: String?
 }
 // MARK: ChannelsManager
 class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
@@ -95,9 +100,11 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
 class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
     
     private let channel: Channel
+    private let userData: UserData
 
-    init(for channel: Channel) {
+    init(for channel: Channel, me user: UserData) {
         self.channel = channel
+        self.userData = user
     }
     
     func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void) {
@@ -130,8 +137,8 @@ class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
         let newMessageData: [String: Any] = [
             "content": message,
             "created": Timestamp(date: Date()),
-            "senderName": mySenderName,
-            "senderId": mySenderId
+            "senderName": userData.name,
+            "senderId": userData.uuid
         ]
         channelMessages.addDocument(data: newMessageData) { (error) in
             if let error = error {

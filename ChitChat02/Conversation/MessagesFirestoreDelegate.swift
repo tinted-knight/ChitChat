@@ -11,9 +11,9 @@ import UIKit
 
 extension ConversationViewController {
     func loadData() {
-        guard let channel = channel else { return }
+        guard let channel = channel, let myData = myData else { return }
         
-        messageManager = FirestoreMessageManager(for: channel)
+        messageManager = FirestoreMessageManager(for: channel, me: myData)
         messageManager?.loadMessageList(onData: { [weak self] (values) in
             guard let self = self else { return }
             
@@ -24,7 +24,7 @@ extension ConversationViewController {
                 .map { (message) in
                     let senderName = message.senderName
                     let direction: MessageDirection =
-                        message.senderId == mySenderId
+                        message.senderId == myData.uuid
                             ? .outcome
                             : .income
                     
