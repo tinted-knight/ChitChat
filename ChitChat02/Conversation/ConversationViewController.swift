@@ -48,7 +48,7 @@ class ConversationViewController: UIViewController {
     private func loadData() {
         guard let channel = channel else { return }
         
-        dataManager?.loadMessages(from: channel) { [weak self] (values) in
+        dataManager?.loadMessageList(from: channel) { [weak self] (values) in
             self?.messages = values
                 .sorted { (prev, next) in
                     prev.created > next.created 

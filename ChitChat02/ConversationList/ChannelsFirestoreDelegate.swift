@@ -9,10 +9,11 @@
 import Foundation
 import Firebase
 
-extension ConversationListViewController: FirestoreDelegate {
-    func onData(_ values: [Channel]) {
-        print(". \(values.count)")
-        channels = values
-        chatTableView.reloadData()
+extension ConversationListViewController {
+    func loadChannelList() {
+        channelsManager?.loadChannelList { [weak self] (values) in
+            self?.channels = values
+            self?.chatTableView.reloadData()
+        }
     }
 }

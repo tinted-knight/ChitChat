@@ -9,12 +9,12 @@
 import Foundation
 import Firebase
 
-protocol FirestoreDelegate {
-    func onData(_ channels: [Channel])
+protocol ChannelsManager {
+    func loadChannelList(onData: @escaping ([Channel]) -> Void)
 }
 
 protocol MessagesManager {
-    func loadMessages(from channel: Channel, onData: @escaping ([Message]) -> Void)
+    func loadMessageList(from channel: Channel, onData: @escaping ([Message]) -> Void)
 }
 
 struct Channel {
@@ -31,14 +31,17 @@ struct Message {
     let senderName: String
 }
 
-class FirestoreDataManager: MessagesManager {
+let fakeUserName = "Timur"
+let fakeSenderId = "42-sender-id"
+
+class FirestoreDataManager {
     private lazy var db = Firestore.firestore()
     private lazy var reference = db.collection("channels")
-    
-    var delegate: FirestoreDelegate?
-    
-    func loadChannelList() {
-        reference.addSnapshotListener { [weak self] (snapshot, error) in
+}
+// MARK: ChannelsManager
+extension FirestoreDataManager: ChannelsManager {
+    func loadChannelList(onData: @escaping ([Channel]) -> Void) {
+        reference.addSnapshotListener { (snapshot, error) in
             let channels: [Channel]  = snapshot?.documents
                 .filter({ document in
                     guard let name = document.data()["name"] as? String, !name.isEmpty else { return false }
@@ -62,11 +65,13 @@ class FirestoreDataManager: MessagesManager {
                 print("id = \(channel.indentifier), name = \(channel.name), lastMessage = \(channel.lastMessage)")
             }
             
-            self?.delegate?.onData(channels)
+            onData(channels)
         }
     }
-    
-    func loadMessages(from channel: Channel, onData: @escaping ([Message]) -> Void) {
+}
+// MARK: MessagesManager
+extension FirestoreDataManager: MessagesManager {
+    func loadMessageList(from channel: Channel, onData: @escaping ([Message]) -> Void) {
         applog("\(#function) from \(channel.name)")
         let messages = db.collection("channels").document(channel.indentifier).collection("messages")
         messages.addSnapshotListener { (snapshot, error) in

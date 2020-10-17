@@ -33,7 +33,10 @@ class ConversationListViewController: UIViewController {
     private var currentTheme: Theme = .black
     private let themeDataManager = ThemeDataManager()
     
+    // под идее, конечно, firestore инициаизируется не здесь
     private let firestore = FirestoreDataManager()
+
+    var channelsManager: ChannelsManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +44,9 @@ class ConversationListViewController: UIViewController {
         currentTheme = loadAppTheme()
         
         prepareUi()
+        
         setupFirestore()
+        loadChannelList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,8 +85,7 @@ class ConversationListViewController: UIViewController {
     }
     
     private func setupFirestore() {
-        firestore.delegate = self
-        firestore.loadChannelList()
+        channelsManager = firestore
     }
 }
 // MARK: ThemesPickerDelegate and stuff
