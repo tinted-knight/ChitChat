@@ -32,7 +32,6 @@ class SaveStringOperation: ResultOperation {
         do {
             try value.write(to: to, atomically: true, encoding: .utf8)
             result = .success
-//            result = .error("operation save error")
         } catch {
             result = .error(error.localizedDescription)
         }
@@ -52,7 +51,6 @@ class SaveDataOperation: ResultOperation {
         do {
             try value.write(to: to)
             result = .success
-//            result = .error("save data test error")
         } catch {
             result = .error(error.localizedDescription)
         }

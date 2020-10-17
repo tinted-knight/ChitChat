@@ -19,7 +19,6 @@ class ConversationListViewController: UIViewController {
     @IBOutlet weak var channelsTableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
     
-    private let segueConversation = "segue_single_conversation"
     private let segueProfile = "segue_show_profile"
     
     private let cellReuseId = "chat-list-cell"

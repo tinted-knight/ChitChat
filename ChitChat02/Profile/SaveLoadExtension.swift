@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-// MARK: Edit mode, save/load user data
 extension ProfileViewController {
     func saveUserData(with dataManagerType: DataManagerType) {
         let name = textUserName.text ?? repo.user.name
@@ -100,7 +99,6 @@ extension ProfileViewController {
             profileImageView.isUserInteractionEnabled = false
         } else {
             activityIndicator.stopAnimating()
-//            buttonSave.isEnabled = false
             buttonEditPicture.isEnabled = true
             profileImageView.isUserInteractionEnabled = true
             buttonUserEdit.isEnabled = true

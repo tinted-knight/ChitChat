@@ -152,7 +152,6 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeField = nil
-//        checkSaveControls()
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -161,7 +160,6 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
 
     func textViewDidEndEditing(_ textView: UITextView) {
         activeField = nil
-//        checkSaveControls()
     }
 }
 

@@ -8,11 +8,6 @@
 
 import Foundation
 
-private enum TestError: Error {
-    case name
-    case desc
-}
-
 private enum SaveResult {
     case success
     case error
@@ -66,16 +61,11 @@ class GCDDataManager: DataManager {
             do {
                 let name = try String(contentsOf: nameUrl)
                 applog("gcd load name: \(name)")
-//                throw TestError.name
                 let description = try String(contentsOf: descriptionUrl)
                 applog("gcd load desc: \(description)")
 
                 let loaded = UserModel(name: name, description: description, avatar: self?.avatarUrl())
                 self?.delegate?.onLoaded(loaded)
-//            } catch TestError.name {
-//                self?.delegate?.onLoadError("name error")
-//            } catch TestError.desc {
-//                self?.delegate?.onLoadError("desc error")
             } catch {
                 self?.delegate?.onLoadError(error.localizedDescription)
             }
@@ -114,7 +104,6 @@ class GCDDataManager: DataManager {
             }
             do {
                 try name.write(to: nameUrl, atomically: true, encoding: .utf8)
-//                self?.nameResult = .error
                 self?.nameResult = .success
                 group.leave()
             } catch {
@@ -136,7 +125,6 @@ class GCDDataManager: DataManager {
             }
             do {
                 try description.write(to: descUrl, atomically: true, encoding: .utf8)
-                //                    descResult = .error
                 self?.descResult = .success
                 group.leave()
             } catch {
