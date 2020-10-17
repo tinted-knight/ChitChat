@@ -16,5 +16,6 @@ enum MessageDirection {
 struct MessageCellModel {
     let text: String
     let date: Date
+    let sender: String?
     let direction: MessageDirection
 }

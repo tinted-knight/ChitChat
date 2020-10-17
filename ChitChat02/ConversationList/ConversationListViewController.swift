@@ -81,7 +81,7 @@ class ConversationListViewController: UIViewController {
     
     private func setupFirestore() {
         firestore.delegate = self
-        firestore.load()
+        firestore.loadChannelList()
     }
 }
 // MARK: ThemesPickerDelegate and stuff
@@ -210,20 +210,24 @@ extension ConversationListViewController: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        openConversation(with: channels[indexPath.row].name)
+        openConversation(for: channels[indexPath.row], via: firestore)
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    private func openConversation(with contactName: String) {
-        performSegue(withIdentifier: segueConversation, sender: contactName)
+    private func openConversation(for channel: Channel, via dataManager: MessagesManager) {
+        if let viewController = ConversationViewController.instance() {
+            viewController.channel = channel
+            viewController.dataManager = dataManager
+            navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }
 // MARK: Navigation helpers
 extension ConversationListViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? ConversationViewController,
-            let name = sender as? String {
-            controller.contactName = name
+            let channel = sender as? Channel {
+            controller.channel = channel
         }
     }
 }

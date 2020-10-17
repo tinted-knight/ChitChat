@@ -15,6 +15,7 @@
 		3958B3B7253AFDF500801E6D /* FirestoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3B6253AFDF500801E6D /* FirestoreDataManager.swift */; };
 		3958B3B9253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */; };
 		3958B3BB253B00E700801E6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3958B3BA253B00E700801E6D /* GoogleService-Info.plist */; };
+		3958B3BD253B284700801E6D /* ConversationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3958B3BC253B284700801E6D /* ConversationViewController.storyboard */; };
 		396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */; };
 		3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3994BFB325248EB6001AB5E7 /* MessageCell.swift */; };
 		3995893025234FBB003C62C8 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */; };
@@ -44,7 +45,6 @@
 		39ED611F25221658006D8E0A /* IncomeMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED611D25221658006D8E0A /* IncomeMessageCell.xib */; };
 		39ED612125221684006D8E0A /* MessageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED612025221684006D8E0A /* MessageCellModel.swift */; };
 		39ED6125252219BA006D8E0A /* OutcomeMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED6123252219BA006D8E0A /* OutcomeMessageCell.xib */; };
-		39ED612725223323006D8E0A /* fake_conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED612625223323006D8E0A /* fake_conversation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +58,7 @@
 		3958B3B6253AFDF500801E6D /* FirestoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDataManager.swift; sourceTree = "<group>"; };
 		3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsFirestoreDelegate.swift; sourceTree = "<group>"; };
 		3958B3BA253B00E700801E6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3958B3BC253B284700801E6D /* ConversationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationViewController.storyboard; sourceTree = "<group>"; };
 		396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3994BFB325248EB6001AB5E7 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
@@ -87,7 +88,6 @@
 		39ED611D25221658006D8E0A /* IncomeMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomeMessageCell.xib; sourceTree = "<group>"; };
 		39ED612025221684006D8E0A /* MessageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
 		39ED6123252219BA006D8E0A /* OutcomeMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutcomeMessageCell.xib; sourceTree = "<group>"; };
-		39ED612625223323006D8E0A /* fake_conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fake_conversation.swift; sourceTree = "<group>"; };
 		3B2FC54AEA21573BC155A8BC /* Pods-ChitChat02.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02.debug.xcconfig"; path = "Target Support Files/Pods-ChitChat02/Pods-ChitChat02.debug.xcconfig"; sourceTree = "<group>"; };
 		53147F9F7C0E3997A63E27F3 /* Pods-ChitChat02.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02.release.xcconfig"; path = "Target Support Files/Pods-ChitChat02/Pods-ChitChat02.release.xcconfig"; sourceTree = "<group>"; };
 		98FFDAB3F1F1D13B5B9E9DD7 /* Pods_ChitChat02.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChitChat02.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,7 +217,6 @@
 		39E4D49D2523478A00BF6BC4 /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				39ED612625223323006D8E0A /* fake_conversation.swift */,
 				39E4D49E252347AD00BF6BC4 /* fake_random_date.swift */,
 			);
 			path = tools;
@@ -238,6 +237,7 @@
 			children = (
 				39ED611B2522163B006D8E0A /* MessageCell */,
 				39ED610D2521EE62006D8E0A /* ConversationViewController.swift */,
+				3958B3BC253B284700801E6D /* ConversationViewController.storyboard */,
 			);
 			path = Conversation;
 			sourceTree = "<group>";
@@ -339,6 +339,7 @@
 				39ED611F25221658006D8E0A /* IncomeMessageCell.xib in Resources */,
 				39ED61162521F76E006D8E0A /* ConversationCell.xib in Resources */,
 				39ED6125252219BA006D8E0A /* OutcomeMessageCell.xib in Resources */,
+				3958B3BD253B284700801E6D /* ConversationViewController.storyboard in Resources */,
 				39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */,
 				394F8680250E518A00B703B3 /* LaunchScreen.storyboard in Resources */,
 				3995893025234FBB003C62C8 /* Comfortaa-Light.ttf in Resources */,
@@ -422,7 +423,6 @@
 				39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */,
 				39ED61182521F7AE006D8E0A /* ConversationCellModel.swift in Sources */,
 				39ABED432534F83400EDCA7C /* SaveCompletionOperation.swift in Sources */,
-				39ED612725223323006D8E0A /* fake_conversation.swift in Sources */,
 				39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */,
 				3995893325239D50003C62C8 /* HeaderCell.swift in Sources */,
 				3958B3B7253AFDF500801E6D /* FirestoreDataManager.swift in Sources */,

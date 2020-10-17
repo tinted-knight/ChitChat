@@ -13,6 +13,10 @@ protocol FirestoreDelegate {
     func onData(_ channels: [Channel])
 }
 
+protocol MessagesManager {
+    func loadMessages(from channel: Channel, onData: @escaping ([Message]) -> Void)
+}
+
 struct Channel {
     let indentifier: String
     let name: String
@@ -27,13 +31,13 @@ struct Message {
     let senderName: String
 }
 
-class FirestoreDataManager {
+class FirestoreDataManager: MessagesManager {
     private lazy var db = Firestore.firestore()
     private lazy var reference = db.collection("channels")
     
     var delegate: FirestoreDelegate?
     
-    func load() {
+    func loadChannelList() {
         reference.addSnapshotListener { [weak self] (snapshot, error) in
             let channels: [Channel]  = snapshot?.documents
                 .filter({ document in
@@ -59,6 +63,28 @@ class FirestoreDataManager {
             }
             
             self?.delegate?.onData(channels)
+        }
+    }
+    
+    func loadMessages(from channel: Channel, onData: @escaping ([Message]) -> Void) {
+        applog("\(#function) from \(channel.name)")
+        let messages = db.collection("channels").document(channel.indentifier).collection("messages")
+        messages.addSnapshotListener { (snapshot, error) in
+            let messages: [Message] = snapshot?.documents
+                .map({ (document) in
+                    let content = document.data()["content"] as? String ?? "no content"
+                    let createdTimestamp = document.data()["created"] as? Timestamp
+                    let created: Date = createdTimestamp?.dateValue() ?? Date()
+                    let senderId = document.data()["senderId"] as? String ?? "no senderId"
+                    let senderName = document.data()["senderName"] as? String ?? "no senderName"
+                    
+                    return Message(
+                        content: content,
+                        created: created,
+                        senderId: senderId,
+                        senderName: senderName)
+                }) ?? []
+            onData(messages)
         }
     }
 }
