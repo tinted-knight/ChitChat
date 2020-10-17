@@ -197,7 +197,7 @@
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="kGS-lf-jsc"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="chatTableView" destination="jPi-cU-LLC" id="m4I-v6-N70"/>
+                        <outlet property="channelsTableView" destination="jPi-cU-LLC" id="m4I-v6-N70"/>
                         <outlet property="emptyLabel" destination="mB6-rn-Ywu" id="jD0-0j-aXI"/>
                         <outlet property="loadingIndicator" destination="5yj-G3-aEf" id="u87-C7-wYn"/>
                         <segue destination="kCs-3c-hXG" kind="presentation" identifier="segue_show_profile" id="ofL-xx-Cli"/>

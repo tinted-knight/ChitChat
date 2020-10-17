@@ -39,7 +39,7 @@ class ConversationViewController: UIViewController {
     
     private func prepareUi() {
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.startAnimating()
+        showLoading()
         
         emptyLabel.isHidden = true
         emptyLabel.text = "Looks like there are no messages in this channel"

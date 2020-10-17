@@ -11,37 +11,56 @@ import Firebase
 
 extension ConversationListViewController {
     func loadChannelList() {
-        channelsManager.loadChannelList { [weak self] (values) in
+        channelsManager.loadChannelList(onData: { [weak self] (values) in
             guard let self = self else { return }
 
             if !values.isEmpty {
                 self.channels = values
             } else {
-                self.emptyLabel.isHidden = false
+                self.showEmpty()
+                return
             }
-            self.chatTableView.reloadData()
-            self.loadingIndicator.stopAnimating()
-        }
+            self.channelsTableView.reloadData()
+            self.showLoaded()
+        }, onError: { [weak self] error in
+            self?.showAlert(error)
+            self?.showError(error)
+        })
     }
     
     @objc func inputNewChannelName() {
-        let alert = UIAlertController(title: "New channel", message: "Input channel name", preferredStyle: .alert)
-
-        alert.addTextField { (textField) in
-            textField.text = ""
-        }
-
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] (_) in
-            guard let textField = alert.textFields?[0], let text = textField.text else { return }
+        inputAlert(title: "New channel", message: "Input channel name") { [weak self] (text) in
             if !text.isEmpty {
                 self?.channelsManager.addChannel(name: text)
             }
-        }))
+        }
+    }
+}
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { (_) in
-            Log.fire("new channel canceled")
-        }))
-        
-        present(alert, animated: true, completion: nil)
+extension ConversationListViewController {
+    func showLoading() {
+        channelsTableView.isHidden = true
+        emptyLabel.isHidden = true
+        loadingIndicator.startAnimating()
+    }
+    
+    func showError(_ text: String) {
+        channelsTableView.isHidden = true
+        emptyLabel.text = text
+        emptyLabel.isHidden = false
+        loadingIndicator.stopAnimating()
+    }
+    
+    func showLoaded() {
+        channelsTableView.isHidden = false
+        emptyLabel.isHidden = true
+        loadingIndicator.stopAnimating()
+    }
+    
+    func showEmpty() {
+        channelsTableView.isHidden = true
+        emptyLabel.text = "empty"
+        emptyLabel.isHidden = false
+        loadingIndicator.stopAnimating()
     }
 }

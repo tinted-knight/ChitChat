@@ -16,7 +16,7 @@ private enum TableSections: Int {
 class ConversationListViewController: UIViewController {
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var chatTableView: UITableView!
+    @IBOutlet weak var channelsTableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
     
     private let segueConversation = "segue_single_conversation"
@@ -54,18 +54,18 @@ class ConversationListViewController: UIViewController {
     
     private func prepareUi() {
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.startAnimating()
+        showLoading()
 
         emptyLabel.isHidden = true
         emptyLabel.text = "Looks like there are no messages in this channel"
 
         title = "Tinkoff Chat"
         
-        chatTableView.register(UINib(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: cellReuseId)
-        chatTableView.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: headerReuseId)
+        channelsTableView.register(UINib(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: cellReuseId)
+        channelsTableView.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: headerReuseId)
         
-        chatTableView.dataSource = self
-        chatTableView.delegate = self
+        channelsTableView.dataSource = self
+        channelsTableView.delegate = self
         
         setupNavBarButtons()
         applyTheme(currentTheme)
@@ -110,7 +110,7 @@ extension ConversationListViewController: ThemesPickerDelegate {
     
     private func applyTheme(_ value: Theme) {
         currentTheme = value
-        chatTableView.reloadData()
+        channelsTableView.reloadData()
         
         ThemeManager.apply(theme: value)
         

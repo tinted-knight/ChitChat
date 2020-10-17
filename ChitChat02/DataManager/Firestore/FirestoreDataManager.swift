@@ -10,12 +10,12 @@ import Foundation
 import Firebase
 
 protocol ChannelsManager {
-    func loadChannelList(onData: @escaping ([Channel]) -> Void)
+    func loadChannelList(onData: @escaping ([Channel]) -> Void, onError: @escaping (String) -> Void)
     func addChannel(name: String)
 }
 
 protocol MessagesManager {
-    func loadMessageList(onData: @escaping ([Message]) -> Void)
+    func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void)
     func add(message: String)
 }
 
@@ -45,8 +45,13 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
         return db.collection("channels")
     }
 
-    func loadChannelList(onData: @escaping ([Channel]) -> Void) {
+    func loadChannelList(onData: @escaping ([Channel]) -> Void, onError: @escaping (String) -> Void) {
         channels.addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                onError(error.localizedDescription)
+                return
+            }
+            
             let channels: [Channel]  = snapshot?.documents
                 .filter({ document in
                     guard let name = document.data()["name"] as? String, !name.isEmpty else { return false }
@@ -66,10 +71,6 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
                         lastActivity: lastActivity)
                 }) ?? []
 
-            channels.forEach { (channel) in
-                print("id = \(channel.indentifier), name = \(channel.name), lastMessage = \(channel.lastMessage)")
-            }
-            
             onData(channels)
         }
     }
@@ -99,9 +100,14 @@ class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
         self.channel = channel
     }
     
-    func loadMessageList(onData: @escaping ([Message]) -> Void) {
+    func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void) {
         applog("\(#function) from \(channel.name)")
         channelMessages.addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                onError(error.localizedDescription)
+                return
+            }
+            
             let messages: [Message] = snapshot?.documents
                 .map({ (document) in
                     let content = document.data()["content"] as? String ?? "no content"
