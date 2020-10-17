@@ -34,7 +34,7 @@ extension ProfileViewController {
     }
     
     func saveSuccess() {
-        showAlert("Данные сохранены")
+        showAlert(title: "Данные сохранены")
         state = .hasSaved
         repo.load()
     }
@@ -137,7 +137,7 @@ extension ProfileViewController {
     
     func setLoadError(_ message: String) {
         showLoadingControls(false)
-        showAlert("Похоже, что  ты новенький", message: "Введи свои данные и сохрани")
+        showAlert(title: "Похоже, что  ты новенький", message: "Введи свои данные и сохрани")
         setLoadedState()
     }
 
@@ -151,12 +151,6 @@ extension ProfileViewController {
         }
         alertView.addAction(doneAction)
         alertView.addAction(retryAction)
-        present(alertView, animated: true, completion: nil)
-    }
-    
-    func showAlert(_ title: String, message: String? = nil) {
-        let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alertView, animated: true, completion: nil)
     }
 }

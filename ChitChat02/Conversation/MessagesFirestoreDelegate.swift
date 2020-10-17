@@ -41,30 +41,17 @@ extension ConversationViewController {
             self.messagesTableView.reloadData()
             self.showLoaded()
             }, onError: { [weak self] (message) in
-                self?.showAlert(message)
+                self?.showAlert(title: "Message loading error", message: message)
                 self?.showError(message)
         })
     }
 
     @objc func inputNewMessage() {
-        let alert = UIAlertController(title: "New message", message: "Input text", preferredStyle: .alert)
-
-        alert.addTextField { (textField) in
-            textField.text = ""
-        }
-
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] (_) in
-            guard let textField = alert.textFields?[0], let text = textField.text else { return }
+        inputAlert(title: "New message", message: "Input text") { [weak self] (text) in
             if !text.isEmpty {
                 self?.messageManager?.add(message: text)
             }
-        }))
-
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { (_) in
-            Log.fire("new message canceled")
-        }))
-        
-        present(alert, animated: true, completion: nil)
+        }
     }
 }
 

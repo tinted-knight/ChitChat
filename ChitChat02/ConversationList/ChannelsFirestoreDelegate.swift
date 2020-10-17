@@ -23,7 +23,7 @@ extension ConversationListViewController {
             self.channelsTableView.reloadData()
             self.showLoaded()
         }, onError: { [weak self] error in
-            self?.showAlert(error)
+            self?.showAlert(title: "Channel load error", message: error)
             self?.showError(error)
         })
     }

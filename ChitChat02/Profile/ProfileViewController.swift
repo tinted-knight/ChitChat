@@ -222,7 +222,7 @@ extension ProfileViewController {
 
             present(picker, animated: true, completion: nil)
         } else {
-            showAlert("Error", message: "Device has no gallery")
+            showAlert(title: "Error", message: "Device has no gallery")
         }
     }
 
@@ -231,7 +231,7 @@ extension ProfileViewController {
             picker.sourceType = .camera
             present(picker, animated: true, completion: nil)
         } else {
-            showAlert("Error", message: "No camera on device! You are in safe!")
+            showAlert(title: "Error", message: "No camera on device! You are in safe!")
         }
     }
 }
@@ -242,7 +242,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         picker.dismiss(animated: true, completion: nil)
         applog("\(info[.imageURL] ?? "nothing")")
         guard let image = info[.originalImage] as? UIImage else {
-            showAlert("Error", message: "Something has gone very wrong")
+            showAlert(title: "Error", message: "Something has gone very wrong")
             return
         }
         profileImage = image
