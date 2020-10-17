@@ -90,6 +90,11 @@ class ConversationListViewController: UIViewController {
             style: .plain,
             target: self,
             action: #selector(settingsOnTap))
+        
+        navigationItem.leftBarButtonItems?.append(UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(inputNewChannelName)))
     }
     
     private func setupFirestore() {

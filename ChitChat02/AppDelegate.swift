@@ -32,6 +32,16 @@ private enum AppState {
     case Terminated
 }
 
+class Log {
+    private static var FIRE_ENABLED = true
+    
+    static func fire(_ message: String) {
+        if FIRE_ENABLED {
+            print(message)
+        }
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

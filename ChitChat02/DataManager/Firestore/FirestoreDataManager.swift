@@ -11,6 +11,7 @@ import Firebase
 
 protocol ChannelsManager {
     func loadChannelList(onData: @escaping ([Channel]) -> Void)
+    func addChannel(with name: String)
 }
 
 protocol MessagesManager {
@@ -32,16 +33,19 @@ struct Message {
 }
 
 let fakeUserName = "Timur"
-let fakeSenderId = "42-sender-id"
+let fakeSenderId = "sender-id-42"
 
 class FirestoreDataManager {
     private lazy var db = Firestore.firestore()
-    private lazy var reference = db.collection("channels")
+    
+    private var channels: CollectionReference {
+        return db.collection("channels")
+    }
 }
 // MARK: ChannelsManager
 extension FirestoreDataManager: ChannelsManager {
     func loadChannelList(onData: @escaping ([Channel]) -> Void) {
-        reference.addSnapshotListener { (snapshot, error) in
+        channels.addSnapshotListener { (snapshot, error) in
             let channels: [Channel]  = snapshot?.documents
                 .filter({ document in
                     guard let name = document.data()["name"] as? String, !name.isEmpty else { return false }
@@ -66,6 +70,22 @@ extension FirestoreDataManager: ChannelsManager {
             }
             
             onData(channels)
+        }
+    }
+    
+    func addChannel(with name: String) {
+        let newChannelData: [String: Any] = [
+            "name": name,
+            "lastMessage": "Опасно!11",
+            "lastActivity": Timestamp(date: Date())
+        ]
+        channels.addDocument(data: newChannelData) { (error) in
+            if let error = error {
+                Log.fire("creating channel error: \(error.localizedDescription)")
+                return
+            } else {
+                Log.fire("creating channel success")
+            }
         }
     }
 }

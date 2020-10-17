@@ -23,4 +23,25 @@ extension ConversationListViewController {
             self.loadingIndicator.stopAnimating()
         }
     }
+    
+    @objc func inputNewChannelName() {
+        let alert = UIAlertController(title: "New channel", message: "Input channel name", preferredStyle: .alert)
+
+        alert.addTextField { (textField) in
+            textField.text = "new channel"
+        }
+
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] (_) in
+            guard let textField = alert.textFields?[0], let text = textField.text else { return }
+            if !text.isEmpty {
+                self?.channelsManager?.addChannel(with: text)
+            }
+        }))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { (_) in
+            Log.fire("new channel canceled")
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
 }
