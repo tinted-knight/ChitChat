@@ -24,7 +24,7 @@ class ThemeManager {
         UITextView.appearance().textColor = themeData.textColor
         UITextView.appearance().backgroundColor = themeData.buttonBgColor
         
-        UITextField.appearance().backgroundColor = themeData.buttonBgColor
+        UITextField.appearance().backgroundColor = themeData.backgroundColor
         
         UIView.appearance().tintColor = themeData.tintColor
         UIBarButtonItem.appearance().tintColor = themeData.tintColor
