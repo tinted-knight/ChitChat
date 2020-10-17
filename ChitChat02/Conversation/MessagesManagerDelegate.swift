@@ -23,16 +23,16 @@ extension ConversationViewController {
                         prev.created > next.created
                     }
                     .map { (message) in
-                        let senderId = message.senderId
+                        let senderName = message.senderName
                         let direction: MessageDirection =
-                            senderId == mySenderId
+                            message.senderId == mySenderId
                                 ? .outcome
                                 : .income
 
                         return MessageCellModel(
                             text: message.content,
                             date: message.created,
-                            sender: senderId,
+                            sender: senderName,
                             direction: direction)
                 }
             } else {
