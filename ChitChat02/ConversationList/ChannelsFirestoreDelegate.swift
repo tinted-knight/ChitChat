@@ -36,7 +36,7 @@ extension ConversationListViewController {
         }
     }
 }
-
+// MARK: States loading, loaded, error, empty
 extension ConversationListViewController {
     func showLoading() {
         channelsTableView.isHidden = true

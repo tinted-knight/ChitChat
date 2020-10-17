@@ -19,22 +19,17 @@ class ConversationListViewController: UIViewController {
     @IBOutlet weak var channelsTableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
     
-    private let segueProfile = "segue_show_profile"
-    
     private let cellReuseId = "chat-list-cell"
     private let headerReuseId = "header-online-reuse-id"
-    
-    private let sectionOnlineId = 0
-    private let sectionHistoryId = 1
     
     private lazy var simpleSectionHeader: UIView = UILabel()
 
     var channels: [Channel] = []
     
-    private var currentTheme: Theme = .black
-    private let themeDataManager = ThemeDataManager()
+    var currentTheme: Theme = .black
+    let themeDataManager = ThemeDataManager()
     
-    private var myData: UserData?
+    var myData: UserData?
     
     var channelsManager: ChannelsManager = FirestoreChannelManager()
     
@@ -53,6 +48,15 @@ class ConversationListViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     
+    private func loadUserData() -> UserData? {
+        let prefs = UserDefaults.standard
+        guard let uuid = prefs.string(forKey: UserData.keyUUID) as String? else { return nil }
+        
+        return UserData(uuid: uuid)
+    }
+}
+// MARK: UI Setup
+extension ConversationListViewController {
     private func prepareUi() {
         loadingIndicator.hidesWhenStopped = true
         showLoading()
@@ -71,14 +75,7 @@ class ConversationListViewController: UIViewController {
         setupNavBarButtons()
         applyTheme(currentTheme)
     }
-    
-    private func loadUserData() -> UserData? {
-        let prefs = UserDefaults.standard
-        guard let uuid = prefs.string(forKey: UserData.keyUUID) as String? else { return nil }
-        
-        return UserData(uuid: uuid)
-    }
-    
+
     private func setupNavBarButtons() {
         let profilePicture = UIImage(named: "ProfileIcon")?.withRenderingMode(.alwaysOriginal)
         let profileNavItem = UIBarButtonItem(
@@ -101,84 +98,23 @@ class ConversationListViewController: UIViewController {
             action: #selector(inputNewChannelName)))
     }
 }
-// MARK: ThemesPickerDelegate and stuff
-extension ConversationListViewController: ThemesPickerDelegate {
-    func theme(picked value: Theme) {
-        //
-    }
-
-    func result(_ value: Theme, _ saveChoice: Bool) {
-        if saveChoice {
-            applyTheme(value)
-            saveCurrentTheme()
-        } else {
-            //
-        }
-    }
-    
-    private func applyTheme(_ value: Theme) {
-        currentTheme = value
-        channelsTableView.reloadData()
-        
-        ThemeManager.apply(theme: value)
-        
-        updateNavbarAppearence()
-        navigationController?.navigationBar.tintColor = ThemeManager.get().tintColor
-        // inspite of setting NavBarStyle in ThemeManager need to duplicate here
-        switch ThemeManager.get().brightness {
-        case .dark:
-            navigationController?.navigationBar.barStyle = .black
-        case .light:
-            navigationController?.navigationBar.barStyle = .default
-        }
-    }
-    
-    private func updateNavbarAppearence() {
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
-        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
-    }
-    
-    private func saveCurrentTheme() {
-        applog(#function)
-        let pref = UserDefaults.standard
-        pref.set(currentTheme.rawValue, forKey: ThemeManager.key)
-        themeDataManager.save(ThemeManager.get())
-    }
-    
-    private func loadAppTheme() -> Theme {
-        let prefs = UserDefaults.standard
-        return Theme(rawValue: prefs.integer(forKey: ThemeManager.key)) ?? Theme.classic
-    }
-}
 // MARK: UI Actions
 extension ConversationListViewController {
     @objc private func profileOnTap() {
-        performSegue(withIdentifier: segueProfile, sender: nil)
+        openProfileScreen()
     }
     
     @objc private func settingsOnTap() {
-        if let themesViewController = ThemesViewController.instance() {
-            themesViewController.activeTheme = currentTheme
-            
-//            themesViewController.delegate = self
-            
-            themesViewController.themePicked = { value in
-                //
+        openSettingsScreen { [weak self] value, saveChoice in
+            if saveChoice {
+                applog("closure: yay! new theme")
+                self?.applyTheme(value)
+                self?.saveCurrentTheme()
+            } else {
+                applog("closure: no new theme")
+                // need to call to fix navbar text color
+                self?.updateNavbarAppearence()
             }
-            
-            themesViewController.result = { [weak self] value, saveChoice in
-                if saveChoice {
-                    applog("closure: yay! new theme")
-                    self?.applyTheme(value)
-                    self?.saveCurrentTheme()
-                } else {
-                    applog("closure: no new theme")
-                    // need to call to fix navbar text color
-                    self?.updateNavbarAppearence()
-                }
-            }
-            
-            navigationController?.pushViewController(themesViewController, animated: true)
         }
     }
 }
@@ -227,24 +163,7 @@ extension ConversationListViewController: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        openConversation(for: channels[indexPath.row])
+        openConversationScreen(for: channels[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: false)
-    }
-    
-    private func openConversation(for channel: Channel) {
-        if let viewController = ConversationViewController.instance() {
-            viewController.channel = channel
-            viewController.myData = myData
-            navigationController?.pushViewController(viewController, animated: true)
-        }
-    }
-}
-// MARK: Navigation helpers
-extension ConversationListViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? ConversationViewController,
-            let channel = sender as? Channel {
-            controller.channel = channel
-        }
     }
 }
