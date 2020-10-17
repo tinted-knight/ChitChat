@@ -48,6 +48,7 @@ class ConversationListViewController: UIViewController {
         prepareData(with: fakeChatList)
         
         firestore.delegate = self
+        firestore.load()
     }
     
     override func viewWillAppear(_ animated: Bool) {

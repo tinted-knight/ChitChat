@@ -118,7 +118,6 @@
 		394F8667250E518A00B703B3 = {
 			isa = PBXGroup;
 			children = (
-				3958B3BA253B00E700801E6D /* GoogleService-Info.plist */,
 				394F8688250E659C00B703B3 /* README.md */,
 				394F8672250E518A00B703B3 /* ChitChat02 */,
 				394F8671250E518A00B703B3 /* Products */,
@@ -138,6 +137,7 @@
 		394F8672250E518A00B703B3 /* ChitChat02 */ = {
 			isa = PBXGroup;
 			children = (
+				3958B3BA253B00E700801E6D /* GoogleService-Info.plist */,
 				39B7FDC02530AFCA00B5F280 /* DataManager */,
 				39BDCFB72527614400ECECCC /* Themes */,
 				3995892C25234DF7003C62C8 /* fonts */,
@@ -598,7 +598,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.Tinkoff.TinkoffChat;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -620,7 +620,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.Tinkoff.TinkoffChat;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

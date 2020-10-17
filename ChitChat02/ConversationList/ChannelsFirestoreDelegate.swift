@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 extension ConversationListViewController: FirestoreDelegate {
-    func snapshot(_ snapshot: QuerySnapshot) {
-        print(".")
+    func onData(_ values: [Channel]) {
+        print(". \(values.count)")
     }
 }
