@@ -11,11 +11,11 @@ import Firebase
 
 protocol ChannelsManager {
     func loadChannelList(onData: @escaping ([Channel]) -> Void)
-    func addChannel(with name: String)
+    func addChannel(name: String)
 }
 
 protocol MessagesManager {
-    func loadMessageList(from channel: Channel, onData: @escaping ([Message]) -> Void)
+    func loadMessageList(onData: @escaping ([Message]) -> Void)
 }
 
 struct Channel {
@@ -36,14 +36,14 @@ let fakeUserName = "Timur"
 let fakeSenderId = "sender-id-42"
 
 class FirestoreDataManager {
-    private lazy var db = Firestore.firestore()
-    
+    internal lazy var db = Firestore.firestore()
+}
+// MARK: ChannelsManager
+class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
     private var channels: CollectionReference {
         return db.collection("channels")
     }
-}
-// MARK: ChannelsManager
-extension FirestoreDataManager: ChannelsManager {
+
     func loadChannelList(onData: @escaping ([Channel]) -> Void) {
         channels.addSnapshotListener { (snapshot, error) in
             let channels: [Channel]  = snapshot?.documents
@@ -73,7 +73,7 @@ extension FirestoreDataManager: ChannelsManager {
         }
     }
     
-    func addChannel(with name: String) {
+    func addChannel(name: String) {
         let newChannelData: [String: Any] = [
             "name": name,
             "lastMessage": "Опасно!11",
@@ -90,8 +90,15 @@ extension FirestoreDataManager: ChannelsManager {
     }
 }
 // MARK: MessagesManager
-extension FirestoreDataManager: MessagesManager {
-    func loadMessageList(from channel: Channel, onData: @escaping ([Message]) -> Void) {
+class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
+    
+    private let channel: Channel
+
+    init(for channel: Channel) {
+        self.channel = channel
+    }
+    
+    func loadMessageList(onData: @escaping ([Message]) -> Void) {
         applog("\(#function) from \(channel.name)")
         let messages = db.collection("channels").document(channel.indentifier).collection("messages")
         messages.addSnapshotListener { (snapshot, error) in
@@ -111,5 +118,8 @@ extension FirestoreDataManager: MessagesManager {
                 }) ?? []
             onData(messages)
         }
+    }
+    func add(message: Message, to channel: Channel) {
+        
     }
 }

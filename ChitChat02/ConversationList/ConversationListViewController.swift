@@ -35,10 +35,7 @@ class ConversationListViewController: UIViewController {
     private var currentTheme: Theme = .black
     private let themeDataManager = ThemeDataManager()
     
-    // под идее, конечно, firestore инициаизируется не здесь
-    private let firestore = FirestoreDataManager()
-
-    var channelsManager: ChannelsManager?
+    var channelsManager: ChannelsManager = FirestoreChannelManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +44,6 @@ class ConversationListViewController: UIViewController {
         
         prepareUi()
         
-        setupFirestore()
         loadChannelList()
     }
     
@@ -95,10 +91,6 @@ class ConversationListViewController: UIViewController {
             barButtonSystemItem: .add,
             target: self,
             action: #selector(inputNewChannelName)))
-    }
-    
-    private func setupFirestore() {
-        channelsManager = firestore
     }
 }
 // MARK: ThemesPickerDelegate and stuff
@@ -227,14 +219,13 @@ extension ConversationListViewController: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        openConversation(for: channels[indexPath.row], via: firestore)
+        openConversation(for: channels[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    private func openConversation(for channel: Channel, via dataManager: MessagesManager) {
+    private func openConversation(for channel: Channel) {
         if let viewController = ConversationViewController.instance() {
             viewController.channel = channel
-            viewController.dataManager = dataManager
             navigationController?.pushViewController(viewController, animated: true)
         }
     }

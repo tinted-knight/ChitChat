@@ -16,9 +16,9 @@ class ConversationViewController: UIViewController {
     }
     
     var channel: Channel?
-    var dataManager: MessagesManager?
+    var messageManager: MessagesManager?
     
-    private var messages: [MessageCellModel] = []
+    var messages: [MessageCellModel] = []
     
     private let nonameContact = "Noname"
     
@@ -51,35 +51,10 @@ class ConversationViewController: UIViewController {
         messagesTableView.delegate = self
         messagesTableView.dataSource = self
         messagesTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
-    }
-    
-    private func loadData() {
-        guard let channel = channel else { return }
         
-        dataManager?.loadMessageList(from: channel) { [weak self] (values) in
-            guard let self = self else { return }
-            
-            if !values.isEmpty {
-                self.messages = values
-                    .sorted { (prev, next) in
-                        prev.created > next.created
-                    }
-                    .map { (message) in
-                        let senderId = message.senderId
-                        let direction: MessageDirection = senderId == "42" ? .outcome : .income
-
-                        return MessageCellModel(
-                            text: message.content,
-                            date: message.created,
-                            sender: senderId,
-                            direction: direction)
-                }
-            } else {
-                self.emptyLabel.isHidden = false
-            }
-            self.loadingIndicator.stopAnimating()
-            self.messagesTableView.reloadData()
-        }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self, action: #selector(inputNewMessage))
     }
     
     private func applyTheme() {

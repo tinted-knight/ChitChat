@@ -11,7 +11,7 @@ import Firebase
 
 extension ConversationListViewController {
     func loadChannelList() {
-        channelsManager?.loadChannelList { [weak self] (values) in
+        channelsManager.loadChannelList { [weak self] (values) in
             guard let self = self else { return }
 
             if !values.isEmpty {
@@ -34,7 +34,7 @@ extension ConversationListViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] (_) in
             guard let textField = alert.textFields?[0], let text = textField.text else { return }
             if !text.isEmpty {
-                self?.channelsManager?.addChannel(with: text)
+                self?.channelsManager.addChannel(name: text)
             }
         }))
 
