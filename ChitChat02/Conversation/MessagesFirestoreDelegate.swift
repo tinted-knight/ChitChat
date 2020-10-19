@@ -18,10 +18,7 @@ extension ConversationViewController {
             guard let self = self else { return }
             
             if !values.isEmpty {
-                self.messages = values.sorted { (prev, next) in
-                        prev.created > next.created
-                }
-                .map { (message) in
+                self.messages = values.map { (message) in
                     let senderName = message.senderName
                     let direction: MessageDirection =
                         message.senderId == myData.uuid

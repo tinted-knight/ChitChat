@@ -21,7 +21,7 @@ class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
     
     func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void) {
         Log.fire("\(#function) from \(channel.name)")
-        channelMessages.addSnapshotListener { (snapshot, error) in
+        channelMessages.order(by: Message.created, descending: true).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 onError(error.localizedDescription)
                 return
