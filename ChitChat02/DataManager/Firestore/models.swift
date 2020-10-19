@@ -16,7 +16,7 @@ struct Channel {
     let lastActivity: Date?
 }
 
-extension Channel {
+extension Channel: Codable {
     static let path = "channels"
     
     static let name = "name"

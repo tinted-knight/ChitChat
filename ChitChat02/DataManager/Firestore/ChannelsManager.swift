@@ -15,7 +15,7 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
     }
 
     func loadChannelList(onData: @escaping ([Channel]) -> Void, onError: @escaping (String) -> Void) {
-        channels.addSnapshotListener { (snapshot, error) in
+        channels.order(by: Channel.name, descending: false).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 onError(error.localizedDescription)
                 return
@@ -29,11 +29,11 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
                 })
                 .compactMap({ document in
                     guard let name = document.data()[Channel.name] as? String else { return nil }
-                    guard let lastMessage = document.data()[Channel.lastMessage] as? String else { return nil }
                     guard let timestamp = document.data()[Channel.lastActivity] as? Timestamp else { return nil }
 
                     let id: String = document.documentID
                     let lastActivity = timestamp.dateValue()
+                    let lastMessage = document.data()[Channel.lastMessage] as? String ?? "no last message"
 
                     return Channel(
                         indentifier: id,
