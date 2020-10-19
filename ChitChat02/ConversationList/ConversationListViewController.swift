@@ -92,7 +92,7 @@ extension ConversationListViewController {
             target: self,
             action: #selector(settingsOnTap))
         
-        navigationItem.leftBarButtonItems?.append(UIBarButtonItem(
+        navigationItem.rightBarButtonItems?.append(UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
             action: #selector(inputNewChannelName)))

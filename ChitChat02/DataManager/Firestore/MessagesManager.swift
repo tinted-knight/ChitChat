@@ -20,27 +20,30 @@ class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
     }
     
     func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void) {
-        applog("\(#function) from \(channel.name)")
+        Log.fire("\(#function) from \(channel.name)")
         channelMessages.addSnapshotListener { (snapshot, error) in
             if let error = error {
                 onError(error.localizedDescription)
                 return
             }
-            
+
             let messages: [Message] = snapshot?.documents
-                .map({ (document) in
-                    let content = document.data()[Message.content] as? String ?? "no content"
-                    let createdTimestamp = document.data()[Message.created] as? Timestamp
-                    let created: Date = createdTimestamp?.dateValue() ?? Date()
-                    let senderId = document.data()[Message.senderId] as? String ?? "no senderId"
-                    let senderName = document.data()[Message.senderName] as? String ?? "no senderName"
+                .compactMap({ (document) in
+                    guard let content = document.data()[Message.content] as? String else { return nil }
+                    guard let createdTimestamp = document.data()[Message.created] as? Timestamp else { return nil }
+                    guard let senderId = document.data()[Message.senderId] as? String else { return nil }
+                    guard let senderName = document.data()[Message.senderName] as? String  else { return nil }
                     
+                    let created: Date = createdTimestamp.dateValue()
+
                     return Message(
                         content: content,
                         created: created,
                         senderId: senderId,
                         senderName: senderName)
                 }) ?? []
+
+            Log.fire("\(messages.count) valid messages of total \(snapshot?.documents.count ?? 0)")
             onData(messages)
         }
     }

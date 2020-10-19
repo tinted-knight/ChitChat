@@ -23,16 +23,18 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
             
             let channels: [Channel]  = snapshot?.documents
                 .filter({ document in
-                    guard let name = document.data()[Channel.name] as? String, !name.isEmpty else { return false }
+                    guard let name = document.data()[Channel.name] as? String,
+                        !name.isEmpty else { return false }
                     return true
                 })
-                .map({ document in
+                .compactMap({ document in
+                    guard let name = document.data()[Channel.name] as? String else { return nil }
+                    guard let lastMessage = document.data()[Channel.lastMessage] as? String else { return nil }
+                    guard let timestamp = document.data()[Channel.lastActivity] as? Timestamp else { return nil }
+
                     let id: String = document.documentID
-                    let name: String = document.data()[Channel.name] as? String ?? "noname"
-                    let lastMessage: String? = document.data()[Channel.lastMessage] as? String
-                    let timestamp: Timestamp? = document.data()[Channel.lastActivity] as? Timestamp
-                    let lastActivity: Date? = timestamp?.dateValue()
-                    
+                    let lastActivity = timestamp.dateValue()
+
                     return Channel(
                         indentifier: id,
                         name: name,
