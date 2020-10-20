@@ -27,20 +27,7 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
                         !name.isEmpty else { return false }
                     return true
                 })
-                .compactMap({ document in
-                    guard let name = document.data()[Channel.name] as? String else { return nil }
-                    guard let timestamp = document.data()[Channel.lastActivity] as? Timestamp else { return nil }
-
-                    let id: String = document.documentID
-                    let lastActivity = timestamp.dateValue()
-                    let lastMessage = document.data()[Channel.lastMessage] as? String ?? "no last message"
-
-                    return Channel(
-                        indentifier: id,
-                        name: name,
-                        lastMessage: lastMessage,
-                        lastActivity: lastActivity)
-                }) ?? []
+                .compactMap({ document in Channel(from: document) }) ?? []
 
             onData(channels)
         }

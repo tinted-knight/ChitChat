@@ -8,11 +8,6 @@
 
 import UIKit
 
-private enum TableSections: Int {
-    case online = 0
-    case history = 1
-}
-
 class ConversationListViewController: UIViewController {
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!

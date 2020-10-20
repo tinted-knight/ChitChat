@@ -28,20 +28,7 @@ class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
             }
 
             let messages: [Message] = snapshot?.documents
-                .compactMap({ (document) in
-                    guard let content = document.data()[Message.content] as? String else { return nil }
-                    guard let createdTimestamp = document.data()[Message.created] as? Timestamp else { return nil }
-                    guard let senderId = document.data()[Message.senderId] as? String else { return nil }
-                    guard let senderName = document.data()[Message.senderName] as? String  else { return nil }
-                    
-                    let created: Date = createdTimestamp.dateValue()
-
-                    return Message(
-                        content: content,
-                        created: created,
-                        senderId: senderId,
-                        senderName: senderName)
-                }) ?? []
+                .compactMap({ (document) in Message(from: document)}) ?? []
 
             Log.fire("\(messages.count) valid messages of total \(snapshot?.documents.count ?? 0)")
             onData(messages)
