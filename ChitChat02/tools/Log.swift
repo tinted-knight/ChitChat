@@ -9,8 +9,9 @@
 import Foundation
 
 class Log {
-    private static var FIRE_ENABLED = true
-    private static var PREFS_ENABLED = true
+    private static var FIRE_ENABLED = false
+    private static var PREFS_ENABLED = false
+    private static var OLDSCHOOL_ENABLED = true
 
     static func fire(_ message: String) {
         log(message, FIRE_ENABLED)
@@ -18,6 +19,10 @@ class Log {
     
     static func prefs(_ message: String) {
         log(message, PREFS_ENABLED)
+    }
+    
+    static func oldschool(_ message: String) {
+        log(message, OLDSCHOOL_ENABLED)
     }
     
     private static func log(_ message: String, _ condition: Bool) {

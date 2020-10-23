@@ -55,6 +55,25 @@ extension ConversationListViewController {
         channelsTableView.isHidden = false
         emptyLabel.isHidden = true
         loadingIndicator.stopAnimating()
+        processCoreData()
+    }
+    
+    func processCoreData() {
+        coreDataManager.checkSavedData { [weak self] (chatList) in
+            Log.oldschool("checkSavedData")
+            if !chatList.isEmpty {
+                Log.oldschool("not empty")
+                chatList.keys.forEach { (channel) in
+                    Log.oldschool("Channel: \(channel.name)")
+                    chatList[channel]?.forEach({ (message) in
+                        Log.oldschool("     \(message.content)")
+                    })
+                }
+            } else {
+                Log.oldschool("empty")
+                self?.coreDataManager.loadFromNetAndSaveLocally()
+            }
+        }
     }
     
     func showEmpty() {

@@ -14,7 +14,7 @@ enum ChannelError: Error {
 }
 
 // MARK: Channel
-struct Channel {
+struct Channel: Hashable {
     let indentifier: String
     let name: String
     let lastMessage: String?
@@ -32,6 +32,10 @@ struct Channel {
         self.name = name
         self.lastMessage = lastMessage
         self.lastActivity = lastActivity
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.indentifier)
     }
 }
 
