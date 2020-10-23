@@ -35,6 +35,7 @@ class ConversationListViewController: UIViewController {
     private var historyData: [ConversationCellModel] = []
     
     private var currentTheme: Theme = .black
+    private let themeDataManager = ThemeDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,15 +88,15 @@ class ConversationListViewController: UIViewController {
 // MARK: -ThemesPickerDelegate and stuff
 extension ConversationListViewController: ThemesPickerDelegate {
     func theme(picked value: Theme) {
-        applog("delegate : \(value)")
+        //
     }
 
     func result(_ value: Theme, _ saveChoice: Bool) {
         if saveChoice {
-            applog("delegate: yay! new theme")
             applyTheme(value)
+            saveCurrentTheme()
         } else {
-            applog("delegate: no new theme")
+            //
         }
     }
     
@@ -114,7 +115,6 @@ extension ConversationListViewController: ThemesPickerDelegate {
             case .light:
                 navigationController?.navigationBar.barStyle = .default
         }
-        saveAppTheme(value)
     }
     
     private func updateNavbarAppearence() {
@@ -122,9 +122,11 @@ extension ConversationListViewController: ThemesPickerDelegate {
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
     }
     
-    private func saveAppTheme(_ value: Theme) {
+    private func saveCurrentTheme() {
+        applog(#function)
         let pref = UserDefaults.standard
-        pref.set(value.rawValue, forKey: ThemeManager.key)
+        pref.set(currentTheme.rawValue, forKey: ThemeManager.key)
+        themeDataManager.save(ThemeManager.get())
     }
     
     private func loadAppTheme() -> Theme {
@@ -145,13 +147,14 @@ extension ConversationListViewController {
 //            themesViewController.delegate = self
             
             themesViewController.themePicked = { value in
-                applog("closure themePicked")
+                //
             }
             
             themesViewController.result = { [weak self] value, saveChoice in
                 if saveChoice {
                     applog("closure: yay! new theme")
                     self?.applyTheme(value)
+                    self?.saveCurrentTheme()
                 } else {
                     applog("closure: no new theme")
                     // need to call to fix navbar text color

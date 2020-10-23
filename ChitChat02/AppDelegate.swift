@@ -44,10 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         currentState = .Inactive
         
         let prefs = UserDefaults.standard
-        if let theme = prefs.integer(forKey: ThemeManager.key) as Int? {
-            applog("prefs not empty: \(theme)")
-        } else {
-            applog("prefs empty, looks like first run")
+        if (prefs.integer(forKey: ThemeManager.key) as Int?) == nil {
             prefs.set(Theme.classic.rawValue, forKey: ThemeManager.key)
         }
         

@@ -20,7 +20,12 @@ class ThemeManager {
         MessageCell.appearance().backgroundColor = themeData.backgroundColor
         HeaderCell.appearance().backgroundColor = themeData.backgroundColor
         UILabel.appearance().textColor = themeData.textColor
+        
         UITextView.appearance().textColor = themeData.textColor
+        UITextView.appearance().backgroundColor = themeData.buttonBgColor
+        
+        UITextField.appearance().backgroundColor = themeData.buttonBgColor
+        
         UIView.appearance().tintColor = themeData.tintColor
         UIBarButtonItem.appearance().tintColor = themeData.tintColor
         switch themeData.brightness {
