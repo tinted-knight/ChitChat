@@ -60,17 +60,17 @@ extension ConversationListViewController {
     
     func processCoreData() {
         coreDataManager.checkSavedData { [weak self] (chatList) in
-            Log.oldschool("checkSavedData")
+            Log.oldschool("checkSavedData: ")
             if !chatList.isEmpty {
-                Log.oldschool("not empty")
+                Log.oldschool("     not empty")
                 chatList.keys.forEach { (channel) in
-                    Log.oldschool("Channel: \(channel.name)")
+                    Log.oldschool("Channel from CoreData: \(channel.name)")
                     chatList[channel]?.forEach({ (message) in
                         Log.oldschool("     \(message.content)")
                     })
                 }
             } else {
-                Log.oldschool("empty")
+                Log.oldschool("     empty")
                 self?.coreDataManager.loadFromNetAndSaveLocally()
             }
         }

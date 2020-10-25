@@ -74,7 +74,9 @@ class CoreDataStack {
         context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         return context
     }
-    
+}
+// MARK: Load
+extension CoreDataStack {
     func load(_ completion: @escaping ([ChannelEntity: [MessageEntity]]) -> Void) {
         mainContext.perform {
             do {
@@ -93,7 +95,9 @@ class CoreDataStack {
             }
         }
     }
-    
+}
+// MARK: Save
+extension CoreDataStack {
     func performSave(_ block: (NSManagedObjectContext) -> Void) {
         let context = saveContext()
         context.performAndWait {
@@ -112,7 +116,9 @@ class CoreDataStack {
         try context.save()
         if let parent = context.parent { try performSave(in: parent)}
     }
-    
+}
+// MARK: Logs
+extension CoreDataStack {
     func enableObservers() {
         NotificationCenter.default.addObserver(
             self,

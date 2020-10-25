@@ -33,8 +33,7 @@ class ConversationListViewController: UIViewController {
             fatalError("myData is nil")
         }
        return CoreDataManager(coreDataStack: CoreDataStack(),
-                              channelsManager: FirestoreChannelManager(),
-                              userData: userData)
+                              channelsManager: FirestoreChannelManager())
     }()
     
     override func viewDidLoad() {
