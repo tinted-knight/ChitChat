@@ -49,6 +49,7 @@ extension Channel: Codable {
 
 // MARK: Message
 struct Message {
+    let documentId: String
     let content: String
     let created: Date
     let senderId: String
@@ -62,6 +63,7 @@ struct Message {
         
         let created: Date = createdTimestamp.dateValue()
         
+        self.documentId = document.documentID
         self.content = content
         self.created = created
         self.senderId = senderId

@@ -113,7 +113,7 @@ extension CoreDataStack {
     }
     
     private func performSave(in context: NSManagedObjectContext) throws {
-        // эта обёртка убирает runtime error EXC_BAD_INSTRUCTION (code=EXC_I386_INVOP, subcode=0x0)
+        // эта обёртка убирает runtime esrror EXC_BAD_INSTRUCTION (code=EXC_I386_INVOP, subcode=0x0)
 //        context.perform {
 //            do {
                 try context.save()
@@ -160,14 +160,15 @@ extension CoreDataStack {
         mainContext.perform {
             do {
                 let count = try self.mainContext.count(for: ChannelEntity.fetchRequest())
-                print("\(count) channels")
+                Log.delimiter("\(count) channels")
                 let channels = try self.mainContext.fetch(ChannelEntity.fetchRequest()) as? [ChannelEntity] ?? []
                 channels.forEach {
                     print($0.name)
                 }
                 let messages = try self.mainContext.fetch(MessageEntity.fetchRequest()) as? [MessageEntity] ?? []
+                Log.delimiter("messages")
                 messages.forEach {
-                    print($0.content)
+                    print("\($0.content), \($0.documentId)")
                 }
             } catch {
                 fatalError(error.localizedDescription)

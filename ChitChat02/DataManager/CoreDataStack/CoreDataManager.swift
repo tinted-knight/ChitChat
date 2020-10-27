@@ -17,6 +17,9 @@ class CoreDataManager {
     init(coreDataStack: CoreDataStack, channelsManager: ChannelsManager) {
         self.coreDataStack = coreDataStack
         self.channelsManager = channelsManager
+        
+        coreDataStack.didUpdateDatabase = { $0.printDBStat() }
+        coreDataStack.enableObservers()
     }
     
     func checkSavedData(_ completion: @escaping ([ChannelEntity: [MessageEntity]]) -> Void) {
@@ -30,8 +33,6 @@ class CoreDataManager {
             channels.forEach { (channel) in
                 let messagesReader = FirestoreMessageReader(for: channel)
                 messagesReader.loadMessageList(onData: { (messages) in
-                    Log.oldschool("Channel from net: \(channel.name); message count: \(messages.count)")
-                    messages.forEach { Log.oldschool("        \($0.content)") }
                     self.save(channel, with: messages)
                 }, onError: { error in
                     fatalError(error)

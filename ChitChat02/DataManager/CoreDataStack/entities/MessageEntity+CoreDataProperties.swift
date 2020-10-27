@@ -17,6 +17,7 @@ extension MessageEntity {
     }
 
     @NSManaged public var content: String
+    @NSManaged public var documentId: String
     @NSManaged public var created: Date
     @NSManaged public var senderId: String
     @NSManaged public var senderName: String

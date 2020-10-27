@@ -12,6 +12,7 @@ import CoreData
 extension MessageEntity {
     convenience init(from model: Message, in context: NSManagedObjectContext) {
         self.init(context: context)
+        self.documentId = model.documentId
         self.content = model.content
         self.created = model.created
         self.senderId = model.senderId
