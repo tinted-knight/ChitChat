@@ -113,7 +113,14 @@ extension CoreDataStack {
     }
     
     private func performSave(in context: NSManagedObjectContext) throws {
-        try context.save()
+        // эта обёртка убирает runtime error EXC_BAD_INSTRUCTION (code=EXC_I386_INVOP, subcode=0x0)
+//        context.perform {
+//            do {
+                try context.save()
+//            } catch {
+//                assertionFailure(error.localizedDescription)
+//            }
+//        }
         if let parent = context.parent { try performSave(in: parent)}
     }
 }
