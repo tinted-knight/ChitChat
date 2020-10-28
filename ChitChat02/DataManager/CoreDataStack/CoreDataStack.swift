@@ -103,25 +103,20 @@ extension CoreDataStack {
         context.performAndWait {
             block(context)
             if context.hasChanges {
-                do {
-                    try performSave(in: context)
-                } catch {
-                    assertionFailure(error.localizedDescription)
-                }
+                performSave(in: context)
             }
         }
     }
     
-    private func performSave(in context: NSManagedObjectContext) throws {
-        // эта обёртка убирает runtime esrror EXC_BAD_INSTRUCTION (code=EXC_I386_INVOP, subcode=0x0)
-//        context.perform {
-//            do {
+    private func performSave(in context: NSManagedObjectContext) {
+        context.performAndWait {
+            do {
                 try context.save()
-//            } catch {
-//                assertionFailure(error.localizedDescription)
-//            }
-//        }
-        if let parent = context.parent { try performSave(in: parent)}
+            } catch {
+                assertionFailure(error.localizedDescription)
+            }
+        }
+        if let parent = context.parent { performSave(in: parent) }
     }
 }
 // MARK: Logs

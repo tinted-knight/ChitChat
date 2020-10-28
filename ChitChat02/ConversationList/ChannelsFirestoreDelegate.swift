@@ -64,15 +64,12 @@ extension ConversationListViewController {
             if !chatList.isEmpty {
                 Log.oldschool("     not empty")
                 chatList.keys.forEach { (channel) in
-                    Log.oldschool("Channel from CoreData: \(channel.name)")
-                    chatList[channel]?.forEach({ (message) in
-                        Log.oldschool("     \(message.content)")
-                    })
+                    Log.oldschool("Channel from CoreData: \(channel.name), message count: \(chatList[channel]?.count ?? 0)")
                 }
             } else {
                 Log.oldschool("     empty")
-                self?.coreDataManager.loadFromNetAndSaveLocally()
             }
+            self?.coreDataManager.loadFromNetAndSaveLocally()
         }
     }
     
