@@ -12,8 +12,6 @@ class CoreDataManager {
     private let coreDataStack: CoreDataStack
     private let channelsManager: ChannelsManager
     
-    private let queue = DispatchQueue(label: "core data save queue")
-    
     init(coreDataStack: CoreDataStack, channelsManager: ChannelsManager) {
         self.coreDataStack = coreDataStack
         self.channelsManager = channelsManager
@@ -44,14 +42,10 @@ class CoreDataManager {
     }
     
     private func save(_ channel: Channel, with messages: [Message]) {
-        // пробовал обернуть вызов в очередь, чтоб гарантировано
-        // поместить не в main поток
-//        queue.async { [weak self] in
             coreDataStack.performSave { (context) in
                 let channelEntity = ChannelEntity(from: channel, in: context)
                 let messageEntityList = messages.map { MessageEntity(from: $0, in: context) }
                 channelEntity.addToMessages(NSSet(array: messageEntityList))
             }
-//        }
     }
 }
