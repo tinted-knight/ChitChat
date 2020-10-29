@@ -98,27 +98,32 @@ extension CoreDataStack {
 }
 // MARK: Save
 extension CoreDataStack {
-    func performSave(_ block: (NSManagedObjectContext) -> Void) {
+    func performSave(_ block:@escaping (NSManagedObjectContext) -> Void) {
         let context = saveContext()
-        context.performAndWait {
+        context.perform { [weak self] in
+//            Log.oldschool("= isMainThread: \(Thread.isMainThread)")
             block(context)
             if context.hasChanges {
-                performSave(in: context)
+                self?.performSave(in: context)
             }
         }
     }
     
     private func performSave(in context: NSManagedObjectContext) {
         context.performAndWait {
+//            Log.oldschool("=|= isMainThread: \(Thread.isMainThread)")
+            // вот здесь иногда выскакивает mainThread, видимо когда исполняется на mainContext
             do {
                 try context.save()
             } catch {
                 assertionFailure(error.localizedDescription)
             }
         }
+//        Log.oldschool("=|=|= isMainThread: \(Thread.isMainThread)")
         if let parent = context.parent { performSave(in: parent) }
     }
 }
+
 // MARK: Logs
 extension CoreDataStack {
     func enableObservers() {

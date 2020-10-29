@@ -42,10 +42,10 @@ class CoreDataManager {
     }
     
     private func save(_ channel: Channel, with messages: [Message]) {
-            coreDataStack.performSave { (context) in
-                let channelEntity = ChannelEntity(from: channel, in: context)
-                let messageEntityList = messages.map { MessageEntity(from: $0, in: context) }
-                channelEntity.addToMessages(NSSet(array: messageEntityList))
-            }
+        coreDataStack.performSave { (context) in
+            let channelEntity = ChannelEntity(from: channel, in: context)
+            let messageEntityList = messages.map { MessageEntity(from: $0, in: context) }
+            channelEntity.addToMessages(NSSet(array: messageEntityList))
+        }
     }
 }
