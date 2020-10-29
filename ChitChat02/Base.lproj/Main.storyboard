@@ -166,11 +166,28 @@
                                 <rect key="frame" x="0.0" y="96" width="375" height="522"/>
                                 <sections/>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5yj-G3-aEf">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mB6-rn-Ywu">
+                                <rect key="frame" x="166.5" y="323.5" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="5yj-G3-aEf" firstAttribute="centerX" secondItem="pxa-aX-Mwh" secondAttribute="centerX" id="2Bu-UB-lc6"/>
+                            <constraint firstItem="cTl-Kz-7CA" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mB6-rn-Ywu" secondAttribute="trailing" constant="16" id="3io-Qz-fIB"/>
+                            <constraint firstItem="5yj-G3-aEf" firstAttribute="centerY" secondItem="pxa-aX-Mwh" secondAttribute="centerY" id="BOj-U6-gmI"/>
+                            <constraint firstItem="mB6-rn-Ywu" firstAttribute="centerX" secondItem="pxa-aX-Mwh" secondAttribute="centerX" id="K7j-3R-aOR"/>
+                            <constraint firstItem="mB6-rn-Ywu" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cTl-Kz-7CA" secondAttribute="top" constant="16" id="SFf-9w-KZp"/>
                             <constraint firstItem="jPi-cU-LLC" firstAttribute="trailing" secondItem="cTl-Kz-7CA" secondAttribute="trailing" id="gbb-dy-9nm"/>
+                            <constraint firstItem="mB6-rn-Ywu" firstAttribute="centerY" secondItem="pxa-aX-Mwh" secondAttribute="centerY" id="hGw-ac-pTx"/>
+                            <constraint firstItem="mB6-rn-Ywu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cTl-Kz-7CA" secondAttribute="leading" constant="16" id="mvv-dw-oSV"/>
                             <constraint firstItem="jPi-cU-LLC" firstAttribute="top" secondItem="cTl-Kz-7CA" secondAttribute="top" id="o8T-Qz-DrU"/>
+                            <constraint firstItem="cTl-Kz-7CA" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mB6-rn-Ywu" secondAttribute="bottom" constant="16" id="qg5-pp-SZ6"/>
                             <constraint firstItem="jPi-cU-LLC" firstAttribute="bottom" secondItem="cTl-Kz-7CA" secondAttribute="bottom" id="tDH-Dv-3bI"/>
                             <constraint firstItem="jPi-cU-LLC" firstAttribute="leading" secondItem="cTl-Kz-7CA" secondAttribute="leading" id="z9B-R1-wgD"/>
                         </constraints>
@@ -180,45 +197,15 @@
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="kGS-lf-jsc"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="chatTableView" destination="jPi-cU-LLC" id="m4I-v6-N70"/>
-                        <segue destination="OIn-fe-geF" kind="show" identifier="segue_single_conversation" id="1we-QB-y8D"/>
+                        <outlet property="channelsTableView" destination="jPi-cU-LLC" id="m4I-v6-N70"/>
+                        <outlet property="emptyLabel" destination="mB6-rn-Ywu" id="jD0-0j-aXI"/>
+                        <outlet property="loadingIndicator" destination="5yj-G3-aEf" id="u87-C7-wYn"/>
                         <segue destination="kCs-3c-hXG" kind="presentation" identifier="segue_show_profile" id="ofL-xx-Cli"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSV-tY-Wgx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1111" y="878"/>
-        </scene>
-        <!--Martha Craig-->
-        <scene sceneID="tP1-Ft-pM1">
-            <objects>
-                <viewController id="OIn-fe-geF" customClass="ConversationViewController" customModule="ChitChat02" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HJS-ae-f6w">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cdH-6X-exv">
-                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="zIV-g2-kHC" firstAttribute="bottom" secondItem="cdH-6X-exv" secondAttribute="bottom" id="IHc-uZ-tXY"/>
-                            <constraint firstItem="zIV-g2-kHC" firstAttribute="trailing" secondItem="cdH-6X-exv" secondAttribute="trailing" id="bOm-XE-GC9"/>
-                            <constraint firstItem="cdH-6X-exv" firstAttribute="leading" secondItem="zIV-g2-kHC" secondAttribute="leading" id="cZh-Nk-lAJ"/>
-                            <constraint firstItem="cdH-6X-exv" firstAttribute="top" secondItem="zIV-g2-kHC" secondAttribute="top" id="ohs-gw-ddx"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="zIV-g2-kHC"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Martha Craig" largeTitleDisplayMode="never" id="Tk8-Mu-yrd"/>
-                    <connections>
-                        <outlet property="messages" destination="cdH-6X-exv" id="ciQ-ev-QJD"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vWI-Te-PAJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1982" y="878"/>
         </scene>
     </scenes>
     <resources>

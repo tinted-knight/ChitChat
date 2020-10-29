@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView!
 
-    private var activeField: UIView? = nil
+    private var activeField: UIView?
 
     private let picker = UIImagePickerController()
     var profileImage: UIImage?
@@ -46,6 +46,8 @@ class ProfileViewController: UIViewController {
 
         repo.delegate = self
         loadUserData()
+        
+        super.viewDidLoad()
     }
 
     private func prepareUi() {
@@ -92,7 +94,7 @@ class ProfileViewController: UIViewController {
                 object: nil)
     }
 
-    // MARK: -UI Actions
+    // MARK: UI Actions
     @objc private func adjustForKeyboard(_ notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
             return
@@ -142,7 +144,7 @@ class ProfileViewController: UIViewController {
 
 }
 
-// MARK: -TextField change handler
+// MARK: TextField change handler
 extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeField = textField
@@ -150,7 +152,6 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeField = nil
-//        checkSaveControls()
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -159,11 +160,10 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
 
     func textViewDidEndEditing(_ textView: UITextView) {
         activeField = nil
-//        checkSaveControls()
     }
 }
 
-// MARK: -DataManagerDelegate
+// MARK: DataManagerDelegate
 extension ProfileViewController: DataManagerDelegate {
 
     func onLoaded(_ model: UserModel) {
@@ -191,17 +191,17 @@ extension ProfileViewController: DataManagerDelegate {
     }
 }
 
-//MARK: -Profile picture choose
+// MARK: Profile picture choose
 extension ProfileViewController {
     private func showChooseDialog() {
         let alertController = UIAlertController(title: nil, message: "Think twice. Everyone all over the Internet will see your face.", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Make a foto", style: .default) { [weak self] UIAlertAction in
+        let cameraAction = UIAlertAction(title: "Make a foto", style: .default) { [weak self] _ in
             self?.chooseFromCamera()
         }
-        let galleryAction = UIAlertAction(title: "From galley", style: .default) { [weak self] UIAlertAction in
+        let galleryAction = UIAlertAction(title: "From galley", style: .default) { [weak self] _ in
             self?.chooseFromGallery()
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { UIAlertAction in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
             // todo cancel handler
         }
 
@@ -220,7 +220,7 @@ extension ProfileViewController {
 
             present(picker, animated: true, completion: nil)
         } else {
-            showAlert("Error", message: "Device has no gallery")
+            showAlert(title: "Error", message: "Device has no gallery")
         }
     }
 
@@ -229,18 +229,18 @@ extension ProfileViewController {
             picker.sourceType = .camera
             present(picker, animated: true, completion: nil)
         } else {
-            showAlert("Error", message: "No camera on device! You are in safe!")
+            showAlert(title: "Error", message: "No camera on device! You are in safe!")
         }
     }
 }
 
-// MARK: -UIImagePickerControllerDelegate, UINavigationControllerDelegate
+// MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
         applog("\(info[.imageURL] ?? "nothing")")
         guard let image = info[.originalImage] as? UIImage else {
-            showAlert("Error", message: "Something has gone very wrong")
+            showAlert(title: "Error", message: "Something has gone very wrong")
             return
         }
         profileImage = image

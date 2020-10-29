@@ -8,13 +8,6 @@
 
 import UIKit
 
-// похоже, что в двух местах line:141 и line:67 может произойти retain cycle
-// потому что при вызове этих замыканий, если класс, где они объявлены
-// почему-то должен быть уничтожен к этому моменту, и в замыканиях не использовано
-// [weak self], то получится
-// SomeViewController   ссылка на ->    { closure }
-// SomeViewController   <- слылка на    { closure без [weak self] }
-
 protocol ThemesPickerDelegate {
     func theme(picked value: Theme)
     func result(_ value: Theme, _ saveChoice: Bool)
@@ -23,7 +16,7 @@ protocol ThemesPickerDelegate {
 class ThemesViewController: UIViewController {
     
     static func instance() -> ThemesViewController? {
-        let storyboard = UIStoryboard(name: String.init(describing: self), bundle: nil)
+        let storyboard = UIStoryboard(name: "ThemesViewController", bundle: nil)
         return storyboard.instantiateInitialViewController() as? ThemesViewController
     }
     
@@ -46,12 +39,12 @@ class ThemesViewController: UIViewController {
     var selectedTheme: Theme = .classic
     private var selectedImageView: UIImageView? {
         switch selectedTheme {
-            case .classic:
-                return imageRed
-            case .yellow:
-                return imageYellow
-            case .black:
-                return imageGreen
+        case .classic:
+            return imageRed
+        case .yellow:
+            return imageYellow
+        case .black:
+            return imageGreen
         }
     }
 

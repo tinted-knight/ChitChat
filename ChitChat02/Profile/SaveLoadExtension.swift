@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-// MARK: -Edit mode, save/load user data
 extension ProfileViewController {
     func saveUserData(with dataManagerType: DataManagerType) {
         let name = textUserName.text ?? repo.user.name
@@ -34,20 +33,21 @@ extension ProfileViewController {
     }
     
     func saveSuccess() {
-        showAlert("Данные сохранены")
+        showAlert(title: "Данные сохранены")
         state = .hasSaved
         repo.load()
     }
     
     func userSaveError(_ message: String) {
-        showRetryAlert(
-            message,
+        retryAlert(
+            title: "Save error",
+            message: message,
             onOk: { [weak self] in
                 self?.repo.load()
             },
             onRetry: {[weak self] in
                 self?.repo.retry()
-            })
+        })
     }
     
     func loadUserData() {
@@ -99,7 +99,6 @@ extension ProfileViewController {
             profileImageView.isUserInteractionEnabled = false
         } else {
             activityIndicator.stopAnimating()
-//            buttonSave.isEnabled = false
             buttonEditPicture.isEnabled = true
             profileImageView.isUserInteractionEnabled = true
             buttonUserEdit.isEnabled = true
@@ -137,26 +136,7 @@ extension ProfileViewController {
     
     func setLoadError(_ message: String) {
         showLoadingControls(false)
-        showAlert("Похоже, что  ты новенький", message: "Введи свои данные и сохрани")
+        showAlert(title: "Похоже, что  ты новенький", message: "Введи свои данные и сохрани")
         setLoadedState()
-    }
-
-    func showRetryAlert(_ message: String, onOk: (() -> Void)? = nil, onRetry: @escaping () -> Void) {
-        let alertView = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Ok", style: .default) { action in
-            onOk?()
-        }
-        let retryAction = UIAlertAction(title: "Повторить", style: .default) { action in
-            onRetry()
-        }
-        alertView.addAction(doneAction)
-        alertView.addAction(retryAction)
-        present(alertView, animated: true, completion: nil)
-    }
-    
-    func showAlert(_ title: String, message: String? = nil) {
-        let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        present(alertView, animated: true, completion: nil)
     }
 }

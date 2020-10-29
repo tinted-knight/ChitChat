@@ -18,18 +18,18 @@ class SmartDataManager {
     
     private var dataManager: DataManager {
         switch dataManagerType {
-            case .gcd:
-                return gcdDataManager
-            case .operation:
-                return operationDataManager
+        case .gcd:
+            return gcdDataManager
+        case .operation:
+            return operationDataManager
         }
     }
 
-    var delegate: DataManagerDelegate? = nil
+    var delegate: DataManagerDelegate?
     
     var user: UserModel = newUser
-    private var lastSavedUser: UserModel? = nil
-    private var lastSavedAvatar: Data? = nil
+    private var lastSavedUser: UserModel?
+    private var lastSavedAvatar: Data?
 
     init(dataManagerType: DataManagerType = .gcd) {
         self.dataManagerType = dataManagerType
@@ -55,10 +55,10 @@ class SmartDataManager {
         if let type = type { self.dataManagerType = type }
         
         switch self.dataManagerType {
-            case .gcd:
-                gcdDataManager.load()
-            case .operation:
-                operationDataManager.load()
+        case .gcd:
+            gcdDataManager.load()
+        case .operation:
+            operationDataManager.load()
         }
     }
     

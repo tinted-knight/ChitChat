@@ -13,6 +13,7 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var background: UIView!
+    @IBOutlet weak var labelName: UILabel!
     
     private let formatter = DateFormatter()
     private let calendar = Calendar.current
@@ -44,12 +45,13 @@ extension MessageCell: ConfigurableView {
         message.text = model.text
         date.text = formatDateTime(with: model.date)
         switch model.direction {
-            case .income:
-                background.backgroundColor = ThemeManager.get().incomeBgColor
-                message.textColor = ThemeManager.get().incomeTextColor
-            case .outcome:
-                background.backgroundColor = ThemeManager.get().outcomeBgColor
-                message.textColor = ThemeManager.get().outcomeTextColor
+        case .income:
+            background.backgroundColor = ThemeManager.get().incomeBgColor
+            message.textColor = ThemeManager.get().incomeTextColor
+            labelName.text = model.sender
+        case .outcome:
+            background.backgroundColor = ThemeManager.get().outcomeBgColor
+            message.textColor = ThemeManager.get().outcomeTextColor
         }
     }
 }

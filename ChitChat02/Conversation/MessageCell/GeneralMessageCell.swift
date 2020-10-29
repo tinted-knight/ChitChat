@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BaseMessageCell  {
+class BaseMessageCell {
 
     private let formatter = DateFormatter()
     private let calendar = Calendar.current

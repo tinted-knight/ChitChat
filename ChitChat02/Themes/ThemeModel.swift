@@ -27,34 +27,34 @@ enum Brightness: Codable {
         let container = try decoder.container(keyedBy: Key.self)
         let rawValue = try container.decode(Int.self, forKey: .rawValue)
         switch rawValue {
-            case 0:
-                self = .light
-            case 1:
-                self = .dark
-            default:
-                throw CodingError.unknownValue
+        case 0:
+            self = .light
+        case 1:
+            self = .dark
+        default:
+            throw CodingError.unknownValue
         }
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: Key.self)
         switch self {
-            case .light:
-                try container.encode(0, forKey: .rawValue)
-            case .dark:
-                try container.encode(0, forKey: .rawValue)
+        case .light:
+            try container.encode(0, forKey: .rawValue)
+        case .dark:
+            try container.encode(0, forKey: .rawValue)
         }
     }
 }
 
-struct Color : Codable {
-    var red : CGFloat = 0.0, green: CGFloat = 0.0, blue: CGFloat = 0.0, alpha: CGFloat = 0.0
+struct Color: Codable {
+    var red: CGFloat = 0.0, green: CGFloat = 0.0, blue: CGFloat = 0.0, alpha: CGFloat = 0.0
 
-    var uiColor : UIColor {
+    var uiColor: UIColor {
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 
-    init(_ uiColor : UIColor) {
+    init(_ uiColor: UIColor) {
         uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
     }
 }
@@ -136,8 +136,8 @@ let fakeThemeData = [
         brightness: .light,
         backgroundColor: .white,
         textColor: .black,
-        incomeBgColor: .green,
-        outcomeBgColor: .lightGray,
+        incomeBgColor: UIColor.green.withAlphaComponent(0.2),
+        outcomeBgColor: UIColor.lightGray.withAlphaComponent(0.2),
         incomeTextColor: .black,
         outcomeTextColor: .black,
         onlineBgColor: UIColor.yellow.withAlphaComponent(0.2),
@@ -172,5 +172,5 @@ let fakeThemeData = [
         historyBgColor: .black,
         tintColor: .systemBlue,
         buttonBgColor: UIColor(displayP3Red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
-    ),
+    )
 ]

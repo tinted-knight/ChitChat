@@ -32,13 +32,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Las-5V-wLm">
+                                <rect key="frame" x="4" y="125.5" width="259.5" height="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="0.20478381849315069" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="aIx-Ni-hsr" firstAttribute="top" secondItem="pel-lH-dYB" secondAttribute="top" constant="4" id="EWj-If-dgG"/>
                             <constraint firstAttribute="trailing" secondItem="aIx-Ni-hsr" secondAttribute="trailing" constant="4" id="L6m-rw-8Yd"/>
                             <constraint firstAttribute="bottom" secondItem="gC6-1c-mbM" secondAttribute="bottom" constant="4" id="NNX-rq-mWm"/>
+                            <constraint firstItem="Las-5V-wLm" firstAttribute="leading" secondItem="pel-lH-dYB" secondAttribute="leading" constant="4" id="QQK-Gd-eFl"/>
+                            <constraint firstItem="Las-5V-wLm" firstAttribute="top" secondItem="aIx-Ni-hsr" secondAttribute="bottom" id="SLc-Hj-daS"/>
                             <constraint firstAttribute="trailing" secondItem="gC6-1c-mbM" secondAttribute="trailing" constant="4" id="W7U-ZC-cJr"/>
+                            <constraint firstItem="Las-5V-wLm" firstAttribute="trailing" secondItem="gC6-1c-mbM" secondAttribute="leading" id="XBE-9O-6Na"/>
                             <constraint firstItem="aIx-Ni-hsr" firstAttribute="leading" secondItem="pel-lH-dYB" secondAttribute="leading" constant="4" id="a3t-w4-KDX"/>
                             <constraint firstItem="gC6-1c-mbM" firstAttribute="top" secondItem="aIx-Ni-hsr" secondAttribute="bottom" constant="2" id="cgI-1J-4VQ"/>
                         </constraints>
@@ -56,6 +65,7 @@
             <connections>
                 <outlet property="background" destination="pel-lH-dYB" id="xHY-o6-I6X"/>
                 <outlet property="date" destination="gC6-1c-mbM" id="pc9-th-Q0L"/>
+                <outlet property="labelName" destination="Las-5V-wLm" id="iNu-2R-Wqk"/>
                 <outlet property="message" destination="aIx-Ni-hsr" id="TRi-TP-v6W"/>
             </connections>
             <point key="canvasLocation" x="163.768115942029" y="98.102678571428569"/>
