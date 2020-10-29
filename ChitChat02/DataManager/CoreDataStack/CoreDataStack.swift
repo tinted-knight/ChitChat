@@ -74,6 +74,14 @@ class CoreDataStack {
         context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         return context
     }
+
+    private func logContext() -> NSManagedObjectContext {
+        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.parent = self.mainContext
+        context.automaticallyMergesChangesFromParent = true
+        context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        return context
+    }
 }
 // MARK: Load
 extension CoreDataStack {
@@ -101,7 +109,7 @@ extension CoreDataStack {
     func performSave(_ block:@escaping (NSManagedObjectContext) -> Void) {
         let context = saveContext()
         context.perform { [weak self] in
-//            Log.oldschool("= isMainThread: \(Thread.isMainThread)")
+            Log.oldschool("= isMainThread: \(Thread.isMainThread)")
             block(context)
             if context.hasChanges {
                 self?.performSave(in: context)
@@ -111,16 +119,15 @@ extension CoreDataStack {
     
     private func performSave(in context: NSManagedObjectContext) {
         context.performAndWait {
-//            Log.oldschool("=|= isMainThread: \(Thread.isMainThread)")
+            Log.oldschool("=|= isMainThread: \(Thread.isMainThread)")
             // вот здесь иногда выскакивает mainThread, видимо когда исполняется на mainContext
             do {
                 try context.save()
+                if let parent = context.parent { performSave(in: parent) }
             } catch {
                 assertionFailure(error.localizedDescription)
             }
         }
-//        Log.oldschool("=|=|= isMainThread: \(Thread.isMainThread)")
-        if let parent = context.parent { performSave(in: parent) }
     }
 }
 
@@ -157,15 +164,16 @@ extension CoreDataStack {
     }
     
     func printDBStat() {
-        mainContext.perform {
+        let context = logContext()
+        context.perform {
             do {
-                let count = try self.mainContext.count(for: ChannelEntity.fetchRequest())
+                let count = try context.count(for: ChannelEntity.fetchRequest())
                 Log.delimiter("\(count) channels")
-                let channels = try self.mainContext.fetch(ChannelEntity.fetchRequest()) as? [ChannelEntity] ?? []
+                let channels = try context.fetch(ChannelEntity.fetchRequest()) as? [ChannelEntity] ?? []
                 channels.forEach {
                     print($0.name)
                 }
-                let messages = try self.mainContext.fetch(MessageEntity.fetchRequest()) as? [MessageEntity] ?? []
+                let messages = try context.fetch(MessageEntity.fetchRequest()) as? [MessageEntity] ?? []
                 Log.delimiter("messages")
                 messages.forEach {
                     print("\($0.content), \($0.documentId)")

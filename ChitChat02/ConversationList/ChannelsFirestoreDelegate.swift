@@ -62,10 +62,7 @@ extension ConversationListViewController {
         coreDataManager.checkSavedData { [weak self] (chatList) in
             Log.oldschool("checkSavedData: ")
             if !chatList.isEmpty {
-                Log.oldschool("     not empty")
-                chatList.keys.forEach { (channel) in
-                    Log.oldschool("Channel from CoreData: \(channel.name), message count: \(chatList[channel]?.count ?? 0)")
-                }
+                Log.oldschool("     NOT empty")
             } else {
                 Log.oldschool("     empty")
             }
