@@ -43,7 +43,8 @@ class ConversationListViewController: UIViewController {
         myData = loadUserData()
         
         prepareUi()
-        loadChannelList()
+        loadFromCache()
+//        loadChannelList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,23 +125,31 @@ extension ConversationListViewController {
 // MARK: UITableViewDataSource
 extension ConversationListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let channel = coreDataManager.frcChannels.object(at: indexPath)
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
             as? ConversationCell else {
                 return UITableViewCell()
         }
-        
-        cell.configure(with: channels[indexPath.row])
+
+        cell.configure(with: channel)
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        guard let sections = coreDataManager.frcChannels.sections else { return 0 }
+        return sections.count
     }
     
     private func simpleHeader(_ text: String) -> UIView {
         let view = UILabel()
         view.text = text
         return view
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = coreDataManager.frcChannels.sections else { return nil }
+        return sections[section].name
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -150,7 +159,7 @@ extension ConversationListViewController: UITableViewDataSource {
         cell.configure(with: "Channels")
         return cell
     }
-    
+
     private func buildSectionHeader(_ tableView: UITableView, with text: String) -> UIView {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: headerReuseId) as? HeaderCell else {
             return simpleHeader("Channels")
@@ -160,13 +169,17 @@ extension ConversationListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return channels.count
+        guard let sections = coreDataManager.frcChannels.sections else { return 0 }
+        return sections[section].numberOfObjects
     }
 }
 // MARK: UITableViewDelegate
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        openConversationScreen(for: channels[indexPath.row])
+        guard let channel = coreDataManager.frcChannels.fetchedObjects?[indexPath.row] else { return }
+        Log.oldschool("\(indexPath)")
+        Log.oldschool("openConversation for \(channel.identifier), \(channel.name)")
+        openConversationScreen(for: channel, with: coreDataManager.frcMess(for: channel.identifier))
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }

@@ -8,18 +8,20 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 extension ConversationListViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? ConversationViewController,
-            let channel = sender as? Channel {
-            controller.channel = channel
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let controller = segue.destination as? ConversationViewController,
+//            let channel = sender as? Channel {
+//            controller.channel = channel
+//        }
+//    }
     
-    func openConversationScreen(for channel: Channel) {
+    func openConversationScreen(for channel: ChannelEntity, with frc: NSFetchedResultsController<MessageEntity>) {
         if let viewController = ConversationViewController.instance() {
             viewController.channel = channel
+            viewController.frc = frc
             viewController.myData = myData
             navigationController?.pushViewController(viewController, animated: true)
         }

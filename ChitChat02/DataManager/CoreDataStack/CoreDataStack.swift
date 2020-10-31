@@ -59,7 +59,7 @@ class CoreDataStack {
         return context
     }()
     
-    private lazy var mainContext: NSManagedObjectContext = {
+    lazy var mainContext: NSManagedObjectContext = {
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.parent = self.writerContext
         context.automaticallyMergesChangesFromParent = true
@@ -109,7 +109,7 @@ extension CoreDataStack {
     func performSave(_ block:@escaping (NSManagedObjectContext) -> Void) {
         let context = saveContext()
         context.perform { [weak self] in
-            Log.oldschool("= isMainThread: \(Thread.isMainThread)")
+//            Log.oldschool("= isMainThread: \(Thread.isMainThread)")
             block(context)
             if context.hasChanges {
                 self?.performSave(in: context)
@@ -119,7 +119,7 @@ extension CoreDataStack {
     
     private func performSave(in context: NSManagedObjectContext) {
         context.performAndWait {
-            Log.oldschool("=|= isMainThread: \(Thread.isMainThread)")
+//            Log.oldschool("=|= isMainThread: \(Thread.isMainThread)")
             // вот здесь иногда выскакивает mainThread, видимо когда исполняется на mainContext
             do {
                 try context.save()

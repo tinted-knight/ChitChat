@@ -59,7 +59,7 @@ class ConversationCell: UITableViewCell {
 
 extension ConversationCell: ConfigurableView {
     
-    func configure(with model: Channel) {
+    func configure(with model: ChannelEntity) {
         nameView.text = model.name
 
         if let lastMessage = model.lastMessage, !lastMessage.isEmpty {
@@ -69,7 +69,7 @@ extension ConversationCell: ConfigurableView {
         }
     }
     
-    private func renderHasLastMessage(with model: Channel) {
+    private func renderHasLastMessage(with model: ChannelEntity) {
         messageView.text = model.lastMessage ?? "!!! no last message"
         displayDateTime(with: model.lastActivity)
     }

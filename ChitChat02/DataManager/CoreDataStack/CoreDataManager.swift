@@ -7,17 +7,48 @@
 //
 
 import Foundation
+import CoreData
 
 class CoreDataManager {
     private let coreDataStack: CoreDataStack
     private let channelsManager: ChannelsManager
-    
+
     init(coreDataStack: CoreDataStack, channelsManager: ChannelsManager) {
         self.coreDataStack = coreDataStack
         self.channelsManager = channelsManager
+
+//        coreDataStack.didUpdateDatabase = { $0.printDBStat() }
+//        coreDataStack.enableObservers()
+    }
+    
+    lazy var frcChannels: NSFetchedResultsController<ChannelEntity> = {
+        let sortChannels = NSSortDescriptor(key: "name", ascending: true)
+        let frChannels = NSFetchRequest<ChannelEntity>(entityName: "ChannelEntity")
+        frChannels.sortDescriptors = [sortChannels]
         
-        coreDataStack.didUpdateDatabase = { $0.printDBStat() }
-        coreDataStack.enableObservers()
+        return NSFetchedResultsController(fetchRequest: frChannels,
+                                          managedObjectContext: coreDataStack.mainContext,
+                                          sectionNameKeyPath: nil,
+                                          cacheName: nil)
+    }()
+    
+    func frcMess(for channelId: String) -> NSFetchedResultsController<MessageEntity> {
+        Log.oldschool("frcMess for \(channelId)")
+        let sortMessages = NSSortDescriptor(key: "documentId", ascending: true)
+        let predicate = NSPredicate(format: "channel.identifier like '\(channelId)'")
+
+        let frMessages = NSFetchRequest<MessageEntity>(entityName: "MessageEntity")
+        frMessages.sortDescriptors = [sortMessages]
+        frMessages.predicate = predicate
+
+        return NSFetchedResultsController(fetchRequest: frMessages,
+                                          managedObjectContext: coreDataStack.mainContext,
+                                          sectionNameKeyPath: nil,
+                                          cacheName: nil)
+    }
+    
+    func fetchMessagesFor(channel: ChannelEntity) {
+        //
     }
     
     func checkSavedData(_ completion: @escaping ([ChannelEntity: [MessageEntity]]) -> Void) {

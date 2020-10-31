@@ -20,7 +20,7 @@ extension ConversationListViewController {
                 self.showEmpty()
                 return
             }
-            self.channelsTableView.reloadData()
+//            self.channelsTableView.reloadData()
             self.showLoaded()
         }, onError: { [weak self] error in
             self?.showAlert(title: "Channel load error", message: error)
@@ -55,19 +55,7 @@ extension ConversationListViewController {
         channelsTableView.isHidden = false
         emptyLabel.isHidden = true
         loadingIndicator.stopAnimating()
-        processCoreData()
-    }
-    
-    func processCoreData() {
-        coreDataManager.checkSavedData { [weak self] (chatList) in
-            Log.oldschool("checkSavedData: ")
-            if !chatList.isEmpty {
-                Log.oldschool("     NOT empty")
-            } else {
-                Log.oldschool("     empty")
-            }
-            self?.coreDataManager.loadFromNetAndSaveLocally()
-        }
+//        processCoreData()
     }
     
     func showEmpty() {

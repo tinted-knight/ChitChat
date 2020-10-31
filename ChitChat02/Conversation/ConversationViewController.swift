@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ConversationViewController: UIViewController {
 
@@ -15,11 +16,13 @@ class ConversationViewController: UIViewController {
         return storyboard.instantiateInitialViewController() as? ConversationViewController
     }
     
-    var channel: Channel?
+    var channel: ChannelEntity?
     var messageManager: MessagesManager?
     var myData: UserData?
     
     var messages: [MessageCellModel] = []
+    
+    var frc: NSFetchedResultsController<MessageEntity>?
     
     private let nonameContact = "Noname"
     
@@ -34,7 +37,8 @@ class ConversationViewController: UIViewController {
         super.viewDidLoad()
 
         prepareUi()
-        loadData()
+//        loadData()
+        loadCached()
         applyTheme()
     }
     
@@ -68,21 +72,34 @@ extension ConversationViewController: UITableViewDelegate {
 }
 
 extension ConversationViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard let sections = frc?.sections else { return 0 }
+        return sections.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+        guard let frc = frc, let sections = frc.sections else { return 0 }
+        
+        return sections[section].numberOfObjects
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message = messages[indexPath.row]
+        guard let frc = frc else { return UITableViewCell() }
+        let message = frc.object(at: indexPath)
+        let direction: MessageDirection = message.senderId == myData?.uuid ? .outcome : .income
 
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: cellReuseId(for: message.direction),
+            withIdentifier: cellReuseId(for: direction),
             for: indexPath) as? MessageCell else {
                 return UITableViewCell()
         }
 
         cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-        cell.configure(with: message)
+        cell.configure(with: MessageCellModel(text: message.content,
+                                              date: message.created,
+                                              sender: message.senderName,
+                                              direction: direction))
 
         return cell
     }
