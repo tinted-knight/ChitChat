@@ -57,11 +57,13 @@ class CoreDataManager {
     
     func loadFromNetAndSaveLocally() {
         channelsManager.loadChannelList(onData: { [weak self] (channels) in
+            Log.oldschool("fire channels \(channels.count)")
             guard let self = self else { return }
             
             channels.forEach { (channel) in
                 let messagesReader = FirestoreMessageReader(for: channel)
                 messagesReader.loadMessageList(onData: { (messages) in
+                    Log.oldschool("fire messages for <\(channel.name)>, \(messages.count)")
                     self.save(channel, with: messages)
                 }, onError: { error in
                     fatalError(error)

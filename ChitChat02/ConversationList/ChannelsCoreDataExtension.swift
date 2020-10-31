@@ -12,8 +12,9 @@ import CoreData
 extension ConversationListViewController {
     func loadFromCache() {
         do {
-            try coreDataManager.frcChannels.performFetch()
             coreDataManager.frcChannels.delegate = self
+            try coreDataManager.frcChannels.performFetch()
+//            channelsTableView.reloadData()
             showLoaded()
 //            processCoreData()
         } catch {
@@ -66,20 +67,24 @@ extension ConversationListViewController: NSFetchedResultsControllerDelegate {
                     newIndexPath: IndexPath?) {
         switch type {
         case .insert:
-            if let indexPath = indexPath {
-                channelsTableView.insertRows(at: [indexPath], with: .automatic)
+            Log.oldschool("insert")
+            if let newIndexPath = newIndexPath {
+                channelsTableView.insertRows(at: [newIndexPath], with: .automatic)
             }
         case .delete:
+            Log.oldschool("delete")
             if let indexPath = indexPath {
                 channelsTableView.deleteRows(at: [indexPath], with: .automatic)
             }
         case .update:
+            Log.oldschool("update")
             if let indexPath = indexPath {
                 let channel = coreDataManager.frcChannels.object(at: indexPath)
                 guard let cell = channelsTableView.cellForRow(at: indexPath) as? ConversationCell else { break }
                 cell.configure(with: channel)
             }
         case .move:
+            Log.oldschool("move")
             if let indexPath = indexPath {
                 channelsTableView.deleteRows(at: [indexPath], with: .automatic)
             }

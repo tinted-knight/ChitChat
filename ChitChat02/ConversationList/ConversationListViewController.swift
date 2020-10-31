@@ -140,7 +140,7 @@ extension ConversationListViewController: UITableViewDataSource {
         guard let sections = coreDataManager.frcChannels.sections else { return 0 }
         return sections.count
     }
-    
+
     private func simpleHeader(_ text: String) -> UIView {
         let view = UILabel()
         view.text = text
@@ -151,7 +151,7 @@ extension ConversationListViewController: UITableViewDataSource {
         guard let sections = coreDataManager.frcChannels.sections else { return nil }
         return sections[section].name
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: headerReuseId) as? HeaderCell else {
             return simpleHeader("Channels")
