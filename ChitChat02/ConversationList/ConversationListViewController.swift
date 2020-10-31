@@ -19,8 +19,6 @@ class ConversationListViewController: UIViewController {
     
     private lazy var simpleSectionHeader: UIView = UILabel()
 
-    var channels: [Channel] = []
-    
     var currentTheme: Theme = .black
     let themeDataManager = ThemeDataManager()
     
@@ -177,9 +175,13 @@ extension ConversationListViewController: UITableViewDataSource {
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let channel = coreDataManager.frcChannels.fetchedObjects?[indexPath.row] else { return }
+        guard let userData = myData else { return }
         Log.oldschool("\(indexPath)")
         Log.oldschool("openConversation for \(channel.identifier), \(channel.name)")
-        openConversationScreen(for: channel, with: coreDataManager.frcMess(for: channel.identifier))
+        openConversationScreen(for: channel,
+                               with: FirestoreMessageManager(for: channel,
+                                                             me: userData,
+                                                             with: coreDataManager.coreDataStack))
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }

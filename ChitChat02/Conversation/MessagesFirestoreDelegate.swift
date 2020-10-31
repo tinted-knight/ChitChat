@@ -83,11 +83,11 @@ extension ConversationViewController {
 
 extension ConversationViewController {
     func loadCached() {
-        guard let frc = frc else { return }
+        guard let frc = messageManager?.frc else { return }
         do {
-//            frc.delegate = nil
+//            frc.delegate = self
             try frc.performFetch()
-            Log.oldschool("fetch messages, \(frc.fetchedObjects?.count)")
+            Log.oldschool("fetch messages, \(frc.fetchedObjects?.count ?? 0)")
             showLoaded()
         } catch {
             Log.oldschool(error.localizedDescription)

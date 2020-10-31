@@ -18,10 +18,10 @@ extension ConversationListViewController {
 //        }
 //    }
     
-    func openConversationScreen(for channel: ChannelEntity, with frc: NSFetchedResultsController<MessageEntity>) {
+    func openConversationScreen(for channel: ChannelEntity, with manager: MessagesManager) {
         if let viewController = ConversationViewController.instance() {
             viewController.channel = channel
-            viewController.frc = frc
+            viewController.messageManager = manager
             viewController.myData = myData
             navigationController?.pushViewController(viewController, animated: true)
         }

@@ -15,7 +15,7 @@ extension ConversationListViewController {
             guard let self = self else { return }
 
             if !values.isEmpty {
-                self.channels = values
+//                self.channels = values
             } else {
                 self.showEmpty()
                 return

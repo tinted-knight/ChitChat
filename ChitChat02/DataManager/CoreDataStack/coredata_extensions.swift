@@ -23,7 +23,7 @@ extension MessageEntity {
 extension ChannelEntity {
     convenience init(from model: Channel, in context: NSManagedObjectContext) {
         self.init(context: context)
-        self.identifier = model.indentifier
+        self.identifier = model.identifier
         self.name = model.name
         self.lastMessage = model.lastMessage
         self.lastActivity = model.lastActivity

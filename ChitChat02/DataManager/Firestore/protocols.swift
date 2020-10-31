@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol ChannelsManager {
     func loadChannelList(onData: @escaping ([Channel]) -> Void, onError: @escaping (String) -> Void)
@@ -18,5 +19,6 @@ protocol MessagesReader {
 }
 
 protocol MessagesManager: MessagesReader {
+    var frc: NSFetchedResultsController<MessageEntity> { get }
     func add(message: String)
 }

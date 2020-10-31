@@ -22,8 +22,6 @@ class ConversationViewController: UIViewController {
     
     var messages: [MessageCellModel] = []
     
-    var frc: NSFetchedResultsController<MessageEntity>?
-    
     private let nonameContact = "Noname"
     
     private let incomeCellId = "income-cell-id"
@@ -74,18 +72,18 @@ extension ConversationViewController: UITableViewDelegate {
 extension ConversationViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let sections = frc?.sections else { return 0 }
+        guard let sections = messageManager?.frc.sections else { return 0 }
         return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let frc = frc, let sections = frc.sections else { return 0 }
+        guard let frc = messageManager?.frc, let sections = frc.sections else { return 0 }
         
         return sections[section].numberOfObjects
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let frc = frc else { return UITableViewCell() }
+        guard let frc = messageManager?.frc else { return UITableViewCell() }
         let message = frc.object(at: indexPath)
         let direction: MessageDirection = message.senderId == myData?.uuid ? .outcome : .income
 

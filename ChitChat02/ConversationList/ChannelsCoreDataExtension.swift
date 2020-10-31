@@ -11,12 +11,12 @@ import CoreData
 
 extension ConversationListViewController {
     func loadFromCache() {
+        Log.oldschool(#function)
         do {
             coreDataManager.frcChannels.delegate = self
             try coreDataManager.frcChannels.performFetch()
-//            channelsTableView.reloadData()
             showLoaded()
-//            processCoreData()
+//            coreDataManager.loadFromNetAndSaveLocally()
         } catch {
             Log.oldschool(error.localizedDescription)
         }

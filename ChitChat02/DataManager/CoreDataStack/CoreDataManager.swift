@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 class CoreDataManager {
-    private let coreDataStack: CoreDataStack
+    let coreDataStack: CoreDataStack
     private let channelsManager: ChannelsManager
 
     init(coreDataStack: CoreDataStack, channelsManager: ChannelsManager) {
@@ -32,21 +32,6 @@ class CoreDataManager {
                                           cacheName: nil)
     }()
     
-    func frcMess(for channelId: String) -> NSFetchedResultsController<MessageEntity> {
-        Log.oldschool("frcMess for \(channelId)")
-        let sortMessages = NSSortDescriptor(key: "documentId", ascending: true)
-        let predicate = NSPredicate(format: "channel.identifier like '\(channelId)'")
-
-        let frMessages = NSFetchRequest<MessageEntity>(entityName: "MessageEntity")
-        frMessages.sortDescriptors = [sortMessages]
-        frMessages.predicate = predicate
-
-        return NSFetchedResultsController(fetchRequest: frMessages,
-                                          managedObjectContext: coreDataStack.mainContext,
-                                          sectionNameKeyPath: nil,
-                                          cacheName: nil)
-    }
-    
     func fetchMessagesFor(channel: ChannelEntity) {
         //
     }
@@ -61,7 +46,7 @@ class CoreDataManager {
             guard let self = self else { return }
             
             channels.forEach { (channel) in
-                let messagesReader = FirestoreMessageReader(for: channel)
+                let messagesReader = FirestoreMessageReader(for: channel.identifier)
                 messagesReader.loadMessageList(onData: { (messages) in
                     Log.oldschool("fire messages for <\(channel.name)>, \(messages.count)")
                     self.save(channel, with: messages)
