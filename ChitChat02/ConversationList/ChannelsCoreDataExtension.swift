@@ -16,7 +16,7 @@ extension ConversationListViewController {
             coreDataManager.frcChannels.delegate = self
             try coreDataManager.frcChannels.performFetch()
             showLoaded()
-//            coreDataManager.loadFromNetAndSaveLocally()
+            coreDataManager.loadFromNetAndSaveLocally()
         } catch {
             Log.oldschool(error.localizedDescription)
         }
@@ -42,7 +42,7 @@ extension ConversationListViewController: NSFetchedResultsControllerDelegate {
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        Log.oldschool("willChangeContent")
+        Log.frc("willChangeContent")
         channelsTableView.beginUpdates()
     }
  
@@ -67,24 +67,24 @@ extension ConversationListViewController: NSFetchedResultsControllerDelegate {
                     newIndexPath: IndexPath?) {
         switch type {
         case .insert:
-            Log.oldschool("insert")
+            Log.frc("insert")
             if let newIndexPath = newIndexPath {
                 channelsTableView.insertRows(at: [newIndexPath], with: .automatic)
             }
         case .delete:
-            Log.oldschool("delete")
+            Log.frc("delete")
             if let indexPath = indexPath {
                 channelsTableView.deleteRows(at: [indexPath], with: .automatic)
             }
         case .update:
-            Log.oldschool("update")
+            Log.frc("update")
             if let indexPath = indexPath {
                 let channel = coreDataManager.frcChannels.object(at: indexPath)
                 guard let cell = channelsTableView.cellForRow(at: indexPath) as? ConversationCell else { break }
                 cell.configure(with: channel)
             }
         case .move:
-            Log.oldschool("move")
+            Log.frc("move")
             if let indexPath = indexPath {
                 channelsTableView.deleteRows(at: [indexPath], with: .automatic)
             }
@@ -97,7 +97,7 @@ extension ConversationListViewController: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        Log.oldschool("didChangeContent")
+        Log.frc("didChangeContent")
         channelsTableView.endUpdates()
     }
 }

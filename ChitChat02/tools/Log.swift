@@ -14,6 +14,7 @@ class Log {
     private static var FIRE_ENABLED = false
     private static var PREFS_ENABLED = false
     private static var OLDSCHOOL_ENABLED = true
+    private static var FRC_ENABLED = false
 
     static func fire(_ message: String) {
         log(message, FIRE_ENABLED)
@@ -23,6 +24,10 @@ class Log {
         log(message, PREFS_ENABLED)
     }
     
+    static func frc(_ message: String) {
+        log(message, FRC_ENABLED)
+    }
+
     static func oldschool(_ message: String) {
         log(message, OLDSCHOOL_ENABLED)
     }

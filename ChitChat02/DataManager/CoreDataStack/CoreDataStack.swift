@@ -111,6 +111,11 @@ extension CoreDataStack {
         context.perform { [weak self] in
 //            Log.oldschool("= isMainThread: \(Thread.isMainThread)")
             block(context)
+            do {
+                try context.obtainPermanentIDs(for: Array(context.insertedObjects))
+            } catch {
+                Log.oldschool("obtainPermanentIDs error")
+            }
             if context.hasChanges {
                 self?.performSave(in: context)
             }

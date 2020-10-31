@@ -32,10 +32,6 @@ class CoreDataManager {
                                           cacheName: nil)
     }()
     
-    func fetchMessagesFor(channel: ChannelEntity) {
-        //
-    }
-    
     func checkSavedData(_ completion: @escaping ([ChannelEntity: [MessageEntity]]) -> Void) {
         coreDataStack.load(completion)
     }
@@ -44,7 +40,12 @@ class CoreDataManager {
         channelsManager.loadChannelList(onData: { [weak self] (channels) in
             Log.oldschool("fire channels \(channels.count)")
             guard let self = self else { return }
-            
+
+//            channels.forEach { (channel) in
+//                self.coreDataStack.performSave { (context) in
+//                    ChannelEntity(from: channel, in: context)
+//                }
+//            }
             channels.forEach { (channel) in
                 let messagesReader = FirestoreMessageReader(for: channel.identifier)
                 messagesReader.loadMessageList(onData: { (messages) in

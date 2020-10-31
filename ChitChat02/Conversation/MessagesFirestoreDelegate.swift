@@ -110,7 +110,14 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
                     didChange sectionInfo: NSFetchedResultsSectionInfo,
                     atSectionIndex sectionIndex: Int,
                     for type: NSFetchedResultsChangeType) {
-        //
+        switch type {
+        case .insert:
+            messagesTableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .automatic)
+        case .delete:
+            messagesTableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .automatic)
+        default:
+            return
+        }
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
@@ -118,7 +125,35 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
                     at indexPath: IndexPath?,
                     for type: NSFetchedResultsChangeType,
                     newIndexPath: IndexPath?) {
-        //
+        switch type {
+        case .insert:
+            if let newIndexPath = newIndexPath {
+                messagesTableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                messagesTableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                guard let message = messageManager?.frc.object(at: indexPath) else { break }
+                guard let cell = messagesTableView.cellForRow(at: indexPath) as? MessageCell else { break }
+                let direction: MessageDirection = message.senderId == myData?.uuid ? .outcome : .income
+                cell.configure(with: MessageCellModel(text: message.content,
+                                                      date: message.created,
+                                                      sender: message.senderName,
+                                                      direction: direction))
+            }
+        case .move:
+            if let indexPath = indexPath {
+                messagesTableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            if let newIndexPath = newIndexPath {
+                messagesTableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        default:
+            break
+        }
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
