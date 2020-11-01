@@ -85,7 +85,7 @@ extension ConversationViewController {
     func loadCached() {
         guard let frc = messageManager?.frc else { return }
         do {
-//            frc.delegate = self
+            frc.delegate = self
             try frc.performFetch()
             Log.oldschool("fetch messages, \(frc.fetchedObjects?.count ?? 0)")
             showLoaded()
