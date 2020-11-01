@@ -13,11 +13,14 @@ extension ConversationListViewController {
     func loadFromCache() {
         Log.oldschool(#function)
         do {
-            coreDataManager.frcChannels.delegate = self
-            try coreDataManager.frcChannels.performFetch()
+            channelsManager?.frc.delegate = self
+            try channelsManager?.frc.performFetch()
+            channelsManager?.fetchRemote()
             showLoaded()
-            coreDataManager.refreshChannels()
-//            coreDataManager.loadFromNetAndSaveLocally()
+//            coreDataManager.frcChannels.delegate = self
+//            try coreDataManager.frcChannels.performFetch()
+//            showLoaded()
+//            coreDataManager.refreshChannels()
         } catch {
             Log.oldschool(error.localizedDescription)
         }
@@ -25,8 +28,8 @@ extension ConversationListViewController {
     
     func reloadData(for channel: ChannelEntity) {
         // refresh specific channel
-        coreDataManager.refresh(channel)
-        needRefresh = true
+//        coreDataManager.refresh(channel)
+//        needRefresh = true
     }
     
 //    func processCoreData() {
@@ -85,8 +88,7 @@ extension ConversationListViewController: NSFetchedResultsControllerDelegate {
             }
         case .update:
             Log.frc("update")
-            if let indexPath = indexPath {
-                let channel = coreDataManager.frcChannels.object(at: indexPath)
+            if let indexPath = indexPath, let channel = channelsManager?.frc.object(at: indexPath) {
                 guard let cell = channelsTableView.cellForRow(at: indexPath) as? ConversationCell else { break }
                 cell.configure(with: channel)
             }

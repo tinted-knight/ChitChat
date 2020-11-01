@@ -84,29 +84,29 @@ class CoreDataStack {
     }
 }
 // MARK: Load
-extension CoreDataStack {
-    func load(_ completion: @escaping ([ChannelEntity: [MessageEntity]]) -> Void) {
-        mainContext.perform {
-            do {
-                let channels = try self.mainContext.fetch(ChannelEntity.fetchRequest()) as? [ChannelEntity] ?? []
-                Log.oldschool("channels loaded: \(channels.count)")
-                let messages = try self.mainContext.fetch(MessageEntity.fetchRequest()) as? [MessageEntity] ?? []
-                Log.oldschool("messages loaded: \(messages.count)")
-                var result: [ChannelEntity: [MessageEntity]] = [:]
-                channels.forEach { (channel) in
-                    let filtered = messages.filter { $0.channel.identifier == channel.identifier }
-                    result[channel] = filtered
-                }
-                completion(result)
-            } catch {
-                fatalError(error.localizedDescription)
-            }
-        }
-    }
-}
+//extension CoreDataStack {
+//    func load(_ completion: @escaping ([ChannelEntity: [MessageEntity]]) -> Void) {
+//        mainContext.perform {
+//            do {
+//                let channels = try self.mainContext.fetch(ChannelEntity.fetchRequest()) as? [ChannelEntity] ?? []
+//                Log.oldschool("channels loaded: \(channels.count)")
+//                let messages = try self.mainContext.fetch(MessageEntity.fetchRequest()) as? [MessageEntity] ?? []
+//                Log.oldschool("messages loaded: \(messages.count)")
+//                var result: [ChannelEntity: [MessageEntity]] = [:]
+//                channels.forEach { (channel) in
+//                    let filtered = messages.filter { $0.channel.identifier == channel.identifier }
+//                    result[channel] = filtered
+//                }
+//                completion(result)
+//            } catch {
+//                fatalError(error.localizedDescription)
+//            }
+//        }
+//    }
+//}
 // MARK: Save
 extension CoreDataStack {
-    func performSave(_ block:@escaping (NSManagedObjectContext) -> Void) {
+    func performSave(_ block: @escaping (NSManagedObjectContext) -> Void) {
         let context = saveContext()
         context.perform { [weak self] in
 //            Log.oldschool("= isMainThread: \(Thread.isMainThread)")

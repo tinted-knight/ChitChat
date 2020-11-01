@@ -8,11 +8,29 @@
 
 import Foundation
 import Firebase
+import CoreData
 
 class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
     private var channels: CollectionReference {
         return db.collection(Channel.path)
     }
+
+    private let viewContext: NSManagedObjectContext
+    
+    init(with context: NSManagedObjectContext) {
+        self.viewContext = context
+    }
+    
+    lazy var frc: NSFetchedResultsController<ChannelEntity> = {
+        let sortChannels = NSSortDescriptor(key: "name", ascending: true)
+        let frChannels = NSFetchRequest<ChannelEntity>(entityName: "ChannelEntity")
+        frChannels.sortDescriptors = [sortChannels]
+        
+        return NSFetchedResultsController(fetchRequest: frChannels,
+                                          managedObjectContext: self.viewContext,
+                                          sectionNameKeyPath: nil,
+                                          cacheName: nil)
+    }()
 
     func loadChannelList(onData: @escaping ([Channel]) -> Void, onError: @escaping (String) -> Void) {
         channels.order(by: Channel.name, descending: false).getDocuments { (snapshot, error) in

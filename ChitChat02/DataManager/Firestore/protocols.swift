@@ -17,6 +17,13 @@ protocol ChannelsManager {
     func deleteChannel(id: String, completion: @escaping (Bool) -> Void)
 }
 
+protocol NewChannelManager {
+    var frc: NSFetchedResultsController<ChannelEntity> { get }
+    
+    func fetchRemote()
+    func addChannel(name: String)
+}
+
 protocol MessagesReader {
     func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void)
 }

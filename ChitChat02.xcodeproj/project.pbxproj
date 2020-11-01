@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		13E359B0661DA342B7FF4E23 /* Pods_ChitChat02.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FFDAB3F1F1D13B5B9E9DD7 /* Pods_ChitChat02.framework */; };
+		393AEDE1254F3A270028B893 /* NewSchool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE0254F3A270028B893 /* NewSchool.swift */; };
+		393AEDE6254F41A80028B893 /* SuperSmartChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE5254F41A80028B893 /* SuperSmartChannelManager.swift */; };
 		3948F9BE253B893700465D02 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9BD253B893700465D02 /* Log.swift */; };
 		3948F9C0253B8B9100465D02 /* FirestoreChannelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9BF253B8B9100465D02 /* FirestoreChannelsManager.swift */; };
 		3948F9C2253B8B9C00465D02 /* FirestoreMessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9C1253B8B9C00465D02 /* FirestoreMessagesManager.swift */; };
@@ -65,6 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		393AEDE0254F3A270028B893 /* NewSchool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSchool.swift; sourceTree = "<group>"; };
+		393AEDE5254F41A80028B893 /* SuperSmartChannelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperSmartChannelManager.swift; sourceTree = "<group>"; };
 		3948F9BD253B893700465D02 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		3948F9BF253B8B9100465D02 /* FirestoreChannelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreChannelsManager.swift; sourceTree = "<group>"; };
 		3948F9C1253B8B9C00465D02 /* FirestoreMessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMessagesManager.swift; sourceTree = "<group>"; };
@@ -145,6 +149,15 @@
 				98FFDAB3F1F1D13B5B9E9DD7 /* Pods_ChitChat02.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		393AEDE4254F41990028B893 /* Smart */ = {
+			isa = PBXGroup;
+			children = (
+				393AEDE0254F3A270028B893 /* NewSchool.swift */,
+				393AEDE5254F41A80028B893 /* SuperSmartChannelManager.swift */,
+			);
+			path = Smart;
 			sourceTree = "<group>";
 		};
 		394F8667250E518A00B703B3 = {
@@ -230,6 +243,7 @@
 		39B7FDC02530AFCA00B5F280 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				393AEDE4254F41990028B893 /* Smart */,
 				39EDD9F62542F3F000FE640B /* CoreDataStack */,
 				3958B3B5253AFDE200801E6D /* Firestore */,
 				39DE12C02531C1B20068C875 /* OperationDataManager */,
@@ -522,8 +536,10 @@
 				3957588425434635001F054E /* ChannelEntity+CoreDataProperties.swift in Sources */,
 				3948F9CA253B942600465D02 /* ThemeAndStuff.swift in Sources */,
 				39B7FDC22530AFF100B5F280 /* OperationDataManager.swift in Sources */,
+				393AEDE1254F3A270028B893 /* NewSchool.swift in Sources */,
 				39EDD9F52542E7D000FE640B /* coredata_extensions.swift in Sources */,
 				3948F9BE253B893700465D02 /* Log.swift in Sources */,
+				393AEDE6254F41A80028B893 /* SuperSmartChannelManager.swift in Sources */,
 				3948F9C2253B8B9C00465D02 /* FirestoreMessagesManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

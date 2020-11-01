@@ -41,12 +41,12 @@ class FirestoreMessageReader: FirestoreDataManager, MessagesReader {
 class FirestoreMessageManager: FirestoreMessageReader, MessagesManager {
     
     private let userData: UserData
-    private let coreDataManager: CoreDataManager
+    private let viewContext: NSManagedObjectContext
     private let channel: ChannelEntity
 
-    init(for channel: ChannelEntity, me user: UserData, with manager: CoreDataManager) {
+    init(for channel: ChannelEntity, me user: UserData, with context: NSManagedObjectContext) {
         self.userData = user
-        self.coreDataManager = manager
+        self.viewContext = context
         self.channel = channel
         super.init(for: channel.identifier)
     }
@@ -61,7 +61,7 @@ class FirestoreMessageManager: FirestoreMessageReader, MessagesManager {
         frMessages.predicate = predicate
 
         return NSFetchedResultsController(fetchRequest: frMessages,
-                                          managedObjectContext: coreDataManager.coreDataStack.mainContext,
+                                          managedObjectContext: self.viewContext,
                                           sectionNameKeyPath: nil,
                                           cacheName: nil)
     }()
