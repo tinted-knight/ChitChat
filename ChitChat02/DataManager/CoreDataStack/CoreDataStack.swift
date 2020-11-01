@@ -134,6 +134,15 @@ extension CoreDataStack {
             }
         }
     }
+    
+    func delete(_ channel: ChannelEntity) {
+        mainContext.delete(channel)
+        do {
+            try mainContext.save()
+        } catch {
+            fatalError("cannot delete with mainContext")
+        }
+    }
 }
 
 // MARK: Logs

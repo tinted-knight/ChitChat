@@ -48,7 +48,7 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
         }
     }
     
-    func addChannel(name: String) {
+    func addChannel(name: String, completion: @escaping (Bool) -> Void) {
         let newChannelData: [String: Any] = [
             Channel.name: name,
             Channel.lastActivity: Timestamp(date: Date())
@@ -56,9 +56,24 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
         channels.addDocument(data: newChannelData) { (error) in
             if let error = error {
                 Log.fire("creating channel error: \(error.localizedDescription)")
+                completion(false)
                 return
             } else {
                 Log.fire("creating channel success")
+                completion(true)
+            }
+        }
+    }
+    
+    func deleteChannel(id: String, completion: @escaping (Bool) -> Void) {
+        channels.document(id).delete { (error) in
+            if error != nil {
+                Log.fire("delete channel error")
+                completion(false)
+                return
+            } else {
+                Log.fire("delete channel success")
+                completion(true)
             }
         }
     }

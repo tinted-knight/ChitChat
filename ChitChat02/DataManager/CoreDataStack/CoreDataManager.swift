@@ -32,10 +32,10 @@ class CoreDataManager {
                                           cacheName: nil)
     }()
     
-    func checkSavedData(_ completion: @escaping ([ChannelEntity: [MessageEntity]]) -> Void) {
-        coreDataStack.load(completion)
-    }
-    
+//    func checkSavedData(_ completion: @escaping ([ChannelEntity: [MessageEntity]]) -> Void) {
+//        coreDataStack.load(completion)
+//    }
+
     func refreshChannels() {
         Log.oldschool(#function)
         channelsManager.loadChannelList(onData: { [weak self] (channels) in
@@ -61,6 +61,15 @@ class CoreDataManager {
                 self?.save(channel, with: values)
             }, onError: { Log.oldschool($0)})
         }, onError: { Log.oldschool($0) })
+    }
+    
+    func delete(channel: ChannelEntity) {
+        channelsManager.deleteChannel(id: channel.identifier) { [weak self] (result) in
+            if result {
+                self?.coreDataStack.delete(channel)
+                self?.refreshChannels()
+            }
+        }
     }
     
 //    func loadFromNetAndSaveLocally() {

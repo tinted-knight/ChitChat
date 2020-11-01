@@ -13,7 +13,8 @@ import Firebase
 protocol ChannelsManager {
     func loadChannelList(onData: @escaping ([Channel]) -> Void, onError: @escaping (String) -> Void)
     func getChannel(id channelId: String, onData: @escaping (Channel) -> Void, onError: @escaping (String) -> Void)
-    func addChannel(name: String)
+    func addChannel(name: String, completion: @escaping (Bool) -> Void)
+    func deleteChannel(id: String, completion: @escaping (Bool) -> Void)
 }
 
 protocol MessagesReader {

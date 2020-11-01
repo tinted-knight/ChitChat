@@ -31,7 +31,11 @@ extension ConversationListViewController {
     @objc func inputNewChannelName() {
         inputAlert(title: "New channel", message: "Input channel name") { [weak self] (text) in
             if !text.isEmpty {
-                self?.channelsManager.addChannel(name: text)
+                self?.channelsManager.addChannel(name: text) { [weak self] result in
+                    if result {
+                        self?.coreDataManager.refreshChannels()
+                    }
+                }
             }
         }
     }

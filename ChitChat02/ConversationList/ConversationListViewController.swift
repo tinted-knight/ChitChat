@@ -24,7 +24,7 @@ class ConversationListViewController: UIViewController {
     
     var myData: UserData?
     
-    var channelsManager: ChannelsManager = FirestoreChannelManager()
+    let channelsManager: ChannelsManager = FirestoreChannelManager()
     
     var needRefresh = false
     
@@ -33,7 +33,7 @@ class ConversationListViewController: UIViewController {
             fatalError("myData is nil")
         }
        return CoreDataManager(coreDataStack: CoreDataStack(),
-                              channelsManager: FirestoreChannelManager())
+                              channelsManager: self.channelsManager)
     }()
     
     override func viewDidLoad() {
@@ -194,5 +194,18 @@ extension ConversationListViewController: UITableViewDelegate {
                                                              me: userData,
                                                              with: coreDataManager))
         tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let channel = coreDataManager.frcChannels.fetchedObjects?[indexPath.row] else { return }
+        if editingStyle == .delete {
+            Log.oldschool("delete row, \(channel.name)")
+            coreDataManager.delete(channel: channel)
+//            channelsManager.deleteChannel(id: channel.identifier) { [weak self] (result) in
+//                if result {
+//                    self?.coreDataManager.refreshChannels()
+//                }
+//            }
+        }
     }
 }
