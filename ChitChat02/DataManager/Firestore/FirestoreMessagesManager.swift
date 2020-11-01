@@ -23,7 +23,7 @@ class FirestoreMessageReader: FirestoreDataManager, MessagesReader {
     }
 
     func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void) {
-        channelMessages.order(by: Message.created, descending: true).addSnapshotListener { (snapshot, error) in
+        channelMessages.order(by: Message.created, descending: true).getDocuments { (snapshot, error) in
             if let error = error {
                 onError(error.localizedDescription)
                 return
@@ -41,30 +41,30 @@ class FirestoreMessageReader: FirestoreDataManager, MessagesReader {
 class FirestoreMessageManager: FirestoreMessageReader, MessagesManager {
     
     private let userData: UserData
-    private let coreDataStack: CoreDataStack
+    private let coreDataManager: CoreDataManager
     private let channel: ChannelEntity
 
-    init(for channel: ChannelEntity, me user: UserData, with stack: CoreDataStack) {
+    init(for channel: ChannelEntity, me user: UserData, with manager: CoreDataManager) {
         self.userData = user
-        self.coreDataStack = stack
+        self.coreDataManager = manager
         self.channel = channel
         super.init(for: channel.identifier)
     }
     
-//    override func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void) {
-//        channelMessages.order(by: Message.created, descending: true).addSnapshotListener { (snapshot, error) in
-//            if let error = error {
-//                onError(error.localizedDescription)
-//                return
-//            }
-//
-//            let messages: [Message] = snapshot?.documents
-//                .compactMap({ (document) in Message(from: document)}) ?? []
-//
-//            Log.fire("\(messages.count) valid messages of total \(snapshot?.documents.count ?? 0)")
-//            onData(messages)
-//        }
-//    }
+    override func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void) {
+        channelMessages.order(by: Message.created, descending: true).getDocuments { (snapshot, error) in
+            if let error = error {
+                onError(error.localizedDescription)
+                return
+            }
+
+            let messages: [Message] = snapshot?.documents
+                .compactMap({ (document) in Message(from: document)}) ?? []
+
+            Log.fire("\(messages.count) valid messages of total \(snapshot?.documents.count ?? 0)")
+            onData(messages)
+        }
+    }
     
     lazy var frc: NSFetchedResultsController<MessageEntity> = {
         Log.oldschool("frcMess for \(channelId)")
@@ -76,12 +76,12 @@ class FirestoreMessageManager: FirestoreMessageReader, MessagesManager {
         frMessages.predicate = predicate
 
         return NSFetchedResultsController(fetchRequest: frMessages,
-                                          managedObjectContext: coreDataStack.mainContext,
+                                          managedObjectContext: coreDataManager.coreDataStack.mainContext,
                                           sectionNameKeyPath: nil,
                                           cacheName: nil)
     }()
 
-    func add(message: String) {
+    func add(message: String, completion: @escaping () -> Void) {
         let newMessageData: [String: Any] = [
             Message.content: message,
             Message.created: Timestamp(date: Date()),
@@ -94,6 +94,7 @@ class FirestoreMessageManager: FirestoreMessageReader, MessagesManager {
                 return
             } else {
                 Log.fire("adding message success")
+                completion()
             }
         }
     }

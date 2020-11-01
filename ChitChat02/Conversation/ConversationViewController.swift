@@ -20,6 +20,8 @@ class ConversationViewController: UIViewController {
     var messageManager: MessagesManager?
     var myData: UserData?
     
+    var onNewMessages: (() -> Void)?
+    
     var messages: [MessageCellModel] = []
     
     private let nonameContact = "Noname"

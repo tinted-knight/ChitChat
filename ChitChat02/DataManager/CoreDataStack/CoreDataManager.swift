@@ -36,6 +36,26 @@ class CoreDataManager {
         coreDataStack.load(completion)
     }
     
+    func reloadData() {
+        
+    }
+    
+    func refreshChannels() {
+        Log.oldschool(#function)
+        channelsManager.loadChannelList(onData: { [weak self] (channels) in
+            Log.oldschool("fire channels \(channels.count)")
+            guard let self = self else { return }
+            
+            channels.forEach { (channel) in
+                self.coreDataStack.performSave { (context) in
+                    ChannelEntity(from: channel, in: context)
+                }
+            }
+            }, onError: { (error) in
+                fatalError(error)
+        })
+    }
+    
     func loadFromNetAndSaveLocally() {
         channelsManager.loadChannelList(onData: { [weak self] (channels) in
             Log.oldschool("fire channels \(channels.count)")

@@ -47,7 +47,11 @@ extension ConversationViewController {
     @objc func inputNewMessage() {
         inputAlert(title: "New message", message: "Input text") { [weak self] (text) in
             if !text.isEmpty {
-                self?.messageManager?.add(message: text)
+                self?.messageManager?.add(message: text) {
+                    self?.messageManager?.loadMessageList(onData: { (_) in
+                        self?.onNewMessages?()
+                    }, onError: { fatalError($0) })
+                }
             }
         }
     }
@@ -87,6 +91,9 @@ extension ConversationViewController {
         do {
             frc.delegate = self
             try frc.performFetch()
+            messageManager?.loadMessageList(onData: { [weak self] (_) in
+                self?.onNewMessages?()
+            }, onError: { fatalError($0) })
             Log.oldschool("fetch messages, \(frc.fetchedObjects?.count ?? 0)")
             showLoaded()
         } catch {

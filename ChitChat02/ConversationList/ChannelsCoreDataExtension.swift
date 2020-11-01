@@ -22,6 +22,11 @@ extension ConversationListViewController {
         }
     }
     
+    func reloadData() {
+        // refresh specific channel
+        coreDataManager.loadFromNetAndSaveLocally()
+    }
+    
     func processCoreData() {
         coreDataManager.checkSavedData { [weak self] (chatList) in
             Log.oldschool("checkSavedData: ")

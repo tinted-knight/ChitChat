@@ -63,7 +63,7 @@ class CoreDataStack {
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.parent = self.writerContext
         context.automaticallyMergesChangesFromParent = true
-        context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context
     }()
     
@@ -71,7 +71,7 @@ class CoreDataStack {
         let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         context.parent = self.mainContext
         context.automaticallyMergesChangesFromParent = true
-        context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context
     }
 

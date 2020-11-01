@@ -47,6 +47,7 @@ class ConversationListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = ThemeManager.get().backgroundColor
+//        coreDataManager.refreshChannels()
         super.viewWillAppear(animated)
     }
     
@@ -181,7 +182,7 @@ extension ConversationListViewController: UITableViewDelegate {
         openConversationScreen(for: channel,
                                with: FirestoreMessageManager(for: channel,
                                                              me: userData,
-                                                             with: coreDataManager.coreDataStack))
+                                                             with: coreDataManager))
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }

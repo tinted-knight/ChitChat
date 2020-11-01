@@ -20,5 +20,5 @@ protocol MessagesReader {
 
 protocol MessagesManager: MessagesReader {
     var frc: NSFetchedResultsController<MessageEntity> { get }
-    func add(message: String)
+    func add(message: String, completion: @escaping () -> Void)
 }
