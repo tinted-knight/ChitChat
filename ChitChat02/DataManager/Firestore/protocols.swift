@@ -24,6 +24,10 @@ protocol NewChannelManager {
     func addChannel(name: String)
 }
 
+protocol NewMessageManager {
+    var frc: NSFetchedResultsController<MessageEntity> { get }
+}
+
 protocol MessagesReader {
     func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void)
 }

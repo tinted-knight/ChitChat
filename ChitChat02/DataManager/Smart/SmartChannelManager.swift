@@ -19,6 +19,7 @@ class LocalCache {
     func saveContext() {
         if container.viewContext.hasChanges {
             do {
+                try container.viewContext.obtainPermanentIDs(for: Array(container.viewContext.insertedObjects))
                 try container.viewContext.save()
             } catch {
                 Log.newschool(error.localizedDescription)
@@ -27,7 +28,7 @@ class LocalCache {
     }
 }
 
-class SuperSmartChannelManager: NewChannelManager {
+class SmartChannelManager: NewChannelManager {
     private let cache: LocalCache
     private let channelsManager: ChannelsManager
     private let viewContext: NSManagedObjectContext
@@ -52,11 +53,18 @@ class SuperSmartChannelManager: NewChannelManager {
     func fetchRemote() {
         channelsManager.loadChannelList(onData: { [weak self] (values) in
             guard let self = self else { fatalError("fetchRemote::no self") }
+            Log.newschool("fetchRemote, \(values.count) channels")
             values.forEach { (channel) in
-                self.viewContext.insert(ChannelEntity(from: channel))
+                self.viewContext.insert(ChannelEntity(from: channel, in: self.viewContext))
                 self.cache.saveContext()
             }
         }, onError: onError(_:))
+    }
+    
+    func addChannel(name: String) {
+        channelsManager.addChannel(name: name) { [weak self] (success) in
+            if success { self?.fetchRemote() }
+        }
     }
     
     private func onError(_ message: String) {
