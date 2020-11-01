@@ -23,8 +23,8 @@ extension ConversationListViewController {
             viewController.channel = channel
             viewController.messageManager = manager
             viewController.myData = myData
-            viewController.onNewMessages = { [weak self] in
-                self?.reloadData()
+            viewController.onNewMessages = { [weak self] (channel) in
+                self?.reloadData(for: channel)
             }
             navigationController?.pushViewController(viewController, animated: true)
         }

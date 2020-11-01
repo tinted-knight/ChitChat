@@ -16,28 +16,30 @@ extension ConversationListViewController {
             coreDataManager.frcChannels.delegate = self
             try coreDataManager.frcChannels.performFetch()
             showLoaded()
-            coreDataManager.loadFromNetAndSaveLocally()
+            coreDataManager.refreshChannels()
+//            coreDataManager.loadFromNetAndSaveLocally()
         } catch {
             Log.oldschool(error.localizedDescription)
         }
     }
     
-    func reloadData() {
+    func reloadData(for channel: ChannelEntity) {
         // refresh specific channel
-        coreDataManager.loadFromNetAndSaveLocally()
+        coreDataManager.refresh(channel)
+        needRefresh = true
     }
     
-    func processCoreData() {
-        coreDataManager.checkSavedData { [weak self] (chatList) in
-            Log.oldschool("checkSavedData: ")
-            if !chatList.isEmpty {
-                Log.oldschool("     NOT empty")
-            } else {
-                Log.oldschool("     empty")
-            }
-            self?.coreDataManager.loadFromNetAndSaveLocally()
-        }
-    }
+//    func processCoreData() {
+//        coreDataManager.checkSavedData { [weak self] (chatList) in
+//            Log.oldschool("checkSavedData: ")
+//            if !chatList.isEmpty {
+//                Log.oldschool("     NOT empty")
+//            } else {
+//                Log.oldschool("     empty")
+//            }
+//            self?.coreDataManager.loadFromNetAndSaveLocally()
+//        }
+//    }
 }
 
 extension ConversationListViewController: NSFetchedResultsControllerDelegate {

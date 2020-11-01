@@ -26,6 +26,8 @@ class ConversationListViewController: UIViewController {
     
     var channelsManager: ChannelsManager = FirestoreChannelManager()
     
+    var needRefresh = false
+    
     lazy var coreDataManager: CoreDataManager = {
         guard let userData = self.myData else {
             fatalError("myData is nil")
@@ -47,8 +49,16 @@ class ConversationListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = ThemeManager.get().backgroundColor
-//        coreDataManager.refreshChannels()
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Log.oldschool("\(#function), needRefresh = \(needRefresh)")
+        if needRefresh {
+            coreDataManager.refreshChannels()
+            needRefresh = false
+        }
+        super.viewDidAppear(animated)
     }
     
     private func loadUserData() -> UserData? {

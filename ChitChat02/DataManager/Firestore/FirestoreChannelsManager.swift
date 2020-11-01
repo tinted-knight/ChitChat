@@ -33,6 +33,21 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
         }
     }
     
+    func getChannel(id channelId: String, onData: @escaping (Channel) -> Void, onError: @escaping (String) -> Void) {
+        Log.oldschool(#function)
+        channels.document(channelId).getDocument { (snapshot, error) in
+            guard let snapshot = snapshot else { fatalError("channel is nil") }
+            if let error = error {
+                onError(error.localizedDescription)
+                return
+            }
+            if let channel = Channel(from: snapshot) {
+                Log.oldschool("getChannel::onData, \(channel.name)")
+                onData(channel)
+            }
+        }
+    }
+    
     func addChannel(name: String) {
         let newChannelData: [String: Any] = [
             Channel.name: name,

@@ -20,7 +20,7 @@ class ConversationViewController: UIViewController {
     var messageManager: MessagesManager?
     var myData: UserData?
     
-    var onNewMessages: (() -> Void)?
+    var onNewMessages: ((ChannelEntity) -> Void)?
     
     var messages: [MessageCellModel] = []
     

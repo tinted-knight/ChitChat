@@ -46,10 +46,12 @@ extension ConversationViewController {
 
     @objc func inputNewMessage() {
         inputAlert(title: "New message", message: "Input text") { [weak self] (text) in
+            guard let self = self else { return }
             if !text.isEmpty {
-                self?.messageManager?.add(message: text) {
-                    self?.messageManager?.loadMessageList(onData: { (_) in
-                        self?.onNewMessages?()
+                self.messageManager?.add(message: text) {
+                    self.messageManager?.loadMessageList(onData: { (_) in
+                        guard let channel = self.channel else { return }
+                        self.onNewMessages?(channel)
                     }, onError: { fatalError($0) })
                 }
             }
@@ -92,7 +94,11 @@ extension ConversationViewController {
             frc.delegate = self
             try frc.performFetch()
             messageManager?.loadMessageList(onData: { [weak self] (_) in
-                self?.onNewMessages?()
+                guard let self = self, let channel = self.channel else { return }
+                if self.messageManager?.frc.fetchedObjects?.count == 0 {
+                    self.onNewMessages?(channel)
+                }
+//                self.onNewMessages?(channel)
             }, onError: { fatalError($0) })
             Log.oldschool("fetch messages, \(frc.fetchedObjects?.count ?? 0)")
             showLoaded()
@@ -109,7 +115,7 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        Log.oldschool("willChangeContent")
+        Log.frc("willChangeContent")
         messagesTableView.beginUpdates()
     }
  
@@ -164,7 +170,7 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        Log.oldschool("didChangeContent")
+        Log.frc("didChangeContent")
         messagesTableView.endUpdates()
     }
 }

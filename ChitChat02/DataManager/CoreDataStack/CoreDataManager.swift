@@ -36,10 +36,6 @@ class CoreDataManager {
         coreDataStack.load(completion)
     }
     
-    func reloadData() {
-        
-    }
-    
     func refreshChannels() {
         Log.oldschool(#function)
         channelsManager.loadChannelList(onData: { [weak self] (channels) in
@@ -55,30 +51,36 @@ class CoreDataManager {
                 fatalError(error)
         })
     }
-    
-    func loadFromNetAndSaveLocally() {
-        channelsManager.loadChannelList(onData: { [weak self] (channels) in
-            Log.oldschool("fire channels \(channels.count)")
-            guard let self = self else { return }
 
-//            channels.forEach { (channel) in
-//                self.coreDataStack.performSave { (context) in
-//                    ChannelEntity(from: channel, in: context)
-//                }
-//            }
-            channels.forEach { (channel) in
-                let messagesReader = FirestoreMessageReader(for: channel.identifier)
-                messagesReader.loadMessageList(onData: { (messages) in
-                    Log.oldschool("fire messages for <\(channel.name)>, \(messages.count)")
-                    self.save(channel, with: messages)
-                }, onError: { error in
-                    fatalError(error)
-                })
-            }
-        }, onError: { (error) in
-            fatalError(error)
-        })
+    func refresh(_ channel: ChannelEntity) {
+        Log.oldschool(#function)
+        channelsManager.getChannel(id: channel.identifier, onData: { [weak self] (channel) in
+            let messagesReader = FirestoreMessageReader(for: channel.identifier)
+            messagesReader.loadMessageList(onData: { (values) in
+                Log.oldschool("refresh, \(channel.name), \(values.count) messages")
+                self?.save(channel, with: values)
+            }, onError: { Log.oldschool($0)})
+        }, onError: { Log.oldschool($0) })
     }
+    
+//    func loadFromNetAndSaveLocally() {
+//        channelsManager.loadChannelList(onData: { [weak self] (channels) in
+//            Log.oldschool("fire channels \(channels.count)")
+//            guard let self = self else { return }
+//
+//            channels.forEach { (channel) in
+//                let messagesReader = FirestoreMessageReader(for: channel.identifier)
+//                messagesReader.loadMessageList(onData: { (messages) in
+//                    Log.oldschool("fire messages for <\(channel.name)>, \(messages.count)")
+//                    self.save(channel, with: messages)
+//                }, onError: { error in
+//                    fatalError(error)
+//                })
+//            }
+//        }, onError: { (error) in
+//            fatalError(error)
+//        })
+//    }
     
     private func save(_ channel: Channel, with messages: [Message]) {
         coreDataStack.performSave { (context) in

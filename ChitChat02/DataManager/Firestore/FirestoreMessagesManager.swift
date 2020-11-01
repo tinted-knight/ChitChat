@@ -51,21 +51,6 @@ class FirestoreMessageManager: FirestoreMessageReader, MessagesManager {
         super.init(for: channel.identifier)
     }
     
-    override func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void) {
-        channelMessages.order(by: Message.created, descending: true).getDocuments { (snapshot, error) in
-            if let error = error {
-                onError(error.localizedDescription)
-                return
-            }
-
-            let messages: [Message] = snapshot?.documents
-                .compactMap({ (document) in Message(from: document)}) ?? []
-
-            Log.fire("\(messages.count) valid messages of total \(snapshot?.documents.count ?? 0)")
-            onData(messages)
-        }
-    }
-    
     lazy var frc: NSFetchedResultsController<MessageEntity> = {
         Log.oldschool("frcMess for \(channelId)")
         let sortMessages = NSSortDescriptor(key: "created", ascending: false)
