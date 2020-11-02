@@ -17,7 +17,7 @@ class ConversationViewController: UIViewController {
     }
     
     var channel: ChannelEntity?
-    var messageManager: MessagesManager?
+    var messageManager: NewMessageManager?
     var myData: UserData?
     
     var onNewMessages: ((ChannelEntity) -> Void)?

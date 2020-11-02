@@ -11,18 +11,18 @@ class SmartMessageManager: NewMessageManager {
     private let cache: LocalCache
     private let messagesManager: MessagesManager
     private let viewContext: NSManagedObjectContext
-    private let channelId: String
+    private let channel: ChannelEntity
 
     init(for channel: ChannelEntity, me userData: UserData, container: NSPersistentContainer) {
         self.cache = LocalCache(container)
         self.viewContext = cache.container.viewContext
-        self.channelId = channel.identifier
+        self.channel = channel
         self.messagesManager = FirestoreMessageManager(for: channel, me: userData, with: viewContext)
     }
 
     lazy var frc: NSFetchedResultsController<MessageEntity> = {
         let sortMessages = NSSortDescriptor(key: "created", ascending: false)
-        let predicate = NSPredicate(format: "channel.identifier like '\(channelId)'")
+        let predicate = NSPredicate(format: "channel.identifier like '\(channel.identifier)'")
 
         let frMessages = NSFetchRequest<MessageEntity>(entityName: "MessageEntity")
         frMessages.sortDescriptors = [sortMessages]
@@ -33,4 +33,18 @@ class SmartMessageManager: NewMessageManager {
                 sectionNameKeyPath: nil,
                 cacheName: nil)
     }()
+    
+    func fetchRemote() {
+        messagesManager.loadMessageList(onData: { [weak self] (values) in
+            guard let self = self else { fatalError("fetchRemote::no self") }
+            Log.newschool("fetchRemote, \(values.count) messages for \(self.channel.identifier)")
+            let entities = values.map { MessageEntity(from: $0, in: self.viewContext) }
+            self.channel.addToMessages(NSSet(array: entities))
+            self.cache.saveContext()
+        }, onError: onError(_:))
+    }
+
+    private func onError(_ message: String) {
+        Log.newschool(message)
+    }
 }

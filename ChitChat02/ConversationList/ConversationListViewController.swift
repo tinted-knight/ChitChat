@@ -190,15 +190,16 @@ extension ConversationListViewController: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Log.oldschool("table row select")
         guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
-        guard let context = newSchool.container?.viewContext else { return }
+        guard let container = newSchool.container else { return }
         guard let userData = myData else { return }
         Log.oldschool("\(indexPath)")
         Log.oldschool("openConversation for \(channel.identifier), \(channel.name)")
         openConversationScreen(for: channel,
-                               with: FirestoreMessageManager(for: channel,
-                                                             me: userData,
-                                                             with: context))
+                               with: SmartMessageManager(for: channel,
+                                                         me: userData,
+                                                         container: container))
         tableView.deselectRow(at: indexPath, animated: false)
     }
     

@@ -18,7 +18,7 @@ extension ConversationListViewController {
 //        }
 //    }
     
-    func openConversationScreen(for channel: ChannelEntity, with manager: MessagesManager) {
+    func openConversationScreen(for channel: ChannelEntity, with manager: NewMessageManager) {
         if let viewController = ConversationViewController.instance() {
             viewController.channel = channel
             viewController.messageManager = manager

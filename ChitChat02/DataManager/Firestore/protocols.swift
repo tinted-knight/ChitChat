@@ -26,6 +26,7 @@ protocol NewChannelManager {
 
 protocol NewMessageManager {
     var frc: NSFetchedResultsController<MessageEntity> { get }
+    func fetchRemote()
 }
 
 protocol MessagesReader {

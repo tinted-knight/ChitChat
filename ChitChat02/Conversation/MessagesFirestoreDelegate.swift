@@ -48,12 +48,12 @@ extension ConversationViewController {
         inputAlert(title: "New message", message: "Input text") { [weak self] (text) in
             guard let self = self else { return }
             if !text.isEmpty {
-                self.messageManager?.add(message: text) {
-                    self.messageManager?.loadMessageList(onData: { (_) in
-                        guard let channel = self.channel else { return }
-                        self.onNewMessages?(channel)
-                    }, onError: { fatalError($0) })
-                }
+//                self.messageManager?.add(message: text) {
+//                    self.messageManager?.loadMessageList(onData: { (_) in
+//                        guard let channel = self.channel else { return }
+//                        self.onNewMessages?(channel)
+//                    }, onError: { fatalError($0) })
+//                }
             }
         }
     }
@@ -93,13 +93,14 @@ extension ConversationViewController {
         do {
             frc.delegate = self
             try frc.performFetch()
-            messageManager?.loadMessageList(onData: { [weak self] (_) in
-                guard let self = self, let channel = self.channel else { return }
-                if self.messageManager?.frc.fetchedObjects?.count == 0 {
-                    self.onNewMessages?(channel)
-                }
+            messageManager?.fetchRemote()
+//            messageManager?.loadMessageList(onData: { [weak self] (_) in
+//                guard let self = self, let channel = self.channel else { return }
+//                if self.messageManager?.frc.fetchedObjects?.count == 0 {
+//                    self.onNewMessages?(channel)
+//                }
 //                self.onNewMessages?(channel)
-            }, onError: { fatalError($0) })
+//            }, onError: { fatalError($0) })
             Log.oldschool("fetch messages, \(frc.fetchedObjects?.count ?? 0)")
             showLoaded()
         } catch {

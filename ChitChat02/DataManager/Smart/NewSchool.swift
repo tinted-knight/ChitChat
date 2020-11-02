@@ -15,7 +15,8 @@ class NewSchool {
     
     func createContainer(completion: @escaping (NSPersistentContainer) -> Void) {
         let container = NSPersistentContainer(name: "Chat")
-        container.loadPersistentStores(completionHandler: { _, error in
+        container.loadPersistentStores(completionHandler: { [weak self] _, error in
+            self?.container = container
             container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
 //            container.viewContext.mergePolicy = NSOverwriteMergePolicy
             guard error == nil else {
