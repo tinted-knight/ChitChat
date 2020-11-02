@@ -10,18 +10,16 @@ import Foundation
 import CoreData
 import Firebase
 
-protocol ChannelsManager {
+protocol RemoteChannelManager {
     func loadChannelList(onAdded: @escaping (Channel) -> Void,
                          onModified: @escaping (Channel) -> Void,
                          onRemoved: @escaping (Channel) -> Void,
                          onError: @escaping (String) -> Void)
-    func loadChannelList(onData: @escaping ([Channel]) -> Void, onError: @escaping (String) -> Void)
-    func getChannel(id channelId: String, onData: @escaping (Channel) -> Void, onError: @escaping (String) -> Void)
     func addChannel(name: String, completion: @escaping (Bool) -> Void)
     func deleteChannel(id: String, completion: @escaping (Bool) -> Void)
 }
 
-protocol NewChannelManager {
+protocol ChannelManager {
     var frc: NSFetchedResultsController<ChannelEntity> { get }
     
     func fetchRemote()
@@ -29,22 +27,18 @@ protocol NewChannelManager {
     func deleteChannel(_ channel: ChannelEntity)
 }
 
-protocol NewMessageManager {
+protocol MessageManager {
     var channel: ChannelEntity { get }
     var frc: NSFetchedResultsController<MessageEntity> { get }
+    
     func fetchRemote(completion: @escaping () -> Void)
     func add(message content: String)
 }
 
-protocol MessagesReader {
+protocol RemoteMessageManager {
     func loadMessageList(onAdded: @escaping (Message) -> Void,
                          onModified: @escaping (Message) -> Void,
                          onRemoved: @escaping (Message) -> Void,
                          onError: @escaping (String) -> Void)
-    func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void)
-}
-
-protocol MessagesManager: MessagesReader {
-    var frc: NSFetchedResultsController<MessageEntity> { get }
     func add(data: [String: Any], completion: @escaping (Bool) -> Void)
 }

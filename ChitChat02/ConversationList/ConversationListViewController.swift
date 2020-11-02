@@ -24,18 +24,10 @@ class ConversationListViewController: UIViewController {
     
     var myData: UserData?
     
-    var channelsManager: NewChannelManager?
-    let newSchool = NewSchool()
+    var channelsManager: ChannelManager?
+    let newSchool = NewSchoolCoreData()
     
     var needRefresh = false
-    
-//    lazy var coreDataManager: CoreDataManager = {
-//        guard let userData = self.myData else {
-//            fatalError("myData is nil")
-//        }
-//       return CoreDataManager(coreDataStack: CoreDataStack(),
-//                              channelsManager: self.channelsManager)
-//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +40,6 @@ class ConversationListViewController: UIViewController {
             self?.channelsManager = SmartChannelManager(container)
             self?.loadFromCache()
         }
-//        loadFromCache()
-//        loadChannelList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,11 +49,6 @@ class ConversationListViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         Log.oldschool("\(#function), needRefresh = \(needRefresh)")
-        if needRefresh {
-//            channelsManager?.fetchRemote()
-//            coreDataManager.refreshChannels()
-//            needRefresh = false
-        }
         super.viewDidAppear(animated)
     }
     
@@ -195,7 +180,6 @@ extension ConversationListViewController: UITableViewDelegate {
         guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
         guard let container = newSchool.container else { return }
         guard let userData = myData else { return }
-        Log.oldschool("\(indexPath)")
         Log.oldschool("openConversation for \(channel.identifier), \(channel.name)")
         openConversationScreen(for: channel,
                                with: SmartMessageManager(for: channel,
@@ -209,12 +193,6 @@ extension ConversationListViewController: UITableViewDelegate {
         if editingStyle == .delete {
             Log.oldschool("delete row, \(channel.name)")
             channelsManager?.deleteChannel(channel)
-//            coreDataManager.delete(channel: channel)
-//            channelsManager.deleteChannel(id: channel.identifier) { [weak self] (result) in
-//                if result {
-//                    self?.coreDataManager.refreshChannels()
-//                }
-//            }
         }
     }
 }

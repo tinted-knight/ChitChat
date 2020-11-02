@@ -11,15 +11,8 @@ import UIKit
 import CoreData
 
 extension ConversationListViewController {
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let controller = segue.destination as? ConversationViewController,
-//            let channel = sender as? Channel {
-//            controller.channel = channel
-//        }
-//    }
-    
-    func openConversationScreen(for channel: ChannelEntity, with manager: NewMessageManager) {
-        if let viewController = ConversationViewController.instance() {
+    func openConversationScreen(for channel: ChannelEntity, with manager: MessageManager) {
+        if let viewController = MessagesViewController.instance() {
             viewController.messageManager = manager
             viewController.myData = myData
             viewController.onNewMessages = { [weak self] (channel) in

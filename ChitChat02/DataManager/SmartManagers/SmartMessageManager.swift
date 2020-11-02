@@ -7,10 +7,10 @@ import Foundation
 import CoreData
 import Firebase
 
-class SmartMessageManager: NewMessageManager {
+class SmartMessageManager: MessageManager {
 
     private let cache: LocalCache
-    private let messagesManager: MessagesManager
+    private let messagesManager: RemoteMessageManager
     private let viewContext: NSManagedObjectContext
     private let my: UserData
     let channel: ChannelEntity

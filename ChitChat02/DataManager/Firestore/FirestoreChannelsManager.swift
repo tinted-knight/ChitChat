@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import CoreData
 
-class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
+class FirestoreChannelManager: FirestoreDataManager, RemoteChannelManager {
     private var channels: CollectionReference {
         return db.collection(Channel.path)
     }
@@ -53,25 +53,6 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
                     onRemoved(channel)
                 }
             }
-        }
-    }
-    
-    func loadChannelList(onData: @escaping ([Channel]) -> Void, onError: @escaping (String) -> Void) {
-        channels.order(by: Channel.name, descending: false).getDocuments { (snapshot, error) in
-            if let error = error {
-                onError(error.localizedDescription)
-                return
-            }
-            
-            let channels: [Channel]  = snapshot?.documents
-                .filter({ document in
-                    guard let name = document.data()[Channel.name] as? String,
-                        !name.isEmpty else { return false }
-                    return true
-                })
-                .compactMap({ document in Channel(from: document) }) ?? []
-
-            onData(channels)
         }
     }
     

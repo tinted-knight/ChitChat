@@ -10,57 +10,18 @@ import Foundation
 import UIKit
 import CoreData
 
-extension ConversationViewController {
-//    func loadData() {
-//        guard let channel = channel, let myData = myData else { return }
-//
-//        messageManager = FirestoreMessageManager(for: channel, me: myData)
-//        messageManager?.loadMessageList(onData: { [weak self] (values) in
-//            guard let self = self else { return }
-//
-//            if !values.isEmpty {
-//                self.messages = values.map { (message) in
-//                    let senderName = message.senderName
-//                    let direction: MessageDirection =
-//                        message.senderId == myData.uuid
-//                            ? .outcome
-//                            : .income
-//
-//                    return MessageCellModel(
-//                        text: message.content,
-//                        date: message.created,
-//                        sender: senderName,
-//                        direction: direction)
-//                }
-//            } else {
-//                self.showEmpty()
-//                return
-//            }
-//            self.messagesTableView.reloadData()
-//            self.showLoaded()
-//            }, onError: { [weak self] (message) in
-//                self?.showAlert(title: "Message loading error", message: message)
-//                self?.showError(message)
-//        })
-//    }
-
+extension MessagesViewController {
     @objc func inputNewMessage() {
         inputAlert(title: "New message", message: "Input text") { [weak self] (text) in
             guard let self = self else { return }
             if !text.isEmpty {
                 self.messageManager?.add(message: text)
-//                self.messageManager?.add(message: text) {
-//                    self.messageManager?.loadMessageList(onData: { (_) in
-//                        guard let channel = self.channel else { return }
-//                        self.onNewMessages?(channel)
-//                    }, onError: { fatalError($0) })
-//                }
             }
         }
     }
 }
-
-extension ConversationViewController {
+// MARK: - View states
+extension MessagesViewController {
     func showLoading() {
         messagesTableView.isHidden = true
         emptyLabel.isHidden = true
@@ -88,16 +49,13 @@ extension ConversationViewController {
     }
 }
 
-extension ConversationViewController {
+extension MessagesViewController {
     func loadCached() {
         guard let frc = messageManager?.frc else { return }
         do {
             frc.delegate = self
             try frc.performFetch()
-            messageManager?.fetchRemote { [weak self] in
-                guard let self = self, let channel = self.messageManager?.channel else { return }
-//                self.onNewMessages?(channel)
-            }
+            messageManager?.fetchRemote { }
             Log.oldschool("fetch messages, \(frc.fetchedObjects?.count ?? 0)")
             showLoaded()
         } catch {
@@ -105,8 +63,8 @@ extension ConversationViewController {
         }
     }
 }
-
-extension ConversationViewController: NSFetchedResultsControllerDelegate {
+// MARK: - FRC
+extension MessagesViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     sectionIndexTitleForSectionName sectionName: String) -> String? {
         return sectionName

@@ -9,36 +9,9 @@
 import Foundation
 import CoreData
 
-class LocalCache {
-    let container: NSPersistentContainer
-    
-    init(_ container: NSPersistentContainer) {
-        self.container = container
-    }
-    
-    func saveContext() {
-        if container.viewContext.hasChanges {
-            do {
-                try container.viewContext.obtainPermanentIDs(for: Array(container.viewContext.insertedObjects))
-                try container.viewContext.save()
-            } catch {
-                Log.newschool(error.localizedDescription)
-            }
-        }
-    }
-    
-    func performDelete() {
-        do {
-            try container.viewContext.save()
-        } catch {
-            fatalError("cannot delete with viewContext")
-        }
-    }
-}
-
-class SmartChannelManager: NewChannelManager {
+class SmartChannelManager: ChannelManager {
     private let cache: LocalCache
-    private let channelsManager: ChannelsManager
+    private let channelsManager: RemoteChannelManager
     private let viewContext: NSManagedObjectContext
 
     init(_ container: NSPersistentContainer) {
