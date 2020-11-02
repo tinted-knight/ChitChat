@@ -25,8 +25,10 @@ protocol NewChannelManager {
 }
 
 protocol NewMessageManager {
+    var channel: ChannelEntity { get }
     var frc: NSFetchedResultsController<MessageEntity> { get }
-    func fetchRemote()
+    func fetchRemote(completion: @escaping () -> Void)
+    func add(message content: String)
 }
 
 protocol MessagesReader {
@@ -35,5 +37,5 @@ protocol MessagesReader {
 
 protocol MessagesManager: MessagesReader {
     var frc: NSFetchedResultsController<MessageEntity> { get }
-    func add(message: String, completion: @escaping () -> Void)
+    func add(data: [String: Any], completion: @escaping (Bool) -> Void)
 }

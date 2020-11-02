@@ -16,7 +16,6 @@ class ConversationViewController: UIViewController {
         return storyboard.instantiateInitialViewController() as? ConversationViewController
     }
     
-    var channel: ChannelEntity?
     var messageManager: NewMessageManager?
     var myData: UserData?
     
@@ -49,7 +48,7 @@ class ConversationViewController: UIViewController {
         emptyLabel.isHidden = true
         emptyLabel.text = "Looks like there are no messages in this channel"
         
-        title = channel?.name ?? nonameContact
+        title = messageManager?.channel.name ?? nonameContact
         
         messagesTableView.register(UINib(nibName: "IncomeMessageCell", bundle: nil), forCellReuseIdentifier: incomeCellId)
         messagesTableView.register(UINib(nibName: "OutcomeMessageCell", bundle: nil), forCellReuseIdentifier: outcomeCellId)

@@ -60,6 +60,7 @@ class ConversationListViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         Log.oldschool("\(#function), needRefresh = \(needRefresh)")
         if needRefresh {
+            channelsManager?.fetchRemote()
 //            coreDataManager.refreshChannels()
 //            needRefresh = false
         }

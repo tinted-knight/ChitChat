@@ -40,12 +40,11 @@ class FirestoreMessageReader: FirestoreDataManager, MessagesReader {
 
 class FirestoreMessageManager: FirestoreMessageReader, MessagesManager {
     
-    private let userData: UserData
+//    private let userData: UserData
     private let viewContext: NSManagedObjectContext
     private let channel: ChannelEntity
 
-    init(for channel: ChannelEntity, me user: UserData, with context: NSManagedObjectContext) {
-        self.userData = user
+    init(for channel: ChannelEntity, with context: NSManagedObjectContext) {
         self.viewContext = context
         self.channel = channel
         super.init(for: channel.identifier)
@@ -66,20 +65,14 @@ class FirestoreMessageManager: FirestoreMessageReader, MessagesManager {
                                           cacheName: nil)
     }()
 
-    func add(message: String, completion: @escaping () -> Void) {
-        let newMessageData: [String: Any] = [
-            Message.content: message,
-            Message.created: Timestamp(date: Date()),
-            Message.senderName: userData.name,
-            Message.senderId: userData.uuid
-        ]
-        channelMessages.addDocument(data: newMessageData) { (error) in
+    func add(data: [String: Any], completion: @escaping (Bool) -> Void) {
+        channelMessages.addDocument(data: data) { (error) in
             if let error = error {
                 Log.fire("adding message error: \(error.localizedDescription)")
-                return
+                completion(false)
             } else {
                 Log.fire("adding message success")
-                completion()
+                completion(true)
             }
         }
     }

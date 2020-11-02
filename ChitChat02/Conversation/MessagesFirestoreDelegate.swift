@@ -48,6 +48,7 @@ extension ConversationViewController {
         inputAlert(title: "New message", message: "Input text") { [weak self] (text) in
             guard let self = self else { return }
             if !text.isEmpty {
+                self.messageManager?.add(message: text)
 //                self.messageManager?.add(message: text) {
 //                    self.messageManager?.loadMessageList(onData: { (_) in
 //                        guard let channel = self.channel else { return }
@@ -93,7 +94,10 @@ extension ConversationViewController {
         do {
             frc.delegate = self
             try frc.performFetch()
-            messageManager?.fetchRemote()
+            messageManager?.fetchRemote { [weak self] in
+                guard let self = self, let channel = self.messageManager?.channel else { return }
+                self.onNewMessages?(channel)
+            }
 //            messageManager?.loadMessageList(onData: { [weak self] (_) in
 //                guard let self = self, let channel = self.channel else { return }
 //                if self.messageManager?.frc.fetchedObjects?.count == 0 {
