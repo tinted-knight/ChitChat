@@ -37,6 +37,10 @@ protocol NewMessageManager {
 }
 
 protocol MessagesReader {
+    func loadMessageList(onAdded: @escaping (Message) -> Void,
+                         onModified: @escaping (Message) -> Void,
+                         onRemoved: @escaping (Message) -> Void,
+                         onError: @escaping (String) -> Void)
     func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void)
 }
 

@@ -22,6 +22,30 @@ class FirestoreMessageReader: FirestoreDataManager, MessagesReader {
         self.channelId = channelId
     }
 
+    func loadMessageList(onAdded: @escaping (Message) -> Void,
+                         onModified: @escaping (Message) -> Void,
+                         onRemoved: @escaping (Message) -> Void,
+                         onError: @escaping (String) -> Void) {
+        channelMessages.order(by: Message.created, descending: true).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                onError(error.localizedDescription)
+                return
+            }
+            guard let snapshot = snapshot else { return }
+            snapshot.documentChanges.forEach { (diff) in
+                guard let message = Message(from: diff.document) else { return }
+                switch diff.type {
+                case .added:
+                    onAdded(message)
+                case .modified:
+                    onModified(message)
+                case .removed:
+                    onRemoved(message)
+                }
+            }
+        }
+    }
+
     func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void) {
         channelMessages.order(by: Message.created, descending: true).getDocuments { (snapshot, error) in
             if let error = error {

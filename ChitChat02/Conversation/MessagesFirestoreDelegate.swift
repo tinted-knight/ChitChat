@@ -96,15 +96,8 @@ extension ConversationViewController {
             try frc.performFetch()
             messageManager?.fetchRemote { [weak self] in
                 guard let self = self, let channel = self.messageManager?.channel else { return }
-                self.onNewMessages?(channel)
-            }
-//            messageManager?.loadMessageList(onData: { [weak self] (_) in
-//                guard let self = self, let channel = self.channel else { return }
-//                if self.messageManager?.frc.fetchedObjects?.count == 0 {
-//                    self.onNewMessages?(channel)
-//                }
 //                self.onNewMessages?(channel)
-//            }, onError: { fatalError($0) })
+            }
             Log.oldschool("fetch messages, \(frc.fetchedObjects?.count ?? 0)")
             showLoaded()
         } catch {

@@ -25,7 +25,7 @@ class SmartMessageManager: NewMessageManager {
 
     lazy var frc: NSFetchedResultsController<MessageEntity> = {
         let sortMessages = NSSortDescriptor(key: "created", ascending: false)
-        let predicate = NSPredicate(format: "channel.identifier like '\(channel.identifier)'")
+        let predicate = NSPredicate(format: "channel.identifier == '\(channel.identifier)'")
 
         let frMessages = NSFetchRequest<MessageEntity>(entityName: "MessageEntity")
         frMessages.sortDescriptors = [sortMessages]
@@ -38,14 +38,17 @@ class SmartMessageManager: NewMessageManager {
     }()
     
     func fetchRemote(completion: @escaping () -> Void) {
-        messagesManager.loadMessageList(onData: { [weak self] (values) in
-            guard let self = self else { fatalError("fetchRemote::no self") }
-            Log.newschool("fetchRemote, \(values.count) messages for \(self.channel.identifier)")
-            let entities = values.map { MessageEntity(from: $0, in: self.viewContext) }
-            self.channel.addToMessages(NSSet(array: entities))
-            self.cache.saveContext()
-            completion()
-        }, onError: onError(_:))
+        messagesManager.loadMessageList(
+            onAdded: { [weak self] (message) in
+                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
+                self?.insertMessage(message)
+            }, onModified: { [weak self] (message) in
+                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
+                self?.updateMessage(with: message.documentId, content: message.content)
+            }, onRemoved: { [weak self] (message) in
+                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
+                self?.deleteFromDB(with: message.documentId)
+            }, onError: onError(_:))
     }
     
     func add(message content: String) {
@@ -55,9 +58,44 @@ class SmartMessageManager: NewMessageManager {
             Message.senderName: my.name,
             Message.senderId: my.uuid
         ]
-        messagesManager.add(data: messageData) { [weak self] (success) in
-            if success { self?.fetchRemote(completion: {})}
+        messagesManager.add(data: messageData) { (success) in
+            Log.newschool("message added \(success)")
         }
+    }
+    
+    private func insertMessage(_ message: Message) {
+        let entity = MessageEntity(from: message, in: viewContext)
+        channel.addToMessages(entity)
+        viewContext.insert(entity)
+        cache.saveContext()
+    }
+    
+    private func updateMessage(with identifier: String, content: String) {
+        let request: NSFetchRequest<MessageEntity> = MessageEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "documentId == %@", identifier)
+        request.fetchLimit = 1
+        do {
+            let toUpdate = try viewContext.fetch(request)
+            if !toUpdate.isEmpty {
+                Log.newschool("deleting message \(toUpdate[0].content.prefix(20))")
+                toUpdate[0].content = content
+                cache.saveContext()
+            }
+        } catch { fatalError("cannot fetch message to update") }
+    }
+    
+    private func deleteFromDB(with identifier: String) {
+        let request: NSFetchRequest<MessageEntity> = MessageEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "documentId == %@", identifier)
+        request.fetchLimit = 1
+        do {
+            let sacrifice = try viewContext.fetch(request)
+            if !sacrifice.isEmpty {
+                Log.newschool("deleting message \(sacrifice[0].content.prefix(20))")
+                viewContext.delete(sacrifice[0])
+                cache.performDelete()
+            }
+        } catch { fatalError("cannot fetch message for deletion") }
     }
 
     private func onError(_ message: String) {
