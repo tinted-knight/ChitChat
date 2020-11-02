@@ -11,6 +11,10 @@ import CoreData
 import Firebase
 
 protocol ChannelsManager {
+    func loadChannelList(onAdded: @escaping (Channel) -> Void,
+                         onModified: @escaping (Channel) -> Void,
+                         onRemoved: @escaping (Channel) -> Void,
+                         onError: @escaping (String) -> Void)
     func loadChannelList(onData: @escaping ([Channel]) -> Void, onError: @escaping (String) -> Void)
     func getChannel(id channelId: String, onData: @escaping (Channel) -> Void, onError: @escaping (String) -> Void)
     func addChannel(name: String, completion: @escaping (Bool) -> Void)
@@ -22,6 +26,7 @@ protocol NewChannelManager {
     
     func fetchRemote()
     func addChannel(name: String)
+    func deleteChannel(_ channel: ChannelEntity)
 }
 
 protocol NewMessageManager {

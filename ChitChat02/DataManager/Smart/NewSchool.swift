@@ -18,6 +18,7 @@ class NewSchool {
         container.loadPersistentStores(completionHandler: { [weak self] _, error in
             self?.container = container
             container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
+            container.viewContext.automaticallyMergesChangesFromParent = true
 //            container.viewContext.mergePolicy = NSOverwriteMergePolicy
             guard error == nil else {
                 fatalError("Failed to load store")

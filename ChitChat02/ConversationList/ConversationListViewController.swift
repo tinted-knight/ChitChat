@@ -60,7 +60,7 @@ class ConversationListViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         Log.oldschool("\(#function), needRefresh = \(needRefresh)")
         if needRefresh {
-            channelsManager?.fetchRemote()
+//            channelsManager?.fetchRemote()
 //            coreDataManager.refreshChannels()
 //            needRefresh = false
         }
@@ -208,6 +208,7 @@ extension ConversationListViewController: UITableViewDelegate {
         guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
         if editingStyle == .delete {
             Log.oldschool("delete row, \(channel.name)")
+            channelsManager?.deleteChannel(channel)
 //            coreDataManager.delete(channel: channel)
 //            channelsManager.deleteChannel(id: channel.identifier) { [weak self] (result) in
 //                if result {

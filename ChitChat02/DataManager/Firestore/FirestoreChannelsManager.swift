@@ -32,6 +32,30 @@ class FirestoreChannelManager: FirestoreDataManager, ChannelsManager {
                                           cacheName: nil)
     }()
 
+    func loadChannelList(onAdded: @escaping (Channel) -> Void,
+                         onModified: @escaping (Channel) -> Void,
+                         onRemoved: @escaping (Channel) -> Void,
+                         onError: @escaping (String) -> Void) {
+        channels.order(by: Channel.name, descending: false).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                onError(error.localizedDescription)
+                return
+            }
+            guard let snapshot = snapshot else { return }
+            snapshot.documentChanges.forEach { (diff) in
+                guard let channel = Channel(from: diff.document) else { return }
+                switch diff.type {
+                case .added:
+                    onAdded(channel)
+                case .modified:
+                    onModified(channel)
+                case .removed:
+                    onRemoved(channel)
+                }
+            }
+        }
+    }
+    
     func loadChannelList(onData: @escaping ([Channel]) -> Void, onError: @escaping (String) -> Void) {
         channels.order(by: Channel.name, descending: false).getDocuments { (snapshot, error) in
             if let error = error {
