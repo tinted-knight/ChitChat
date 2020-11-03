@@ -39,16 +39,15 @@ class SmartMessageManager: MessageManager {
     
     func fetchRemote(completion: @escaping () -> Void) {
         messagesManager.loadMessageList(
-            onAdded: { [weak self] (messages) in
-                guard let self = self else { return }
-                Log.newschool("fetchRemote messages, added \(messages.count)")
-                self.insert(messages, into: self.channel.identifier)
-            }, onModified: { [weak self] (messages) in
-                Log.newschool("fetchRemote messages, added \(messages.count)")
-                self?.update(messages: messages)
-            }, onRemoved: { [weak self] (messages) in
-                Log.newschool("fetchRemote messages, added \(messages.count))")
-                self?.deleteFromDB(messages)
+            onAdded: { [weak self] (message) in
+                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
+                self?.insert(message)
+            }, onModified: { [weak self] (message) in
+                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
+                self?.updateMessage(with: message.documentId, content: message.content)
+            }, onRemoved: { [weak self] (message) in
+                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
+                self?.deleteFromDB(with: message.documentId)
             }, onError: onError(_:))
     }
     
@@ -64,23 +63,19 @@ class SmartMessageManager: MessageManager {
         }
     }
     
-    private func insert(_ messages: [Message], into channelId: String) {
-//        let entity = MessageEntity(from: message, in: viewContext)
-//        channel.addToMessages(entity)
-//        viewContext.insert(entity)
-//        cache.saveContext()
-        cache.perforBackgroundSave { (context) in
-            let entities = messages.map { MessageEntity(from: $0, in: context) }
-
+    private func insert(_ message: Message) {
+        let identifier = channel.identifier
+        cache.saveInBackground { (context) in
             let request: NSFetchRequest<ChannelEntity> = ChannelEntity.fetchRequest()
-            request.predicate = NSPredicate(format: "identifier == %@", channelId)
+            request.predicate = NSPredicate(format: "identifier == %@", identifier)
             request.fetchLimit = 1
             do {
-                let channel = try context.fetch(request)
-                if !channel.isEmpty {
-                    channel[0].addToMessages(NSSet(array: entities))
+                let into = try context.fetch(request)
+                if !into.isEmpty {
+                    let entity = MessageEntity(from: message, in: context)
+                    into[0].addToMessages(entity)
                 }
-            } catch { Log.newschool("error fetching channel to add messages to")}
+            } catch { fatalError("error inserting message, \(error.localizedDescription)") }
         }
     }
     

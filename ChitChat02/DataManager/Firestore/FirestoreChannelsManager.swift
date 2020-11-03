@@ -57,6 +57,18 @@ class FirestoreChannelManager: FirestoreDataManager, RemoteChannelManager {
         }
     }
     
+    func loadOnce(onData: @escaping ([Channel]) -> Void) {
+        channels.order(by: Channel.name, descending: false).getDocuments { (snapshot, error) in
+            if let error = error {
+                Log.newschool(error.localizedDescription)
+                return
+            }
+            guard let snapshot = snapshot else { return }
+            let channels: [Channel] = snapshot.documents.compactMap { Channel(from: $0) }
+            onData(channels)
+        }
+    }
+    
     func getChannel(id channelId: String, onData: @escaping (Channel) -> Void, onError: @escaping (String) -> Void) {
         Log.oldschool(#function)
         channels.document(channelId).getDocument { (snapshot, error) in
