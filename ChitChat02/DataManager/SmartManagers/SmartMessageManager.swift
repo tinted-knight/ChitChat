@@ -41,7 +41,7 @@ class SmartMessageManager: MessageManager {
         messagesManager.loadMessageList(
             onAdded: { [weak self] (message) in
                 Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
-                self?.insertMessage(message)
+                self?.insert(message)
             }, onModified: { [weak self] (message) in
                 Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
                 self?.updateMessage(with: message.documentId, content: message.content)
@@ -63,11 +63,20 @@ class SmartMessageManager: MessageManager {
         }
     }
     
-    private func insertMessage(_ message: Message) {
-        let entity = MessageEntity(from: message, in: viewContext)
-        channel.addToMessages(entity)
-        viewContext.insert(entity)
-        cache.saveContext()
+    private func insert(_ message: Message) {
+        let identifier = channel.identifier
+        cache.saveInBackground { (context) in
+            let request: NSFetchRequest<ChannelEntity> = ChannelEntity.fetchRequest()
+            request.predicate = NSPredicate(format: "identifier == %@", identifier)
+            request.fetchLimit = 1
+            do {
+                let into = try context.fetch(request)
+                if !into.isEmpty {
+                    let entity = MessageEntity(from: message, in: context)
+                    into[0].addToMessages(entity)
+                }
+            } catch { fatalError("error inserting message, \(error.localizedDescription)") }
+        }
     }
     
     private func updateMessage(with identifier: String, content: String) {

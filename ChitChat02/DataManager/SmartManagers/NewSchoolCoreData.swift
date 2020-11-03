@@ -45,6 +45,21 @@ class LocalCache {
         }
     }
     
+    func saveInBackground(bloc: @escaping (NSManagedObjectContext) -> Void) {
+        container.performBackgroundTask { (context) in
+            context.automaticallyMergesChangesFromParent = true
+            context.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
+            bloc(context)
+            if context.hasChanges {
+                do {
+                    try context.obtainPermanentIDs(for: Array(context.insertedObjects))
+                    try context.save()
+                } catch {
+                    Log.newschool("bg save error, \(error.localizedDescription)")
+                }
+            }
+        }
+    }
     func performDelete() {
         do {
             try container.viewContext.save()
