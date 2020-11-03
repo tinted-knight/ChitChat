@@ -32,7 +32,7 @@ class FirestoreChannelManager: FirestoreDataManager, RemoteChannelManager {
                                           cacheName: nil)
     }()
 
-    func loadChannelList(onAdded: @escaping ([Channel]) -> Void,
+    func loadChannelList(onAdded: @escaping (Channel) -> Void,
                          onModified: @escaping (Channel) -> Void,
                          onRemoved: @escaping (Channel) -> Void,
                          onError: @escaping (String) -> Void) {
@@ -43,17 +43,11 @@ class FirestoreChannelManager: FirestoreDataManager, RemoteChannelManager {
             }
             guard let snapshot = snapshot else { return }
 
-            let added: [Channel] = snapshot.documentChanges
-                .filter { (diff) in diff.type == .added }
-                .compactMap { (diff) in Channel(from: diff.document) }
-            if !added.isEmpty { onAdded(added) }
-            
             snapshot.documentChanges.forEach { (diff) in
                 guard let channel = Channel(from: diff.document) else { return }
                 switch diff.type {
                 case .added:
-                    break
-//                    onAdded(channel)
+                    onAdded(channel)
                 case .modified:
                     onModified(channel)
                 case .removed:

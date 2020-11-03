@@ -11,7 +11,7 @@ import CoreData
 import Firebase
 
 protocol RemoteChannelManager {
-    func loadChannelList(onAdded: @escaping ([Channel]) -> Void,
+    func loadChannelList(onAdded: @escaping (Channel) -> Void,
                          onModified: @escaping (Channel) -> Void,
                          onRemoved: @escaping (Channel) -> Void,
                          onError: @escaping (String) -> Void)
