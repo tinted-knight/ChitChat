@@ -39,16 +39,10 @@ class SmartMessageManager: MessageManager {
     
     func fetchRemote(completion: @escaping () -> Void) {
         messagesManager.loadMessageList(
-            onAdded: { [weak self] (message) in
-                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
-                self?.insert(message)
-            }, onModified: { [weak self] (message) in
-                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
-                self?.updateMessage(with: message.documentId, content: message.content)
-            }, onRemoved: { [weak self] (message) in
-                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
-                self?.deleteFromDB(with: message.documentId)
-            }, onError: onError(_:))
+            onAdded: insert(_:),
+            onModified: update(_:),
+            onRemoved: deleteFromDB(_:),
+            onError: onError(_:))
     }
     
     func add(message content: String) {
@@ -63,7 +57,7 @@ class SmartMessageManager: MessageManager {
         }
     }
     
-    private func insert(_ message: Message) {
+    private func insert(_ messages: [Message]) {
         let identifier = channel.identifier
         cache.saveInBackground { (context) in
             let request: NSFetchRequest<ChannelEntity> = ChannelEntity.fetchRequest()
@@ -72,14 +66,14 @@ class SmartMessageManager: MessageManager {
             do {
                 let into = try context.fetch(request)
                 if !into.isEmpty {
-                    let entity = MessageEntity(from: message, in: context)
-                    into[0].addToMessages(entity)
+                    let entities = messages.map { MessageEntity(from: $0, in: context)}
+                    into[0].addToMessages(NSSet(array: Array(entities)))
                 }
             } catch { fatalError("error inserting message, \(error.localizedDescription)") }
         }
     }
     
-    private func update(messages: [Message]) {
+    private func update(_ messages: [Message]) {
         let identifiers = messages.map { $0.documentId }
         let request: NSFetchRequest<MessageEntity> = MessageEntity.fetchRequest()
         request.predicate = NSPredicate(format: "documentId in %@", identifiers)
