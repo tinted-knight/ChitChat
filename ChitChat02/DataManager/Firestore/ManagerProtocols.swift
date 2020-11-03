@@ -15,6 +15,7 @@ protocol RemoteChannelManager {
                          onModified: @escaping (Channel) -> Void,
                          onRemoved: @escaping (Channel) -> Void,
                          onError: @escaping (String) -> Void)
+    func loadOnce(onData: @escaping ([Channel]) -> Void)
     func addChannel(name: String, completion: @escaping (Bool) -> Void)
     func deleteChannel(id: String, completion: @escaping (Bool) -> Void)
 }

@@ -60,6 +60,7 @@ class LocalCache {
             }
         }
     }
+    
     func performDelete() {
         do {
             try container.viewContext.save()
