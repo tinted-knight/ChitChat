@@ -33,9 +33,9 @@ class SmartChannelManager: ChannelManager {
     
     func fetchRemote() {
         channelsManager.loadChannelList(
-            onAdded: { [weak self] (channel) in
-                Log.newschool("fetchRemote channels, added \(channel.name), \(channel.lastMessage ?? "")")
-                self?.insertChannel(channel)
+            onAdded: { [weak self] (channels) in
+                Log.newschool("fetchRemote channels, added \(channels.count))")
+                self?.insert(channels)
             }, onModified: { [weak self] (channel) in
                 Log.newschool("fetchRemote channels, modified \(channel.name), \(channel.lastMessage ?? "")")
                 self?.updateChannel(with: channel.identifier, message: channel.lastMessage, activity: channel.lastActivity)
@@ -71,8 +71,8 @@ class SmartChannelManager: ChannelManager {
         } catch { fatalError("cannot fetch channel for deletion") }
     }
     
-    private func insertChannel(_ channel: Channel) {
-        viewContext.insert(ChannelEntity(from: channel, in: viewContext))
+    private func insert(_ channels: [Channel]) {
+        channels.forEach { viewContext.insert(ChannelEntity(from: $0, in: viewContext))}
         cache.saveContext()
     }
     

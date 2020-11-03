@@ -24,9 +24,9 @@ class FirestoreMessageManager: FirestoreDataManager, RemoteMessageManager {
         self.channel = channel
     }
     
-    func loadMessageList(onAdded: @escaping (Message) -> Void,
-                         onModified: @escaping (Message) -> Void,
-                         onRemoved: @escaping (Message) -> Void,
+    func loadMessageList(onAdded: @escaping ([Message]) -> Void,
+                         onModified: @escaping ([Message]) -> Void,
+                         onRemoved: @escaping ([Message]) -> Void,
                          onError: @escaping (String) -> Void) {
         channelMessages.order(by: Message.created, descending: true).addSnapshotListener { (snapshot, error) in
             if let error = error {
@@ -34,17 +34,21 @@ class FirestoreMessageManager: FirestoreDataManager, RemoteMessageManager {
                 return
             }
             guard let snapshot = snapshot else { return }
-            snapshot.documentChanges.forEach { (diff) in
-                guard let message = Message(from: diff.document) else { return }
-                switch diff.type {
-                case .added:
-                    onAdded(message)
-                case .modified:
-                    onModified(message)
-                case .removed:
-                    onRemoved(message)
-                }
-            }
+
+            let added: [Message] = snapshot.documentChanges
+                .filter { (diff) in diff.type == .added}
+                .compactMap { Message(from: $0.document) }
+            if !added.isEmpty { onAdded(added)}
+
+            let modified: [Message] = snapshot.documentChanges
+                .filter { (diff) in diff.type == .modified}
+                .compactMap { Message(from: $0.document) }
+            if !modified.isEmpty { onModified(modified) }
+            
+            let removed: [Message] = snapshot.documentChanges
+                .filter { (diff) in diff.type == .removed}
+                .compactMap { Message(from: $0.document) }
+            if !removed.isEmpty { onRemoved(removed) }
         }
     }
 

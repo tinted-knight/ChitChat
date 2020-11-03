@@ -39,15 +39,16 @@ class SmartMessageManager: MessageManager {
     
     func fetchRemote(completion: @escaping () -> Void) {
         messagesManager.loadMessageList(
-            onAdded: { [weak self] (message) in
-                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
-                self?.insertMessage(message)
-            }, onModified: { [weak self] (message) in
-                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
-                self?.updateMessage(with: message.documentId, content: message.content)
-            }, onRemoved: { [weak self] (message) in
-                Log.newschool("fetchRemote messages, added \(message.content.prefix(20))")
-                self?.deleteFromDB(with: message.documentId)
+            onAdded: { [weak self] (messages) in
+                guard let self = self else { return }
+                Log.newschool("fetchRemote messages, added \(messages.count)")
+                self.insert(messages, into: self.channel.identifier)
+            }, onModified: { [weak self] (messages) in
+                Log.newschool("fetchRemote messages, added \(messages.count)")
+                self?.update(messages: messages)
+            }, onRemoved: { [weak self] (messages) in
+                Log.newschool("fetchRemote messages, added \(messages.count))")
+                self?.deleteFromDB(messages)
             }, onError: onError(_:))
     }
     
@@ -63,38 +64,53 @@ class SmartMessageManager: MessageManager {
         }
     }
     
-    private func insertMessage(_ message: Message) {
-        let entity = MessageEntity(from: message, in: viewContext)
-        channel.addToMessages(entity)
-        viewContext.insert(entity)
-        cache.saveContext()
+    private func insert(_ messages: [Message], into channelId: String) {
+//        let entity = MessageEntity(from: message, in: viewContext)
+//        channel.addToMessages(entity)
+//        viewContext.insert(entity)
+//        cache.saveContext()
+        cache.perforBackgroundSave { (context) in
+            let entities = messages.map { MessageEntity(from: $0, in: context) }
+
+            let request: NSFetchRequest<ChannelEntity> = ChannelEntity.fetchRequest()
+            request.predicate = NSPredicate(format: "identifier == %@", channelId)
+            request.fetchLimit = 1
+            do {
+                let channel = try context.fetch(request)
+                if !channel.isEmpty {
+                    channel[0].addToMessages(NSSet(array: entities))
+                }
+            } catch { Log.newschool("error fetching channel to add messages to")}
+        }
     }
     
-    private func updateMessage(with identifier: String, content: String) {
+    private func update(messages: [Message]) {
+        let identifiers = messages.map { $0.documentId }
         let request: NSFetchRequest<MessageEntity> = MessageEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "documentId == %@", identifier)
-        request.fetchLimit = 1
+        request.predicate = NSPredicate(format: "documentId in %@", identifiers)
         do {
             let toUpdate = try viewContext.fetch(request)
-            if !toUpdate.isEmpty {
-                Log.newschool("deleting message \(toUpdate[0].content.prefix(20))")
-                toUpdate[0].content = content
-                cache.saveContext()
+            toUpdate.forEach { (entity) in
+                Log.newschool("updating message \(entity.content.prefix(20))")
+                if let content = messages.first(where: { $0.documentId == entity.documentId })?.content {
+                    entity.content = content
+                }
             }
+            cache.saveContext()
         } catch { fatalError("cannot fetch message to update") }
     }
     
-    private func deleteFromDB(with identifier: String) {
+    private func deleteFromDB(_ messages: [Message]) {
+        let identifiers = messages.map { $0.documentId }
         let request: NSFetchRequest<MessageEntity> = MessageEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "documentId == %@", identifier)
-        request.fetchLimit = 1
+        request.predicate = NSPredicate(format: "documentId in %@", identifiers)
         do {
             let sacrifice = try viewContext.fetch(request)
-            if !sacrifice.isEmpty {
-                Log.newschool("deleting message \(sacrifice[0].content.prefix(20))")
-                viewContext.delete(sacrifice[0])
-                cache.performDelete()
+            sacrifice.forEach { (entity) in
+                Log.newschool("deleting message \(entity.content.prefix(20))")
+                viewContext.delete(entity)
             }
+            cache.performDelete()
         } catch { fatalError("cannot fetch message for deletion") }
     }
 

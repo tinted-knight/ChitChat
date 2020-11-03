@@ -11,7 +11,7 @@ import CoreData
 import Firebase
 
 protocol RemoteChannelManager {
-    func loadChannelList(onAdded: @escaping (Channel) -> Void,
+    func loadChannelList(onAdded: @escaping ([Channel]) -> Void,
                          onModified: @escaping (Channel) -> Void,
                          onRemoved: @escaping (Channel) -> Void,
                          onError: @escaping (String) -> Void)
@@ -36,9 +36,9 @@ protocol MessageManager {
 }
 
 protocol RemoteMessageManager {
-    func loadMessageList(onAdded: @escaping (Message) -> Void,
-                         onModified: @escaping (Message) -> Void,
-                         onRemoved: @escaping (Message) -> Void,
+    func loadMessageList(onAdded: @escaping ([Message]) -> Void,
+                         onModified: @escaping ([Message]) -> Void,
+                         onRemoved: @escaping ([Message]) -> Void,
                          onError: @escaping (String) -> Void)
     func add(data: [String: Any], completion: @escaping (Bool) -> Void)
 }
