@@ -55,7 +55,7 @@ class SmartChannelManager: ChannelManager {
     private func channelsListener() {
         channelsManager.loadChannelList(
             onAdded: { [weak self] (channel) in
-                Log.newschool("fetchRemote channels, added \(channel.name)")
+                Log.newschool("fetchRemote channels, added \(channel.name), \(channel.lastMessage ?? "nil")")
                 self?.insert(channel)
             }, onModified: { [weak self] (channel) in
                 Log.newschool("fetchRemote channels, modified \(channel.name), \(channel.lastMessage ?? "")")
@@ -109,8 +109,9 @@ class SmartChannelManager: ChannelManager {
     }
     
     private func insert(_ channel: Channel) {
-        viewContext.insert(ChannelEntity(from: channel, in: viewContext))
-        cache.saveContext()
+        cache.saveInBackground { (context) in
+            context.insert(ChannelEntity(from: channel, in: context))
+        }
     }
     
     private func updateChannel(with identifier: String, message: String?, activity: Date?) {

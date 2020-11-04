@@ -48,7 +48,7 @@ class LocalCache {
     func saveInBackground(bloc: @escaping (NSManagedObjectContext) -> Void) {
         container.performBackgroundTask { (context) in
             context.automaticallyMergesChangesFromParent = true
-            context.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
+            context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
             bloc(context)
             if context.hasChanges {
                 do {
