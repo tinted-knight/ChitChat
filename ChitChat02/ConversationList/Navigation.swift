@@ -15,9 +15,6 @@ extension ConversationListViewController {
         if let viewController = MessagesViewController.instance() {
             viewController.messageManager = manager
             viewController.myData = myData
-            viewController.onNewMessages = { [weak self] (channel) in
-                self?.needRefresh = true
-            }
             navigationController?.pushViewController(viewController, animated: true)
         }
     }

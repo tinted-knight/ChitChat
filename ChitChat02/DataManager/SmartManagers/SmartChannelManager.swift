@@ -121,7 +121,6 @@ class SmartChannelManager: ChannelManager {
         do {
             let toUpdate = try viewContext.fetch(request)
             if !toUpdate.isEmpty {
-                Log.newschool("updating channel \(toUpdate[0].name)")
                 toUpdate[0].lastMessage = message
                 toUpdate[0].lastActivity = activity
                 cache.saveContext()

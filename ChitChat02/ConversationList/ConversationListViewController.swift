@@ -27,8 +27,6 @@ class ConversationListViewController: UIViewController {
     var channelsManager: ChannelManager?
     let newSchool = NewSchoolCoreData()
     
-    var needRefresh = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,11 +43,6 @@ class ConversationListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = ThemeManager.get().backgroundColor
         super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        Log.oldschool("\(#function), needRefresh = \(needRefresh)")
-        super.viewDidAppear(animated)
     }
     
     private func loadUserData() -> UserData? {
@@ -176,11 +169,10 @@ extension ConversationListViewController: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Log.oldschool("table row select")
         guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
         guard let container = newSchool.container else { return }
         guard let userData = myData else { return }
-        Log.oldschool("openConversation for \(channel.identifier), \(channel.name)")
+        Log.oldschool("openConversation for channel \(channel.name), id = \(channel.identifier)")
         openConversationScreen(for: channel,
                                with: SmartMessageManager(for: channel,
                                                          me: userData,
