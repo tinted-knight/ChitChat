@@ -11,7 +11,6 @@
 		393AEDE1254F3A270028B893 /* NewSchoolCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */; };
 		393AEDE6254F41A80028B893 /* SmartChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE5254F41A80028B893 /* SmartChannelManager.swift */; };
 		3948F9BE253B893700465D02 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9BD253B893700465D02 /* Log.swift */; };
-		3948F9C0253B8B9100465D02 /* FirestoreChannelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9BF253B8B9100465D02 /* FirestoreChannelsManager.swift */; };
 		3948F9C2253B8B9C00465D02 /* FirestoreMessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9C1253B8B9C00465D02 /* FirestoreMessagesManager.swift */; };
 		3948F9C4253B8F3600465D02 /* ManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9C3253B8F3600465D02 /* ManagerProtocols.swift */; };
 		3948F9C6253B8F6F00465D02 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9C5253B8F6F00465D02 /* models.swift */; };
@@ -77,7 +76,6 @@
 		393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSchoolCoreData.swift; sourceTree = "<group>"; };
 		393AEDE5254F41A80028B893 /* SmartChannelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartChannelManager.swift; sourceTree = "<group>"; };
 		3948F9BD253B893700465D02 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		3948F9BF253B8B9100465D02 /* FirestoreChannelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreChannelsManager.swift; sourceTree = "<group>"; };
 		3948F9C1253B8B9C00465D02 /* FirestoreMessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMessagesManager.swift; sourceTree = "<group>"; };
 		3948F9C3253B8F3600465D02 /* ManagerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerProtocols.swift; sourceTree = "<group>"; };
 		3948F9C5253B8F6F00465D02 /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				3958B3B6253AFDF500801E6D /* FirestoreDataManager.swift */,
-				3948F9BF253B8B9100465D02 /* FirestoreChannelsManager.swift */,
 				3948F9C1253B8B9C00465D02 /* FirestoreMessagesManager.swift */,
 				3948F9C3253B8F3600465D02 /* ManagerProtocols.swift */,
 				3948F9C5253B8F6F00465D02 /* models.swift */,
@@ -633,7 +630,6 @@
 				39ED610B2521EB32006D8E0A /* ChannelsViewController.swift in Sources */,
 				39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */,
 				3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */,
-				3948F9C0253B8B9100465D02 /* FirestoreChannelsManager.swift in Sources */,
 				3958B3BF253B4CFA00801E6D /* MessagesVCManager.swift in Sources */,
 				39A2848025583534003C2484 /* ChannelModel.swift in Sources */,
 				3958B3B9253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift in Sources */,
