@@ -30,6 +30,7 @@ class ChannelsViewController: UIViewController {
     var myData: UserData?
     
     var channelModel: IChannelModel?
+    var presentationAssembly: PresentationAssembly?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,10 +181,11 @@ extension ChannelsViewController: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension ChannelsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
-//        guard let container = newSchool.container else { return }
-//        guard let userData = myData else { return }
-//        Log.oldschool("openConversation for channel \(channel.name), id = \(channel.identifier)")
+        guard let channel = channelModel?.frc.fetchedObjects?[indexPath.row] else { return }
+        guard let userData = myData else { return }
+        Log.oldschool("openConversation for channel \(channel.name), id = \(channel.identifier)")
+        guard let messages = presentationAssembly?.messagesViewController(for: channel, userData: userData) else { return }
+        navigationController?.pushViewController(messages, animated: true)
 //        openConversationScreen(for: channel,
 //                               with: SmartMessageManager(for: channel,
 //                                                         me: userData,

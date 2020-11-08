@@ -13,6 +13,8 @@ protocol IPresentationAssembly {
     func navigationViewController(withRoot root: UIViewController) -> UINavigationController
 
     func channelsViewController() -> ChannelsViewController
+    
+    func messagesViewController(for channel: ChannelEntity, userData: UserData) -> MessagesViewController
 }
 
 class PresentationAssembly: IPresentationAssembly {
@@ -34,7 +36,21 @@ class PresentationAssembly: IPresentationAssembly {
         }
 //        controller.channelsManager = serviceAssembly.channelService
         controller.channelModel = getChannelModel()
+        controller.presentationAssembly = self
         return controller
+    }
+    
+    func messagesViewController(for channel: ChannelEntity, userData: UserData) -> MessagesViewController {
+        guard let controller = MessagesViewController.instance() else {
+            fatalError("Cannot instantiate MessagesViewController")
+        }
+//        controller.messageModel = serviceAssembly.messageService(for: channel, userData: userData)
+        controller.messageModel = getMessagesModel(for: channel, user: userData)
+        return controller
+    }
+    
+    private func getMessagesModel(for channel: ChannelEntity, user: UserData) -> IMessagesModel {
+        return MessagesModel(messagesService: serviceAssembly.messageService(for: channel, userData: user))
     }
     
     private func getChannelModel() -> IChannelModel {

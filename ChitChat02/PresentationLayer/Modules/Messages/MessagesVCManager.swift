@@ -15,7 +15,7 @@ extension MessagesViewController {
         inputAlert(title: "New message", message: "Input text") { [weak self] (text) in
             guard let self = self else { return }
             if !text.isEmpty {
-                self.messageManager?.add(message: text)
+                self.messageModel?.add(message: text)
             }
         }
     }
@@ -51,16 +51,16 @@ extension MessagesViewController {
 
 extension MessagesViewController {
     func loadCached() {
-        guard let frc = messageManager?.frc else { return }
-        do {
-            frc.delegate = self
-            try frc.performFetch()
-            messageManager?.fetchRemote { }
-            Log.oldschool("fetch messages, \(frc.fetchedObjects?.count ?? 0)")
-            showLoaded()
-        } catch {
-            Log.oldschool(error.localizedDescription)
-        }
+//        guard let frc = messageManager?.frc else { return }
+//        do {
+//            frc.delegate = self
+//            try frc.performFetch()
+//            messageManager?.fetchRemote { }
+//            Log.oldschool("fetch messages, \(frc.fetchedObjects?.count ?? 0)")
+//            showLoaded()
+//        } catch {
+//            Log.oldschool(error.localizedDescription)
+//        }
     }
 }
 // MARK: - FRC
@@ -105,7 +105,7 @@ extension MessagesViewController: NSFetchedResultsControllerDelegate {
             }
         case .update:
             if let indexPath = indexPath {
-                guard let message = messageManager?.frc.object(at: indexPath) else { break }
+                guard let message = messageModel?.frc.object(at: indexPath) else { break }
                 guard let cell = messagesTableView.cellForRow(at: indexPath) as? MessageCell else { break }
                 let direction: MessageDirection = message.senderId == myData?.uuid ? .outcome : .income
                 cell.configure(with: MessageCellModel(text: message.content,

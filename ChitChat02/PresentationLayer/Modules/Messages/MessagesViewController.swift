@@ -16,7 +16,8 @@ class MessagesViewController: UIViewController {
         return storyboard.instantiateInitialViewController() as? MessagesViewController
     }
     
-    var messageManager: MessageManager?
+//    var messageManager: IMessageService?
+    var messageModel: IMessagesModel?
     var myData: UserData?
     
     var messages: [MessageCellModel] = []
@@ -34,7 +35,10 @@ class MessagesViewController: UIViewController {
         super.viewDidLoad()
 
         prepareUi()
-        loadCached()
+        messageModel?.delegate = self
+        messageModel?.frc.delegate = self
+        messageModel?.loadData()
+//        loadCached()
         applyTheme()
     }
     
@@ -45,7 +49,7 @@ class MessagesViewController: UIViewController {
         emptyLabel.isHidden = true
         emptyLabel.text = "Looks like there are no messages in this channel"
         
-        title = messageManager?.channel.name ?? nonameContact
+        title = messageModel?.channel.name ?? nonameContact
         
         messagesTableView.register(UINib(nibName: "IncomeMessageCell", bundle: nil), forCellReuseIdentifier: incomeCellId)
         messagesTableView.register(UINib(nibName: "OutcomeMessageCell", bundle: nil), forCellReuseIdentifier: outcomeCellId)
@@ -62,6 +66,13 @@ class MessagesViewController: UIViewController {
         view.backgroundColor = ThemeManager.get().backgroundColor
     }
 }
+
+extension MessagesViewController: IMessageModelDelegate {
+    func dataLoaded() {
+        showLoaded()
+    }
+}
+
 // MARK: - UITableViewDelegate
 extension MessagesViewController: UITableViewDelegate {
     
@@ -70,18 +81,18 @@ extension MessagesViewController: UITableViewDelegate {
 extension MessagesViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let sections = messageManager?.frc.sections else { return 0 }
+        guard let sections = messageModel?.frc.sections else { return 0 }
         return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let frc = messageManager?.frc, let sections = frc.sections else { return 0 }
+        guard let frc = messageModel?.frc, let sections = frc.sections else { return 0 }
         
         return sections[section].numberOfObjects
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let frc = messageManager?.frc else { return UITableViewCell() }
+        guard let frc = messageModel?.frc else { return UITableViewCell() }
         let message = frc.object(at: indexPath)
         let direction: MessageDirection = message.senderId == myData?.uuid ? .outcome : .income
 

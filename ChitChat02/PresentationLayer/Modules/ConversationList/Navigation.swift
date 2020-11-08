@@ -11,12 +11,12 @@ import UIKit
 import CoreData
 
 extension ChannelsViewController {
-    func openConversationScreen(for channel: ChannelEntity, with manager: MessageManager) {
-        if let viewController = MessagesViewController.instance() {
-            viewController.messageManager = manager
-            viewController.myData = myData
-            navigationController?.pushViewController(viewController, animated: true)
-        }
+    func openConversationScreen(for channel: ChannelEntity, with manager: IMessageService) {
+//        if let viewController = MessagesViewController.instance() {
+//            viewController.messageModel = manager
+//            viewController.myData = myData
+//            navigationController?.pushViewController(viewController, animated: true)
+//        }
     }
     
     func openSettingsScreen(result: @escaping (Theme, Bool) -> Void) {

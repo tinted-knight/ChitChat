@@ -11,7 +11,7 @@ protocol IMessageService {
     var channel: ChannelEntity { get }
     var frc: NSFetchedResultsController<MessageEntity> { get }
     
-    func fetchRemote(completion: @escaping () -> Void)
+    func fetchRemote()
     func add(message content: String)
 }
 
@@ -45,7 +45,7 @@ class MessageService: IMessageService {
                 cacheName: nil)
     }()
     
-    func fetchRemote(completion: @escaping () -> Void) {
+    func fetchRemote() {
         remote.loadMessageList(
             onAdded: insert(_:),
             onModified: update(_:),

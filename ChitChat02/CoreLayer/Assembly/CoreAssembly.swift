@@ -11,10 +11,15 @@ import Foundation
 protocol ICoreAssembly {
     var cache: IStorage { get }
     var remoteChannelStorage: IRemoteChannelStorage { get }
+    func remoteMessageStorage(for channel: ChannelEntity) -> IRemoteMessageStorage
 }
 
 class CoreAssembly: ICoreAssembly {
     lazy var cache: IStorage = NewSchoolStorage()
     
     lazy var remoteChannelStorage: IRemoteChannelStorage = RemoteChannelStorage()
+    
+    func remoteMessageStorage(for channel: ChannelEntity) -> IRemoteMessageStorage {
+        return RemoteMessageStorage(for: channel)
+    }
 }

@@ -10,17 +10,24 @@ import Foundation
 import Firebase
 import CoreData
 
-class FirestoreMessageManager: FirestoreDataManager, RemoteMessageManager {
-    
-    private let viewContext: NSManagedObjectContext
+protocol IRemoteMessageStorage {
+    func loadMessageList(onAdded: @escaping ([Message]) -> Void,
+                         onModified: @escaping ([Message]) -> Void,
+                         onRemoved: @escaping ([Message]) -> Void,
+                         onError: @escaping (String) -> Void)
+    func add(data: [String: Any], completion: @escaping (Bool) -> Void)
+}
+
+class RemoteMessageStorage: IRemoteMessageStorage {
+    lazy var db = Firestore.firestore()
+
     private let channel: ChannelEntity
 
     var channelMessages: CollectionReference {
         return db.collection(Channel.path).document(channel.identifier).collection(Message.path)
     }
 
-    init(for channel: ChannelEntity, with context: NSManagedObjectContext) {
-        self.viewContext = context
+    init(for channel: ChannelEntity, with context: NSManagedObjectContext? = nil) {
         self.channel = channel
     }
     
