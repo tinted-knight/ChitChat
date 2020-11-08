@@ -13,7 +13,10 @@ protocol ChannelsManager {
     func addChannel(name: String)
 }
 
-protocol MessagesManager {
+protocol MessagesReader {
     func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void)
+}
+
+protocol MessagesManager: MessagesReader {
     func add(message: String)
 }

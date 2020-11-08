@@ -14,7 +14,7 @@ enum ChannelError: Error {
 }
 
 // MARK: Channel
-struct Channel {
+struct Channel: Hashable {
     let indentifier: String
     let name: String
     let lastMessage: String?
@@ -33,6 +33,10 @@ struct Channel {
         self.lastMessage = lastMessage
         self.lastActivity = lastActivity
     }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.indentifier)
+    }
 }
 
 extension Channel: Codable {
@@ -45,6 +49,7 @@ extension Channel: Codable {
 
 // MARK: Message
 struct Message {
+    let documentId: String
     let content: String
     let created: Date
     let senderId: String
@@ -58,6 +63,7 @@ struct Message {
         
         let created: Date = createdTimestamp.dateValue()
         
+        self.documentId = document.documentID
         self.content = content
         self.created = created
         self.senderId = senderId

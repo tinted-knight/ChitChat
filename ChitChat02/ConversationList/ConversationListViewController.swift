@@ -28,6 +28,14 @@ class ConversationListViewController: UIViewController {
     
     var channelsManager: ChannelsManager = FirestoreChannelManager()
     
+    lazy var coreDataManager: CoreDataManager = {
+        guard let userData = self.myData else {
+            fatalError("myData is nil")
+        }
+       return CoreDataManager(coreDataStack: CoreDataStack(),
+                              channelsManager: FirestoreChannelManager())
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

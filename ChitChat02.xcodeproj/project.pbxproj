@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		13E359B0661DA342B7FF4E23 /* Pods_ChitChat02.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FFDAB3F1F1D13B5B9E9DD7 /* Pods_ChitChat02.framework */; };
 		3948F9BE253B893700465D02 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9BD253B893700465D02 /* Log.swift */; };
-		3948F9C0253B8B9100465D02 /* ChannelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9BF253B8B9100465D02 /* ChannelsManager.swift */; };
-		3948F9C2253B8B9C00465D02 /* MessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9C1253B8B9C00465D02 /* MessagesManager.swift */; };
+		3948F9C0253B8B9100465D02 /* FirestoreChannelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9BF253B8B9100465D02 /* FirestoreChannelsManager.swift */; };
+		3948F9C2253B8B9C00465D02 /* FirestoreMessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9C1253B8B9C00465D02 /* FirestoreMessagesManager.swift */; };
 		3948F9C4253B8F3600465D02 /* protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9C3253B8F3600465D02 /* protocols.swift */; };
 		3948F9C6253B8F6F00465D02 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9C5253B8F6F00465D02 /* models.swift */; };
 		3948F9C8253B919300465D02 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9C7253B919300465D02 /* Navigation.swift */; };
@@ -19,6 +19,11 @@
 		394F867B250E518A00B703B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F8679250E518A00B703B3 /* Main.storyboard */; };
 		394F867D250E518A00B703B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 394F867C250E518A00B703B3 /* Assets.xcassets */; };
 		394F8680250E518A00B703B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F867E250E518A00B703B3 /* LaunchScreen.storyboard */; };
+		3957588325434635001F054E /* ChannelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3957588125434635001F054E /* ChannelEntity+CoreDataClass.swift */; };
+		3957588425434635001F054E /* ChannelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3957588225434635001F054E /* ChannelEntity+CoreDataProperties.swift */; };
+		395758872543464C001F054E /* MessageEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395758852543464C001F054E /* MessageEntity+CoreDataClass.swift */; };
+		395758882543464C001F054E /* MessageEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395758862543464C001F054E /* MessageEntity+CoreDataProperties.swift */; };
+		3957588B25435596001F054E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3957588A25435596001F054E /* CoreDataManager.swift */; };
 		3958B3B7253AFDF500801E6D /* FirestoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3B6253AFDF500801E6D /* FirestoreDataManager.swift */; };
 		3958B3B9253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */; };
 		3958B3BB253B00E700801E6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3958B3BA253B00E700801E6D /* GoogleService-Info.plist */; };
@@ -53,12 +58,15 @@
 		39ED611F25221658006D8E0A /* IncomeMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED611D25221658006D8E0A /* IncomeMessageCell.xib */; };
 		39ED612125221684006D8E0A /* MessageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED612025221684006D8E0A /* MessageCellModel.swift */; };
 		39ED6125252219BA006D8E0A /* OutcomeMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED6123252219BA006D8E0A /* OutcomeMessageCell.xib */; };
+		39EDD9F32542E17400FE640B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EDD9F22542E17400FE640B /* CoreDataStack.swift */; };
+		39EDD9F52542E7D000FE640B /* coredata_extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EDD9F42542E7D000FE640B /* coredata_extensions.swift */; };
+		39EDD9FB2543337E00FE640B /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39EDD9F92543337E00FE640B /* Chat.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3948F9BD253B893700465D02 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		3948F9BF253B8B9100465D02 /* ChannelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsManager.swift; sourceTree = "<group>"; };
-		3948F9C1253B8B9C00465D02 /* MessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManager.swift; sourceTree = "<group>"; };
+		3948F9BF253B8B9100465D02 /* FirestoreChannelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreChannelsManager.swift; sourceTree = "<group>"; };
+		3948F9C1253B8B9C00465D02 /* FirestoreMessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMessagesManager.swift; sourceTree = "<group>"; };
 		3948F9C3253B8F3600465D02 /* protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = protocols.swift; sourceTree = "<group>"; };
 		3948F9C5253B8F6F00465D02 /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
 		3948F9C7253B919300465D02 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
@@ -70,6 +78,11 @@
 		394F867F250E518A00B703B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		394F8681250E518A00B703B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		394F8688250E659C00B703B3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3957588125434635001F054E /* ChannelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ChannelEntity+CoreDataClass.swift"; path = "ChitChat02/DataManager/CoreDataStack/entities/ChannelEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		3957588225434635001F054E /* ChannelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ChannelEntity+CoreDataProperties.swift"; path = "ChitChat02/DataManager/CoreDataStack/entities/ChannelEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		395758852543464C001F054E /* MessageEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MessageEntity+CoreDataClass.swift"; path = "ChitChat02/DataManager/CoreDataStack/entities/MessageEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		395758862543464C001F054E /* MessageEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MessageEntity+CoreDataProperties.swift"; path = "ChitChat02/DataManager/CoreDataStack/entities/MessageEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		3957588A25435596001F054E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3958B3B6253AFDF500801E6D /* FirestoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDataManager.swift; sourceTree = "<group>"; };
 		3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsFirestoreDelegate.swift; sourceTree = "<group>"; };
 		3958B3BA253B00E700801E6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -104,6 +117,9 @@
 		39ED611D25221658006D8E0A /* IncomeMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomeMessageCell.xib; sourceTree = "<group>"; };
 		39ED612025221684006D8E0A /* MessageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
 		39ED6123252219BA006D8E0A /* OutcomeMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutcomeMessageCell.xib; sourceTree = "<group>"; };
+		39EDD9F22542E17400FE640B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		39EDD9F42542E7D000FE640B /* coredata_extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coredata_extensions.swift; sourceTree = "<group>"; };
+		39EDD9FA2543337E00FE640B /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
 		3B2FC54AEA21573BC155A8BC /* Pods-ChitChat02.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02.debug.xcconfig"; path = "Target Support Files/Pods-ChitChat02/Pods-ChitChat02.debug.xcconfig"; sourceTree = "<group>"; };
 		53147F9F7C0E3997A63E27F3 /* Pods-ChitChat02.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02.release.xcconfig"; path = "Target Support Files/Pods-ChitChat02/Pods-ChitChat02.release.xcconfig"; sourceTree = "<group>"; };
 		98FFDAB3F1F1D13B5B9E9DD7 /* Pods_ChitChat02.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChitChat02.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,12 +184,23 @@
 			path = ChitChat02;
 			sourceTree = "<group>";
 		};
+		3957588925435576001F054E /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				395758852543464C001F054E /* MessageEntity+CoreDataClass.swift */,
+				395758862543464C001F054E /* MessageEntity+CoreDataProperties.swift */,
+				3957588125434635001F054E /* ChannelEntity+CoreDataClass.swift */,
+				3957588225434635001F054E /* ChannelEntity+CoreDataProperties.swift */,
+			);
+			path = entities;
+			sourceTree = "<group>";
+		};
 		3958B3B5253AFDE200801E6D /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
 				3958B3B6253AFDF500801E6D /* FirestoreDataManager.swift */,
-				3948F9BF253B8B9100465D02 /* ChannelsManager.swift */,
-				3948F9C1253B8B9C00465D02 /* MessagesManager.swift */,
+				3948F9BF253B8B9100465D02 /* FirestoreChannelsManager.swift */,
+				3948F9C1253B8B9C00465D02 /* FirestoreMessagesManager.swift */,
 				3948F9C3253B8F3600465D02 /* protocols.swift */,
 				3948F9C5253B8F6F00465D02 /* models.swift */,
 			);
@@ -201,6 +228,7 @@
 		39B7FDC02530AFCA00B5F280 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				39EDD9F62542F3F000FE640B /* CoreDataStack */,
 				3958B3B5253AFDE200801E6D /* Firestore */,
 				39DE12C02531C1B20068C875 /* OperationDataManager */,
 				39B7FDBE25306CB800B5F280 /* Repo.swift */,
@@ -287,6 +315,18 @@
 				3994BFB325248EB6001AB5E7 /* MessageCell.swift */,
 			);
 			path = MessageCell;
+			sourceTree = "<group>";
+		};
+		39EDD9F62542F3F000FE640B /* CoreDataStack */ = {
+			isa = PBXGroup;
+			children = (
+				3957588925435576001F054E /* entities */,
+				39EDD9F92543337E00FE640B /* Chat.xcdatamodeld */,
+				39EDD9F42542E7D000FE640B /* coredata_extensions.swift */,
+				39EDD9F22542E17400FE640B /* CoreDataStack.swift */,
+				3957588A25435596001F054E /* CoreDataManager.swift */,
+			);
+			path = CoreDataStack;
 			sourceTree = "<group>";
 		};
 		421B2EFD5D2930D3B39F3217 /* Pods */ = {
@@ -443,19 +483,25 @@
 				39DE12C42531C2280068C875 /* SaveOperations.swift in Sources */,
 				3948F9C4253B8F3600465D02 /* protocols.swift in Sources */,
 				3948F9C8253B919300465D02 /* Navigation.swift in Sources */,
+				395758882543464C001F054E /* MessageEntity+CoreDataProperties.swift in Sources */,
 				3958B3C1253B708B00801E6D /* AlertViewController.swift in Sources */,
 				394F8674250E518A00B703B3 /* AppDelegate.swift in Sources */,
 				39ABED452534F99100EDCA7C /* LoadCompletionOperation.swift in Sources */,
 				39BDCFC82527A37A00ECECCC /* ThemeManager.swift in Sources */,
+				3957588325434635001F054E /* ChannelEntity+CoreDataClass.swift in Sources */,
 				39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */,
+				39EDD9FB2543337E00FE640B /* Chat.xcdatamodeld in Sources */,
 				39ED61182521F7AE006D8E0A /* ConversationCellModel.swift in Sources */,
 				39ABED432534F83400EDCA7C /* SaveCompletionOperation.swift in Sources */,
+				39EDD9F32542E17400FE640B /* CoreDataStack.swift in Sources */,
 				39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */,
 				3948F9C6253B8F6F00465D02 /* models.swift in Sources */,
 				3995893325239D50003C62C8 /* HeaderCell.swift in Sources */,
+				395758872543464C001F054E /* MessageEntity+CoreDataClass.swift in Sources */,
 				3958B3B7253AFDF500801E6D /* FirestoreDataManager.swift in Sources */,
 				39B7FDC42530B00200B5F280 /* GCDDataManager.swift in Sources */,
 				39B7FDBF25306CB800B5F280 /* Repo.swift in Sources */,
+				3957588B25435596001F054E /* CoreDataManager.swift in Sources */,
 				39BDCFBF252767B100ECECCC /* ThemeModel.swift in Sources */,
 				39ED610E2521EE62006D8E0A /* ConversationViewController.swift in Sources */,
 				39DE12C82531E5DA0068C875 /* ThemeDataManager.swift in Sources */,
@@ -464,15 +510,17 @@
 				39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */,
 				39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */,
 				3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */,
-				3948F9C0253B8B9100465D02 /* ChannelsManager.swift in Sources */,
+				3948F9C0253B8B9100465D02 /* FirestoreChannelsManager.swift in Sources */,
 				3958B3BF253B4CFA00801E6D /* MessagesFirestoreDelegate.swift in Sources */,
 				3958B3B9253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
 				39ED61152521F76E006D8E0A /* ConversationCell.swift in Sources */,
+				3957588425434635001F054E /* ChannelEntity+CoreDataProperties.swift in Sources */,
 				3948F9CA253B942600465D02 /* ThemeAndStuff.swift in Sources */,
 				39B7FDC22530AFF100B5F280 /* OperationDataManager.swift in Sources */,
+				39EDD9F52542E7D000FE640B /* coredata_extensions.swift in Sources */,
 				3948F9BE253B893700465D02 /* Log.swift in Sources */,
-				3948F9C2253B8B9C00465D02 /* MessagesManager.swift in Sources */,
+				3948F9C2253B8B9C00465D02 /* FirestoreMessagesManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,6 +726,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		39EDD9F92543337E00FE640B /* Chat.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				39EDD9FA2543337E00FE640B /* Chat.xcdatamodel */,
+			);
+			currentVersion = 39EDD9FA2543337E00FE640B /* Chat.xcdatamodel */;
+			path = Chat.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 394F8668250E518A00B703B3 /* Project object */;
 }

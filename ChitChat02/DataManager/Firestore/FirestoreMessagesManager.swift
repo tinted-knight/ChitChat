@@ -9,16 +9,18 @@
 import Foundation
 import Firebase
 
-class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
-    
-    private let channel: Channel
-    private let userData: UserData
+class FirestoreMessageReader: FirestoreDataManager, MessagesReader {
 
-    init(for channel: Channel, me user: UserData) {
-        self.channel = channel
-        self.userData = user
+    private let channel: Channel
+
+    var channelMessages: CollectionReference {
+        return db.collection(Channel.path).document(channel.indentifier).collection(Message.path)
     }
-    
+
+    init(for channel: Channel) {
+        self.channel = channel
+    }
+
     func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void) {
         Log.fire("\(#function) from \(channel.name)")
         channelMessages.order(by: Message.created, descending: true).addSnapshotListener { (snapshot, error) in
@@ -34,7 +36,17 @@ class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
             onData(messages)
         }
     }
+}
 
+class FirestoreMessageManager: FirestoreMessageReader, MessagesManager {
+    
+    private let userData: UserData
+
+    init(for channel: Channel, me user: UserData) {
+        self.userData = user
+        super.init(for: channel)
+    }
+    
     func add(message: String) {
         let newMessageData: [String: Any] = [
             Message.content: message,
@@ -50,9 +62,5 @@ class FirestoreMessageManager: FirestoreDataManager, MessagesManager {
                 Log.fire("adding message success")
             }
         }
-    }
-    
-    private var channelMessages: CollectionReference {
-        return db.collection(Channel.path).document(channel.indentifier).collection(Message.path)
     }
 }
