@@ -19,5 +19,6 @@ class ServiceAssembly: IServiceAssembly {
         self.coreAssembly = coreAssembly
     }
     
-    lazy var channelService: ChannelManager = SmartChannelManager(self.coreAssembly.storage)
+    lazy var channelService: ChannelManager = SmartChannelManager(local: self.coreAssembly.cache,
+                                                                  remote: self.coreAssembly.remoteChannelStorage)
 }

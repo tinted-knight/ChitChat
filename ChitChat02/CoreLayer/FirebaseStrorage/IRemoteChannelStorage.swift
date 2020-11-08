@@ -1,16 +1,28 @@
 //
-//  ChannelsManager.swift
+//  RemoteChannelStorage.swift
 //  ChitChat02
 //
-//  Created by Timun on 17.10.2020.
+//  Created by Timun on 08.11.2020.
 //  Copyright © 2020 TimunInc. All rights reserved.
 //
 
 import Foundation
 import Firebase
-import CoreData
 
-class FirestoreChannelManager: FirestoreDataManager, IRemoteChannelStorage {
+protocol IRemoteChannelStorage {
+    func loadChannelList(onAdded: @escaping (Channel) -> Void,
+                         onModified: @escaping (Channel) -> Void,
+                         onRemoved: @escaping (Channel) -> Void,
+                         onError: @escaping (String) -> Void)
+    func loadOnce(onData: @escaping ([Channel]) -> Void)
+    func addChannel(name: String, completion: @escaping (Bool) -> Void)
+    func deleteChannel(id: String, completion: @escaping (Bool) -> Void)
+}
+
+class RemoteChannelStorage: IRemoteChannelStorage {
+
+    lazy var db = Firestore.firestore()
+
     private var channels: CollectionReference {
         return db.collection(Channel.path)
     }

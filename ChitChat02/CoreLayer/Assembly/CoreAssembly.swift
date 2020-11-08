@@ -9,9 +9,12 @@
 import Foundation
 
 protocol ICoreAssembly {
-    var storage: IStorage { get }
+    var cache: IStorage { get }
+    var remoteChannelStorage: IRemoteChannelStorage { get }
 }
 
 class CoreAssembly: ICoreAssembly {
-    lazy var storage: IStorage = NewSchoolStorage()
+    lazy var cache: IStorage = NewSchoolStorage()
+    
+    lazy var remoteChannelStorage: IRemoteChannelStorage = RemoteChannelStorage()
 }

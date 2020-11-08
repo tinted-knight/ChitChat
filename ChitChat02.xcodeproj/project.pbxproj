@@ -42,6 +42,7 @@
 		39A284792558238E003C2484 /* CoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A284782558238E003C2484 /* CoreAssembly.swift */; };
 		39A2847C25582A7A003C2484 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A2847B25582A7A003C2484 /* ServiceAssembly.swift */; };
 		39A2848025583534003C2484 /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A2847F25583534003C2484 /* ChannelModel.swift */; };
+		39A284832558511F003C2484 /* IRemoteChannelStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A284822558511F003C2484 /* IRemoteChannelStorage.swift */; };
 		39ABED412534D3C200EDCA7C /* SmartDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ABED402534D3C200EDCA7C /* SmartDataManager.swift */; };
 		39ABED432534F83400EDCA7C /* SaveCompletionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ABED422534F83400EDCA7C /* SaveCompletionOperation.swift */; };
 		39ABED452534F99100EDCA7C /* LoadCompletionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ABED442534F99100EDCA7C /* LoadCompletionOperation.swift */; };
@@ -110,6 +111,7 @@
 		39A284782558238E003C2484 /* CoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAssembly.swift; sourceTree = "<group>"; };
 		39A2847B25582A7A003C2484 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		39A2847F25583534003C2484 /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
+		39A284822558511F003C2484 /* IRemoteChannelStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRemoteChannelStorage.swift; sourceTree = "<group>"; };
 		39ABED402534D3C200EDCA7C /* SmartDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartDataManager.swift; sourceTree = "<group>"; };
 		39ABED422534F83400EDCA7C /* SaveCompletionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCompletionOperation.swift; sourceTree = "<group>"; };
 		39ABED442534F99100EDCA7C /* LoadCompletionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCompletionOperation.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			children = (
 				39A284762558216F003C2484 /* Assembly */,
 				39A2847725582177003C2484 /* NewSchoolStorage */,
+				39A28481255850E0003C2484 /* FirebaseStrorage */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -319,6 +322,14 @@
 				39A2847B25582A7A003C2484 /* ServiceAssembly.swift */,
 			);
 			path = Assembly;
+			sourceTree = "<group>";
+		};
+		39A28481255850E0003C2484 /* FirebaseStrorage */ = {
+			isa = PBXGroup;
+			children = (
+				39A284822558511F003C2484 /* IRemoteChannelStorage.swift */,
+			);
+			path = FirebaseStrorage;
 			sourceTree = "<group>";
 		};
 		39B7FDC02530AFCA00B5F280 /* DataManager */ = {
@@ -620,6 +631,7 @@
 				3958B3B9253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
 				39ED61152521F76E006D8E0A /* ConversationCell.swift in Sources */,
+				39A284832558511F003C2484 /* IRemoteChannelStorage.swift in Sources */,
 				3957588425434635001F054E /* ChannelEntity+CoreDataProperties.swift in Sources */,
 				3948F9CA253B942600465D02 /* ThemeAndStuff.swift in Sources */,
 				39B7FDC22530AFF100B5F280 /* OperationDataManager.swift in Sources */,

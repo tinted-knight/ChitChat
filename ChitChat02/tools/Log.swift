@@ -15,7 +15,7 @@ class Log {
     private static var PREFS_ENABLED = false
     private static var OLDSCHOOL_ENABLED = true
     private static var NEWSCHOOOL_ENABLED = true
-    private static var FRC_ENABLED = true
+    private static var FRC_ENABLED = false
     private static var ARCH_ENABLED = false
 
     static func arch(_ message: String) {

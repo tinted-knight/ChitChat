@@ -10,24 +10,24 @@ import Foundation
 import CoreData
 
 class SmartChannelManager: ChannelManager {
-    private let storage: IStorage
-    private let channelsManager: RemoteChannelManager
+    private let localStorage: IStorage
+    private let remote: IRemoteChannelStorage
 
     private var firstStart = true
 
-    init(_ storage: IStorage) {
-        self.storage = storage
-        self.channelsManager = FirestoreChannelManager()
+    init(local: IStorage, remote: IRemoteChannelStorage) {
+        self.localStorage = local
+        self.remote = remote
     }
 
     func setup(completion: @escaping () -> Void) {
-        storage.createContainer {
+        localStorage.createContainer {
             completion()
         }
     }
     
     lazy var frc: NSFetchedResultsController<ChannelEntity> = {
-        guard let viewContext = self.storage.viewContext else { fatalError() }
+        guard let viewContext = self.localStorage.viewContext else { fatalError() }
         
         let sortChannels = NSSortDescriptor(key: "name", ascending: true)
         let frChannels = NSFetchRequest<ChannelEntity>(entityName: "ChannelEntity")
@@ -49,7 +49,7 @@ class SmartChannelManager: ChannelManager {
         // вообще по идее если этот метод вызывать только один раз (сейчас так и есть),
         // то можно обойтись без флага firstStart
 //        if firstStart {
-        channelsManager.loadOnce { [weak self] (channels) in
+        remote.loadOnce { [weak self] (channels) in
             self?.lookForDeleted(in: channels)
             self?.channelsListener()
         }
@@ -59,7 +59,7 @@ class SmartChannelManager: ChannelManager {
     }
     
     private func channelsListener() {
-        channelsManager.loadChannelList(
+        remote.loadChannelList(
             onAdded: { [weak self] (channel) in
                 Log.newschool("fetchRemote channels, added \(channel.name), \(channel.lastMessage ?? "nil")")
                 self?.insert(channel)
@@ -73,19 +73,19 @@ class SmartChannelManager: ChannelManager {
     }
     
     func addChannel(name: String) {
-        channelsManager.addChannel(name: name) { (success) in
+        remote.addChannel(name: name) { (success) in
             Log.newschool("add channel \(success)")
         }
     }
     
     func deleteChannel(_ channel: ChannelEntity) {
-        channelsManager.deleteChannel(id: channel.identifier) { (success) in
+        remote.deleteChannel(id: channel.identifier) { (success) in
             Log.newschool("delete channel \(success)")
         }
     }
     
     private func lookForDeleted(in channels: [Channel]) {
-        guard let viewContext = self.storage.viewContext else { fatalError() }
+        guard let viewContext = self.localStorage.viewContext else { fatalError() }
         
         let identifiers = channels.map { $0.identifier }
         let request: NSFetchRequest<ChannelEntity> = ChannelEntity.fetchRequest()
@@ -97,13 +97,13 @@ class SmartChannelManager: ChannelManager {
                 Log.newschool("ready to delete channel \(entity.name)")
                 viewContext.delete(entity)
             }
-            storage.performDelete()
+            localStorage.performDelete()
             firstStart = false
         } catch { fatalError("error while looking for deleted, \(error.localizedDescription)") }
     }
     
     private func deleteFromDB(with identifier: String) {
-        guard let viewContext = self.storage.viewContext else { fatalError() }
+        guard let viewContext = self.localStorage.viewContext else { fatalError() }
         
         let request: NSFetchRequest<ChannelEntity> = ChannelEntity.fetchRequest()
         request.predicate = NSPredicate(format: "identifier == %@", identifier)
@@ -113,19 +113,19 @@ class SmartChannelManager: ChannelManager {
             if !sacrifice.isEmpty {
                 Log.newschool("deleting channel \(sacrifice[0].name)")
                 viewContext.delete(sacrifice[0])
-                storage.performDelete()
+                localStorage.performDelete()
             }
         } catch { fatalError("cannot fetch channel for deletion") }
     }
     
     private func insert(_ channel: Channel) {
-        storage.saveInBackground { (context) in
+        localStorage.saveInBackground { (context) in
             context.insert(ChannelEntity(from: channel, in: context))
         }
     }
     
     private func updateChannel(with identifier: String, message: String?, activity: Date?) {
-        guard let viewContext = self.storage.viewContext else { fatalError() }
+        guard let viewContext = self.localStorage.viewContext else { fatalError() }
         
         let request: NSFetchRequest<ChannelEntity> = ChannelEntity.fetchRequest()
         request.predicate = NSPredicate(format: "identifier == %@", identifier)
@@ -135,7 +135,7 @@ class SmartChannelManager: ChannelManager {
             if !toUpdate.isEmpty {
                 toUpdate[0].lastMessage = message
                 toUpdate[0].lastActivity = activity
-                storage.saveContext()
+                localStorage.saveContext()
             }
         } catch { fatalError("cannot fetch channel for update") }
     }
