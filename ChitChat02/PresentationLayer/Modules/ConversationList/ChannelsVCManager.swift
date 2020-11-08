@@ -9,19 +9,6 @@
 import Foundation
 import CoreData
 
-extension ChannelsViewController {
-    func loadFromCache() {
-        Log.oldschool(#function)
-        do {
-            channelsManager?.frc.delegate = self
-            try channelsManager?.frc.performFetch()
-            channelsManager?.fetchRemote()
-            showLoaded()
-        } catch {
-            Log.oldschool(error.localizedDescription)
-        }
-    }
-}
 // MARK: - NSFetchedResultsControllerDelegate
 extension ChannelsViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
@@ -66,7 +53,8 @@ extension ChannelsViewController: NSFetchedResultsControllerDelegate {
             }
         case .update:
             Log.frc("update")
-            if let indexPath = indexPath, let channel = channelsManager?.frc.object(at: indexPath) {
+//            if let indexPath = indexPath, let channel = channelsManager?.frc.object(at: indexPath) {
+            if let indexPath = indexPath, let channel = controller.object(at: indexPath) as? ChannelEntity {
                 guard let cell = channelsTableView.cellForRow(at: indexPath) as? ConversationCell else { break }
                 cell.configure(with: channel)
             }

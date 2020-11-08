@@ -22,14 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    private let rootAssembly = RootAssembly()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let navigation = UINavigationController()
-        guard let channels = ChannelsViewController.instance() else { return false }
-        navigation.viewControllers = [channels]
-        window?.rootViewController = navigation
+        let channels = rootAssembly.presentationAssembly.channelsViewController()
+        let navController = rootAssembly.presentationAssembly.navigationViewController(withRoot: channels)
+        window?.rootViewController = navController
         window?.makeKeyAndVisible()
         
         let prefs = UserDefaults.standard

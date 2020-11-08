@@ -29,8 +29,7 @@ class ChannelsViewController: UIViewController {
     
     var myData: UserData?
     
-    var channelsManager: ChannelManager?
-    let newSchool = NewSchoolCoreData()
+    var channelModel: IChannelModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +38,9 @@ class ChannelsViewController: UIViewController {
         myData = loadUserData()
         
         prepareUi()
-        newSchool.createContainer { [weak self] (container) in
-            self?.channelsManager = SmartChannelManager(container)
-            self?.loadFromCache()
-        }
+
+        channelModel?.delegate = self
+        channelModel?.performSetup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +55,17 @@ class ChannelsViewController: UIViewController {
         return UserData(uuid: uuid)
     }
 }
+
+extension ChannelsViewController: IChannelModelDelegate {
+    func dataLoaded() {
+        channelModel?.frc.delegate = self
+        channelModel?.loadData()
+        channelsTableView.dataSource = self
+        channelsTableView.delegate = self
+        showLoaded()
+    }
+}
+
 // MARK: UI Setup
 extension ChannelsViewController {
     private func prepareUi() {
@@ -70,9 +79,6 @@ extension ChannelsViewController {
         
         channelsTableView.register(UINib(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: cellReuseId)
         channelsTableView.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: headerReuseId)
-        
-        channelsTableView.dataSource = self
-        channelsTableView.delegate = self
         
         setupNavBarButtons()
         applyTheme(currentTheme)
@@ -123,7 +129,7 @@ extension ChannelsViewController {
 // MARK: UITableViewDataSource
 extension ChannelsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let channel = channelsManager?.frc.object(at: indexPath) else { return UITableViewCell() }
+        guard let channel = channelModel?.frc.object(at: indexPath) else { return UITableViewCell() }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
             as? ConversationCell else {
@@ -135,7 +141,7 @@ extension ChannelsViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let sections = channelsManager?.frc.sections else { return 0 }
+        guard let sections = channelModel?.frc.sections else { return 0 }
         return sections.count
     }
 
@@ -146,7 +152,7 @@ extension ChannelsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let sections = channelsManager?.frc.sections else { return nil }
+        guard let sections = channelModel?.frc.sections else { return nil }
         return sections[section].name
     }
 
@@ -167,29 +173,29 @@ extension ChannelsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = channelsManager?.frc.sections else { return 0 }
+        guard let sections = channelModel?.frc.sections else { return 0 }
         return sections[section].numberOfObjects
     }
 }
 // MARK: UITableViewDelegate
 extension ChannelsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
-        guard let container = newSchool.container else { return }
-        guard let userData = myData else { return }
-        Log.oldschool("openConversation for channel \(channel.name), id = \(channel.identifier)")
-        openConversationScreen(for: channel,
-                               with: SmartMessageManager(for: channel,
-                                                         me: userData,
-                                                         container: container))
+//        guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
+//        guard let container = newSchool.container else { return }
+//        guard let userData = myData else { return }
+//        Log.oldschool("openConversation for channel \(channel.name), id = \(channel.identifier)")
+//        openConversationScreen(for: channel,
+//                               with: SmartMessageManager(for: channel,
+//                                                         me: userData,
+//                                                         container: container))
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
-        if editingStyle == .delete {
-            Log.oldschool("delete row, \(channel.name)")
-            channelsManager?.deleteChannel(channel)
-        }
+//        guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
+//        if editingStyle == .delete {
+//            Log.oldschool("delete row, \(channel.name)")
+//            channelsManager?.deleteChannel(channel)
+//        }
     }
 }

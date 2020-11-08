@@ -15,23 +15,6 @@ class FirestoreChannelManager: FirestoreDataManager, RemoteChannelManager {
         return db.collection(Channel.path)
     }
 
-    private let viewContext: NSManagedObjectContext
-    
-    init(with context: NSManagedObjectContext) {
-        self.viewContext = context
-    }
-    
-    lazy var frc: NSFetchedResultsController<ChannelEntity> = {
-        let sortChannels = NSSortDescriptor(key: "name", ascending: true)
-        let frChannels = NSFetchRequest<ChannelEntity>(entityName: "ChannelEntity")
-        frChannels.sortDescriptors = [sortChannels]
-        
-        return NSFetchedResultsController(fetchRequest: frChannels,
-                                          managedObjectContext: self.viewContext,
-                                          sectionNameKeyPath: nil,
-                                          cacheName: nil)
-    }()
-
     func loadChannelList(onAdded: @escaping (Channel) -> Void,
                          onModified: @escaping (Channel) -> Void,
                          onRemoved: @escaping (Channel) -> Void,

@@ -23,6 +23,7 @@ protocol RemoteChannelManager {
 protocol ChannelManager {
     var frc: NSFetchedResultsController<ChannelEntity> { get }
     
+    func setup(completion: @escaping () -> Void)
     func fetchRemote()
     func addChannel(name: String)
     func deleteChannel(_ channel: ChannelEntity)
