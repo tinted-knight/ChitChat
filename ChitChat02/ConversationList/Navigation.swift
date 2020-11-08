@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-extension ConversationListViewController {
+extension ChannelsViewController {
     func openConversationScreen(for channel: ChannelEntity, with manager: MessageManager) {
         if let viewController = MessagesViewController.instance() {
             viewController.messageManager = manager

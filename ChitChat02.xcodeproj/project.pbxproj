@@ -36,6 +36,7 @@
 		3995893025234FBB003C62C8 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */; };
 		3995893325239D50003C62C8 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3995893125239D50003C62C8 /* HeaderCell.swift */; };
 		3995893425239D50003C62C8 /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3995893225239D50003C62C8 /* HeaderCell.xib */; };
+		39A2846F25581968003C2484 /* ChannelsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39A2846E25581968003C2484 /* ChannelsViewController.storyboard */; };
 		39ABED412534D3C200EDCA7C /* SmartDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ABED402534D3C200EDCA7C /* SmartDataManager.swift */; };
 		39ABED432534F83400EDCA7C /* SaveCompletionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ABED422534F83400EDCA7C /* SaveCompletionOperation.swift */; };
 		39ABED452534F99100EDCA7C /* LoadCompletionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ABED442534F99100EDCA7C /* LoadCompletionOperation.swift */; };
@@ -52,7 +53,7 @@
 		39DE12C42531C2280068C875 /* SaveOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C32531C2280068C875 /* SaveOperations.swift */; };
 		39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C52531C4290068C875 /* SaveLoadExtension.swift */; };
 		39DE12C82531E5DA0068C875 /* ThemeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */; };
-		39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */; };
+		39ED610B2521EB32006D8E0A /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */; };
 		39ED610E2521EE62006D8E0A /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610D2521EE62006D8E0A /* MessagesViewController.swift */; };
 		39ED61152521F76E006D8E0A /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61132521F76E006D8E0A /* ConversationCell.swift */; };
 		39ED61162521F76E006D8E0A /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED61142521F76E006D8E0A /* ConversationCell.xib */; };
@@ -98,6 +99,7 @@
 		3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		3995893125239D50003C62C8 /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		3995893225239D50003C62C8 /* HeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCell.xib; sourceTree = "<group>"; };
+		39A2846E25581968003C2484 /* ChannelsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChannelsViewController.storyboard; sourceTree = "<group>"; };
 		39ABED402534D3C200EDCA7C /* SmartDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartDataManager.swift; sourceTree = "<group>"; };
 		39ABED422534F83400EDCA7C /* SaveCompletionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCompletionOperation.swift; sourceTree = "<group>"; };
 		39ABED442534F99100EDCA7C /* LoadCompletionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCompletionOperation.swift; sourceTree = "<group>"; };
@@ -114,7 +116,7 @@
 		39DE12C32531C2280068C875 /* SaveOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOperations.swift; sourceTree = "<group>"; };
 		39DE12C52531C4290068C875 /* SaveLoadExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadExtension.swift; sourceTree = "<group>"; };
 		39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataManager.swift; sourceTree = "<group>"; };
-		39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
+		39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 		39ED610D2521EE62006D8E0A /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		39ED61132521F76E006D8E0A /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		39ED61142521F76E006D8E0A /* ConversationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
@@ -183,6 +185,9 @@
 		394F8672250E518A00B703B3 /* ChitChat02 */ = {
 			isa = PBXGroup;
 			children = (
+				39A2846B255813D5003C2484 /* PresentationLayer */,
+				39A2846D2558141B003C2484 /* ServiceLayer */,
+				39A2846C25581401003C2484 /* CoreLayer */,
 				3958B3BA253B00E700801E6D /* GoogleService-Info.plist */,
 				39B7FDC02530AFCA00B5F280 /* DataManager */,
 				39BDCFB72527614400ECECCC /* Themes */,
@@ -191,8 +196,8 @@
 				39ED610C2521EE3C006D8E0A /* Conversation */,
 				39ED61092521EB00006D8E0A /* ConversationList */,
 				396F5EA32517AF1F0070F2BD /* Profile */,
-				394F8673250E518A00B703B3 /* AppDelegate.swift */,
 				394F8679250E518A00B703B3 /* Main.storyboard */,
+				394F8673250E518A00B703B3 /* AppDelegate.swift */,
 				394F867C250E518A00B703B3 /* Assets.xcassets */,
 				394F867E250E518A00B703B3 /* LaunchScreen.storyboard */,
 				394F8681250E518A00B703B3 /* Info.plist */,
@@ -239,6 +244,27 @@
 				3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */,
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		39A2846B255813D5003C2484 /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		39A2846C25581401003C2484 /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreLayer;
+			sourceTree = "<group>";
+		};
+		39A2846D2558141B003C2484 /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ServiceLayer;
 			sourceTree = "<group>";
 		};
 		39B7FDC02530AFCA00B5F280 /* DataManager */ = {
@@ -292,11 +318,12 @@
 			isa = PBXGroup;
 			children = (
 				39ED61122521F734006D8E0A /* ConversationCell */,
-				39ED610A2521EB32006D8E0A /* ConversationListViewController.swift */,
+				39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */,
 				3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */,
 				3948F9C7253B919300465D02 /* Navigation.swift */,
 				3948F9C9253B942600465D02 /* ThemeAndStuff.swift */,
 				39DBBAFD254D8A17009F4B5D /* ChannelsVCManager.swift */,
+				39A2846E25581968003C2484 /* ChannelsViewController.storyboard */,
 			);
 			path = ConversationList;
 			sourceTree = "<group>";
@@ -425,6 +452,7 @@
 				394F8680250E518A00B703B3 /* LaunchScreen.storyboard in Resources */,
 				3995893025234FBB003C62C8 /* Comfortaa-Light.ttf in Resources */,
 				3958B3BB253B00E700801E6D /* GoogleService-Info.plist in Resources */,
+				39A2846F25581968003C2484 /* ChannelsViewController.storyboard in Resources */,
 				394F867D250E518A00B703B3 /* Assets.xcassets in Resources */,
 				394F867B250E518A00B703B3 /* Main.storyboard in Resources */,
 			);
@@ -524,7 +552,7 @@
 				39DE12C82531E5DA0068C875 /* ThemeDataManager.swift in Sources */,
 				39ABED412534D3C200EDCA7C /* SmartDataManager.swift in Sources */,
 				39B7FDBD253062F500B5F280 /* UserModel.swift in Sources */,
-				39ED610B2521EB32006D8E0A /* ConversationListViewController.swift in Sources */,
+				39ED610B2521EB32006D8E0A /* ChannelsViewController.swift in Sources */,
 				39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */,
 				3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */,
 				3948F9C0253B8B9100465D02 /* FirestoreChannelsManager.swift in Sources */,

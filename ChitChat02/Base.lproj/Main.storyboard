@@ -136,7 +136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yB7-tq-3Rq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2800.8000000000002" y="162.3688155922039"/>
+            <point key="canvasLocation" x="2278" y="608"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jzd-LS-8dR">
@@ -157,7 +157,7 @@
         <!--Tinkoff Chat-->
         <scene sceneID="zW6-ss-cd2">
             <objects>
-                <viewController id="mLB-XE-ehy" customClass="ConversationListViewController" customModule="ChitChat02" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mLB-XE-ehy" customClass="ChannelsViewController" customModule="ChitChat02" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pxa-aX-Mwh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

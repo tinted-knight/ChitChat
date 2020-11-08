@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-extension ConversationListViewController {
+extension ChannelsViewController {
     func loadFromCache() {
         Log.oldschool(#function)
         do {
@@ -23,7 +23,7 @@ extension ConversationListViewController {
     }
 }
 // MARK: - NSFetchedResultsControllerDelegate
-extension ConversationListViewController: NSFetchedResultsControllerDelegate {
+extension ChannelsViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     sectionIndexTitleForSectionName sectionName: String) -> String? {
         return sectionName

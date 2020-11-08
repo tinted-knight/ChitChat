@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-extension ConversationListViewController {
+extension ChannelsViewController {
     @objc func inputNewChannelName() {
         inputAlert(title: "New channel", message: "Input channel name") { [weak self] (text) in
             if !text.isEmpty {
@@ -19,7 +19,7 @@ extension ConversationListViewController {
     }
 }
 // MARK: - View states
-extension ConversationListViewController {
+extension ChannelsViewController {
     func showLoading() {
         channelsTableView.isHidden = true
         emptyLabel.isHidden = true

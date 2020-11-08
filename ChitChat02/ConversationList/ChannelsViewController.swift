@@ -8,7 +8,12 @@
 
 import UIKit
 
-class ConversationListViewController: UIViewController {
+class ChannelsViewController: UIViewController {
+
+    static func instance() -> ChannelsViewController? {
+        let storyboard = UIStoryboard(name: "ChannelsViewController", bundle: nil)
+        return storyboard.instantiateInitialViewController() as? ChannelsViewController
+    }
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var channelsTableView: UITableView!
@@ -53,7 +58,7 @@ class ConversationListViewController: UIViewController {
     }
 }
 // MARK: UI Setup
-extension ConversationListViewController {
+extension ChannelsViewController {
     private func prepareUi() {
         loadingIndicator.hidesWhenStopped = true
         showLoading()
@@ -96,7 +101,7 @@ extension ConversationListViewController {
     }
 }
 // MARK: UI Actions
-extension ConversationListViewController {
+extension ChannelsViewController {
     @objc private func profileOnTap() {
         openProfileScreen()
     }
@@ -116,7 +121,7 @@ extension ConversationListViewController {
     }
 }
 // MARK: UITableViewDataSource
-extension ConversationListViewController: UITableViewDataSource {
+extension ChannelsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let channel = channelsManager?.frc.object(at: indexPath) else { return UITableViewCell() }
         
@@ -167,7 +172,7 @@ extension ConversationListViewController: UITableViewDataSource {
     }
 }
 // MARK: UITableViewDelegate
-extension ConversationListViewController: UITableViewDelegate {
+extension ChannelsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
         guard let container = newSchool.container else { return }

@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: ThemesPickerDelegate and stuff
-extension ConversationListViewController: ThemesPickerDelegate {
+extension ChannelsViewController: ThemesPickerDelegate {
     func theme(picked value: Theme) {
         //
     }

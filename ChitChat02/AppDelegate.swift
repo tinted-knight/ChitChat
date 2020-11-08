@@ -25,6 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let navigation = UINavigationController()
+        guard let channels = ChannelsViewController.instance() else { return false }
+        navigation.viewControllers = [channels]
+        window?.rootViewController = navigation
+        window?.makeKeyAndVisible()
+        
         let prefs = UserDefaults.standard
         if (prefs.integer(forKey: ThemeManager.key) as Int?) == nil {
             prefs.set(Theme.classic.rawValue, forKey: ThemeManager.key)
