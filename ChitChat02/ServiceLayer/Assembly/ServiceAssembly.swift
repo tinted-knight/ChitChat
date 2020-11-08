@@ -9,7 +9,7 @@
 import Foundation
 
 protocol IServiceAssembly {
-    var channelService: ChannelManager { get }
+    var channelService: IChannelService { get }
 }
 
 class ServiceAssembly: IServiceAssembly {
@@ -19,6 +19,6 @@ class ServiceAssembly: IServiceAssembly {
         self.coreAssembly = coreAssembly
     }
     
-    lazy var channelService: ChannelManager = SmartChannelManager(local: self.coreAssembly.cache,
-                                                                  remote: self.coreAssembly.remoteChannelStorage)
+    lazy var channelService: IChannelService = ChannelService(local: self.coreAssembly.cache,
+                                                              remote: self.coreAssembly.remoteChannelStorage)
 }

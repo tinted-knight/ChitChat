@@ -33,7 +33,7 @@ protocol IChannelModelDelegate: class {
 
 class ChannelModel: IChannelModel {
 
-    private let channelService: ChannelManager
+    private let channelService: IChannelService
     
     lazy var frc: NSFetchedResultsController<ChannelEntity> = self.channelService.frc
     
@@ -41,7 +41,7 @@ class ChannelModel: IChannelModel {
     
     weak var delegate: IChannelModelDelegate?
     
-    init(channelService: ChannelManager) {
+    init(channelService: IChannelService) {
         self.channelService = channelService
     }
     
@@ -61,10 +61,10 @@ class ChannelModel: IChannelModel {
     }
     
     func addChannel(name: String) {
-        //
+        channelService.addChannel(name)
     }
     
     func deleteChannel(_ channel: ChannelEntity) {
-        //
+        channelService.deleteChannel(channel)
     }
 }

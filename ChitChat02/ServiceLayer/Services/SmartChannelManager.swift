@@ -9,7 +9,16 @@
 import Foundation
 import CoreData
 
-class SmartChannelManager: ChannelManager {
+protocol IChannelService {
+    var frc: NSFetchedResultsController<ChannelEntity> { get }
+    
+    func setup(completion: @escaping () -> Void)
+    func fetchRemote()
+    func addChannel(_ name: String)
+    func deleteChannel(_ channel: ChannelEntity)
+}
+
+class ChannelService: IChannelService {
     private let localStorage: IStorage
     private let remote: IRemoteChannelStorage
 
@@ -72,7 +81,7 @@ class SmartChannelManager: ChannelManager {
             }, onError: onError(_:))
     }
     
-    func addChannel(name: String) {
+    func addChannel(_ name: String) {
         remote.addChannel(name: name) { (success) in
             Log.newschool("add channel \(success)")
         }

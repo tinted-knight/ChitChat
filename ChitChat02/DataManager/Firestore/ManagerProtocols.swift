@@ -10,15 +10,6 @@ import Foundation
 import CoreData
 import Firebase
 
-protocol ChannelManager {
-    var frc: NSFetchedResultsController<ChannelEntity> { get }
-    
-    func setup(completion: @escaping () -> Void)
-    func fetchRemote()
-    func addChannel(name: String)
-    func deleteChannel(_ channel: ChannelEntity)
-}
-
 protocol MessageManager {
     var channel: ChannelEntity { get }
     var frc: NSFetchedResultsController<MessageEntity> { get }

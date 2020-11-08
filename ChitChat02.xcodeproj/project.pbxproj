@@ -168,7 +168,6 @@
 		393AEDE4254F41990028B893 /* SmartManagers */ = {
 			isa = PBXGroup;
 			children = (
-				393AEDE5254F41A80028B893 /* SmartChannelManager.swift */,
 				69409ED40674C511CFCD83FA /* SmartMessageManager.swift */,
 			);
 			path = SmartManagers;
@@ -280,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				39A2847A25582A66003C2484 /* Assembly */,
+				39A2848425585A89003C2484 /* Services */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -330,6 +330,14 @@
 				39A284822558511F003C2484 /* IRemoteChannelStorage.swift */,
 			);
 			path = FirebaseStrorage;
+			sourceTree = "<group>";
+		};
+		39A2848425585A89003C2484 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				393AEDE5254F41A80028B893 /* SmartChannelManager.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		39B7FDC02530AFCA00B5F280 /* DataManager */ = {
