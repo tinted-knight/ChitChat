@@ -37,6 +37,7 @@ class PresentationAssembly: IPresentationAssembly {
 //        controller.channelsManager = serviceAssembly.channelService
         controller.channelModel = getChannelModel()
         controller.myDataModel = getUserDataModel
+        controller.themeModel = themeModel
         controller.presentationAssembly = self
         return controller
     }
@@ -61,4 +62,8 @@ class PresentationAssembly: IPresentationAssembly {
     private func getChannelModel() -> IChannelModel {
         return ChannelModel(channelService: serviceAssembly.channelService)
     }
+    
+    lazy var themeModel: IThemeModelNew = {
+        return ThemeModelNew(themeService: self.serviceAssembly.themeService)
+    }()
 }

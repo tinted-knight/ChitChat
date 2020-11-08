@@ -24,8 +24,9 @@ class ChannelsViewController: UIViewController {
     
     private lazy var simpleSectionHeader: UIView = UILabel()
 
-    var currentTheme: Theme = .black
     let themeDataManager = ThemeDataManager()
+    
+    var themeModel: IThemeModelNew?
     
 //    var myData: UserData?
     var myDataModel: IUserDataModel?
@@ -36,7 +37,6 @@ class ChannelsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentTheme = loadAppTheme()
 //        myData = loadUserData()
         
         prepareUi()
@@ -83,7 +83,9 @@ extension ChannelsViewController {
         channelsTableView.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: headerReuseId)
         
         setupNavBarButtons()
-        applyTheme(currentTheme)
+        if let theme = themeModel?.currentTheme {
+            applyTheme(theme)
+        }
     }
 
     private func setupNavBarButtons() {

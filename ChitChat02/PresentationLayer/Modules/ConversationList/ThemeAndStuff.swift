@@ -16,15 +16,17 @@ extension ChannelsViewController: ThemesPickerDelegate {
 
     func result(_ value: Theme, _ saveChoice: Bool) {
         if saveChoice {
+            applog("delegate: yay! new theme")
             applyTheme(value)
             saveCurrentTheme()
         } else {
-            //
+            applog("delegate: no new theme")
+            updateNavbarAppearence()
         }
     }
     
     func applyTheme(_ value: Theme) {
-        currentTheme = value
+//        currentTheme = value
         channelsTableView.reloadData()
         
         ThemeManager.apply(theme: value)
@@ -46,10 +48,10 @@ extension ChannelsViewController: ThemesPickerDelegate {
     }
     
     func saveCurrentTheme() {
-        applog(#function)
-        let pref = UserDefaults.standard
-        pref.set(currentTheme.rawValue, forKey: ThemeManager.key)
-        themeDataManager.save(ThemeManager.get())
+//        applog(#function)
+//        let pref = UserDefaults.standard
+//        pref.set(currentTheme.rawValue, forKey: ThemeManager.key)
+//        themeDataManager.save(ThemeManager.get())
     }
     
     func loadAppTheme() -> Theme {

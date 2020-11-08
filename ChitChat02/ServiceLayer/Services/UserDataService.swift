@@ -14,11 +14,11 @@ protocol IUserDataService {
 
 class UserDataService: IUserDataService {
     
-    private let storage: IUserDataStorage
+    private let storage: IKeyValueStorage
     
     let uuid: String
     
-    init(storage: IUserDataStorage) {
+    init(storage: IKeyValueStorage) {
         self.storage = storage
         
         if let uuid = storage.load(key: UserData.keyUUID) {
@@ -27,7 +27,7 @@ class UserDataService: IUserDataService {
         } else {
             let uuid = UUID().uuidString
             Log.prefs("new uuid = \(uuid)")
-            storage.save(uuid: uuid)
+            storage.save(value: uuid)
             self.uuid = uuid
         }
     }

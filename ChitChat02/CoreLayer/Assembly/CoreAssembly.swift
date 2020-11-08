@@ -13,7 +13,7 @@ protocol ICoreAssembly {
 
     var remoteChannelStorage: IRemoteChannelStorage { get }
 
-    var userDataStorage: IUserDataStorage { get }
+    var keyValueStorage: IKeyValueStorage { get }
 
     func remoteMessageStorage(for channel: ChannelEntity) -> IRemoteMessageStorage
 }
@@ -23,7 +23,7 @@ class CoreAssembly: ICoreAssembly {
     
     lazy var remoteChannelStorage: IRemoteChannelStorage = RemoteChannelStorage()
 
-    private(set) lazy var userDataStorage: IUserDataStorage = UserDataStorage()
+    lazy var keyValueStorage: IKeyValueStorage = KeyValueStorage()
 
     func remoteMessageStorage(for channel: ChannelEntity) -> IRemoteMessageStorage {
         return RemoteMessageStorage(for: channel)

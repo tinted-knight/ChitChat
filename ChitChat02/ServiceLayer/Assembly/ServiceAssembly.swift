@@ -13,6 +13,8 @@ protocol IServiceAssembly {
     
     var userDataService: IUserDataService { get }
     
+    var themeService: IThemeService { get }
+    
     func messageService(for channel: ChannelEntity, userData: IUserDataModel) -> IMessageService
 }
 
@@ -26,7 +28,9 @@ class ServiceAssembly: IServiceAssembly {
     lazy var channelService: IChannelService = ChannelService(local: self.coreAssembly.cache,
                                                               remote: self.coreAssembly.remoteChannelStorage)
     
-    lazy var userDataService: IUserDataService = UserDataService(storage: self.coreAssembly.userDataStorage)
+    lazy var userDataService: IUserDataService = UserDataService(storage: self.coreAssembly.keyValueStorage)
+    
+    lazy var themeService: IThemeService = ThemeService(storage: self.coreAssembly.keyValueStorage)
     
     func messageService(for channel: ChannelEntity, userData: IUserDataModel) -> IMessageService {
         return MessageService(for: channel,

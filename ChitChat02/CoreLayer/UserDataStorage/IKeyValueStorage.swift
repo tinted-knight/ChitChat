@@ -5,21 +5,27 @@
 
 import Foundation
 
-protocol IUserDataStorage {
+protocol IKeyValueStorage {
     
     func load(key: String) -> String?
     
-    func save(uuid: String)
+    func integer(key: String) -> Int
+    
+    func save(value: String)
 }
 
-class UserDataStorage: IUserDataStorage {
+class KeyValueStorage: IKeyValueStorage {
     private let prefs = UserDefaults.standard
     
     func load(key: String) -> String? {
         return prefs.string(forKey: key)
     }
     
-    func save(uuid: String) {
-        prefs.set(uuid, forKey: UserData.keyUUID)
+    func integer(key: String) -> Int {
+        return prefs.integer(forKey: key)
+    }
+    
+    func save(value: String) {
+        prefs.set(value, forKey: UserData.keyUUID)
     }
 }

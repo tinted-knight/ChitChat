@@ -22,8 +22,8 @@ class ThemesViewController: UIViewController {
     
     var delegate: ThemesPickerDelegate?
     
-    var themePicked: ((Theme) -> Void)?
-    var result: ((Theme, Bool) -> Void)?
+//    var themePicked: ((Theme) -> Void)?
+//    var result: ((Theme, Bool) -> Void)?
     
     private var saveChoice = true
     
@@ -58,7 +58,7 @@ class ThemesViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        result?(selectedTheme, saveChoice)
+//        result?(selectedTheme, saveChoice)
         delegate?.result(selectedTheme, saveChoice)
         
         super.viewWillDisappear(animated)
@@ -133,7 +133,7 @@ class ThemesViewController: UIViewController {
         selectedImageView?.isChoosed(true)
         
         delegate?.theme(picked: value)
-        themePicked?(value)
+//        themePicked?(value)
     }
     
     private func revertTheme(to value: Theme) {

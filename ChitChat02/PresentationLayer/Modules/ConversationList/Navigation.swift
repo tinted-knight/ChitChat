@@ -20,16 +20,16 @@ extension ChannelsViewController {
     }
     
     func openSettingsScreen(result: @escaping (Theme, Bool) -> Void) {
-        if let themesViewController = ThemesViewController.instance() {
-            themesViewController.activeTheme = currentTheme
+        if let themesViewController = ThemesViewController.instance(), let theme = themeModel?.currentTheme {
+            themesViewController.activeTheme = theme
             
-            //themesViewController.delegate = self
+            themesViewController.delegate = self
             
-            themesViewController.themePicked = { value in
-                //
-            }
-            
-            themesViewController.result = result
+//            themesViewController.themePicked = { value in
+//                //
+//            }
+//
+//            themesViewController.result = result
             
             navigationController?.pushViewController(themesViewController, animated: true)
         }
