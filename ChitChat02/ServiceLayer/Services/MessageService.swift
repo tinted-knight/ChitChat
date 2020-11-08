@@ -19,10 +19,10 @@ class MessageService: IMessageService {
 
     private let local: IStorage
     private let remote: IRemoteMessageStorage
-    private let my: UserData
+    private let my: IUserDataModel
     let channel: ChannelEntity
 
-    init(for channel: ChannelEntity, me userData: UserData, local: IStorage, remote: IRemoteMessageStorage) {
+    init(for channel: ChannelEntity, me userData: IUserDataModel, local: IStorage, remote: IRemoteMessageStorage) {
         self.local = local
         self.channel = channel
         self.my = userData

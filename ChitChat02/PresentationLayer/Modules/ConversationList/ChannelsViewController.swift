@@ -27,7 +27,8 @@ class ChannelsViewController: UIViewController {
     var currentTheme: Theme = .black
     let themeDataManager = ThemeDataManager()
     
-    var myData: UserData?
+//    var myData: UserData?
+    var myDataModel: IUserDataModel?
     
     var channelModel: IChannelModel?
     var presentationAssembly: PresentationAssembly?
@@ -36,7 +37,7 @@ class ChannelsViewController: UIViewController {
         super.viewDidLoad()
         
         currentTheme = loadAppTheme()
-        myData = loadUserData()
+//        myData = loadUserData()
         
         prepareUi()
 
@@ -49,12 +50,12 @@ class ChannelsViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     
-    private func loadUserData() -> UserData? {
-        let prefs = UserDefaults.standard
-        guard let uuid = prefs.string(forKey: UserData.keyUUID) as String? else { return nil }
-        
-        return UserData(uuid: uuid)
-    }
+//    private func loadUserData() -> UserData? {
+//        let prefs = UserDefaults.standard
+//        guard let uuid = prefs.string(forKey: UserData.keyUUID) as String? else { return nil }
+//
+//        return UserData(uuid: uuid)
+//    }
 }
 
 extension ChannelsViewController: IChannelModelDelegate {
@@ -182,9 +183,8 @@ extension ChannelsViewController: UITableViewDataSource {
 extension ChannelsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let channel = channelModel?.frc.fetchedObjects?[indexPath.row] else { return }
-        guard let userData = myData else { return }
         Log.oldschool("openConversation for channel \(channel.name), id = \(channel.identifier)")
-        guard let messages = presentationAssembly?.messagesViewController(for: channel, userData: userData) else { return }
+        guard let messages = presentationAssembly?.messagesViewController(for: channel) else { return }
         navigationController?.pushViewController(messages, animated: true)
 //        openConversationScreen(for: channel,
 //                               with: SmartMessageManager(for: channel,

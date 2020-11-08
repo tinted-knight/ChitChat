@@ -38,13 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             prefs.set(Theme.classic.rawValue, forKey: ThemeManager.key)
         }
 
-        if let uuid = prefs.string(forKey: UserData.keyUUID) as String? {
-            Log.prefs("existing uuid = \(uuid)")
-        } else {
-            let uuid = UUID().uuidString
-            Log.prefs("new uuid = \(uuid)")
-            prefs.set(uuid, forKey: UserData.keyUUID)
-        }
+//        if let uuid = prefs.string(forKey: UserData.keyUUID) as String? {
+//            Log.prefs("existing uuid = \(uuid)")
+//        } else {
+//            let uuid = UUID().uuidString
+//            Log.prefs("new uuid = \(uuid)")
+//            prefs.set(uuid, forKey: UserData.keyUUID)
+//        }
         
         return true
     }

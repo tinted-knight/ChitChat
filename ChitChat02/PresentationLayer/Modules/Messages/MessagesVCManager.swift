@@ -107,7 +107,7 @@ extension MessagesViewController: NSFetchedResultsControllerDelegate {
             if let indexPath = indexPath {
                 guard let message = messageModel?.frc.object(at: indexPath) else { break }
                 guard let cell = messagesTableView.cellForRow(at: indexPath) as? MessageCell else { break }
-                let direction: MessageDirection = message.senderId == myData?.uuid ? .outcome : .income
+                let direction: MessageDirection = message.senderId == myDataModel?.uuid ? .outcome : .income
                 cell.configure(with: MessageCellModel(text: message.content,
                                                       date: message.created,
                                                       sender: message.senderName,

@@ -14,7 +14,7 @@ protocol IPresentationAssembly {
 
     func channelsViewController() -> ChannelsViewController
     
-    func messagesViewController(for channel: ChannelEntity, userData: UserData) -> MessagesViewController
+    func messagesViewController(for channel: ChannelEntity) -> MessagesViewController
 }
 
 class PresentationAssembly: IPresentationAssembly {
@@ -36,20 +36,25 @@ class PresentationAssembly: IPresentationAssembly {
         }
 //        controller.channelsManager = serviceAssembly.channelService
         controller.channelModel = getChannelModel()
+        controller.myDataModel = getUserDataModel
         controller.presentationAssembly = self
         return controller
     }
     
-    func messagesViewController(for channel: ChannelEntity, userData: UserData) -> MessagesViewController {
+    func messagesViewController(for channel: ChannelEntity) -> MessagesViewController {
         guard let controller = MessagesViewController.instance() else {
             fatalError("Cannot instantiate MessagesViewController")
         }
 //        controller.messageModel = serviceAssembly.messageService(for: channel, userData: userData)
-        controller.messageModel = getMessagesModel(for: channel, user: userData)
+        controller.messageModel = getMessagesModel(for: channel, user: getUserDataModel)
         return controller
     }
     
-    private func getMessagesModel(for channel: ChannelEntity, user: UserData) -> IMessagesModel {
+    lazy var getUserDataModel: IUserDataModel = {
+        return UserDataModel(userDataService: serviceAssembly.userDataService)
+    }()
+    
+    private func getMessagesModel(for channel: ChannelEntity, user: IUserDataModel) -> IMessagesModel {
         return MessagesModel(messagesService: serviceAssembly.messageService(for: channel, userData: user))
     }
     

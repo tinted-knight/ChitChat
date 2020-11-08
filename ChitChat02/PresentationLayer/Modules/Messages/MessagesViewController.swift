@@ -18,7 +18,9 @@ class MessagesViewController: UIViewController {
     
 //    var messageManager: IMessageService?
     var messageModel: IMessagesModel?
-    var myData: UserData?
+
+//    var myData: UserData?
+    var myDataModel: IUserDataModel?
     
     var messages: [MessageCellModel] = []
     
@@ -94,7 +96,7 @@ extension MessagesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let frc = messageModel?.frc else { return UITableViewCell() }
         let message = frc.object(at: indexPath)
-        let direction: MessageDirection = message.senderId == myData?.uuid ? .outcome : .income
+        let direction: MessageDirection = message.senderId == myDataModel?.uuid ? .outcome : .income
 
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellReuseId(for: direction),

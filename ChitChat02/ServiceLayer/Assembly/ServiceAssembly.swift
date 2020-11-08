@@ -11,7 +11,9 @@ import Foundation
 protocol IServiceAssembly {
     var channelService: IChannelService { get }
     
-    func messageService(for channel: ChannelEntity, userData: UserData) -> IMessageService
+    var userDataService: IUserDataService { get }
+    
+    func messageService(for channel: ChannelEntity, userData: IUserDataModel) -> IMessageService
 }
 
 class ServiceAssembly: IServiceAssembly {
@@ -24,7 +26,9 @@ class ServiceAssembly: IServiceAssembly {
     lazy var channelService: IChannelService = ChannelService(local: self.coreAssembly.cache,
                                                               remote: self.coreAssembly.remoteChannelStorage)
     
-    func messageService(for channel: ChannelEntity, userData: UserData) -> IMessageService {
+    lazy var userDataService: IUserDataService = UserDataService(storage: self.coreAssembly.userDataStorage)
+    
+    func messageService(for channel: ChannelEntity, userData: IUserDataModel) -> IMessageService {
         return MessageService(for: channel,
                               me: userData,
                               local: self.coreAssembly.cache,
