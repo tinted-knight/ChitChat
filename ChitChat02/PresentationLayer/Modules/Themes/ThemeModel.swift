@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum Theme: Int {
+enum AppTheme: Int {
     case classic = 0
     case yellow = 1
     case black = 2

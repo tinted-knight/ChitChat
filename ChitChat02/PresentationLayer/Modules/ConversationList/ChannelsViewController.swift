@@ -40,7 +40,7 @@ class ChannelsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        view.backgroundColor = ThemeManager.get().backgroundColor
+        view.backgroundColor = themeModel?.getThemeData().backgroundColor
         super.viewWillAppear(animated)
     }
     
@@ -70,9 +70,9 @@ extension ChannelsViewController {
         channelsTableView.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: headerReuseId)
         
         setupNavBarButtons()
-        if let theme = themeModel?.currentTheme {
-            applyTheme(theme)
-        }
+
+        themeModel?.delegate = self
+        themeModel?.applyCurrent()
     }
 
     private func setupNavBarButtons() {
@@ -105,16 +105,18 @@ extension ChannelsViewController {
     }
     
     @objc private func settingsOnTap() {
-        openSettingsScreen { [weak self] value, saveChoice in
-            if saveChoice {
-                applog("closure: yay! new theme")
-                self?.applyTheme(value)
-                self?.saveCurrentTheme()
-            } else {
-                applog("closure: no new theme")
-                // need to call to fix navbar text color
-                self?.updateNavbarAppearence()
-            }
-        }
+        guard let controller = presentationAssembly?.themesViewController() else { return }
+        navigationController?.pushViewController(controller, animated: true)
+//        openSettingsScreen { [weak self] value, saveChoice in
+//            if saveChoice {
+//                applog("closure: yay! new theme")
+//                self?.applyTheme(value)
+//                self?.saveCurrentTheme()
+//            } else {
+//                applog("closure: no new theme")
+//                // need to call to fix navbar text color
+//                self?.updateNavbarAppearence()
+//            }
+//        }
     }
 }

@@ -17,6 +17,8 @@ protocol IPresentationAssembly {
     func messagesViewController(for channel: ChannelEntity) -> MessagesViewController
     
     func profileViewController() -> ProfileViewController
+    
+    func themesViewController() -> ThemesViewController
 }
 
 class PresentationAssembly: IPresentationAssembly {
@@ -39,7 +41,7 @@ class PresentationAssembly: IPresentationAssembly {
 //        controller.channelsManager = serviceAssembly.channelService
         controller.channelModel = getChannelModel()
         controller.myDataModel = getFirestoreUser
-        controller.themeModel = themeModel
+        controller.themeModel = getThemeModel
         controller.presentationAssembly = self
         return controller
     }
@@ -62,6 +64,14 @@ class PresentationAssembly: IPresentationAssembly {
         return controller
     }
     
+    func themesViewController() -> ThemesViewController {
+        guard let controller = ThemesViewController.instance() else {
+            fatalError("Cannot instantiate ThemesViewController")
+        }
+        controller.themeModel = getThemeModel
+        return controller
+    }
+    
     lazy var getFirestoreUser: IFirestoreUser = {
         return FirestoreUser(userDataService: serviceAssembly.userDataService)
     }()
@@ -75,7 +85,7 @@ class PresentationAssembly: IPresentationAssembly {
         return ChannelModel(channelService: serviceAssembly.channelService)
     }
     
-    lazy var themeModel: IThemeModelNew = {
+    lazy var getThemeModel: IThemeModelNew = {
         return ThemeModelNew(themeService: self.serviceAssembly.themeService)
     }()
     

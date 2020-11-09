@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let prefs = UserDefaults.standard
         if (prefs.integer(forKey: ThemeManager.key) as Int?) == nil {
-            prefs.set(Theme.classic.rawValue, forKey: ThemeManager.key)
+            prefs.set(AppTheme.classic.rawValue, forKey: ThemeManager.key)
         }
 
 //        if let uuid = prefs.string(forKey: UserData.keyUUID) as String? {

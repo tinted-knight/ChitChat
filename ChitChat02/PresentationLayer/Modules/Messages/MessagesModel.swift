@@ -25,7 +25,7 @@ protocol IMessagesModel {
     func add(message content: String)
 }
 
-protocol IMessageModelDelegate {
+protocol IMessageModelDelegate: class {
     func dataLoaded()
 }
 
@@ -41,7 +41,7 @@ class MessagesModel: IMessagesModel {
     
     lazy var userName: String = self.firestoreUser.name()
 
-    var delegate: IMessageModelDelegate?
+    weak var delegate: IMessageModelDelegate?
     
     init(messagesService: IMessageService, firestoreUser: IFirestoreUser) {
         self.messagesService = messagesService

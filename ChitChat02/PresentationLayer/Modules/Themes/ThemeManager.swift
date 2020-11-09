@@ -12,9 +12,9 @@ import UIKit
 class ThemeManager {
     static let key = "key-theme"
     
-    static private var current: Theme?
+    static private var current: AppTheme?
     
-    static func apply(theme: Theme) {
+    static func apply(theme: AppTheme) {
         current = theme
         let themeData = get()
         MessageCell.appearance().backgroundColor = themeData.backgroundColor

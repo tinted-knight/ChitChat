@@ -9,32 +9,18 @@
 import Foundation
 
 // MARK: ThemesPickerDelegate and stuff
-extension ChannelsViewController: ThemesPickerDelegate {
-    func theme(picked value: Theme) {
-        //
-    }
-
-    func result(_ value: Theme, _ saveChoice: Bool) {
-        if saveChoice {
-            applog("delegate: yay! new theme")
-            applyTheme(value)
-            saveCurrentTheme()
-        } else {
-            applog("delegate: no new theme")
-            updateNavbarAppearence()
-        }
-    }
+extension ChannelsViewController: IThemeModelDelegate {
     
-    func applyTheme(_ value: Theme) {
-//        currentTheme = value
+    func apply(_ theme: ThemeModel) {
+        applyTheme(theme)
+    }
+    func applyTheme(_ value: ThemeModel) {
         channelsTableView.reloadData()
         
-        ThemeManager.apply(theme: value)
-        
-        updateNavbarAppearence()
-        navigationController?.navigationBar.tintColor = ThemeManager.get().tintColor
-        // inspite of setting NavBarStyle in ThemeManager need to duplicate here
-        switch ThemeManager.get().brightness {
+        updateNavbarAppearence(value)
+        navigationController?.navigationBar.tintColor = value.tintColor
+        // need to duplicate here
+        switch value.brightness {
         case .dark:
             navigationController?.navigationBar.barStyle = .black
         case .light:
@@ -42,20 +28,8 @@ extension ChannelsViewController: ThemesPickerDelegate {
         }
     }
     
-    func updateNavbarAppearence() {
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
-        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: ThemeManager.get().textColor]
-    }
-    
-    func saveCurrentTheme() {
-//        applog(#function)
-//        let pref = UserDefaults.standard
-//        pref.set(currentTheme.rawValue, forKey: ThemeManager.key)
-//        themeDataManager.save(ThemeManager.get())
-    }
-    
-    func loadAppTheme() -> Theme {
-        let prefs = UserDefaults.standard
-        return Theme(rawValue: prefs.integer(forKey: ThemeManager.key)) ?? Theme.classic
+    func updateNavbarAppearence(_ value: ThemeModel) {
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: value.textColor]
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: value.textColor]
     }
 }

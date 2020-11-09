@@ -9,8 +9,7 @@
 import UIKit
 
 protocol ThemesPickerDelegate {
-    func theme(picked value: Theme)
-    func result(_ value: Theme, _ saveChoice: Bool)
+    func themePicked()
 }
 
 class ThemesViewController: UIViewController {
@@ -19,6 +18,8 @@ class ThemesViewController: UIViewController {
         let storyboard = UIStoryboard(name: "ThemesViewController", bundle: nil)
         return storyboard.instantiateInitialViewController() as? ThemesViewController
     }
+    
+    var themeModel: IThemeModelNew!
     
     var delegate: ThemesPickerDelegate?
     
@@ -31,26 +32,27 @@ class ThemesViewController: UIViewController {
     @IBOutlet weak var buttonYellow: UIButton!
     @IBOutlet weak var buttonGreen: UIButton!
     
-    @IBOutlet weak var imageRed: UIImageView!
+    @IBOutlet weak var imageClassic: UIImageView!
     @IBOutlet weak var imageYellow: UIImageView!
-    @IBOutlet weak var imageGreen: UIImageView!
+    @IBOutlet weak var imageBlack: UIImageView!
     
-    var activeTheme: Theme = .classic
-    var selectedTheme: Theme = .classic
+    var activeTheme: AppTheme!
+    var selectedTheme: AppTheme = .classic
     private var selectedImageView: UIImageView? {
         switch selectedTheme {
         case .classic:
-            return imageRed
+            return imageClassic
         case .yellow:
             return imageYellow
         case .black:
-            return imageGreen
+            return imageBlack
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activeTheme = themeModel.currentTheme
         selectedTheme = activeTheme
         
         prepareUi()
@@ -59,8 +61,9 @@ class ThemesViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
 //        result?(selectedTheme, saveChoice)
-        delegate?.result(selectedTheme, saveChoice)
-        
+        delegate?.themePicked()
+        themeModel.picked(theme: selectedTheme)
+
         super.viewWillDisappear(animated)
     }
     
@@ -77,31 +80,31 @@ class ThemesViewController: UIViewController {
         buttonYellow.setTitle(fakeThemeData[1].name, for: .normal)
         buttonGreen.setTitle(fakeThemeData[2].name, for: .normal)
         
-        imageRed.layer.cornerRadius = 14
+        imageClassic.layer.cornerRadius = 14
         imageYellow.layer.cornerRadius = 14
-        imageGreen.layer.cornerRadius = 14
+        imageBlack.layer.cornerRadius = 14
         
         setSelectedTheme(selectedTheme, force: true)
     }
     
     private func setupListeners() {
-        buttonRed.addTarget(self, action: #selector(selectRedTheme), for: .touchUpInside)
-        buttonYellow.addTarget(self, action: #selector(selectYellowTheme), for: .touchUpInside)
-        buttonGreen.addTarget(self, action: #selector(selectGreenTheme), for: .touchUpInside)
+        buttonRed.addTarget(self, action: #selector(selectClassicTheme), for: .touchUpInside)
+        buttonYellow.addTarget(self, action: #selector(selectAlternativeTheme), for: .touchUpInside)
+        buttonGreen.addTarget(self, action: #selector(selectDarkTheme), for: .touchUpInside)
         
-        imageRed.isUserInteractionEnabled = true
-        imageRed.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(selectRedTheme))
+        imageClassic.isUserInteractionEnabled = true
+        imageClassic.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(selectClassicTheme))
         )
         
         imageYellow.isUserInteractionEnabled = true
         imageYellow.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(selectYellowTheme))
+            UITapGestureRecognizer(target: self, action: #selector(selectAlternativeTheme))
         )
         
-        imageGreen.isUserInteractionEnabled = true
-        imageGreen.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(selectGreenTheme))
+        imageBlack.isUserInteractionEnabled = true
+        imageBlack.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(selectDarkTheme))
         )
     }
     
@@ -111,19 +114,19 @@ class ThemesViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func selectRedTheme() {
+    @objc private func selectClassicTheme() {
         setSelectedTheme(.classic)
     }
     
-    @objc private func selectYellowTheme() {
+    @objc private func selectAlternativeTheme() {
         setSelectedTheme(.yellow)
     }
     
-    @objc private func selectGreenTheme() {
+    @objc private func selectDarkTheme() {
         setSelectedTheme(.black)
     }
     
-    private func setSelectedTheme(_ value: Theme, force: Bool = false) {
+    private func setSelectedTheme(_ value: AppTheme, force: Bool = false) {
         guard force || value != selectedTheme else {
             return
         }
@@ -131,16 +134,14 @@ class ThemesViewController: UIViewController {
         selectedImageView?.isChoosed(false)
         selectedTheme = value
         selectedImageView?.isChoosed(true)
-        
-        delegate?.theme(picked: value)
 //        themePicked?(value)
     }
     
-    private func revertTheme(to value: Theme) {
+    private func revertTheme(to value: AppTheme) {
         applyThemeForPreview(value)
     }
     
-    private func applyThemeForPreview(_ value: Theme) {
+    private func applyThemeForPreview(_ value: AppTheme) {
         view.backgroundColor = fakeThemeData[value.rawValue].backgroundColor
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: fakeThemeData[value.rawValue].textColor]
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: fakeThemeData[value.rawValue].textColor]
