@@ -19,10 +19,10 @@ class MessageService: IMessageService {
 
     private let local: IStorage
     private let remote: IRemoteMessageStorage
-    private let my: IUserDataModel
+    private let my: IFirestoreUser
     let channel: ChannelEntity
 
-    init(for channel: ChannelEntity, me userData: IUserDataModel, local: IStorage, remote: IRemoteMessageStorage) {
+    init(for channel: ChannelEntity, me userData: IFirestoreUser, local: IStorage, remote: IRemoteMessageStorage) {
         self.local = local
         self.channel = channel
         self.my = userData
@@ -57,7 +57,7 @@ class MessageService: IMessageService {
         let messageData: [String: Any] = [
             Message.content: content,
             Message.created: Timestamp(date: Date()),
-            Message.senderName: my.name,
+            Message.senderName: my.name(),
             Message.senderId: my.uuid
         ]
         remote.add(data: messageData) { (success) in

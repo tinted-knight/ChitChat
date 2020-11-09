@@ -22,7 +22,7 @@ class FirestoreService: IFirestoreUserService {
     
     let uuid: String
     
-    let name: String
+    var name: String
     
     init(storage: IKeyValueStorage) {
         self.storage = storage
@@ -38,10 +38,10 @@ class FirestoreService: IFirestoreUserService {
         }
 
         if let name = storage.load(key: UserData.keyName) {
-            Log.prefs("existing name = \(uuid)")
+            Log.prefs("existing name = \(name)")
             self.name = name
         } else {
-            Log.prefs("no name = \(uuid)")
+            Log.prefs("no name in prefs")
             let myName = "Timur Tharkahov"
             storage.save(value: myName, forKey: UserData.keyName)
             self.name = myName
@@ -49,6 +49,8 @@ class FirestoreService: IFirestoreUserService {
     }
     
     func update(name: String) {
+        Log.arch("prefs update name \(name)")
         storage.save(value: name, forKey: UserData.keyName)
+        self.name = name
     }
 }

@@ -65,7 +65,7 @@ class ProfileViewController: UIViewController {
         profileImageView.addGestureRecognizer(
                 UITapGestureRecognizer(target: self, action: #selector(onProfilePictureTap)))
 
-        buttonUserEdit.isEnabled = false
+        buttonEditPicture.isEnabled = false
         buttonUserEdit.addTarget(self, action: #selector(setEditUser(_:)), for: .touchUpInside)
         textUserDescription.delegate = self
         textUserName.delegate = self

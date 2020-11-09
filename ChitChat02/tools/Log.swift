@@ -12,7 +12,7 @@ class Log {
     private static var OVERALL = true
     
     private static var FIRE_ENABLED = false
-    private static var PREFS_ENABLED = false
+    private static var PREFS_ENABLED = true
     private static var OLDSCHOOL_ENABLED = false
     private static var NEWSCHOOOL_ENABLED = false
     private static var FRC_ENABLED = false

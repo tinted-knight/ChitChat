@@ -20,7 +20,7 @@ class MessagesViewController: UIViewController {
     var messageModel: IMessagesModel?
 
 //    var myData: UserData?
-    var myDataModel: IUserDataModel?
+    var myDataModel: IFirestoreUser?
     
     var messages: [MessageCellModel] = []
     

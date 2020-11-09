@@ -97,7 +97,8 @@ extension Message {
 // MARK: UserData
 struct UserData {
     let uuid: String
-    let name = "Timur"
+    let name: String
 
     static let keyUUID = "key-uuid"
+    static let keyName = "key-name"
 }

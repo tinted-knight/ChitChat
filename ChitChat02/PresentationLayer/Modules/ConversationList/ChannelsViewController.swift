@@ -24,7 +24,7 @@ class ChannelsViewController: UIViewController {
     
     var themeModel: IThemeModelNew?
     
-    var myDataModel: IUserDataModel?
+    var myDataModel: IFirestoreUser?
     
     var channelModel: IChannelModel?
 

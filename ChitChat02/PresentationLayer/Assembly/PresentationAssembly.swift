@@ -38,7 +38,7 @@ class PresentationAssembly: IPresentationAssembly {
         }
 //        controller.channelsManager = serviceAssembly.channelService
         controller.channelModel = getChannelModel()
-        controller.myDataModel = getUserDataModel
+        controller.myDataModel = getFirestoreUser
         controller.themeModel = themeModel
         controller.presentationAssembly = self
         return controller
@@ -49,7 +49,7 @@ class PresentationAssembly: IPresentationAssembly {
             fatalError("Cannot instantiate MessagesViewController")
         }
 //        controller.messageModel = serviceAssembly.messageService(for: channel, userData: userData)
-        controller.messageModel = getMessagesModel(for: channel, user: getUserDataModel)
+        controller.messageModel = getMessagesModel(for: channel)
         return controller
     }
     
@@ -58,16 +58,16 @@ class PresentationAssembly: IPresentationAssembly {
             fatalError("Cannot instantiate ProfileViewController")
         }
         Log.arch("present ProfileVC")
-        controller.model = getProfileModel()
+        controller.model = getProfileModel
         return controller
     }
     
-    lazy var getUserDataModel: IUserDataModel = {
-        return UserDataModel(userDataService: serviceAssembly.userDataService)
+    lazy var getFirestoreUser: IFirestoreUser = {
+        return FirestoreUser(userDataService: serviceAssembly.userDataService)
     }()
 
-    private func getMessagesModel(for channel: ChannelEntity, user: IUserDataModel) -> IMessagesModel {
-        return MessagesModel(messagesService: serviceAssembly.messageService(for: channel, userData: user))
+    private func getMessagesModel(for channel: ChannelEntity) -> IMessagesModel {
+        return MessagesModel(messagesService: serviceAssembly.messageService(for: channel, userData: getFirestoreUser))
     }
     
     private func getChannelModel() -> IChannelModel {
@@ -78,7 +78,8 @@ class PresentationAssembly: IPresentationAssembly {
         return ThemeModelNew(themeService: self.serviceAssembly.themeService)
     }()
     
-    private func getProfileModel() -> IProfileModel {
-        return ProfileModel(dataManager: self.serviceAssembly.profileDataManager)
-    }
+    lazy var getProfileModel: IProfileModel = {
+        return ProfileModel(dataManager: self.serviceAssembly.profileDataManager,
+                            firestoreUserService: self.serviceAssembly.userDataService)
+    }()
 }

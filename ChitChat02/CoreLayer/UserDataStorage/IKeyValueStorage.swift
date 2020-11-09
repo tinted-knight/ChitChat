@@ -11,7 +11,7 @@ protocol IKeyValueStorage {
     
     func integer(key: String) -> Int
     
-    func save(value: String)
+    func save(value: String, forKey key: String)
 }
 
 class KeyValueStorage: IKeyValueStorage {
@@ -25,7 +25,7 @@ class KeyValueStorage: IKeyValueStorage {
         return prefs.integer(forKey: key)
     }
     
-    func save(value: String) {
-        prefs.set(value, forKey: UserData.keyUUID)
+    func save(value: String, forKey key: String) {
+        prefs.set(value, forKey: key)
     }
 }

@@ -80,7 +80,6 @@ extension ChannelsViewController: NSFetchedResultsControllerDelegate {
 extension ChannelsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let channel = channelModel?.frc.object(at: indexPath) else { return UITableViewCell() }
-        Log.arch("cellForRowAt")
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
             as? ConversationCell else {
                 return UITableViewCell()
@@ -92,19 +91,16 @@ extension ChannelsViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let sections = channelModel?.frc.sections else { return 0 }
-        Log.arch("numberOfSections")
         return sections.count
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let sections = channelModel?.frc.sections else { return nil }
-        Log.arch("titleForHeaderInSection")
         return sections[section].name
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = channelModel?.frc.sections else { return 0 }
-        Log.arch("numberOfRowsInSection")
         return sections[section].numberOfObjects
     }
 }

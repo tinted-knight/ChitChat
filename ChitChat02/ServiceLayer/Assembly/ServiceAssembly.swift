@@ -11,13 +11,13 @@ import Foundation
 protocol IServiceAssembly {
     var channelService: IChannelService { get }
     
-    var userDataService: IUserDataService { get }
+    var userDataService: IFirestoreUserService { get }
     
     var themeService: IThemeService { get }
     
     var profileDataManager: IDataManagerService { get }
     
-    func messageService(for channel: ChannelEntity, userData: IUserDataModel) -> IMessageService
+    func messageService(for channel: ChannelEntity, userData: IFirestoreUser) -> IMessageService
 }
 
 class ServiceAssembly: IServiceAssembly {
@@ -30,14 +30,14 @@ class ServiceAssembly: IServiceAssembly {
     lazy var channelService: IChannelService = ChannelService(local: self.coreAssembly.cache,
                                                               remote: self.coreAssembly.remoteChannelStorage)
     
-    lazy var userDataService: IUserDataService = UserDataService(storage: self.coreAssembly.keyValueStorage)
+    lazy var userDataService: IFirestoreUserService = FirestoreService(storage: self.coreAssembly.keyValueStorage)
     
     lazy var themeService: IThemeService = ThemeService(storage: self.coreAssembly.keyValueStorage)
     
     lazy var profileDataManager: IDataManagerService = SmartDataManagerService(gcdManager: self.coreAssembly.gcdDataManager,
                                                                                operationManager: self.coreAssembly.operationDataManager)
     
-    func messageService(for channel: ChannelEntity, userData: IUserDataModel) -> IMessageService {
+    func messageService(for channel: ChannelEntity, userData: IFirestoreUser) -> IMessageService {
         return MessageService(for: channel,
                               me: userData,
                               local: self.coreAssembly.cache,

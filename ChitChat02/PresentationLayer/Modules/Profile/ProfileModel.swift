@@ -16,6 +16,8 @@ protocol IProfileModel: class {
     
     var profileImage: UIImage? { get set }
     
+    var uuid: String { get }
+    
     var state: UIState { get }
 
     func save(name: String?, description: String?, avatar: UIImage?, with type: DataManagerType)
@@ -62,9 +64,14 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     
     var state: UIState = .loading
     
+    lazy var uuid: String = self.firestoreUserService.uuid
+    
     private var profileService: IDataManagerService
     
-    init(dataManager: IDataManagerService) {
+    private let firestoreUserService: IFirestoreUserService
+    
+    init(dataManager: IDataManagerService, firestoreUserService: IFirestoreUserService) {
+        self.firestoreUserService = firestoreUserService
         self.profileService = dataManager
         self.user = newUser
         self.profileImage = UIImage(named: "Profile temp")
@@ -125,6 +132,7 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
         applog("profile load, \(model)")
         state = .hasLoaded
         user = model
+        firestoreUserService.update(name: user.name)
         if let avatarUrl = user.avatar {
             DispatchQueue.global().async { [weak self] in
                 do {
@@ -143,6 +151,7 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     
     func onLoadError(_ message: String) {
         applog("profile load error")
+        state = .hasLoaded
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.loadErrorAlert(title: "Похоже, что  ты новенький", message: "Введи свои данные и сохрани")
         }
