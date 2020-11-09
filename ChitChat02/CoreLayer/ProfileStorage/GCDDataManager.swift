@@ -13,13 +13,13 @@ private enum SaveResult {
     case error
 }
 
-class GCDDataManager: DataManager {
+class GCDDataManager: IDataManager {
     private let queue = DispatchQueue(label: "file-operations", qos: .utility, attributes: .concurrent)
     // delay, чтобы увидеть инидикатор прогресса на экране
     let fakeDelay = 1.0
     let doubleDelay = 2.0
 
-    var delegate: DataManagerDelegate?
+    var delegate: IDataManagerDelegate?
 
     private var nameResult: SaveResult = .success
     private var descResult: SaveResult = .success

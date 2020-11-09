@@ -16,7 +16,7 @@ class SmartDataManager {
 
     private var dataManagerType: DataManagerType
     
-    private var dataManager: DataManager {
+    private var dataManager: IDataManager {
         switch dataManagerType {
         case .gcd:
             return gcdDataManager
@@ -25,7 +25,7 @@ class SmartDataManager {
         }
     }
 
-    var delegate: DataManagerDelegate?
+    var delegate: IDataManagerDelegate?
     
     var user: UserModel = newUser
     private var lastSavedUser: UserModel?
@@ -81,7 +81,7 @@ class SmartDataManager {
     }
 }
 
-extension SmartDataManager: DataManagerDelegate {
+extension SmartDataManager: IDataManagerDelegate {
     func onLoaded(_ model: UserModel) {
         applog("smart load, \(model)")
         user = model

@@ -20,6 +20,11 @@ enum UIState {
 
 class ProfileViewController: UIViewController {
 
+    static func instance() -> ProfileViewController? {
+        let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
+        return storyboard.instantiateInitialViewController() as? ProfileViewController
+    }
+
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var textUserDescription: UITextView!
     @IBOutlet weak var buttonSave: UIButton!
@@ -164,7 +169,7 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
 }
 
 // MARK: DataManagerDelegate
-extension ProfileViewController: DataManagerDelegate {
+extension ProfileViewController: IDataManagerDelegate {
 
     func onLoaded(_ model: UserModel) {
         DispatchQueue.main.async { [weak self] in

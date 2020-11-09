@@ -1,21 +1,21 @@
 //
-//  Repo.swift
+//  IDataManager.swift
 //  ChitChat02
 //
-//  Created by Timun on 09.10.2020.
+//  Created by Timun on 09.11.2020.
 //  Copyright © 2020 TimunInc. All rights reserved.
 //
 
 import Foundation
 
-protocol DataManager {
-    var delegate: DataManagerDelegate? { get set }
+protocol IDataManager {
+    var delegate: IDataManagerDelegate? { get set }
     
     func save(name: String?, description: String?, avatar: Data?)
     func load()
 }
 
-protocol DataManagerDelegate {
+protocol IDataManagerDelegate {
     func onLoaded(_ model: UserModel)
     func onLoadError(_ message: String)
 
@@ -23,7 +23,7 @@ protocol DataManagerDelegate {
     func onSaveError(_ message: String)
 }
 
-extension DataManager {
+extension IDataManager {
     private func storageUrl() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]

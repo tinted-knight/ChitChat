@@ -8,9 +8,9 @@
 
 import Foundation
 
-class OperationDataManager: DataManager {
+class OperationDataManager: IDataManager {
     private let queue = OperationQueue()
-    var delegate: DataManagerDelegate?
+    var delegate: IDataManagerDelegate?
 
     private var nameOperation: ResultOperation = ResultOperation()
     private var descOperation: ResultOperation = ResultOperation()
