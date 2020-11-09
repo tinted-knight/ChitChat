@@ -28,7 +28,7 @@ protocol IChannelModel {
 }
 
 protocol IChannelModelDelegate: class {
-    func dataLoaded()
+    func dataLoaded(_ dataSource: UITableViewDataSource)
 }
 
 class ChannelModel: IChannelModel {
@@ -48,7 +48,10 @@ class ChannelModel: IChannelModel {
     func performSetup() {
         channelService.setup { [weak self] in
             guard let self = self else { return }
-            self.delegate?.dataLoaded()
+            Log.arch("performSetup")
+            self.loadData()
+//            let dataSource = ChannelDataSource(frc: self.frc)
+//            self.delegate?.dataLoaded(dataSource)
         }
     }
 
@@ -57,6 +60,8 @@ class ChannelModel: IChannelModel {
 //            channelService.frc.delegate = self.frcDelegate
             try channelService.frc.performFetch()
             channelService.fetchRemote()
+            let dataSource = ChannelDataSource(frc: self.frc)
+            delegate?.dataLoaded(dataSource)
         } catch { fatalError("channel frc fetch") }
     }
     

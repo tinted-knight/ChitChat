@@ -35,14 +35,14 @@
                             <constraint firstItem="laZ-OT-4NI" firstAttribute="centerX" secondItem="6cO-mr-Jat" secondAttribute="centerX" id="07Z-Gj-tQj"/>
                             <constraint firstItem="9RC-Mj-dWi" firstAttribute="centerY" secondItem="6cO-mr-Jat" secondAttribute="centerY" id="48a-Pa-bog"/>
                             <constraint firstItem="VDq-yc-Wbt" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9RC-Mj-dWi" secondAttribute="bottom" constant="16" id="4fG-us-Dff"/>
-                            <constraint firstItem="VDq-yc-Wbt" firstAttribute="trailing" secondItem="QI6-zc-n6K" secondAttribute="trailing" id="NSO-uH-8Ta"/>
+                            <constraint firstItem="QI6-zc-n6K" firstAttribute="trailing" secondItem="VDq-yc-Wbt" secondAttribute="trailing" id="6EW-aT-6yI"/>
                             <constraint firstItem="laZ-OT-4NI" firstAttribute="centerY" secondItem="6cO-mr-Jat" secondAttribute="centerY" id="OFN-Yb-Ae5"/>
-                            <constraint firstItem="QI6-zc-n6K" firstAttribute="top" secondItem="VDq-yc-Wbt" secondAttribute="top" id="Vvf-ev-oO2"/>
+                            <constraint firstItem="QI6-zc-n6K" firstAttribute="leading" secondItem="VDq-yc-Wbt" secondAttribute="leading" id="RaK-MG-Ftc"/>
+                            <constraint firstItem="QI6-zc-n6K" firstAttribute="bottom" secondItem="VDq-yc-Wbt" secondAttribute="bottom" id="ZUD-9r-MgW"/>
                             <constraint firstItem="9RC-Mj-dWi" firstAttribute="centerX" secondItem="6cO-mr-Jat" secondAttribute="centerX" id="ahq-8Z-lDt"/>
                             <constraint firstItem="9RC-Mj-dWi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VDq-yc-Wbt" secondAttribute="top" constant="16" id="cu2-XM-kBN"/>
                             <constraint firstItem="9RC-Mj-dWi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VDq-yc-Wbt" secondAttribute="leading" constant="16" id="qf0-zX-r4O"/>
-                            <constraint firstItem="VDq-yc-Wbt" firstAttribute="bottom" secondItem="QI6-zc-n6K" secondAttribute="bottom" id="qhz-dk-mnb"/>
-                            <constraint firstItem="QI6-zc-n6K" firstAttribute="leading" secondItem="VDq-yc-Wbt" secondAttribute="leading" id="tqv-8k-nLU"/>
+                            <constraint firstItem="QI6-zc-n6K" firstAttribute="top" secondItem="VDq-yc-Wbt" secondAttribute="top" id="qnl-HN-Q0q"/>
                             <constraint firstItem="VDq-yc-Wbt" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9RC-Mj-dWi" secondAttribute="trailing" constant="16" id="vv1-NF-cC3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VDq-yc-Wbt"/>

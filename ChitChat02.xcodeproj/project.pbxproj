@@ -34,6 +34,7 @@
 		397214B3255876D9001A8B89 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B2255876D8001A8B89 /* UserDataService.swift */; };
 		397214B625587E39001A8B89 /* ThemesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B525587E39001A8B89 /* ThemesService.swift */; };
 		397214B82558807D001A8B89 /* ThemeModelNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B72558807D001A8B89 /* ThemeModelNew.swift */; };
+		397FC94225597FF8000B9873 /* ChannelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397FC94125597FF8000B9873 /* ChannelDataSource.swift */; };
 		3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3994BFB325248EB6001AB5E7 /* MessageCell.swift */; };
 		3995893025234FBB003C62C8 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */; };
 		3995893325239D50003C62C8 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3995893125239D50003C62C8 /* HeaderCell.swift */; };
@@ -58,7 +59,7 @@
 		39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */; };
 		39BDCFBF252767B100ECECCC /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFBE252767B100ECECCC /* ThemeModel.swift */; };
 		39BDCFC82527A37A00ECECCC /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFC72527A37A00ECECCC /* ThemeManager.swift */; };
-		39DBBAFE254D8A17009F4B5D /* ChannelsVCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DBBAFD254D8A17009F4B5D /* ChannelsVCManager.swift */; };
+		39DBBAFE254D8A17009F4B5D /* ChannelsTableViewDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */; };
 		39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C12531C1D20068C875 /* LoadOperation.swift */; };
 		39DE12C42531C2280068C875 /* SaveOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C32531C2280068C875 /* SaveOperations.swift */; };
 		39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C52531C4290068C875 /* SaveLoadExtension.swift */; };
@@ -108,6 +109,7 @@
 		397214B2255876D8001A8B89 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		397214B525587E39001A8B89 /* ThemesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesService.swift; sourceTree = "<group>"; };
 		397214B72558807D001A8B89 /* ThemeModelNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModelNew.swift; sourceTree = "<group>"; };
+		397FC94125597FF8000B9873 /* ChannelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDataSource.swift; sourceTree = "<group>"; };
 		3994BFB325248EB6001AB5E7 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		3995893125239D50003C62C8 /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
@@ -132,7 +134,7 @@
 		39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		39BDCFBE252767B100ECECCC /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
 		39BDCFC72527A37A00ECECCC /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
-		39DBBAFD254D8A17009F4B5D /* ChannelsVCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsVCManager.swift; sourceTree = "<group>"; };
+		39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsTableViewDelegates.swift; sourceTree = "<group>"; };
 		39DE12C12531C1D20068C875 /* LoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
 		39DE12C32531C2280068C875 /* SaveOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOperations.swift; sourceTree = "<group>"; };
 		39DE12C52531C4290068C875 /* SaveLoadExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadExtension.swift; sourceTree = "<group>"; };
@@ -408,10 +410,11 @@
 				3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */,
 				3948F9C7253B919300465D02 /* Navigation.swift */,
 				3948F9C9253B942600465D02 /* ThemeAndStuff.swift */,
-				39DBBAFD254D8A17009F4B5D /* ChannelsVCManager.swift */,
+				39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */,
 				39A2846E25581968003C2484 /* ChannelsViewController.storyboard */,
 				39A2847F25583534003C2484 /* ChannelModel.swift */,
 				397214B025587693001A8B89 /* UserDataModel.swift */,
+				397FC94125597FF8000B9873 /* ChannelDataSource.swift */,
 			);
 			path = ConversationList;
 			sourceTree = "<group>";
@@ -630,12 +633,13 @@
 				3958B3C1253B708B00801E6D /* AlertViewController.swift in Sources */,
 				39A284792558238E003C2484 /* CoreAssembly.swift in Sources */,
 				394F8674250E518A00B703B3 /* AppDelegate.swift in Sources */,
-				39DBBAFE254D8A17009F4B5D /* ChannelsVCManager.swift in Sources */,
+				39DBBAFE254D8A17009F4B5D /* ChannelsTableViewDelegates.swift in Sources */,
 				39ABED452534F99100EDCA7C /* LoadCompletionOperation.swift in Sources */,
 				39BDCFC82527A37A00ECECCC /* ThemeManager.swift in Sources */,
 				3957588325434635001F054E /* ChannelEntity+CoreDataClass.swift in Sources */,
 				397214B82558807D001A8B89 /* ThemeModelNew.swift in Sources */,
 				39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */,
+				397FC94225597FF8000B9873 /* ChannelDataSource.swift in Sources */,
 				39EDD9FB2543337E00FE640B /* Chat.xcdatamodeld in Sources */,
 				397214B3255876D9001A8B89 /* UserDataService.swift in Sources */,
 				39A2847425581D42003C2484 /* PresentationAssembly.swift in Sources */,

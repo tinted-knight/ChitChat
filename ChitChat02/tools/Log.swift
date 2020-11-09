@@ -13,10 +13,10 @@ class Log {
     
     private static var FIRE_ENABLED = false
     private static var PREFS_ENABLED = false
-    private static var OLDSCHOOL_ENABLED = true
-    private static var NEWSCHOOOL_ENABLED = true
+    private static var OLDSCHOOL_ENABLED = false
+    private static var NEWSCHOOOL_ENABLED = false
     private static var FRC_ENABLED = false
-    private static var ARCH_ENABLED = false
+    private static var ARCH_ENABLED = true
 
     static func arch(_ message: String) {
         log(message, ARCH_ENABLED)
