@@ -67,7 +67,8 @@ class PresentationAssembly: IPresentationAssembly {
     }()
 
     private func getMessagesModel(for channel: ChannelEntity) -> IMessagesModel {
-        return MessagesModel(messagesService: serviceAssembly.messageService(for: channel, userData: getFirestoreUser))
+        return MessagesModel(messagesService: serviceAssembly.messageService(for: channel, userData: getFirestoreUser),
+                             firestoreUser: getFirestoreUser)
     }
     
     private func getChannelModel() -> IChannelModel {

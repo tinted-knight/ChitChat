@@ -10,57 +10,47 @@ import Foundation
 import UIKit
 import CoreData
 
-extension MessagesViewController {
-    @objc func inputNewMessage() {
-        inputAlert(title: "New message", message: "Input text") { [weak self] (text) in
-            guard let self = self else { return }
-            if !text.isEmpty {
-                self.messageModel?.add(message: text)
-            }
+// MARK: - UITableViewDataSource
+extension MessagesViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard let sections = messageModel?.frc.sections else { return 0 }
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let frc = messageModel?.frc, let sections = frc.sections else { return 0 }
+        
+        return sections[section].numberOfObjects
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let model = messageModel, let frc = messageModel?.frc else { return UITableViewCell() }
+        let message = frc.object(at: indexPath)
+        let direction = model.direction(for: message)
+
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellReuseId(for: direction),
+            for: indexPath) as? MessageCell else {
+                return UITableViewCell()
         }
-    }
-}
-// MARK: - View states
-extension MessagesViewController {
-    func showLoading() {
-        messagesTableView.isHidden = true
-        emptyLabel.isHidden = true
-        loadingIndicator.startAnimating()
+
+        cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        cell.configure(with: MessageCellModel(text: message.content,
+                                              date: message.created,
+                                              sender: message.senderName,
+                                              direction: direction))
+
+        return cell
     }
     
-    func showError(_ text: String) {
-        messagesTableView.isHidden = true
-        emptyLabel.text = text
-        emptyLabel.isHidden = false
-        loadingIndicator.stopAnimating()
-    }
-
-    func showLoaded() {
-        messagesTableView.isHidden = false
-        emptyLabel.isHidden = true
-        loadingIndicator.stopAnimating()
-    }
-    
-    func showEmpty() {
-        messagesTableView.isHidden = true
-        emptyLabel.text = "empty"
-        emptyLabel.isHidden = false
-        loadingIndicator.stopAnimating()
-    }
-}
-
-extension MessagesViewController {
-    func loadCached() {
-//        guard let frc = messageManager?.frc else { return }
-//        do {
-//            frc.delegate = self
-//            try frc.performFetch()
-//            messageManager?.fetchRemote { }
-//            Log.oldschool("fetch messages, \(frc.fetchedObjects?.count ?? 0)")
-//            showLoaded()
-//        } catch {
-//            Log.oldschool(error.localizedDescription)
-//        }
+    private func cellReuseId(for direction: MessageDirection) -> String {
+        switch direction {
+        case .income:
+            return incomeCellId
+        case .outcome:
+            return outcomeCellId
+        }
     }
 }
 // MARK: - FRC
@@ -107,7 +97,8 @@ extension MessagesViewController: NSFetchedResultsControllerDelegate {
             if let indexPath = indexPath {
                 guard let message = messageModel?.frc.object(at: indexPath) else { break }
                 guard let cell = messagesTableView.cellForRow(at: indexPath) as? MessageCell else { break }
-                let direction: MessageDirection = message.senderId == myDataModel?.uuid ? .outcome : .income
+                guard let model = messageModel else { break }
+                let direction = model.direction(for: message)
                 cell.configure(with: MessageCellModel(text: message.content,
                                                       date: message.created,
                                                       sender: message.senderName,
