@@ -109,7 +109,9 @@ class ProfileViewController: UIViewController {
         if notification.name == UIResponder.keyboardWillHideNotification {
             scrollView.contentInset = .zero
             scrollView.isScrollEnabled = false
-            checkSaveControls()
+            model.endEditing(name: textUserName.text,
+                                 description: textUserDescription.description,
+                                 avaWasModifield: avatarWasModified)
         } else {
             scrollView.contentInset = UIEdgeInsets(
                     top: 0.0,
@@ -157,7 +159,9 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeField = nil
-        checkSaveControls()
+        model.endEditing(name: textUserName.text,
+                             description: textUserDescription.description,
+                             avaWasModifield: avatarWasModified)
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -166,7 +170,9 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
 
     func textViewDidEndEditing(_ textView: UITextView) {
         activeField = nil
-        checkSaveControls()
+        model.endEditing(name: textUserName.text,
+                             description: textUserDescription.description,
+                             avaWasModifield: avatarWasModified)
     }
 }
 
@@ -225,7 +231,9 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         profileImage = image
         profileImageView.image = profileImage
         avatarWasModified = true
-        checkSaveControls()
+        model.endEditing(name: textUserName.text,
+                             description: textUserDescription.description,
+                             avaWasModifield: true)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

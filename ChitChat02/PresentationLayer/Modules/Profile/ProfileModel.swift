@@ -23,13 +23,18 @@ protocol IProfileModel: class {
     func isValid(name: String?, description: String) -> Bool
     
     func wasModified(name: String?, description: String) -> Bool
+    
+    func endEditing(name: String?, description: String, avaWasModifield: Bool)
 }
 
 protocol IProfileModelDelegate: class {
     func onLoaded(_ model: UserModel)
     func loadErrorAlert(title: String, message: String)
+    
     func onSaved()
     func onSaveError(_ message: String)
+    
+    func enableSaveControls()
 }
 
 class ProfileModel: IProfileModel, IDataManagerDelegate {
@@ -64,6 +69,14 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     
     func retry() {
         //
+    }
+    
+    func endEditing(name: String?, description: String, avaWasModifield: Bool) {
+        let dataIsValid = isValid(name: name, description: description)
+        let dataWasModified = wasModified(name: name, description: description)
+        if dataWasModified || (avaWasModifield && dataIsValid) {
+            delegate?.enableSaveControls()
+        }
     }
     
     func isValid(name: String?, description: String) -> Bool {

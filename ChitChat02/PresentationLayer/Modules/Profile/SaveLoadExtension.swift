@@ -33,6 +33,11 @@ extension ProfileViewController: IProfileModelDelegate {
         Log.arch("profile save error")
         userSaveError(message)
     }
+    
+    func enableSaveControls() {
+        buttonSave.isEnabled = true
+        buttonSaveOperation.isEnabled = true
+    }
 }
 
 extension ProfileViewController {
@@ -142,16 +147,6 @@ extension ProfileViewController {
             
             textUserName.text = model.user.name
             textUserDescription.text = model.user.description
-        }
-    }
-
-    func checkSaveControls() {
-        let userDataWasModified = model.wasModified(name: textUserName.text, description: textUserDescription.text)
-        let userDataIsValid = model.isValid(name: textUserName.text, description: textUserDescription.text)
-        applog("\(#function), avatar \(avatarWasModified), data \(userDataWasModified), valid \(userDataIsValid)")
-        if (avatarWasModified && userDataIsValid) || userDataWasModified {
-            buttonSave.isEnabled = true
-            buttonSaveOperation.isEnabled = true
         }
     }
 }
