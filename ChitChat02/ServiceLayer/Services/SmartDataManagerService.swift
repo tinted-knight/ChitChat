@@ -47,7 +47,7 @@ class SmartDataManagerService: IDataManagerService {
         self.gcdDataManager = gcdManager
         self.operationDataManager = operationManager
         
-        self.dataManagerType = .gcd
+        self.dataManagerType = .operation
 
         self.gcdDataManager.delegate = self
         self.operationDataManager.delegate = self
@@ -59,6 +59,7 @@ class SmartDataManagerService: IDataManagerService {
         lastSavedUser = model
         lastSavedAvatar = avatar
         
+        self.dataManagerType = type
         dataManager.save(
             name: model.name != user.name ? model.name : nil,
             description: model.description != user.description ? model.description : nil,

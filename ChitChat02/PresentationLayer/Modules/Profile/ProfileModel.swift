@@ -13,6 +13,8 @@ protocol IProfileModel: class {
     var delegate: IProfileModelDelegate? { get set }
 
     var user: IUserModel { get }
+    
+    var profileImage: UIImage? { get set }
 
     func save(name: String?, description: String?, avatar: UIImage?, with type: DataManagerType)
 
@@ -24,11 +26,11 @@ protocol IProfileModel: class {
     
     func wasModified(name: String?, description: String) -> Bool
     
-    func endEditing(name: String?, description: String, avaWasModifield: Bool)
+    func endEditing(name: String?, description: String, avatar: UIImage?)
 }
 
 protocol IProfileModelDelegate: class {
-    func onLoaded(_ model: UserModel)
+    func onLoaded()
     func loadErrorAlert(title: String, message: String)
     
     func onSaved()
@@ -43,23 +45,22 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     
     var user: IUserModel
     
+    var profileImage: UIImage?
+    
     private var profileService: IDataManagerService
     
     init(dataManager: IDataManagerService) {
         self.profileService = dataManager
         self.user = newUser
+        self.profileImage = UIImage(named: "Profile temp")
         self.profileService.delegate = self
     }
     
     func save(name: String?, description: String?, avatar: UIImage?, with type: DataManagerType) {
         let newUser = UserModel(name: name ?? user.name, description: description ?? user.description, avatar: nil)
-        if let avatar = avatar {
-            DispatchQueue.global().async { [weak self] in
-                let jpegData = avatar.jpegData(compressionQuality: 1.0)
-                self?.profileService.save(user: newUser, avatar: jpegData, with: type)
-            }
-        } else {
-            profileService.save(user: newUser, avatar: nil, with: type)
+        DispatchQueue.global().async { [weak self] in
+            let jpegData = avatar?.jpegData(compressionQuality: 1.0)
+            self?.profileService.save(user: newUser, avatar: jpegData, with: type)
         }
     }
     
@@ -71,10 +72,11 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
         //
     }
     
-    func endEditing(name: String?, description: String, avaWasModifield: Bool) {
+    func endEditing(name: String?, description: String, avatar: UIImage?) {
         let dataIsValid = isValid(name: name, description: description)
         let dataWasModified = wasModified(name: name, description: description)
-        if dataWasModified || (avaWasModifield && dataIsValid) {
+        let avatarWasModified = avatar != profileImage
+        if dataWasModified || (avatarWasModified && dataIsValid) {
             delegate?.enableSaveControls()
         }
     }
@@ -93,8 +95,19 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     func onLoaded(_ model: UserModel) {
         applog("profile load, \(model)")
         user = model
-        DispatchQueue.main.async { [weak self] in
-            self?.delegate?.onLoaded(model)
+        if let avatarUrl = user.avatar {
+            DispatchQueue.global().async { [weak self] in
+                do {
+                    let data = try Data(contentsOf: avatarUrl)
+                    let image = UIImage(data: data)
+                    self?.profileImage = image
+                    DispatchQueue.main.async {
+                        self?.delegate?.onLoaded()
+                    }
+                } catch {
+                    applog("cannot convert avatar's Data to UIImage")
+                }
+            }
         }
     }
     

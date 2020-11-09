@@ -38,10 +38,8 @@ class ProfileViewController: UIViewController {
     private var activeField: UIView?
 
     private let picker = UIImagePickerController()
-    var profileImage: UIImage?
 
     var state: UIState = .loading
-    var avatarWasModified = false
 
     var model: IProfileModel!
 
@@ -61,7 +59,6 @@ class ProfileViewController: UIViewController {
 
         profileImageView.layer.cornerRadius = view.frame.width / 4
         profileImageView.layer.masksToBounds = true
-        profileImage = UIImage(named: "Profile temp")
 
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
@@ -110,8 +107,8 @@ class ProfileViewController: UIViewController {
             scrollView.contentInset = .zero
             scrollView.isScrollEnabled = false
             model.endEditing(name: textUserName.text,
-                                 description: textUserDescription.description,
-                                 avaWasModifield: avatarWasModified)
+                             description: textUserDescription.description,
+                             avatar: profileImageView.image)
         } else {
             scrollView.contentInset = UIEdgeInsets(
                     top: 0.0,
@@ -160,8 +157,8 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeField = nil
         model.endEditing(name: textUserName.text,
-                             description: textUserDescription.description,
-                             avaWasModifield: avatarWasModified)
+                         description: textUserDescription.description,
+                         avatar: profileImageView.image)
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -171,8 +168,8 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         activeField = nil
         model.endEditing(name: textUserName.text,
-                             description: textUserDescription.description,
-                             avaWasModifield: avatarWasModified)
+                         description: textUserDescription.description,
+                         avatar: profileImageView.image)
     }
 }
 
@@ -228,12 +225,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             showAlert(title: "Error", message: "Something has gone very wrong")
             return
         }
-        profileImage = image
-        profileImageView.image = profileImage
-        avatarWasModified = true
+        profileImageView.image = image
         model.endEditing(name: textUserName.text,
-                             description: textUserDescription.description,
-                             avaWasModifield: true)
+                         description: textUserDescription.description,
+                         avatar: profileImageView.image)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

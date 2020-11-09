@@ -76,6 +76,7 @@ class OperationDataManager: IDataManager {
         applog("operation load")
         let nameOp = loadOperation(from: nameUrl())
         let descOp = loadOperation(from: descriptionUrl())
+        
         let loadCompletion = LoadCompletionOperation(
             loadNameOp: nameOp,
             loadDescOp: descOp
@@ -89,7 +90,9 @@ class OperationDataManager: IDataManager {
             case .error(let value):
                 self?.delegate?.onLoadError(value)
             case .success(let value):
-                self?.delegate?.onLoaded(value)
+                self?.delegate?.onLoaded(UserModel(name: value.name,
+                                                   description: value.description,
+                                                   avatar: self?.avatarUrl()))
             }
         }
         loadCompletion.addDependency(nameOp)

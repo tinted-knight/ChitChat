@@ -12,7 +12,7 @@ import UIKit
 // MARK: DataManagerDelegate
 extension ProfileViewController: IProfileModelDelegate {
 
-    func onLoaded(_ model: UserModel) {
+    func onLoaded() {
         Log.arch("profile loaded")
         setLoadedState()
     }
@@ -26,12 +26,22 @@ extension ProfileViewController: IProfileModelDelegate {
 
     func onSaved() {
         Log.arch("profile saved")
-        saveSuccess()
+        showAlert(title: "Данные сохранены")
+        state = .hasSaved
+        model.load()
     }
 
     func onSaveError(_ message: String) {
         Log.arch("profile save error")
-        userSaveError(message)
+        retryAlert(
+            title: "Save error",
+            message: message,
+            onOk: { [weak self] in
+                self?.model.load()
+            },
+            onRetry: {[weak self] in
+                self?.model.retry()
+        })
     }
     
     func enableSaveControls() {
@@ -45,35 +55,13 @@ extension ProfileViewController {
         let name = textUserName.text
         let description = textUserDescription.text
         setSavingState()
-        if avatarWasModified {
-            model?.save(name: name, description: description, avatar: profileImage, with: dataManagerType)
-        } else {
-            model.save(name: name, description: description, avatar: nil, with: dataManagerType)
-        }
+        model?.save(name: name, description: description, avatar: profileImageView.image, with: dataManagerType)
     }
     
     func setSavingState() {
         state = .saving
         showLoadingControls(true)
         buttonUserEdit.setTitle("Edit", for: .normal)
-    }
-    
-    func saveSuccess() {
-        showAlert(title: "Данные сохранены")
-        state = .hasSaved
-        model.load()
-    }
-    
-    func userSaveError(_ message: String) {
-        retryAlert(
-            title: "Save error",
-            message: message,
-            onOk: { [weak self] in
-                self?.model.load()
-            },
-            onRetry: {[weak self] in
-                self?.model.retry()
-        })
     }
     
     func loadUserData() {
@@ -91,26 +79,8 @@ extension ProfileViewController {
         state = .hasLoaded
         textUserName.text = model.user.name
         textUserDescription.text = model.user.description
-        if let avatarUrl = model.user.avatar {
-            DispatchQueue.global().async { [weak self] in
-                do {
-                    let data = try Data(contentsOf: avatarUrl)
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async { [weak self] in
-                        self?.profileImage = image
-                        self?.profileImageView.image = self?.profileImage
-                        self?.showLoadingControls(false)
-                    }
-                } catch {
-                    applog("cannot convert avatar's Data to UIImage")
-                    DispatchQueue.main.async { [weak self] in
-                        self?.showLoadingControls(false)
-                    }
-                }
-            }
-        } else {
-            showLoadingControls(false)
-        }
+        profileImageView.image = model.profileImage
+        showLoadingControls(false)
     }
 
     func showLoadingControls(_ isLoading: Bool) {
