@@ -43,13 +43,13 @@ class ProfileViewController: UIViewController {
     var state: UIState = .loading
     var avatarWasModified = false
 
-    var repo: SmartDataManager = SmartDataManager(dataManagerType: .gcd)
+    var model: IProfileModel!
 
     override func viewDidLoad() {
         prepareUi()
         setupActions()
 
-        repo.delegate = self
+        model.delegate = self
         loadUserData()
         
         super.viewDidLoad()
@@ -157,6 +157,7 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeField = nil
+        checkSaveControls()
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -165,34 +166,7 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
 
     func textViewDidEndEditing(_ textView: UITextView) {
         activeField = nil
-    }
-}
-
-// MARK: DataManagerDelegate
-extension ProfileViewController: IDataManagerDelegate {
-
-    func onLoaded(_ model: UserModel) {
-        DispatchQueue.main.async { [weak self] in
-            self?.setLoadedState()
-        }
-    }
-
-    func onLoadError(_ message: String) {
-        DispatchQueue.main.async { [weak self] in
-            self?.setLoadError(message)
-        }
-    }
-
-    func onSaved() {
-        DispatchQueue.main.async { [weak self] in
-            self?.saveSuccess()
-        }
-    }
-
-    func onSaveError(_ message: String) {
-        DispatchQueue.main.async { [weak self] in
-            self?.userSaveError(message)
-        }
+        checkSaveControls()
     }
 }
 

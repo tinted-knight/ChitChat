@@ -113,10 +113,8 @@ extension ChannelsViewController {
 // MARK: UI Actions
 extension ChannelsViewController {
     @objc private func profileOnTap() {
-        if let controller = ProfileViewController.instance() {
-            navigationController?.pushViewController(controller, animated: true)
-        }
-//        openProfileScreen()
+        guard let controller = presentationAssembly?.profileViewController() else { return }
+        navigationController?.present(controller, animated: true, completion: nil)
     }
     
     @objc private func settingsOnTap() {

@@ -15,6 +15,8 @@ protocol IPresentationAssembly {
     func channelsViewController() -> ChannelsViewController
     
     func messagesViewController(for channel: ChannelEntity) -> MessagesViewController
+    
+    func profileViewController() -> ProfileViewController
 }
 
 class PresentationAssembly: IPresentationAssembly {
@@ -51,10 +53,19 @@ class PresentationAssembly: IPresentationAssembly {
         return controller
     }
     
+    func profileViewController() -> ProfileViewController {
+        guard let controller = ProfileViewController.instance() else {
+            fatalError("Cannot instantiate ProfileViewController")
+        }
+        Log.arch("present ProfileVC")
+        controller.model = getProfileModel()
+        return controller
+    }
+    
     lazy var getUserDataModel: IUserDataModel = {
         return UserDataModel(userDataService: serviceAssembly.userDataService)
     }()
-    
+
     private func getMessagesModel(for channel: ChannelEntity, user: IUserDataModel) -> IMessagesModel {
         return MessagesModel(messagesService: serviceAssembly.messageService(for: channel, userData: user))
     }
@@ -66,4 +77,8 @@ class PresentationAssembly: IPresentationAssembly {
     lazy var themeModel: IThemeModelNew = {
         return ThemeModelNew(themeService: self.serviceAssembly.themeService)
     }()
+    
+    private func getProfileModel() -> IProfileModel {
+        return ProfileModel(dataManager: self.serviceAssembly.profileDataManager)
+    }
 }

@@ -8,7 +8,13 @@
 
 import Foundation
 
-struct UserModel {
+protocol IUserModel {
+    var name: String { get }
+    var description: String { get }
+    var avatar: URL? { get set }
+}
+
+struct UserModel: IUserModel {
     let name: String
     let description: String
     var avatar: URL?

@@ -15,6 +15,8 @@ protocol IServiceAssembly {
     
     var themeService: IThemeService { get }
     
+    var profileDataManager: IDataManagerService { get }
+    
     func messageService(for channel: ChannelEntity, userData: IUserDataModel) -> IMessageService
 }
 
@@ -31,6 +33,9 @@ class ServiceAssembly: IServiceAssembly {
     lazy var userDataService: IUserDataService = UserDataService(storage: self.coreAssembly.keyValueStorage)
     
     lazy var themeService: IThemeService = ThemeService(storage: self.coreAssembly.keyValueStorage)
+    
+    lazy var profileDataManager: IDataManagerService = SmartDataManagerService(gcdManager: self.coreAssembly.gcdDataManager,
+                                                                               operationManager: self.coreAssembly.operationDataManager)
     
     func messageService(for channel: ChannelEntity, userData: IUserDataModel) -> IMessageService {
         return MessageService(for: channel,

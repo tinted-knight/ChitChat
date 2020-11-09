@@ -9,20 +9,41 @@
 import Foundation
 import UIKit
 
+// MARK: DataManagerDelegate
+extension ProfileViewController: IProfileModelDelegate {
+
+    func onLoaded(_ model: UserModel) {
+        Log.arch("profile loaded")
+        setLoadedState()
+    }
+
+    func loadErrorAlert(title: String, message: String) {
+        Log.arch("profile load error")
+        showLoadingControls(false)
+        showAlert(title: title, message: message)
+        setLoadedState()
+    }
+
+    func onSaved() {
+        Log.arch("profile saved")
+        saveSuccess()
+    }
+
+    func onSaveError(_ message: String) {
+        Log.arch("profile save error")
+        userSaveError(message)
+    }
+}
+
 extension ProfileViewController {
     func saveUserData(with dataManagerType: DataManagerType) {
-        let name = textUserName.text ?? repo.user.name
-        let description = textUserDescription.text ?? repo.user.description
+        let name = textUserName.text
+        let description = textUserDescription.text
         setSavingState()
-        let userData = UserModel(name: name, description: description)
         if avatarWasModified {
-            DispatchQueue.global().async { [weak profileImage, weak repo] in
-                // https://stackoverflow.com/a/10632187
-                let jpegData = profileImage?.jpegData(compressionQuality: 1.0)
-                repo?.save(user: userData, avatar: jpegData, with: dataManagerType)
-            }
+            model?.save(name: name, description: description, avatar: profileImage, with: dataManagerType)
         } else {
-            repo.save(user: userData, with: dataManagerType)
+            model.save(name: name, description: description, avatar: nil, with: dataManagerType)
         }
     }
     
@@ -35,7 +56,7 @@ extension ProfileViewController {
     func saveSuccess() {
         showAlert(title: "Данные сохранены")
         state = .hasSaved
-        repo.load()
+        model.load()
     }
     
     func userSaveError(_ message: String) {
@@ -43,17 +64,17 @@ extension ProfileViewController {
             title: "Save error",
             message: message,
             onOk: { [weak self] in
-                self?.repo.load()
+                self?.model.load()
             },
             onRetry: {[weak self] in
-                self?.repo.retry()
+                self?.model.retry()
         })
     }
     
     func loadUserData() {
         setLoadingState()
-        repo.delegate = self
-        repo.load()
+        model.delegate = self
+        model.load()
     }
     
     func setLoadingState() {
@@ -63,9 +84,9 @@ extension ProfileViewController {
     
     func setLoadedState() {
         state = .hasLoaded
-        textUserName.text = repo.user.name
-        textUserDescription.text = repo.user.description
-        if let avatarUrl = repo.user.avatar {
+        textUserName.text = model.user.name
+        textUserDescription.text = model.user.description
+        if let avatarUrl = model.user.avatar {
             DispatchQueue.global().async { [weak self] in
                 do {
                     let data = try Data(contentsOf: avatarUrl)
@@ -119,24 +140,18 @@ extension ProfileViewController {
             textUserName.isEnabled = false
             textUserDescription.isEditable = false
             
-            textUserName.text = repo.user.name
-            textUserDescription.text = repo.user.description
+            textUserName.text = model.user.name
+            textUserDescription.text = model.user.description
         }
     }
 
     func checkSaveControls() {
-        let userDataWasModified = repo.wasModified(name: textUserName.text, description: textUserDescription.text)
-        let userDataIsValid = repo.isValid(name: textUserName.text, description: textUserDescription.text)
+        let userDataWasModified = model.wasModified(name: textUserName.text, description: textUserDescription.text)
+        let userDataIsValid = model.isValid(name: textUserName.text, description: textUserDescription.text)
         applog("\(#function), avatar \(avatarWasModified), data \(userDataWasModified), valid \(userDataIsValid)")
         if (avatarWasModified && userDataIsValid) || userDataWasModified {
             buttonSave.isEnabled = true
             buttonSaveOperation.isEnabled = true
         }
-    }
-    
-    func setLoadError(_ message: String) {
-        showLoadingControls(false)
-        showAlert(title: "Похоже, что  ты новенький", message: "Введи свои данные и сохрани")
-        setLoadedState()
     }
 }
