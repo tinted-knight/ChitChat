@@ -15,6 +15,8 @@ protocol IProfileModel: class {
     var user: IUserModel { get }
     
     var profileImage: UIImage? { get set }
+    
+    var state: UIState { get }
 
     func save(name: String?, description: String?, avatar: UIImage?, with type: DataManagerType)
 
@@ -22,11 +24,9 @@ protocol IProfileModel: class {
     
     func retry()
     
-    func isValid(name: String?, description: String) -> Bool
-    
-    func wasModified(name: String?, description: String) -> Bool
-    
     func endEditing(name: String?, description: String, avatar: UIImage?)
+    
+    func switchEditState()
 }
 
 protocol IProfileModelDelegate: class {
@@ -37,6 +37,19 @@ protocol IProfileModelDelegate: class {
     func onSaveError(_ message: String)
     
     func enableSaveControls()
+    
+    func showEditState(_ value: Bool)
+    
+    func showLoading()
+}
+
+enum UIState {
+    case loading
+    case hasLoaded
+    case saving
+    case hasSaved
+    case error
+    case modeEdit
 }
 
 class ProfileModel: IProfileModel, IDataManagerDelegate {
@@ -46,6 +59,8 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     var user: IUserModel
     
     var profileImage: UIImage?
+    
+    var state: UIState = .loading
     
     private var profileService: IDataManagerService
     
@@ -57,6 +72,8 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     }
     
     func save(name: String?, description: String?, avatar: UIImage?, with type: DataManagerType) {
+        state = .saving
+        delegate?.showLoading()
         let newUser = UserModel(name: name ?? user.name, description: description ?? user.description, avatar: nil)
         DispatchQueue.global().async { [weak self] in
             let jpegData = avatar?.jpegData(compressionQuality: 1.0)
@@ -65,6 +82,8 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     }
     
     func load() {
+        state = .loading
+        delegate?.showLoading()
         profileService.load()
     }
     
@@ -81,19 +100,30 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
         }
     }
     
-    func isValid(name: String?, description: String) -> Bool {
+    func switchEditState() {
+        if state == .hasLoaded || state == .hasSaved {
+            state = .modeEdit
+            delegate?.showEditState(true)
+        } else if state == .modeEdit {
+            state = .hasLoaded
+            delegate?.showEditState(false)
+        }
+    }
+    
+    private func isValid(name: String?, description: String) -> Bool {
         guard let name = name else { return false }
         guard !name.isEmpty, !description.isEmpty else { return false }
         return true
     }
     
-    func wasModified(name: String?, description: String) -> Bool {
+    private func wasModified(name: String?, description: String) -> Bool {
         guard isValid(name: name, description: description) else { return false }
         return name != user.name || description != user.description
     }
     // MARK: - IDataManagerDelegate
     func onLoaded(_ model: UserModel) {
         applog("profile load, \(model)")
+        state = .hasLoaded
         user = model
         if let avatarUrl = user.avatar {
             DispatchQueue.global().async { [weak self] in
@@ -120,6 +150,7 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     
     func onSaved() {
         applog("profile saved")
+        state = .hasSaved
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.onSaved()
         }

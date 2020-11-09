@@ -9,15 +9,6 @@
 import Foundation
 import UIKit
 
-enum UIState {
-    case loading
-    case hasLoaded
-    case saving
-    case hasSaved
-    case error
-    case modeEdit
-}
-
 class ProfileViewController: UIViewController {
 
     static func instance() -> ProfileViewController? {
@@ -38,8 +29,6 @@ class ProfileViewController: UIViewController {
     private var activeField: UIView?
 
     private let picker = UIImagePickerController()
-
-    var state: UIState = .loading
 
     var model: IProfileModel!
 
@@ -72,10 +61,11 @@ class ProfileViewController: UIViewController {
     }
 
     private func setupActions() {
-        profileImageView.isUserInteractionEnabled = true
+        profileImageView.isUserInteractionEnabled = false
         profileImageView.addGestureRecognizer(
                 UITapGestureRecognizer(target: self, action: #selector(onProfilePictureTap)))
 
+        buttonUserEdit.isEnabled = false
         buttonUserEdit.addTarget(self, action: #selector(setEditUser(_:)), for: .touchUpInside)
         textUserDescription.delegate = self
         textUserName.delegate = self
@@ -130,6 +120,12 @@ class ProfileViewController: UIViewController {
         saveUserData(with: .operation)
     }
 
+    private func saveUserData(with dataManagerType: DataManagerType) {
+        let name = textUserName.text
+        let description = textUserDescription.text
+        model?.save(name: name, description: description, avatar: profileImageView.image, with: dataManagerType)
+    }
+
     @objc private func onProfilePictureTap() {
         showChooseDialog()
     }
@@ -143,7 +139,7 @@ class ProfileViewController: UIViewController {
     }
 
     @objc private func setEditUser(_ sender: UIBarButtonItem) {
-        switchEditState()
+        model.switchEditState()
     }
 
 }

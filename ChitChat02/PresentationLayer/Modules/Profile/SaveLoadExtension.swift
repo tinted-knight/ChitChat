@@ -27,7 +27,6 @@ extension ProfileViewController: IProfileModelDelegate {
     func onSaved() {
         Log.arch("profile saved")
         showAlert(title: "Данные сохранены")
-        state = .hasSaved
         model.load()
     }
 
@@ -48,35 +47,44 @@ extension ProfileViewController: IProfileModelDelegate {
         buttonSave.isEnabled = true
         buttonSaveOperation.isEnabled = true
     }
+    
+    func showEditState(_ value: Bool) {
+        if !value {
+            buttonUserEdit.setTitle("Edit", for: .normal)
+            
+            textUserName.isEnabled = false
+            textUserDescription.isEditable = false
+            
+            textUserName.text = model.user.name
+            textUserDescription.text = model.user.description
+
+            profileImageView.isUserInteractionEnabled = false
+            buttonEditPicture.isEnabled = false
+        } else {
+            buttonUserEdit.setTitle("Cancel", for: .normal)
+
+            textUserName.isEnabled = true
+            textUserDescription.isEditable = true
+
+            profileImageView.isUserInteractionEnabled = true
+            buttonEditPicture.isEnabled = true
+        }
+    }
+    
+    func showLoading() {
+        showEditState(false)
+        showLoadingControls(true)
+    }
 }
 
 extension ProfileViewController {
-    func saveUserData(with dataManagerType: DataManagerType) {
-        let name = textUserName.text
-        let description = textUserDescription.text
-        setSavingState()
-        model?.save(name: name, description: description, avatar: profileImageView.image, with: dataManagerType)
-    }
-    
-    func setSavingState() {
-        state = .saving
-        showLoadingControls(true)
-        buttonUserEdit.setTitle("Edit", for: .normal)
-    }
     
     func loadUserData() {
-        setLoadingState()
         model.delegate = self
         model.load()
     }
     
-    func setLoadingState() {
-        state = .loading
-        showLoadingControls(true)
-    }
-    
     func setLoadedState() {
-        state = .hasLoaded
         textUserName.text = model.user.name
         textUserDescription.text = model.user.description
         profileImageView.image = model.profileImage
@@ -92,31 +100,9 @@ extension ProfileViewController {
             buttonUserEdit.isEnabled = false
             textUserName.isEnabled = false
             textUserDescription.isEditable = false
-            profileImageView.isUserInteractionEnabled = false
         } else {
             activityIndicator.stopAnimating()
-            buttonEditPicture.isEnabled = true
-            profileImageView.isUserInteractionEnabled = true
             buttonUserEdit.isEnabled = true
-        }
-    }
-    
-    func switchEditState() {
-        if state == .hasLoaded || state == .hasSaved {
-            state = .modeEdit
-            buttonUserEdit.setTitle("Cancel", for: .normal)
-
-            textUserName.isEnabled = true
-            textUserDescription.isEditable = true
-        } else if state == .modeEdit {
-            state = .hasLoaded
-            buttonUserEdit.setTitle("Edit", for: .normal)
-            
-            textUserName.isEnabled = false
-            textUserDescription.isEditable = false
-            
-            textUserName.text = model.user.name
-            textUserDescription.text = model.user.description
         }
     }
 }
