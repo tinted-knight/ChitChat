@@ -27,7 +27,7 @@ extension ProfileViewController: IProfileModelDelegate {
     func onSaved() {
         Log.arch("profile saved")
         showAlert(title: "Данные сохранены")
-        model.load()
+        model?.load()
     }
 
     func onSaveError(_ message: String) {
@@ -36,10 +36,10 @@ extension ProfileViewController: IProfileModelDelegate {
             title: "Save error",
             message: message,
             onOk: { [weak self] in
-                self?.model.load()
+                self?.model?.load()
             },
             onRetry: {[weak self] in
-                self?.model.retry()
+                self?.model?.retry()
         })
     }
     
@@ -55,8 +55,8 @@ extension ProfileViewController: IProfileModelDelegate {
             textUserName.isEnabled = false
             textUserDescription.isEditable = false
             
-            textUserName.text = model.user.name
-            textUserDescription.text = model.user.description
+            textUserName.text = model?.user.name
+            textUserDescription.text = model?.user.description
 
             profileImageView.isUserInteractionEnabled = false
             buttonEditPicture.isEnabled = false
@@ -79,15 +79,10 @@ extension ProfileViewController: IProfileModelDelegate {
 
 extension ProfileViewController {
     
-    func loadUserData() {
-        model.delegate = self
-        model.load()
-    }
-    
     func setLoadedState() {
-        textUserName.text = model.user.name
-        textUserDescription.text = model.user.description
-        profileImageView.image = model.profileImage
+        textUserName.text = model?.user.name
+        textUserDescription.text = model?.user.description
+        profileImageView.image = model?.profileImage
         showLoadingControls(false)
     }
 

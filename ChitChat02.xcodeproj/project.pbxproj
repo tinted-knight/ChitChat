@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		13E359B0661DA342B7FF4E23 /* Pods_ChitChat02.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FFDAB3F1F1D13B5B9E9DD7 /* Pods_ChitChat02.framework */; };
 		390F4E18255ACCD100DEA323 /* ChannelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 390F4E17255ACCD100DEA323 /* ChannelsViewController.xib */; };
+		390F4E1C255ADB9A00DEA323 /* AvatarPickerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390F4E1B255ADB9A00DEA323 /* AvatarPickerExtension.swift */; };
 		393A0F6825594F920063ACC7 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393A0F6725594F920063ACC7 /* ProfileModel.swift */; };
 		393AEDE1254F3A270028B893 /* NewSchoolCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */; };
 		393AEDE6254F41A80028B893 /* ChannelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE5254F41A80028B893 /* ChannelService.swift */; };
@@ -76,6 +77,7 @@
 
 /* Begin PBXFileReference section */
 		390F4E17255ACCD100DEA323 /* ChannelsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelsViewController.xib; sourceTree = "<group>"; };
+		390F4E1B255ADB9A00DEA323 /* AvatarPickerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPickerExtension.swift; sourceTree = "<group>"; };
 		393A0F6725594F920063ACC7 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSchoolCoreData.swift; sourceTree = "<group>"; };
 		393AEDE5254F41A80028B893 /* ChannelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelService.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				39ADD7D8255ABCEA00FC583A /* model */,
 				396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */,
 				39DE12C52531C4290068C875 /* SaveLoadExtension.swift */,
+				390F4E1B255ADB9A00DEA323 /* AvatarPickerExtension.swift */,
 				39B6A01B2559480400EFE36E /* ProfileViewController.storyboard */,
 			);
 			path = Profile;
@@ -633,6 +636,7 @@
 				39A284792558238E003C2484 /* CoreAssembly.swift in Sources */,
 				394F8674250E518A00B703B3 /* AppDelegate.swift in Sources */,
 				39DBBAFE254D8A17009F4B5D /* ChannelsTableViewDelegates.swift in Sources */,
+				390F4E1C255ADB9A00DEA323 /* AvatarPickerExtension.swift in Sources */,
 				39ABED452534F99100EDCA7C /* LoadCompletionOperation.swift in Sources */,
 				397214B82558807D001A8B89 /* ThemeModel.swift in Sources */,
 				39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */,

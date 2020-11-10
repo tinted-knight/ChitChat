@@ -14,8 +14,6 @@ protocol ConfigurableView {
     func configure(with model: ConfigurationModel, theme: IThemeModel)
 }
 
-private let emptyMessage = "No messages yet"
-
 class ChannelCell: UITableViewCell {
 
     @IBOutlet weak var nameView: UILabel!
@@ -44,7 +42,6 @@ class ChannelCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-//        backgroundColor = ThemeManager.get().historyBgColor
         messageView.font = defaultFont
         super.prepareForReuse()
     }
@@ -60,7 +57,7 @@ extension ChannelCell: ConfigurableView {
         if let lastMessage = model.lastMessage, !lastMessage.isEmpty {
             renderHasLastMessage(with: model)
         } else {
-            renderNoLastMessage()
+            renderNoLastMessage(with: model)
         }
     }
     
@@ -69,8 +66,8 @@ extension ChannelCell: ConfigurableView {
         displayDateTime(with: model.lastActivity)
     }
     
-    private func renderNoLastMessage() {
-        messageView.text = emptyMessage
+    private func renderNoLastMessage(with model: IChannelCellModel) {
+        messageView.text = model.emptyMessage
         messageView.font = noMessageFont
         messageView.adjustsFontForContentSizeCategory = true
         

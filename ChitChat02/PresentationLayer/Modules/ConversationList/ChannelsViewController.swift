@@ -85,6 +85,8 @@ extension ChannelsViewController {
     }
 
     private func setupNavBarButtons() {
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        
         let profilePicture = UIImage(named: "ProfileIcon")?.withRenderingMode(.alwaysOriginal)
         let profileNavItem = UIBarButtonItem(
             image: profilePicture,

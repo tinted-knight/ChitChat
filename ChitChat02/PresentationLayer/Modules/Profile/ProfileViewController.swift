@@ -28,18 +28,18 @@ class ProfileViewController: UIViewController {
 
     private var activeField: UIView?
 
-    private let picker = UIImagePickerController()
+    let picker = UIImagePickerController()
 
-    var model: IProfileModel!
+    var model: IProfileModel?
     
-    var themeModel: IThemeModel!
+    var themeModel: IThemeModel?
 
     override func viewDidLoad() {
         prepareUi()
         setupActions()
 
-        model.delegate = self
-        loadUserData()
+        model?.delegate = self
+        model?.load()
         
         super.viewDidLoad()
     }
@@ -54,12 +54,17 @@ class ProfileViewController: UIViewController {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
 
-        view.backgroundColor = themeModel.getThemeData().backgroundColor
-        buttonSave.backgroundColor = themeModel.getThemeData().buttonBgColor
-        buttonSaveOperation.backgroundColor = themeModel.getThemeData().buttonBgColor
-        textUserName.textColor = themeModel.getThemeData().textColor
-
         scrollView.isScrollEnabled = false
+        
+        applyTheme()
+    }
+    
+    private func applyTheme() {
+        guard let themeData = themeModel?.getThemeData() else { return }
+        view.backgroundColor = themeData.backgroundColor
+        buttonSave.backgroundColor = themeData.buttonBgColor
+        buttonSaveOperation.backgroundColor = themeData.buttonBgColor
+        textUserName.textColor = themeData.textColor
     }
 
     private func setupActions() {
@@ -98,7 +103,7 @@ class ProfileViewController: UIViewController {
         if notification.name == UIResponder.keyboardWillHideNotification {
             scrollView.contentInset = .zero
             scrollView.isScrollEnabled = false
-            model.endEditing(name: textUserName.text,
+            model?.endEditing(name: textUserName.text,
                              description: textUserDescription.description,
                              avatar: profileImageView.image)
         } else {
@@ -141,7 +146,7 @@ class ProfileViewController: UIViewController {
     }
 
     @objc private func setEditUser(_ sender: UIBarButtonItem) {
-        model.switchEditState()
+        model?.switchEditState()
     }
 
 }
@@ -154,7 +159,7 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeField = nil
-        model.endEditing(name: textUserName.text,
+        model?.endEditing(name: textUserName.text,
                          description: textUserDescription.description,
                          avatar: profileImageView.image)
     }
@@ -165,71 +170,8 @@ extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
 
     func textViewDidEndEditing(_ textView: UITextView) {
         activeField = nil
-        model.endEditing(name: textUserName.text,
+        model?.endEditing(name: textUserName.text,
                          description: textUserDescription.description,
                          avatar: profileImageView.image)
-    }
-}
-
-// MARK: Profile picture choose
-extension ProfileViewController {
-    private func showChooseDialog() {
-        let alertController = UIAlertController(title: nil, message: "Think twice. Everyone all over the Internet will see your face.", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Make a foto", style: .default) { [weak self] _ in
-            self?.chooseFromCamera()
-        }
-        let galleryAction = UIAlertAction(title: "From galley", style: .default) { [weak self] _ in
-            self?.chooseFromGallery()
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            // todo cancel handler
-        }
-
-        alertController.addAction(cameraAction)
-        alertController.addAction(galleryAction)
-        alertController.addAction(cancelAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
-
-    private func chooseFromGallery() {
-        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
-            picker.delegate = self
-            picker.sourceType = .photoLibrary
-            picker.allowsEditing = false
-
-            present(picker, animated: true, completion: nil)
-        } else {
-            showAlert(title: "Error", message: "Device has no gallery")
-        }
-    }
-
-    private func chooseFromCamera() {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            picker.sourceType = .camera
-            present(picker, animated: true, completion: nil)
-        } else {
-            showAlert(title: "Error", message: "No camera on device! You are in safe!")
-        }
-    }
-}
-
-// MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
-extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        picker.dismiss(animated: true, completion: nil)
-        applog("\(info[.imageURL] ?? "nothing")")
-        guard let image = info[.originalImage] as? UIImage else {
-            showAlert(title: "Error", message: "Something has gone very wrong")
-            return
-        }
-        profileImageView.image = image
-        model.endEditing(name: textUserName.text,
-                         description: textUserDescription.description,
-                         avatar: profileImageView.image)
-    }
-
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
     }
 }

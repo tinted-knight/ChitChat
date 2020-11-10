@@ -10,16 +10,20 @@ import Foundation
 
 protocol IChannelCellModel {
     var name: String { get }
-        var lastMessage: String? { get }
-        var lastActivity: Date? { get }
-        var hasUnreadMessages: Bool { get }
+    var lastMessage: String? { get }
+    var lastActivity: Date? { get }
+    var hasUnreadMessages: Bool { get }
+    var emptyMessage: String { get }
 }
 
 class ChannelCellModel: IChannelCellModel {
+    static let noMessages = "No messages yet"
+    
     let name: String
     let lastMessage: String?
     let lastActivity: Date?
     let hasUnreadMessages: Bool
+    lazy var emptyMessage: String = ChannelCellModel.noMessages
     
     init(from channel: ChannelEntity) {
         self.name = channel.name

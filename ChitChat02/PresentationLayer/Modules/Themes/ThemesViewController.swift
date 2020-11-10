@@ -15,7 +15,7 @@ class ThemesViewController: UIViewController {
         return storyboard.instantiateInitialViewController() as? ThemesViewController
     }
     
-    var themeModel: IThemeModel!
+    var themeModel: IThemeModel?
     
     @IBOutlet weak var buttonRed: UIButton!
     @IBOutlet weak var buttonYellow: UIButton!
@@ -25,7 +25,7 @@ class ThemesViewController: UIViewController {
     @IBOutlet weak var imageYellow: UIImageView!
     @IBOutlet weak var imageBlack: UIImageView!
     
-    var activeTheme: AppTheme!
+    var activeTheme: AppTheme?
     var selectedTheme: AppTheme = .classic
     private var selectedImageView: UIImageView? {
         switch selectedTheme {
@@ -41,15 +41,17 @@ class ThemesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activeTheme = themeModel.currentTheme
-        selectedTheme = activeTheme
+        activeTheme = themeModel?.currentTheme
+        if let activeTheme = activeTheme {
+            selectedTheme = activeTheme
+        }
         
         prepareUi()
         setupListeners()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        themeModel.picked(theme: selectedTheme)
+        themeModel?.picked(theme: selectedTheme)
 
         super.viewWillDisappear(animated)
     }
@@ -96,7 +98,9 @@ class ThemesViewController: UIViewController {
     }
     
     @objc private func cancelOnTap() {
-        revertTheme(to: activeTheme)
+        if let activeTheme = activeTheme {
+            revertTheme(to: activeTheme)
+        }
         navigationController?.popViewController(animated: true)
     }
     
