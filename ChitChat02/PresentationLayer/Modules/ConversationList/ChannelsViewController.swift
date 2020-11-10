@@ -10,11 +10,6 @@ import UIKit
 
 class ChannelsViewController: UIViewController {
 
-    static func instance() -> ChannelsViewController? {
-        let storyboard = UIStoryboard(name: "ChannelsViewController", bundle: nil)
-        return storyboard.instantiateInitialViewController() as? ChannelsViewController
-    }
-    
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var channelsTableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!

@@ -35,13 +35,6 @@ class PresentationAssembly: IPresentationAssembly {
     }
     
     func channelsViewController() -> ChannelsViewController {
-//        guard let controller = ChannelsViewController.instance() else {
-//            fatalError("Cannot instantiate ChannelsViewController")
-//        }
-//        controller.channelModel = getChannelModel()
-//        controller.myDataModel = getFirestoreUser
-//        controller.themeModel = getThemeModel
-//        controller.presentationAssembly = self
         let controller = ChannelsViewController(presentationAssembly: self,
                                                 channelModel: getChannelModel(),
                                                 myDataModel: getFirestoreUser,

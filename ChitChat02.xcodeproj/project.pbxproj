@@ -32,7 +32,6 @@
 		397214B82558807D001A8B89 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B72558807D001A8B89 /* ThemeModel.swift */; };
 		3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3994BFB325248EB6001AB5E7 /* MessageCell.swift */; };
 		3995893025234FBB003C62C8 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */; };
-		39A2846F25581968003C2484 /* ChannelsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39A2846E25581968003C2484 /* ChannelsViewController.storyboard */; };
 		39A2847125581CFE003C2484 /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A2847025581CFE003C2484 /* RootAssembly.swift */; };
 		39A2847425581D42003C2484 /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A2847325581D42003C2484 /* PresentationAssembly.swift */; };
 		39A284792558238E003C2484 /* CoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A284782558238E003C2484 /* CoreAssembly.swift */; };
@@ -103,7 +102,6 @@
 		397214B72558807D001A8B89 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
 		3994BFB325248EB6001AB5E7 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
-		39A2846E25581968003C2484 /* ChannelsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChannelsViewController.storyboard; sourceTree = "<group>"; };
 		39A2847025581CFE003C2484 /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
 		39A2847325581D42003C2484 /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
 		39A284782558238E003C2484 /* CoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAssembly.swift; sourceTree = "<group>"; };
@@ -430,7 +428,6 @@
 				3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */,
 				3948F9C9253B942600465D02 /* ThemeAndStuff.swift */,
 				39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */,
-				39A2846E25581968003C2484 /* ChannelsViewController.storyboard */,
 				390F4E17255ACCD100DEA323 /* ChannelsViewController.xib */,
 			);
 			path = ConversationList;
@@ -556,7 +553,6 @@
 				390F4E18255ACCD100DEA323 /* ChannelsViewController.xib in Resources */,
 				3995893025234FBB003C62C8 /* Comfortaa-Light.ttf in Resources */,
 				3958B3BB253B00E700801E6D /* GoogleService-Info.plist in Resources */,
-				39A2846F25581968003C2484 /* ChannelsViewController.storyboard in Resources */,
 				394F867D250E518A00B703B3 /* Assets.xcassets in Resources */,
 				394F867B250E518A00B703B3 /* Main.storyboard in Resources */,
 				39B6A01C2559480400EFE36E /* ProfileViewController.storyboard in Resources */,
