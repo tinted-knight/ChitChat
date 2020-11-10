@@ -13,7 +13,7 @@ extension ChannelsViewController {
     @objc func inputNewChannelName() {
         inputAlert(title: "New channel", message: "Input channel name") { [weak self] (text) in
             if !text.isEmpty {
-                self?.channelModel?.addChannel(name: text)
+                self?.channelModel.addChannel(name: text)
             }
         }
     }

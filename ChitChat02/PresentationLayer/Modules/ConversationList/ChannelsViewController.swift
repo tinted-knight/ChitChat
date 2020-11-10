@@ -20,27 +20,42 @@ class ChannelsViewController: UIViewController {
     @IBOutlet weak var emptyLabel: UILabel!
     
     let cellReuseId = "chat-list-cell"
-    let headerReuseId = "header-online-reuse-id"
     
-    var themeModel: IThemeModel?
+    var themeModel: IThemeModel
     
-    var myDataModel: IFirestoreUser?
+    let myDataModel: IFirestoreUser
     
-    var channelModel: IChannelModel?
+    var channelModel: IChannelModel
 
-    var presentationAssembly: PresentationAssembly?
+    let presentationAssembly: PresentationAssembly
+    
+    init(presentationAssembly: PresentationAssembly, channelModel: IChannelModel,
+         myDataModel: IFirestoreUser, themeModel: IThemeModel,
+         nibName: String, bundle: Bundle?) {
+        
+        self.presentationAssembly = presentationAssembly
+        self.channelModel = channelModel
+        self.myDataModel = myDataModel
+        self.themeModel = themeModel
+        
+        super.init(nibName: nibName, bundle: bundle)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         prepareUi()
 
-        channelModel?.delegate = self
-        channelModel?.performSetup()
+        channelModel.delegate = self
+        channelModel.performSetup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        view.backgroundColor = themeModel?.getThemeData().backgroundColor
+        view.backgroundColor = themeModel.getThemeData().backgroundColor
         super.viewWillAppear(animated)
     }
     
@@ -48,7 +63,7 @@ class ChannelsViewController: UIViewController {
 // MARK: - IChannelModelDelegate
 extension ChannelsViewController: IChannelModelDelegate {
     func dataLoaded() {
-        channelModel?.frc.delegate = self
+        channelModel.frc.delegate = self
         channelsTableView.dataSource = self
         channelsTableView.delegate = self
         showLoaded()
@@ -70,8 +85,8 @@ extension ChannelsViewController {
         
         setupNavBarButtons()
 
-        themeModel?.delegate = self
-        themeModel?.applyCurrent()
+        themeModel.delegate = self
+        themeModel.applyCurrent()
     }
 
     private func setupNavBarButtons() {
@@ -99,23 +114,12 @@ extension ChannelsViewController {
 // MARK: UI Actions
 extension ChannelsViewController {
     @objc private func profileOnTap() {
-        guard let controller = presentationAssembly?.profileViewController() else { return }
+        let controller = presentationAssembly.profileViewController()
         navigationController?.present(controller, animated: true, completion: nil)
     }
     
     @objc private func settingsOnTap() {
-        guard let controller = presentationAssembly?.themesViewController() else { return }
+        let controller = presentationAssembly.themesViewController()
         navigationController?.pushViewController(controller, animated: true)
-//        openSettingsScreen { [weak self] value, saveChoice in
-//            if saveChoice {
-//                applog("closure: yay! new theme")
-//                self?.applyTheme(value)
-//                self?.saveCurrentTheme()
-//            } else {
-//                applog("closure: no new theme")
-//                // need to call to fix navbar text color
-//                self?.updateNavbarAppearence()
-//            }
-//        }
     }
 }

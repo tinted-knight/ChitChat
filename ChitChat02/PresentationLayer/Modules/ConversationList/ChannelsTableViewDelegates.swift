@@ -54,10 +54,10 @@ extension ChannelsViewController: NSFetchedResultsControllerDelegate {
             }
         case .update:
             Log.frc("update")
-            if let indexPath = indexPath, let channel = controller.object(at: indexPath) as? ChannelEntity,
-                let theme = themeModel, let cellModel = channelModel?.cellModel(for: channel) {
+            if let indexPath = indexPath, let channel = controller.object(at: indexPath) as? ChannelEntity {
                 guard let cell = channelsTableView.cellForRow(at: indexPath) as? ChannelCell else { break }
-                cell.configure(with: cellModel, theme: theme)
+                let cellModel = channelModel.cellModel(for: channel)
+                cell.configure(with: cellModel, theme: themeModel)
             }
         case .move:
             Log.frc("move")
@@ -80,49 +80,47 @@ extension ChannelsViewController: NSFetchedResultsControllerDelegate {
 // MARK: UITableViewDataSource
 extension ChannelsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let channel = channelModel?.frc.object(at: indexPath), let cellmodel = channelModel?.cellModel(for: channel) else {
-            return UITableViewCell()
-        }
-        guard let theme = themeModel else { return UITableViewCell() }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
             as? ChannelCell else {
                 return UITableViewCell()
         }
 
-        cell.configure(with: cellmodel, theme: theme)
+        let channel = channelModel.frc.object(at: indexPath)
+        let cellmodel = channelModel.cellModel(for: channel)
+        cell.configure(with: cellmodel, theme: themeModel)
         return cell
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let sections = channelModel?.frc.sections else { return 0 }
+        guard let sections = channelModel.frc.sections else { return 0 }
         return sections.count
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let sections = channelModel?.frc.sections else { return nil }
+        guard let sections = channelModel.frc.sections else { return nil }
         return sections[section].name
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = channelModel?.frc.sections else { return 0 }
+        guard let sections = channelModel.frc.sections else { return 0 }
         return sections[section].numberOfObjects
     }
 }
 // MARK: UITableViewDelegate
 extension ChannelsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let channel = channelModel?.frc.fetchedObjects?[indexPath.row] else { return }
+        guard let channel = channelModel.frc.fetchedObjects?[indexPath.row] else { return }
         Log.oldschool("openConversation for channel \(channel.name), id = \(channel.identifier)")
-        guard let messages = presentationAssembly?.messagesViewController(for: channel) else { return }
+        let messages = presentationAssembly.messagesViewController(for: channel)
         navigationController?.pushViewController(messages, animated: true)
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let channel = channelModel?.frc.fetchedObjects?[indexPath.row] else { return }
+        guard let channel = channelModel.frc.fetchedObjects?[indexPath.row] else { return }
         if editingStyle == .delete {
             Log.oldschool("delete row, \(channel.name)")
-            channelModel?.deleteChannel(channel)
+            channelModel.deleteChannel(channel)
         }
     }
 }
