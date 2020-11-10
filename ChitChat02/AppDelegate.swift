@@ -33,19 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
         
-        let prefs = UserDefaults.standard
-        if (prefs.integer(forKey: ThemeManager.key) as Int?) == nil {
-            prefs.set(AppTheme.classic.rawValue, forKey: ThemeManager.key)
-        }
-
-//        if let uuid = prefs.string(forKey: UserData.keyUUID) as String? {
-//            Log.prefs("existing uuid = \(uuid)")
-//        } else {
-//            let uuid = UUID().uuidString
-//            Log.prefs("new uuid = \(uuid)")
-//            prefs.set(uuid, forKey: UserData.keyUUID)
-//        }
-        
         return true
     }
     

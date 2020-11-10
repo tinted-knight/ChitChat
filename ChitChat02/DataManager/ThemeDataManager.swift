@@ -11,15 +11,18 @@ import Foundation
 class ThemeDataManager {
     private let queue = DispatchQueue(label: "theme", qos: .utility)
     
-    func save(_ theme: ThemeModel) {
+    private let themeData: AppThemeData
+    
+    init(data: AppThemeData) {
+        self.themeData = data
+    }
+    
+    func save(_ theme: AppThemeData) {
         queue.async { [weak self] in
-            guard let themeUrl = self?.themeUrl() else {
-                applog("ThemeDataManager return error")
-                return
-            }
+            guard let self = self else { return }
             do {
-                if let encoded = try? JSONEncoder().encode(ThemeManager.get()) {
-                    try encoded.write(to: themeUrl)
+                if let encoded = try? JSONEncoder().encode(self.themeData) {
+                    try encoded.write(to: self.themeUrl())
                     applog("theme saved: \(theme.name)")
                 }
             } catch {
@@ -28,7 +31,7 @@ class ThemeDataManager {
         }
     }
 
-    func load(onDone: @escaping (ThemeModel) -> Void, onError: @escaping () -> Void) {
+    func load(onDone: @escaping (AppThemeData) -> Void, onError: @escaping () -> Void) {
         DispatchQueue.global().async { [weak self] in
             guard let themeUrl = self?.themeUrl() else {
                 onError()
@@ -36,7 +39,7 @@ class ThemeDataManager {
             }
             do {
                 let data = try Data(contentsOf: themeUrl)
-                let theme = try JSONDecoder().decode(ThemeModel.self, from: data)
+                let theme = try JSONDecoder().decode(AppThemeData.self, from: data)
                 onDone(theme)
             } catch {
                 applog("error loading theme")

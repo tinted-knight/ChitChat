@@ -2,7 +2,7 @@
 //  MessageEntity+CoreDataProperties.swift
 //  ChitChat02
 //
-//  Created by Timun on 23.10.2020.
+//  Created by Timun on 10.11.2020.
 //  Copyright © 2020 TimunInc. All rights reserved.
 //
 //
@@ -17,10 +17,10 @@ extension MessageEntity {
     }
 
     @NSManaged public var content: String
-    @NSManaged public var documentId: String
     @NSManaged public var created: Date
+    @NSManaged public var documentId: String
     @NSManaged public var senderId: String
     @NSManaged public var senderName: String
-    @NSManaged public var channel: ChannelEntity
+    @NSManaged public var channel: ChannelEntity?
 
 }

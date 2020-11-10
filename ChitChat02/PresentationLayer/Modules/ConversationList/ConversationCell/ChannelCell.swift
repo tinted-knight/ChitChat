@@ -11,7 +11,7 @@ import UIKit
 protocol ConfigurableView {
     associatedtype ConfigurationModel
     
-    func configure(with model: ConfigurationModel, theme: IThemeModelNew)
+    func configure(with model: ConfigurationModel, theme: IThemeModel)
 }
 
 private let emptyMessage = "No messages yet"
@@ -53,7 +53,7 @@ class ChannelCell: UITableViewCell {
 
 extension ChannelCell: ConfigurableView {
     
-    func configure(with model: IChannelCellModel, theme: IThemeModelNew) {
+    func configure(with model: IChannelCellModel, theme: IThemeModel) {
         nameView.text = model.name
         backgroundColor = theme.getThemeData().backgroundColor
 

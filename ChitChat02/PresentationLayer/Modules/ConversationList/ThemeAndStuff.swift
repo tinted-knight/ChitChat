@@ -11,12 +11,12 @@ import Foundation
 // MARK: ThemesPickerDelegate and stuff
 extension ChannelsViewController: IThemeModelDelegate {
     
-    func apply(_ theme: ThemeModel) {
+    func apply(_ theme: AppThemeData) {
         Log.arch("channels apply theme")
         applyTheme(theme)
     }
     
-    func applyTheme(_ value: ThemeModel) {
+    func applyTheme(_ value: AppThemeData) {
         channelsTableView.reloadData()
         
         updateNavbarAppearence(value)
@@ -30,7 +30,7 @@ extension ChannelsViewController: IThemeModelDelegate {
         }
     }
     
-    func updateNavbarAppearence(_ value: ThemeModel) {
+    func updateNavbarAppearence(_ value: AppThemeData) {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: value.textColor]
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: value.textColor]
     }

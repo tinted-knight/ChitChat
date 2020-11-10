@@ -31,6 +31,8 @@ class ProfileViewController: UIViewController {
     private let picker = UIImagePickerController()
 
     var model: IProfileModel!
+    
+    var themeModel: IThemeModel!
 
     override func viewDidLoad() {
         prepareUi()
@@ -52,10 +54,10 @@ class ProfileViewController: UIViewController {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
 
-        view.backgroundColor = ThemeManager.get().backgroundColor
-        buttonSave.backgroundColor = ThemeManager.get().buttonBgColor
-        buttonSaveOperation.backgroundColor = ThemeManager.get().buttonBgColor
-        textUserName.textColor = ThemeManager.get().textColor
+        view.backgroundColor = themeModel.getThemeData().backgroundColor
+        buttonSave.backgroundColor = themeModel.getThemeData().buttonBgColor
+        buttonSaveOperation.backgroundColor = themeModel.getThemeData().buttonBgColor
+        textUserName.textColor = themeModel.getThemeData().textColor
 
         scrollView.isScrollEnabled = false
     }

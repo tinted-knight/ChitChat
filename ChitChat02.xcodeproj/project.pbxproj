@@ -19,10 +19,6 @@
 		394F867B250E518A00B703B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F8679250E518A00B703B3 /* Main.storyboard */; };
 		394F867D250E518A00B703B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 394F867C250E518A00B703B3 /* Assets.xcassets */; };
 		394F8680250E518A00B703B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F867E250E518A00B703B3 /* LaunchScreen.storyboard */; };
-		3957588325434635001F054E /* ChannelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3957588125434635001F054E /* ChannelEntity+CoreDataClass.swift */; };
-		3957588425434635001F054E /* ChannelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3957588225434635001F054E /* ChannelEntity+CoreDataProperties.swift */; };
-		395758872543464C001F054E /* MessageEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395758852543464C001F054E /* MessageEntity+CoreDataClass.swift */; };
-		395758882543464C001F054E /* MessageEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395758862543464C001F054E /* MessageEntity+CoreDataProperties.swift */; };
 		3958B3B9253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */; };
 		3958B3BB253B00E700801E6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3958B3BA253B00E700801E6D /* GoogleService-Info.plist */; };
 		3958B3BD253B284700801E6D /* ConversationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3958B3BC253B284700801E6D /* ConversationViewController.storyboard */; };
@@ -32,7 +28,7 @@
 		397214B125587693001A8B89 /* FirestoreUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B025587693001A8B89 /* FirestoreUser.swift */; };
 		397214B3255876D9001A8B89 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B2255876D8001A8B89 /* FirestoreService.swift */; };
 		397214B625587E39001A8B89 /* ThemesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B525587E39001A8B89 /* ThemesService.swift */; };
-		397214B82558807D001A8B89 /* ThemeModelNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B72558807D001A8B89 /* ThemeModelNew.swift */; };
+		397214B82558807D001A8B89 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B72558807D001A8B89 /* ThemeModel.swift */; };
 		3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3994BFB325248EB6001AB5E7 /* MessageCell.swift */; };
 		3995893025234FBB003C62C8 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */; };
 		39A2846F25581968003C2484 /* ChannelsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39A2846E25581968003C2484 /* ChannelsViewController.storyboard */; };
@@ -46,6 +42,10 @@
 		39ABED412534D3C200EDCA7C /* SmartDataManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ABED402534D3C200EDCA7C /* SmartDataManagerService.swift */; };
 		39ABED432534F83400EDCA7C /* SaveCompletionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ABED422534F83400EDCA7C /* SaveCompletionOperation.swift */; };
 		39ABED452534F99100EDCA7C /* LoadCompletionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ABED442534F99100EDCA7C /* LoadCompletionOperation.swift */; };
+		39ADD7DB255AC5B700FC583A /* MessageEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ADD7D9255AC5B700FC583A /* MessageEntity+CoreDataProperties.swift */; };
+		39ADD7DC255AC5B700FC583A /* ChannelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ADD7DA255AC5B700FC583A /* ChannelEntity+CoreDataProperties.swift */; };
+		39ADD7DE255AC60200FC583A /* ChannelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ADD7DD255AC60200FC583A /* ChannelEntity+CoreDataClass.swift */; };
+		39ADD7E0255AC60800FC583A /* MessageEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ADD7DF255AC60800FC583A /* MessageEntity+CoreDataClass.swift */; };
 		39B6A01C2559480400EFE36E /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39B6A01B2559480400EFE36E /* ProfileViewController.storyboard */; };
 		39B6A01F25594A4C00EFE36E /* IDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B6A01E25594A4C00EFE36E /* IDataManager.swift */; };
 		39B7FDBD253062F500B5F280 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B7FDBC253062F500B5F280 /* UserModel.swift */; };
@@ -53,8 +53,7 @@
 		39B7FDC42530B00200B5F280 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B7FDC32530B00200B5F280 /* GCDDataManager.swift */; };
 		39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFB82527616C00ECECCC /* ThemesViewController.swift */; };
 		39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */; };
-		39BDCFBF252767B100ECECCC /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFBE252767B100ECECCC /* ThemeModel.swift */; };
-		39BDCFC82527A37A00ECECCC /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFC72527A37A00ECECCC /* ThemeManager.swift */; };
+		39BDCFBF252767B100ECECCC /* AppThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFBE252767B100ECECCC /* AppThemeData.swift */; };
 		39DBBAFE254D8A17009F4B5D /* ChannelsTableViewDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */; };
 		39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C12531C1D20068C875 /* LoadOperation.swift */; };
 		39DE12C42531C2280068C875 /* SaveOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C32531C2280068C875 /* SaveOperations.swift */; };
@@ -62,9 +61,9 @@
 		39DE12C82531E5DA0068C875 /* ThemeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */; };
 		39ED610B2521EB32006D8E0A /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */; };
 		39ED610E2521EE62006D8E0A /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610D2521EE62006D8E0A /* MessagesViewController.swift */; };
-		39ED61152521F76E006D8E0A /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61132521F76E006D8E0A /* ConversationCell.swift */; };
-		39ED61162521F76E006D8E0A /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED61142521F76E006D8E0A /* ConversationCell.xib */; };
-		39ED61182521F7AE006D8E0A /* ConversationCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61172521F7AD006D8E0A /* ConversationCellModel.swift */; };
+		39ED61152521F76E006D8E0A /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61132521F76E006D8E0A /* ChannelCell.swift */; };
+		39ED61162521F76E006D8E0A /* ChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED61142521F76E006D8E0A /* ChannelCell.xib */; };
+		39ED61182521F7AE006D8E0A /* ChannelCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61172521F7AD006D8E0A /* ChannelCellModel.swift */; };
 		39ED611F25221658006D8E0A /* IncomeMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED611D25221658006D8E0A /* IncomeMessageCell.xib */; };
 		39ED612125221684006D8E0A /* MessageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED612025221684006D8E0A /* MessageCellModel.swift */; };
 		39ED6125252219BA006D8E0A /* OutcomeMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39ED6123252219BA006D8E0A /* OutcomeMessageCell.xib */; };
@@ -90,10 +89,6 @@
 		394F867F250E518A00B703B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		394F8681250E518A00B703B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		394F8688250E659C00B703B3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		3957588125434635001F054E /* ChannelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ChannelEntity+CoreDataClass.swift"; path = "ChitChat02/DataManager/CoreDataStack/entities/ChannelEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		3957588225434635001F054E /* ChannelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ChannelEntity+CoreDataProperties.swift"; path = "ChitChat02/DataManager/CoreDataStack/entities/ChannelEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		395758852543464C001F054E /* MessageEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MessageEntity+CoreDataClass.swift"; path = "ChitChat02/DataManager/CoreDataStack/entities/MessageEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		395758862543464C001F054E /* MessageEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MessageEntity+CoreDataProperties.swift"; path = "ChitChat02/DataManager/CoreDataStack/entities/MessageEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsFirestoreDelegate.swift; sourceTree = "<group>"; };
 		3958B3BA253B00E700801E6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3958B3BC253B284700801E6D /* ConversationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationViewController.storyboard; sourceTree = "<group>"; };
@@ -103,7 +98,7 @@
 		397214B025587693001A8B89 /* FirestoreUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUser.swift; sourceTree = "<group>"; };
 		397214B2255876D8001A8B89 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		397214B525587E39001A8B89 /* ThemesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesService.swift; sourceTree = "<group>"; };
-		397214B72558807D001A8B89 /* ThemeModelNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModelNew.swift; sourceTree = "<group>"; };
+		397214B72558807D001A8B89 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
 		3994BFB325248EB6001AB5E7 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3995892F25234FBB003C62C8 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		39A2846E25581968003C2484 /* ChannelsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChannelsViewController.storyboard; sourceTree = "<group>"; };
@@ -117,6 +112,10 @@
 		39ABED402534D3C200EDCA7C /* SmartDataManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartDataManagerService.swift; sourceTree = "<group>"; };
 		39ABED422534F83400EDCA7C /* SaveCompletionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCompletionOperation.swift; sourceTree = "<group>"; };
 		39ABED442534F99100EDCA7C /* LoadCompletionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCompletionOperation.swift; sourceTree = "<group>"; };
+		39ADD7D9255AC5B700FC583A /* MessageEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		39ADD7DA255AC5B700FC583A /* ChannelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChannelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		39ADD7DD255AC60200FC583A /* ChannelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChannelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		39ADD7DF255AC60800FC583A /* MessageEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		39B6A01B2559480400EFE36E /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
 		39B6A01E25594A4C00EFE36E /* IDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDataManager.swift; sourceTree = "<group>"; };
 		39B7FDBC253062F500B5F280 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -124,8 +123,7 @@
 		39B7FDC32530B00200B5F280 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
 		39BDCFB82527616C00ECECCC /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
-		39BDCFBE252767B100ECECCC /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
-		39BDCFC72527A37A00ECECCC /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		39BDCFBE252767B100ECECCC /* AppThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeData.swift; sourceTree = "<group>"; };
 		39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsTableViewDelegates.swift; sourceTree = "<group>"; };
 		39DE12C12531C1D20068C875 /* LoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
 		39DE12C32531C2280068C875 /* SaveOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOperations.swift; sourceTree = "<group>"; };
@@ -133,9 +131,9 @@
 		39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataManager.swift; sourceTree = "<group>"; };
 		39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 		39ED610D2521EE62006D8E0A /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
-		39ED61132521F76E006D8E0A /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
-		39ED61142521F76E006D8E0A /* ConversationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
-		39ED61172521F7AD006D8E0A /* ConversationCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCellModel.swift; sourceTree = "<group>"; };
+		39ED61132521F76E006D8E0A /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
+		39ED61142521F76E006D8E0A /* ChannelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelCell.xib; sourceTree = "<group>"; };
+		39ED61172521F7AD006D8E0A /* ChannelCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCellModel.swift; sourceTree = "<group>"; };
 		39ED611D25221658006D8E0A /* IncomeMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomeMessageCell.xib; sourceTree = "<group>"; };
 		39ED612025221684006D8E0A /* MessageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
 		39ED6123252219BA006D8E0A /* OutcomeMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutcomeMessageCell.xib; sourceTree = "<group>"; };
@@ -211,30 +209,21 @@
 		3957588925435576001F054E /* entities */ = {
 			isa = PBXGroup;
 			children = (
-				395758852543464C001F054E /* MessageEntity+CoreDataClass.swift */,
-				395758862543464C001F054E /* MessageEntity+CoreDataProperties.swift */,
-				3957588125434635001F054E /* ChannelEntity+CoreDataClass.swift */,
-				3957588225434635001F054E /* ChannelEntity+CoreDataProperties.swift */,
+				39ADD7DF255AC60800FC583A /* MessageEntity+CoreDataClass.swift */,
+				39ADD7DD255AC60200FC583A /* ChannelEntity+CoreDataClass.swift */,
+				39ADD7D9255AC5B700FC583A /* MessageEntity+CoreDataProperties.swift */,
+				39ADD7DA255AC5B700FC583A /* ChannelEntity+CoreDataProperties.swift */,
 			);
 			path = entities;
-			sourceTree = "<group>";
-		};
-		3958B3B5253AFDE200801E6D /* Firestore */ = {
-			isa = PBXGroup;
-			children = (
-				3948F9C5253B8F6F00465D02 /* models.swift */,
-			);
-			path = Firestore;
 			sourceTree = "<group>";
 		};
 		396F5EA32517AF1F0070F2BD /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				39ADD7D8255ABCEA00FC583A /* model */,
 				396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */,
-				39B7FDBC253062F500B5F280 /* UserModel.swift */,
 				39DE12C52531C4290068C875 /* SaveLoadExtension.swift */,
 				39B6A01B2559480400EFE36E /* ProfileViewController.storyboard */,
-				393A0F6725594F920063ACC7 /* ProfileModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -250,6 +239,7 @@
 		39A2846B255813D5003C2484 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				3958B3C0253B708B00801E6D /* AlertViewController.swift */,
 				39A2847225581D30003C2484 /* Assembly */,
 				39A2847525581FCC003C2484 /* Modules */,
 			);
@@ -261,7 +251,7 @@
 			children = (
 				39A284762558216F003C2484 /* Assembly */,
 				39B6A01D255949EF00EFE36E /* ProfileStorage */,
-				39A2847725582177003C2484 /* NewSchoolStorage */,
+				39A2847725582177003C2484 /* LocalStorage */,
 				39A28481255850E0003C2484 /* FirebaseStrorage */,
 				69409BB60BC65653E4528944 /* UserDataStorage */,
 			);
@@ -304,12 +294,16 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
-		39A2847725582177003C2484 /* NewSchoolStorage */ = {
+		39A2847725582177003C2484 /* LocalStorage */ = {
 			isa = PBXGroup;
 			children = (
+				3957588925435576001F054E /* entities */,
+				39EDD9F42542E7D000FE640B /* entitiy_extensions.swift */,
+				39EDD9F92543337E00FE640B /* Chat.xcdatamodeld */,
+				39EDD9F22542E17400FE640B /* CoreDataStack.swift */,
 				393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */,
 			);
-			path = NewSchoolStorage;
+			path = LocalStorage;
 			sourceTree = "<group>";
 		};
 		39A2847A25582A66003C2484 /* Assembly */ = {
@@ -323,6 +317,7 @@
 		39A28481255850E0003C2484 /* FirebaseStrorage */ = {
 			isa = PBXGroup;
 			children = (
+				3948F9C5253B8F6F00465D02 /* models.swift */,
 				3948F9C1253B8B9C00465D02 /* IRemoteMessageStorage.swift */,
 				39A284822558511F003C2484 /* IRemoteChannelStorage.swift */,
 			);
@@ -341,6 +336,41 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		39ADD7D5255ABAB900FC583A /* models */ = {
+			isa = PBXGroup;
+			children = (
+				39A2847F25583534003C2484 /* ChannelModel.swift */,
+				397214B025587693001A8B89 /* FirestoreUser.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		39ADD7D6255ABAD600FC583A /* models */ = {
+			isa = PBXGroup;
+			children = (
+				39A2848525586480003C2484 /* MessagesModel.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		39ADD7D7255ABAE100FC583A /* models */ = {
+			isa = PBXGroup;
+			children = (
+				397214B72558807D001A8B89 /* ThemeModel.swift */,
+				39BDCFBE252767B100ECECCC /* AppThemeData.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		39ADD7D8255ABCEA00FC583A /* model */ = {
+			isa = PBXGroup;
+			children = (
+				393A0F6725594F920063ACC7 /* ProfileModel.swift */,
+				39B7FDBC253062F500B5F280 /* UserModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		39B6A01D255949EF00EFE36E /* ProfileStorage */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,8 +384,6 @@
 		39B7FDC02530AFCA00B5F280 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
-				39EDD9F62542F3F000FE640B /* CoreDataStack */,
-				3958B3B5253AFDE200801E6D /* Firestore */,
 				39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */,
 			);
 			path = DataManager;
@@ -364,11 +392,9 @@
 		39BDCFB72527614400ECECCC /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				39ADD7D7255ABAE100FC583A /* models */,
 				39BDCFB82527616C00ECECCC /* ThemesViewController.swift */,
 				39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */,
-				39BDCFBE252767B100ECECCC /* ThemeModel.swift */,
-				39BDCFC72527A37A00ECECCC /* ThemeManager.swift */,
-				397214B72558807D001A8B89 /* ThemeModelNew.swift */,
 			);
 			path = Themes;
 			sourceTree = "<group>";
@@ -388,7 +414,6 @@
 		39E4D49D2523478A00BF6BC4 /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				3958B3C0253B708B00801E6D /* AlertViewController.swift */,
 				3948F9BD253B893700465D02 /* Log.swift */,
 			);
 			path = tools;
@@ -397,14 +422,13 @@
 		39ED61092521EB00006D8E0A /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
+				39ADD7D5255ABAB900FC583A /* models */,
 				39ED61122521F734006D8E0A /* ConversationCell */,
 				39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */,
 				3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */,
 				3948F9C9253B942600465D02 /* ThemeAndStuff.swift */,
 				39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */,
 				39A2846E25581968003C2484 /* ChannelsViewController.storyboard */,
-				39A2847F25583534003C2484 /* ChannelModel.swift */,
-				397214B025587693001A8B89 /* FirestoreUser.swift */,
 			);
 			path = ConversationList;
 			sourceTree = "<group>";
@@ -412,11 +436,11 @@
 		39ED610C2521EE3C006D8E0A /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				39ADD7D6255ABAD600FC583A /* models */,
 				39ED611B2522163B006D8E0A /* MessageCell */,
 				39ED610D2521EE62006D8E0A /* MessagesViewController.swift */,
 				3958B3BC253B284700801E6D /* ConversationViewController.storyboard */,
 				3958B3BE253B4CFA00801E6D /* MessagesVCManager.swift */,
-				39A2848525586480003C2484 /* MessagesModel.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -424,9 +448,9 @@
 		39ED61122521F734006D8E0A /* ConversationCell */ = {
 			isa = PBXGroup;
 			children = (
-				39ED61132521F76E006D8E0A /* ConversationCell.swift */,
-				39ED61142521F76E006D8E0A /* ConversationCell.xib */,
-				39ED61172521F7AD006D8E0A /* ConversationCellModel.swift */,
+				39ED61132521F76E006D8E0A /* ChannelCell.swift */,
+				39ED61142521F76E006D8E0A /* ChannelCell.xib */,
+				39ED61172521F7AD006D8E0A /* ChannelCellModel.swift */,
 			);
 			path = ConversationCell;
 			sourceTree = "<group>";
@@ -440,17 +464,6 @@
 				3994BFB325248EB6001AB5E7 /* MessageCell.swift */,
 			);
 			path = MessageCell;
-			sourceTree = "<group>";
-		};
-		39EDD9F62542F3F000FE640B /* CoreDataStack */ = {
-			isa = PBXGroup;
-			children = (
-				3957588925435576001F054E /* entities */,
-				39EDD9F92543337E00FE640B /* Chat.xcdatamodeld */,
-				39EDD9F42542E7D000FE640B /* entitiy_extensions.swift */,
-				39EDD9F22542E17400FE640B /* CoreDataStack.swift */,
-			);
-			path = CoreDataStack;
 			sourceTree = "<group>";
 		};
 		421B2EFD5D2930D3B39F3217 /* Pods */ = {
@@ -532,7 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39ED611F25221658006D8E0A /* IncomeMessageCell.xib in Resources */,
-				39ED61162521F76E006D8E0A /* ConversationCell.xib in Resources */,
+				39ED61162521F76E006D8E0A /* ChannelCell.xib in Resources */,
 				39ED6125252219BA006D8E0A /* OutcomeMessageCell.xib in Resources */,
 				3958B3BD253B284700801E6D /* ConversationViewController.storyboard in Resources */,
 				39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */,
@@ -614,31 +627,31 @@
 			files = (
 				39ED612125221684006D8E0A /* MessageCellModel.swift in Sources */,
 				39DE12C42531C2280068C875 /* SaveOperations.swift in Sources */,
+				39ADD7E0255AC60800FC583A /* MessageEntity+CoreDataClass.swift in Sources */,
 				39A2847C25582A7A003C2484 /* ServiceAssembly.swift in Sources */,
-				395758882543464C001F054E /* MessageEntity+CoreDataProperties.swift in Sources */,
 				3958B3C1253B708B00801E6D /* AlertViewController.swift in Sources */,
 				39A284792558238E003C2484 /* CoreAssembly.swift in Sources */,
 				394F8674250E518A00B703B3 /* AppDelegate.swift in Sources */,
 				39DBBAFE254D8A17009F4B5D /* ChannelsTableViewDelegates.swift in Sources */,
 				39ABED452534F99100EDCA7C /* LoadCompletionOperation.swift in Sources */,
-				39BDCFC82527A37A00ECECCC /* ThemeManager.swift in Sources */,
-				3957588325434635001F054E /* ChannelEntity+CoreDataClass.swift in Sources */,
-				397214B82558807D001A8B89 /* ThemeModelNew.swift in Sources */,
+				397214B82558807D001A8B89 /* ThemeModel.swift in Sources */,
 				39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */,
 				39EDD9FB2543337E00FE640B /* Chat.xcdatamodeld in Sources */,
+				39ADD7DE255AC60200FC583A /* ChannelEntity+CoreDataClass.swift in Sources */,
+				39ADD7DB255AC5B700FC583A /* MessageEntity+CoreDataProperties.swift in Sources */,
 				397214B3255876D9001A8B89 /* FirestoreService.swift in Sources */,
 				39A2847425581D42003C2484 /* PresentationAssembly.swift in Sources */,
-				39ED61182521F7AE006D8E0A /* ConversationCellModel.swift in Sources */,
+				39ED61182521F7AE006D8E0A /* ChannelCellModel.swift in Sources */,
 				39ABED432534F83400EDCA7C /* SaveCompletionOperation.swift in Sources */,
 				39EDD9F32542E17400FE640B /* CoreDataStack.swift in Sources */,
 				39B6A01F25594A4C00EFE36E /* IDataManager.swift in Sources */,
 				39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */,
 				3948F9C6253B8F6F00465D02 /* models.swift in Sources */,
-				395758872543464C001F054E /* MessageEntity+CoreDataClass.swift in Sources */,
 				393A0F6825594F920063ACC7 /* ProfileModel.swift in Sources */,
 				39B7FDC42530B00200B5F280 /* GCDDataManager.swift in Sources */,
-				39BDCFBF252767B100ECECCC /* ThemeModel.swift in Sources */,
+				39BDCFBF252767B100ECECCC /* AppThemeData.swift in Sources */,
 				397214B125587693001A8B89 /* FirestoreUser.swift in Sources */,
+				39ADD7DC255AC5B700FC583A /* ChannelEntity+CoreDataProperties.swift in Sources */,
 				39ED610E2521EE62006D8E0A /* MessagesViewController.swift in Sources */,
 				39A2848625586480003C2484 /* MessagesModel.swift in Sources */,
 				39DE12C82531E5DA0068C875 /* ThemeDataManager.swift in Sources */,
@@ -653,9 +666,8 @@
 				39A2848025583534003C2484 /* ChannelModel.swift in Sources */,
 				3958B3B9253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
-				39ED61152521F76E006D8E0A /* ConversationCell.swift in Sources */,
+				39ED61152521F76E006D8E0A /* ChannelCell.swift in Sources */,
 				39A284832558511F003C2484 /* IRemoteChannelStorage.swift in Sources */,
-				3957588425434635001F054E /* ChannelEntity+CoreDataProperties.swift in Sources */,
 				3948F9CA253B942600465D02 /* ThemeAndStuff.swift in Sources */,
 				39B7FDC22530AFF100B5F280 /* OperationDataManager.swift in Sources */,
 				393AEDE1254F3A270028B893 /* NewSchoolCoreData.swift in Sources */,

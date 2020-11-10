@@ -60,6 +60,7 @@ class PresentationAssembly: IPresentationAssembly {
         }
         Log.arch("present ProfileVC")
         controller.model = getProfileModel
+        controller.themeModel = getThemeModel
         return controller
     }
     
@@ -84,8 +85,8 @@ class PresentationAssembly: IPresentationAssembly {
         return ChannelModel(channelService: serviceAssembly.channelService)
     }
     
-    lazy var getThemeModel: IThemeModelNew = {
-        return ThemeModelNew(themeService: self.serviceAssembly.themeService)
+    lazy var getThemeModel: IThemeModel = {
+        return ThemeModel(themeService: self.serviceAssembly.themeService)
     }()
     
     lazy var getProfileModel: IProfileModel = {

@@ -15,7 +15,7 @@ class ThemesViewController: UIViewController {
         return storyboard.instantiateInitialViewController() as? ThemesViewController
     }
     
-    var themeModel: IThemeModelNew!
+    var themeModel: IThemeModel!
     
     @IBOutlet weak var buttonRed: UIButton!
     @IBOutlet weak var buttonYellow: UIButton!

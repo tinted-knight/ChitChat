@@ -59,7 +59,7 @@ struct Color: Codable {
     }
 }
 
-struct ThemeModel: Codable {
+struct AppThemeData: Codable {
     let name: String
     let brightness: Brightness
     let backgroundColor: UIColor
@@ -131,7 +131,7 @@ struct ThemeModel: Codable {
 }
 
 let fakeThemeData = [
-    ThemeModel(
+    AppThemeData(
         name: "Classic",
         brightness: .light,
         backgroundColor: .white,
@@ -145,7 +145,7 @@ let fakeThemeData = [
         tintColor: .systemBlue,
         buttonBgColor: UIColor(displayP3Red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
     ),
-    ThemeModel(
+    AppThemeData(
         name: "Yellow",
         brightness: .light,
         backgroundColor: .yellow,
@@ -159,7 +159,7 @@ let fakeThemeData = [
         tintColor: .systemRed,
         buttonBgColor: .white
     ),
-    ThemeModel(
+    AppThemeData(
         name: "Dark",
         brightness: .dark,
         backgroundColor: .black,

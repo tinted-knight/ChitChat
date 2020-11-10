@@ -9,39 +9,39 @@
 import Foundation
 import UIKit
 
-protocol IThemeModelNew {
+protocol IThemeModel {
     var delegate: IThemeModelDelegate? { get set }
     
     var currentTheme: AppTheme { get }
     
-    var classic: ThemeModel { get }
+    var classic: AppThemeData { get }
     
-    var dark: ThemeModel { get }
+    var dark: AppThemeData { get }
     
-    var alternative: ThemeModel { get }
+    var alternative: AppThemeData { get }
     
     func picked(theme: AppTheme)
     
     func applyCurrent()
     
-    func getThemeData() -> ThemeModel
+    func getThemeData() -> AppThemeData
 }
 
 protocol IThemeModelDelegate: class {
-    func apply(_ theme: ThemeModel)
+    func apply(_ theme: AppThemeData)
 }
 
-class ThemeModelNew: IThemeModelNew {
+class ThemeModel: IThemeModel {
 
     private let themeService: IThemeService
     
     lazy var currentTheme: AppTheme = self.themeService.theme
     
-    lazy var classic: ThemeModel = self.themeService.classic
+    lazy var classic: AppThemeData = self.themeService.classic
     
-    lazy var dark: ThemeModel = self.themeService.dark
+    lazy var dark: AppThemeData = self.themeService.dark
 
-    lazy var alternative: ThemeModel = self.themeService.alternative
+    lazy var alternative: AppThemeData = self.themeService.alternative
     
     weak var delegate: IThemeModelDelegate?
 
@@ -82,7 +82,7 @@ class ThemeModelNew: IThemeModelNew {
         delegate?.apply(themeData)
     }
     
-    func getThemeData() -> ThemeModel {
+    func getThemeData() -> AppThemeData {
         switch currentTheme {
         case .classic:
             return classic

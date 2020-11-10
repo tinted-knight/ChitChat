@@ -2,7 +2,7 @@
 //  ChannelEntity+CoreDataProperties.swift
 //  ChitChat02
 //
-//  Created by Timun on 23.10.2020.
+//  Created by Timun on 10.11.2020.
 //  Copyright © 2020 TimunInc. All rights reserved.
 //
 //
@@ -20,7 +20,7 @@ extension ChannelEntity {
     @NSManaged public var lastActivity: Date?
     @NSManaged public var lastMessage: String?
     @NSManaged public var name: String
-    @NSManaged public var messages: NSSet?
+    @NSManaged public var messages: NSSet
 
 }
 

@@ -11,11 +11,11 @@ import Foundation
 protocol IThemeService {
     var theme: AppTheme { get }
 
-    var classic: ThemeModel { get }
+    var classic: AppThemeData { get }
     
-    var dark: ThemeModel { get }
+    var dark: AppThemeData { get }
     
-    var alternative: ThemeModel { get }
+    var alternative: AppThemeData { get }
     
     func save(theme: AppTheme)
 }
@@ -23,17 +23,17 @@ protocol IThemeService {
 class ThemeService: IThemeService {
     private let storage: IKeyValueStorage
     
-    private let themes: [ThemeModel]
+    private let themes: [AppThemeData]
     
     let theme: AppTheme
     
-    lazy var classic: ThemeModel = self.themes[0]
+    lazy var classic: AppThemeData = self.themes[0]
 
-    lazy var dark: ThemeModel = self.themes[2]
+    lazy var dark: AppThemeData = self.themes[2]
 
-    lazy var alternative: ThemeModel = self.themes[1]
+    lazy var alternative: AppThemeData = self.themes[1]
 
-    init(storage: IKeyValueStorage, availableThemes themes: [ThemeModel]) {
+    init(storage: IKeyValueStorage, availableThemes themes: [AppThemeData]) {
         self.storage = storage
         self.themes = themes
         let themeId = storage.integer(key: "key-theme")

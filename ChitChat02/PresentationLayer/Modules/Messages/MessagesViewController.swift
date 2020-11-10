@@ -18,7 +18,7 @@ class MessagesViewController: UIViewController {
     
     var messageModel: IMessagesModel?
     
-    var themeModel: IThemeModelNew?
+    var themeModel: IThemeModel?
 
     var messages: [MessageCellModel] = []
     

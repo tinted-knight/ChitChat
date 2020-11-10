@@ -22,7 +22,7 @@ class ChannelsViewController: UIViewController {
     let cellReuseId = "chat-list-cell"
     let headerReuseId = "header-online-reuse-id"
     
-    var themeModel: IThemeModelNew?
+    var themeModel: IThemeModel?
     
     var myDataModel: IFirestoreUser?
     
@@ -66,8 +66,7 @@ extension ChannelsViewController {
 
         title = "Tinkoff Chat"
         
-        channelsTableView.register(UINib(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: cellReuseId)
-        channelsTableView.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: headerReuseId)
+        channelsTableView.register(UINib(nibName: "ChannelCell", bundle: nil), forCellReuseIdentifier: cellReuseId)
         
         setupNavBarButtons()
 
