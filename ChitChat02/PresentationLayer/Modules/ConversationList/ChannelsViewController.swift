@@ -12,9 +12,6 @@ class ChannelsViewController: UIViewController {
 
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var channelsTableView: UITableView!
-    @IBOutlet weak var emptyLabel: UILabel!
-    
-    let cellReuseId = "chat-list-cell"
     
     var themeModel: IThemeModel
     
@@ -71,12 +68,10 @@ extension ChannelsViewController {
         loadingIndicator.hidesWhenStopped = true
         showLoading()
 
-        emptyLabel.isHidden = true
-        emptyLabel.text = "Looks like there are no messages in this channel"
-
         title = "Tinkoff Chat"
         
-        channelsTableView.register(UINib(nibName: "ChannelCell", bundle: nil), forCellReuseIdentifier: cellReuseId)
+        channelsTableView.register(UINib(nibName: ChannelCellModel.nibName, bundle: nil),
+                                   forCellReuseIdentifier: ChannelCellModel.cellReuseId)
         
         setupNavBarButtons()
 
@@ -118,5 +113,13 @@ extension ChannelsViewController {
     @objc private func settingsOnTap() {
         let controller = presentationAssembly.themesViewController()
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc func inputNewChannelName() {
+        inputAlert(title: "New channel", message: "Input channel name") { [weak self] (text) in
+            if !text.isEmpty {
+                self?.channelModel.addChannel(name: text)
+            }
+        }
     }
 }

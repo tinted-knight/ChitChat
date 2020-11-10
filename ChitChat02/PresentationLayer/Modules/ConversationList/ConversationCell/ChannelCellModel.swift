@@ -18,6 +18,8 @@ protocol IChannelCellModel {
 
 class ChannelCellModel: IChannelCellModel {
     static let noMessages = "No messages yet"
+    static let cellReuseId = "chat-list-cell"
+    static let nibName = "ChannelCell"
     
     let name: String
     let lastMessage: String?

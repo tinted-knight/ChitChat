@@ -80,7 +80,8 @@ extension ChannelsViewController: NSFetchedResultsControllerDelegate {
 // MARK: UITableViewDataSource
 extension ChannelsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChannelCellModel.cellReuseId,
+                                                       for: indexPath)
             as? ChannelCell else {
                 return UITableViewCell()
         }

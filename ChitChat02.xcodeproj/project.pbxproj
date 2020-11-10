@@ -21,7 +21,7 @@
 		394F867B250E518A00B703B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F8679250E518A00B703B3 /* Main.storyboard */; };
 		394F867D250E518A00B703B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 394F867C250E518A00B703B3 /* Assets.xcassets */; };
 		394F8680250E518A00B703B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F867E250E518A00B703B3 /* LaunchScreen.storyboard */; };
-		3958B3B9253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */; };
+		3958B3B9253AFFBE00801E6D /* Loading state.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3B8253AFFBE00801E6D /* Loading state.swift */; };
 		3958B3BB253B00E700801E6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3958B3BA253B00E700801E6D /* GoogleService-Info.plist */; };
 		3958B3BD253B284700801E6D /* MessagesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3958B3BC253B284700801E6D /* MessagesViewController.storyboard */; };
 		3958B3BF253B4CFA00801E6D /* MessagesVCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3BE253B4CFA00801E6D /* MessagesVCManager.swift */; };
@@ -92,7 +92,7 @@
 		394F867F250E518A00B703B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		394F8681250E518A00B703B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		394F8688250E659C00B703B3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsFirestoreDelegate.swift; sourceTree = "<group>"; };
+		3958B3B8253AFFBE00801E6D /* Loading state.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loading state.swift"; sourceTree = "<group>"; };
 		3958B3BA253B00E700801E6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3958B3BC253B284700801E6D /* MessagesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MessagesViewController.storyboard; sourceTree = "<group>"; };
 		3958B3BE253B4CFA00801E6D /* MessagesVCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVCManager.swift; sourceTree = "<group>"; };
@@ -428,7 +428,7 @@
 				39ADD7D5255ABAB900FC583A /* models */,
 				39ED61122521F734006D8E0A /* ConversationCell */,
 				39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */,
-				3958B3B8253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift */,
+				3958B3B8253AFFBE00801E6D /* Loading state.swift */,
 				3948F9C9253B942600465D02 /* ThemeAndStuff.swift */,
 				39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */,
 				390F4E17255ACCD100DEA323 /* ChannelsViewController.xib */,
@@ -668,7 +668,7 @@
 				3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */,
 				3958B3BF253B4CFA00801E6D /* MessagesVCManager.swift in Sources */,
 				39A2848025583534003C2484 /* ChannelModel.swift in Sources */,
-				3958B3B9253AFFBE00801E6D /* ChannelsFirestoreDelegate.swift in Sources */,
+				3958B3B9253AFFBE00801E6D /* Loading state.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
 				39ED61152521F76E006D8E0A /* ChannelCell.swift in Sources */,
 				39A284832558511F003C2484 /* IRemoteChannelStorage.swift in Sources */,
