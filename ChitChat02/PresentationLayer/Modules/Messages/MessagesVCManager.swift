@@ -27,21 +27,17 @@ extension MessagesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = messageModel, let frc = messageModel?.frc else { return UITableViewCell() }
         guard let theme = themeModel else { return UITableViewCell() }
-        let message = frc.object(at: indexPath)
-        let direction = model.direction(for: message)
 
+        let cellModel = model.cellModel(for: frc.object(at: indexPath))
+        
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: cellReuseId(for: direction),
+            withIdentifier: cellReuseId(for: cellModel.direction),
             for: indexPath) as? MessageCell else {
                 return UITableViewCell()
         }
 
         cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-        cell.configure(with: MessageCellModel(text: message.content,
-                                              date: message.created,
-                                              sender: message.senderName,
-                                              direction: direction),
-                       theme: theme)
+        cell.configure(with: cellModel, theme: theme)
 
         return cell
     }
@@ -101,12 +97,8 @@ extension MessagesViewController: NSFetchedResultsControllerDelegate {
                 guard let cell = messagesTableView.cellForRow(at: indexPath) as? MessageCell else { break }
                 guard let model = messageModel else { break }
                 guard let theme = themeModel else { break }
-                let direction = model.direction(for: message)
-                cell.configure(with: MessageCellModel(text: message.content,
-                                                      date: message.created,
-                                                      sender: message.senderName,
-                                                      direction: direction),
-                               theme: theme)
+                let cellModel = model.cellModel(for: message)
+                cell.configure(with: cellModel, theme: theme)
             }
         case .move:
             if let indexPath = indexPath {

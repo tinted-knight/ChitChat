@@ -38,7 +38,6 @@ class PresentationAssembly: IPresentationAssembly {
         guard let controller = ChannelsViewController.instance() else {
             fatalError("Cannot instantiate ChannelsViewController")
         }
-//        controller.channelsManager = serviceAssembly.channelService
         controller.channelModel = getChannelModel()
         controller.myDataModel = getFirestoreUser
         controller.themeModel = getThemeModel

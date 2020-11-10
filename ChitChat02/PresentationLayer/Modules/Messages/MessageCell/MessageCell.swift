@@ -41,7 +41,7 @@ class MessageCell: UITableViewCell {
 }
 
 extension MessageCell: ConfigurableView {
-    func configure(with model: MessageCellModel, theme: IThemeModelNew) {
+    func configure(with model: IMessageCellModel, theme: IThemeModelNew) {
         message.text = model.text
         date.text = formatDateTime(with: model.date)
         switch model.direction {

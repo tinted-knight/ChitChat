@@ -18,7 +18,7 @@ protocol IMessagesModel {
     
     var userName: String { get }
     
-    func direction(for message: MessageEntity) -> MessageDirection
+    func cellModel(for message: MessageEntity) -> IMessageCellModel
     
     func loadData()
     
@@ -48,11 +48,8 @@ class MessagesModel: IMessagesModel {
         self.firestoreUser = firestoreUser
     }
     
-    func direction(for message: MessageEntity) -> MessageDirection {
-        if message.senderId != firestoreUser.uuid {
-            return .income
-        }
-        return .outcome
+    func cellModel(for message: MessageEntity) -> IMessageCellModel {
+        return MessageCellModel(from: message, me: firestoreUser.uuid)
     }
     
     func loadData() {
