@@ -55,9 +55,9 @@ extension ChannelsViewController: NSFetchedResultsControllerDelegate {
         case .update:
             Log.frc("update")
             if let indexPath = indexPath, let channel = controller.object(at: indexPath) as? ChannelEntity,
-                let theme = themeModel {
+                let theme = themeModel, let cellModel = channelModel?.cellModel(for: channel) {
                 guard let cell = channelsTableView.cellForRow(at: indexPath) as? ConversationCell else { break }
-                cell.configure(with: channel, theme: theme)
+                cell.configure(with: cellModel, theme: theme)
             }
         case .move:
             Log.frc("move")
@@ -80,14 +80,16 @@ extension ChannelsViewController: NSFetchedResultsControllerDelegate {
 // MARK: UITableViewDataSource
 extension ChannelsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let channel = channelModel?.frc.object(at: indexPath) else { return UITableViewCell() }
+        guard let channel = channelModel?.frc.object(at: indexPath), let cellmodel = channelModel?.cellModel(for: channel) else {
+            return UITableViewCell()
+        }
         guard let theme = themeModel else { return UITableViewCell() }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
             as? ConversationCell else {
                 return UITableViewCell()
         }
 
-        cell.configure(with: channel, theme: theme)
+        cell.configure(with: cellmodel, theme: theme)
         return cell
     }
 

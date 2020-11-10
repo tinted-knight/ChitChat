@@ -22,6 +22,8 @@ protocol IChannelModel {
 
     func loadData()
 
+    func cellModel(for channel: ChannelEntity) -> IChannelCellModel
+    
     func addChannel(name: String)
 
     func deleteChannel(_ channel: ChannelEntity)
@@ -60,6 +62,10 @@ class ChannelModel: IChannelModel {
             channelService.fetchRemote()
             delegate?.dataLoaded()
         } catch { fatalError("channel frc fetch") }
+    }
+    
+    func cellModel(for channel: ChannelEntity) -> IChannelCellModel {
+        return ChannelCellModel(from: channel)
     }
     
     func addChannel(name: String) {

@@ -8,10 +8,23 @@
 
 import Foundation
 
-struct ConversationCellModel {
+protocol IChannelCellModel {
+    var name: String { get }
+        var lastMessage: String? { get }
+        var lastActivity: Date? { get }
+        var hasUnreadMessages: Bool { get }
+}
+
+class ChannelCellModel: IChannelCellModel {
     let name: String
-    let message: String
-    let date: Date
-    let isOnline: Bool
+    let lastMessage: String?
+    let lastActivity: Date?
     let hasUnreadMessages: Bool
+    
+    init(from channel: ChannelEntity) {
+        self.name = channel.name
+        self.lastMessage = channel.lastMessage
+        self.lastActivity = channel.lastActivity
+        self.hasUnreadMessages = channel.lastMessage != nil
+    }
 }

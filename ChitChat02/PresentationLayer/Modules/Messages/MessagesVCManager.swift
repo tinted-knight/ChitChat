@@ -25,20 +25,21 @@ extension MessagesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = messageModel, let frc = messageModel?.frc else { return UITableViewCell() }
+        guard let message = messageModel?.frc.object(at: indexPath),
+            let cellModel = messageModel?.cellModel(for: message) else {
+                return UITableViewCell()
+        }
         guard let theme = themeModel else { return UITableViewCell() }
-
-        let cellModel = model.cellModel(for: frc.object(at: indexPath))
         
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellReuseId(for: cellModel.direction),
             for: indexPath) as? MessageCell else {
                 return UITableViewCell()
         }
-
+        
         cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
         cell.configure(with: cellModel, theme: theme)
-
+        
         return cell
     }
     
@@ -95,9 +96,8 @@ extension MessagesViewController: NSFetchedResultsControllerDelegate {
             if let indexPath = indexPath {
                 guard let message = messageModel?.frc.object(at: indexPath) else { break }
                 guard let cell = messagesTableView.cellForRow(at: indexPath) as? MessageCell else { break }
-                guard let model = messageModel else { break }
+                guard let cellModel = messageModel?.cellModel(for: message) else { break }
                 guard let theme = themeModel else { break }
-                let cellModel = model.cellModel(for: message)
                 cell.configure(with: cellModel, theme: theme)
             }
         case .move:

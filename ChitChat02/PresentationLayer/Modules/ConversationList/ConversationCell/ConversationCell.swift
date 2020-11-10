@@ -53,7 +53,7 @@ class ConversationCell: UITableViewCell {
 
 extension ConversationCell: ConfigurableView {
     
-    func configure(with model: ChannelEntity, theme: IThemeModelNew) {
+    func configure(with model: IChannelCellModel, theme: IThemeModelNew) {
         nameView.text = model.name
         backgroundColor = theme.getThemeData().backgroundColor
 
@@ -64,7 +64,7 @@ extension ConversationCell: ConfigurableView {
         }
     }
     
-    private func renderHasLastMessage(with model: ChannelEntity) {
+    private func renderHasLastMessage(with model: IChannelCellModel) {
         messageView.text = model.lastMessage ?? "!!! no last message"
         displayDateTime(with: model.lastActivity)
     }
