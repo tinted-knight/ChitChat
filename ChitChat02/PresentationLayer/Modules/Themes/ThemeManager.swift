@@ -18,7 +18,6 @@ class ThemeManager {
         current = theme
         let themeData = get()
         MessageCell.appearance().backgroundColor = themeData.backgroundColor
-        HeaderCell.appearance().backgroundColor = themeData.backgroundColor
         UILabel.appearance().textColor = themeData.textColor
         
         UITextView.appearance().textColor = themeData.textColor

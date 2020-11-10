@@ -17,6 +17,8 @@ class MessagesViewController: UIViewController {
     }
     
     var messageModel: IMessagesModel?
+    
+    var themeModel: IThemeModelNew?
 
     var messages: [MessageCellModel] = []
     
@@ -58,7 +60,7 @@ class MessagesViewController: UIViewController {
     }
     
     private func applyTheme() {
-        view.backgroundColor = ThemeManager.get().backgroundColor
+        view.backgroundColor = themeModel?.getThemeData().backgroundColor
     }
 
     @objc func inputNewMessage() {

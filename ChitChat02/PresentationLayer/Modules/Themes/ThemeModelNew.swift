@@ -53,6 +53,8 @@ class ThemeModelNew: IThemeModelNew {
         if theme != currentTheme {
             Log.arch("theme will save")
             themeService.save(theme: theme)
+            currentTheme = theme
+            applyCurrent()
         } else {
             Log.arch("no need to save")
         }
@@ -61,7 +63,6 @@ class ThemeModelNew: IThemeModelNew {
     func applyCurrent() {
         let themeData = getThemeData()
         MessageCell.appearance().backgroundColor = themeData.backgroundColor
-        HeaderCell.appearance().backgroundColor = themeData.backgroundColor
         UILabel.appearance().textColor = themeData.textColor
 
         UITextView.appearance().textColor = themeData.textColor

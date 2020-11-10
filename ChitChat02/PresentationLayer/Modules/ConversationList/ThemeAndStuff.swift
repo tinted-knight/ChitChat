@@ -12,8 +12,10 @@ import Foundation
 extension ChannelsViewController: IThemeModelDelegate {
     
     func apply(_ theme: ThemeModel) {
+        Log.arch("channels apply theme")
         applyTheme(theme)
     }
+    
     func applyTheme(_ value: ThemeModel) {
         channelsTableView.reloadData()
         

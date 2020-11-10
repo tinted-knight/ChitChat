@@ -11,7 +11,7 @@ import UIKit
 protocol ConfigurableView {
     associatedtype ConfigurationModel
     
-    func configure(with model: ConfigurationModel)
+    func configure(with model: ConfigurationModel, theme: IThemeModelNew)
 }
 
 private let emptyMessage = "No messages yet"
@@ -23,12 +23,6 @@ class ConversationCell: UITableViewCell {
     @IBOutlet weak var messageView: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     
-    // deprecated
-    private lazy var onlineColor: UIColor = UIColor.yellow.withAlphaComponent(0.2)
-    private lazy var offlineColor: UIColor = .white
-    
-    private lazy var boldMessage = UIFont.systemFont(ofSize: 15, weight: .bold)
-
     private lazy var defaultFont: UIFont = UIFont.systemFont(ofSize: 13, weight: .regular)
 
     private lazy var noMessageFont: UIFont = {
@@ -50,7 +44,7 @@ class ConversationCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        backgroundColor = ThemeManager.get().historyBgColor
+//        backgroundColor = ThemeManager.get().historyBgColor
         messageView.font = defaultFont
         super.prepareForReuse()
     }
@@ -59,8 +53,9 @@ class ConversationCell: UITableViewCell {
 
 extension ConversationCell: ConfigurableView {
     
-    func configure(with model: ChannelEntity) {
+    func configure(with model: ChannelEntity, theme: IThemeModelNew) {
         nameView.text = model.name
+        backgroundColor = theme.getThemeData().backgroundColor
 
         if let lastMessage = model.lastMessage, !lastMessage.isEmpty {
             renderHasLastMessage(with: model)

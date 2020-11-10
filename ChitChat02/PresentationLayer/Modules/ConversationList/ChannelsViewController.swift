@@ -47,7 +47,7 @@ class ChannelsViewController: UIViewController {
 }
 // MARK: - IChannelModelDelegate
 extension ChannelsViewController: IChannelModelDelegate {
-    func dataLoaded(_ dataSource: UITableViewDataSource) {
+    func dataLoaded() {
         channelModel?.frc.delegate = self
         channelsTableView.dataSource = self
         channelsTableView.delegate = self

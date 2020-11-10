@@ -50,8 +50,8 @@ class PresentationAssembly: IPresentationAssembly {
         guard let controller = MessagesViewController.instance() else {
             fatalError("Cannot instantiate MessagesViewController")
         }
-//        controller.messageModel = serviceAssembly.messageService(for: channel, userData: userData)
         controller.messageModel = getMessagesModel(for: channel)
+        controller.themeModel = getThemeModel
         return controller
     }
     

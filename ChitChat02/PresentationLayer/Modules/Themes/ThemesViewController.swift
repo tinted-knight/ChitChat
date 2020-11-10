@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol ThemesPickerDelegate {
-    func themePicked()
-}
-
 class ThemesViewController: UIViewController {
     
     static func instance() -> ThemesViewController? {
@@ -20,13 +16,6 @@ class ThemesViewController: UIViewController {
     }
     
     var themeModel: IThemeModelNew!
-    
-    var delegate: ThemesPickerDelegate?
-    
-//    var themePicked: ((Theme) -> Void)?
-//    var result: ((Theme, Bool) -> Void)?
-    
-    private var saveChoice = true
     
     @IBOutlet weak var buttonRed: UIButton!
     @IBOutlet weak var buttonYellow: UIButton!
@@ -60,8 +49,6 @@ class ThemesViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        result?(selectedTheme, saveChoice)
-        delegate?.themePicked()
         themeModel.picked(theme: selectedTheme)
 
         super.viewWillDisappear(animated)
@@ -109,7 +96,6 @@ class ThemesViewController: UIViewController {
     }
     
     @objc private func cancelOnTap() {
-        saveChoice = false
         revertTheme(to: activeTheme)
         navigationController?.popViewController(animated: true)
     }
@@ -134,7 +120,6 @@ class ThemesViewController: UIViewController {
         selectedImageView?.isChoosed(false)
         selectedTheme = value
         selectedImageView?.isChoosed(true)
-//        themePicked?(value)
     }
     
     private func revertTheme(to value: AppTheme) {

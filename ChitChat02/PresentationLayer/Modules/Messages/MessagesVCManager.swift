@@ -26,6 +26,7 @@ extension MessagesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = messageModel, let frc = messageModel?.frc else { return UITableViewCell() }
+        guard let theme = themeModel else { return UITableViewCell() }
         let message = frc.object(at: indexPath)
         let direction = model.direction(for: message)
 
@@ -39,7 +40,8 @@ extension MessagesViewController: UITableViewDataSource {
         cell.configure(with: MessageCellModel(text: message.content,
                                               date: message.created,
                                               sender: message.senderName,
-                                              direction: direction))
+                                              direction: direction),
+                       theme: theme)
 
         return cell
     }
@@ -98,11 +100,13 @@ extension MessagesViewController: NSFetchedResultsControllerDelegate {
                 guard let message = messageModel?.frc.object(at: indexPath) else { break }
                 guard let cell = messagesTableView.cellForRow(at: indexPath) as? MessageCell else { break }
                 guard let model = messageModel else { break }
+                guard let theme = themeModel else { break }
                 let direction = model.direction(for: message)
                 cell.configure(with: MessageCellModel(text: message.content,
                                                       date: message.created,
                                                       sender: message.senderName,
-                                                      direction: direction))
+                                                      direction: direction),
+                               theme: theme)
             }
         case .move:
             if let indexPath = indexPath {

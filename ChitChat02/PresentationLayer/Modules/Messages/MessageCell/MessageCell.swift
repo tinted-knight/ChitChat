@@ -41,17 +41,17 @@ class MessageCell: UITableViewCell {
 }
 
 extension MessageCell: ConfigurableView {
-    func configure(with model: MessageCellModel) {
+    func configure(with model: MessageCellModel, theme: IThemeModelNew) {
         message.text = model.text
         date.text = formatDateTime(with: model.date)
         switch model.direction {
         case .income:
-            background.backgroundColor = ThemeManager.get().incomeBgColor
-            message.textColor = ThemeManager.get().incomeTextColor
+            background.backgroundColor = theme.getThemeData().incomeBgColor
+            message.textColor = theme.getThemeData().incomeTextColor
             labelName.text = model.sender
         case .outcome:
-            background.backgroundColor = ThemeManager.get().outcomeBgColor
-            message.textColor = ThemeManager.get().outcomeTextColor
+            background.backgroundColor = theme.getThemeData().outcomeBgColor
+            message.textColor = theme.getThemeData().outcomeTextColor
         }
     }
 }
