@@ -19,6 +19,8 @@ protocol ICoreAssembly {
 
     var gcdDataManager: IDataManager { get }
 
+    var themeDataManager: IThemeDataManager { get }
+
     func remoteMessageStorage(for channel: ChannelEntity) -> IRemoteMessageStorage
 }
 
@@ -33,6 +35,8 @@ class CoreAssembly: ICoreAssembly {
 
     lazy var gcdDataManager: IDataManager = GCDDataManager()
 
+    lazy var themeDataManager: IThemeDataManager = ThemeDataManager()
+    
     func remoteMessageStorage(for channel: ChannelEntity) -> IRemoteMessageStorage {
         return RemoteMessageStorage(for: channel)
     }

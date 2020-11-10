@@ -33,6 +33,7 @@ class ServiceAssembly: IServiceAssembly {
     lazy var userDataService: IFirestoreUserService = FirestoreService(storage: self.coreAssembly.keyValueStorage)
     
     lazy var themeService: IThemeService = ThemeService(storage: self.coreAssembly.keyValueStorage,
+                                                        dataManager: self.coreAssembly.themeDataManager,
                                                         availableThemes: fakeThemeData)
     
     lazy var profileDataManager: IDataManagerService = SmartDataManagerService(gcdManager: self.coreAssembly.gcdDataManager,

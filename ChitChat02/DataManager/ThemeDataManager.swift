@@ -8,20 +8,20 @@
 
 import Foundation
 
-class ThemeDataManager {
+protocol IThemeDataManager {
+    func save(_ theme: AppThemeData)
+
+    func load(onDone: @escaping (AppThemeData) -> Void, onError: @escaping () -> Void)
+}
+
+class ThemeDataManager: IThemeDataManager {
     private let queue = DispatchQueue(label: "theme", qos: .utility)
-    
-    private let themeData: AppThemeData
-    
-    init(data: AppThemeData) {
-        self.themeData = data
-    }
     
     func save(_ theme: AppThemeData) {
         queue.async { [weak self] in
             guard let self = self else { return }
             do {
-                if let encoded = try? JSONEncoder().encode(self.themeData) {
+                if let encoded = try? JSONEncoder().encode(theme) {
                     try encoded.write(to: self.themeUrl())
                     applog("theme saved: \(theme.name)")
                 }
