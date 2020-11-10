@@ -46,9 +46,9 @@ extension MessagesViewController: UITableViewDataSource {
     private func cellReuseId(for direction: MessageDirection) -> String {
         switch direction {
         case .income:
-            return incomeCellId
+            return MessageCellModel.IncomeCellId
         case .outcome:
-            return outcomeCellId
+            return MessageCellModel.OutcomeCellId
         }
     }
 }

@@ -12,7 +12,7 @@ import CoreData
 class MessagesViewController: UIViewController {
 
     static func instance() -> MessagesViewController? {
-        let storyboard = UIStoryboard(name: "ConversationViewController", bundle: nil)
+        let storyboard = UIStoryboard(name: "MessagesViewController", bundle: nil)
         return storyboard.instantiateInitialViewController() as? MessagesViewController
     }
     
@@ -20,14 +20,8 @@ class MessagesViewController: UIViewController {
     
     var themeModel: IThemeModel?
 
-    var messages: [MessageCellModel] = []
-    
-    let incomeCellId = "income-cell-id"
-    let outcomeCellId = "outcome-cell-id"
-
     @IBOutlet weak var messagesTableView: UITableView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var emptyLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +37,12 @@ class MessagesViewController: UIViewController {
         loadingIndicator.hidesWhenStopped = true
         showLoading()
         
-        emptyLabel.isHidden = true
-        emptyLabel.text = "Looks like there are no messages in this channel"
-        
         title = messageModel?.channel.name ?? ""
         
-        messagesTableView.register(UINib(nibName: "IncomeMessageCell", bundle: nil), forCellReuseIdentifier: incomeCellId)
-        messagesTableView.register(UINib(nibName: "OutcomeMessageCell", bundle: nil), forCellReuseIdentifier: outcomeCellId)
+        messagesTableView.register(UINib(nibName: MessageCellModel.IncomeNib, bundle: nil),
+                                   forCellReuseIdentifier: MessageCellModel.IncomeCellId)
+        messagesTableView.register(UINib(nibName: MessageCellModel.OutcomeNib, bundle: nil),
+                                   forCellReuseIdentifier: MessageCellModel.OutcomeCellId)
 
         messagesTableView.dataSource = self
         messagesTableView.transform = CGAffineTransform(scaleX: 1, y: -1)
@@ -76,13 +69,11 @@ class MessagesViewController: UIViewController {
 extension MessagesViewController: IMessageModelDelegate {
     func dataLoaded() {
         messagesTableView.isHidden = false
-        emptyLabel.isHidden = true
         loadingIndicator.stopAnimating()
     }
 
     func showLoading() {
         messagesTableView.isHidden = true
-        emptyLabel.isHidden = true
         loadingIndicator.startAnimating()
     }
 }

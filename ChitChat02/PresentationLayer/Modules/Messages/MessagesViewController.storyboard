@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l9m-Aj-9NK">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,42 +13,29 @@
             <objects>
                 <viewController id="l9m-Aj-9NK" customClass="MessagesViewController" customModule="ChitChat02" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vrv-pi-pYq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LSv-3d-ITs">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="lIh-SK-GEm">
                                 <rect key="frame" x="197" y="438" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vri-KF-wxW">
-                                <rect key="frame" x="279" y="290" width="42" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Vri-KF-wxW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6VM-sg-ZBf" secondAttribute="leading" constant="16" id="0Nb-wb-iOR"/>
                             <constraint firstItem="LSv-3d-ITs" firstAttribute="leading" secondItem="6VM-sg-ZBf" secondAttribute="leading" id="D3h-uI-YSO"/>
                             <constraint firstItem="6VM-sg-ZBf" firstAttribute="bottom" secondItem="LSv-3d-ITs" secondAttribute="bottom" id="QR3-Im-2Py"/>
-                            <constraint firstItem="Vri-KF-wxW" firstAttribute="centerX" secondItem="vrv-pi-pYq" secondAttribute="centerX" id="SZn-dq-jha"/>
-                            <constraint firstItem="6VM-sg-ZBf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Vri-KF-wxW" secondAttribute="trailing" constant="16" id="Vth-6p-xCH"/>
                             <constraint firstItem="6VM-sg-ZBf" firstAttribute="trailing" secondItem="LSv-3d-ITs" secondAttribute="trailing" id="eSv-Fg-QSX"/>
                             <constraint firstItem="LSv-3d-ITs" firstAttribute="top" secondItem="6VM-sg-ZBf" secondAttribute="top" id="eVf-Z5-5D2"/>
-                            <constraint firstItem="Vri-KF-wxW" firstAttribute="centerY" secondItem="vrv-pi-pYq" secondAttribute="centerY" id="kZP-fO-naM"/>
-                            <constraint firstItem="Vri-KF-wxW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6VM-sg-ZBf" secondAttribute="top" constant="16" id="piN-NH-Abr"/>
-                            <constraint firstItem="6VM-sg-ZBf" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Vri-KF-wxW" secondAttribute="bottom" constant="16" id="x2v-7q-bqF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6VM-sg-ZBf"/>
                     </view>
                     <navigationItem key="navigationItem" title="Martha Craig" largeTitleDisplayMode="never" id="T60-2l-LuB"/>
                     <connections>
-                        <outlet property="emptyLabel" destination="Vri-KF-wxW" id="bIw-ia-RJB"/>
                         <outlet property="loadingIndicator" destination="lIh-SK-GEm" id="0zV-9Z-qfu"/>
                         <outlet property="messagesTableView" destination="LSv-3d-ITs" id="bmK-CE-jE6"/>
                     </connections>

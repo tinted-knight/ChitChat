@@ -37,3 +37,11 @@ class MessageCellModel: IMessageCellModel {
         }
     }
 }
+
+extension MessageCellModel {
+    static let IncomeCellId = "income-cell-id"
+    static let OutcomeCellId = "outcome-cell-id"
+    
+    static let IncomeNib = "IncomeMessageCell"
+    static let OutcomeNib = "OutcomeMessageCell"
+}
