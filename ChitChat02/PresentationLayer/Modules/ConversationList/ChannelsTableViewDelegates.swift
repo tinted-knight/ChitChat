@@ -111,7 +111,7 @@ extension ChannelsViewController: UITableViewDataSource {
 extension ChannelsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let channel = channelModel.frc.fetchedObjects?[indexPath.row] else { return }
-        Log.oldschool("openConversation for channel \(channel.name), id = \(channel.identifier)")
+        Log.coredata("openConversation for channel \(channel.name), id = \(channel.identifier)")
         let messages = presentationAssembly.messagesViewController(for: channel)
         navigationController?.pushViewController(messages, animated: true)
         tableView.deselectRow(at: indexPath, animated: false)
@@ -120,7 +120,7 @@ extension ChannelsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard let channel = channelModel.frc.fetchedObjects?[indexPath.row] else { return }
         if editingStyle == .delete {
-            Log.oldschool("delete row, \(channel.name)")
+            Log.coredata("delete row, \(channel.name)")
             channelModel.deleteChannel(channel)
         }
     }

@@ -43,7 +43,7 @@ class SaveDataOperation: ResultOperation {
     var value: Data?
     
     override func main() {
-        applog("operation save avatar")
+        Log.profile("operation save avatar")
         guard let to = to, !isCancelled, let value = value else {
             result = .error("save data error")
             return

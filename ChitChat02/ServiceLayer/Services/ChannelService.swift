@@ -70,26 +70,26 @@ class ChannelService: IChannelService {
     private func channelsListener() {
         remote.loadChannelList(
             onAdded: { [weak self] (channel) in
-                Log.newschool("fetchRemote channels, added \(channel.name), \(channel.lastMessage ?? "nil")")
+                Log.coredata("fetchRemote channels, added \(channel.name), \(channel.lastMessage ?? "nil")")
                 self?.insert(channel)
             }, onModified: { [weak self] (channel) in
-                Log.newschool("fetchRemote channels, modified \(channel.name), \(channel.lastMessage ?? "")")
+                Log.coredata("fetchRemote channels, modified \(channel.name), \(channel.lastMessage ?? "")")
                 self?.updateChannel(with: channel.identifier, message: channel.lastMessage, activity: channel.lastActivity)
             }, onRemoved: { [weak self] (channel) in
-                Log.newschool("fetchRemote channels, removed \(channel.name)")
+                Log.coredata("fetchRemote channels, removed \(channel.name)")
                 self?.deleteFromDB(with: channel.identifier)
             }, onError: onError(_:))
     }
     
     func addChannel(_ name: String) {
         remote.addChannel(name: name) { (success) in
-            Log.newschool("add channel \(success)")
+            Log.coredata("add channel \(success)")
         }
     }
     
     func deleteChannel(_ channel: ChannelEntity) {
         remote.deleteChannel(id: channel.identifier) { (success) in
-            Log.newschool("delete channel \(success)")
+            Log.coredata("delete channel \(success)")
         }
     }
     
@@ -103,7 +103,7 @@ class ChannelService: IChannelService {
             fromDb.filter { (entity) -> Bool in
                 !identifiers.contains(entity.identifier)
             }.forEach { (entity) in
-                Log.newschool("ready to delete channel \(entity.name)")
+                Log.coredata("ready to delete channel \(entity.name)")
                 viewContext.delete(entity)
             }
             localStorage.performDelete()
@@ -120,7 +120,7 @@ class ChannelService: IChannelService {
         do {
             let sacrifice = try viewContext.fetch(request)
             if !sacrifice.isEmpty {
-                Log.newschool("deleting channel \(sacrifice[0].name)")
+                Log.coredata("deleting channel \(sacrifice[0].name)")
                 viewContext.delete(sacrifice[0])
                 localStorage.performDelete()
             }
@@ -150,6 +150,6 @@ class ChannelService: IChannelService {
     }
     
     private func onError(_ message: String) {
-        Log.newschool(message)
+        Log.coredata(message)
     }
 }

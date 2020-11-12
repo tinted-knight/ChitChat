@@ -129,7 +129,7 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     }
     // MARK: - IDataManagerDelegate
     func onLoaded(_ model: UserModel) {
-        applog("profile load, \(model)")
+        Log.profile("profile load, \(model)")
         state = .hasLoaded
         user = model
         firestoreUserService.update(name: user.name)
@@ -143,14 +143,14 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
                         self?.delegate?.onLoaded()
                     }
                 } catch {
-                    applog("cannot convert avatar's Data to UIImage")
+                    Log.profile("cannot convert avatar's Data to UIImage")
                 }
             }
         }
     }
     
     func onLoadError(_ message: String) {
-        applog("profile load error")
+        Log.profile("profile load error")
         state = .hasLoaded
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.loadErrorAlert(title: "Похоже, что  ты новенький", message: "Введи свои данные и сохрани")
@@ -158,7 +158,7 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     }
     
     func onSaved() {
-        applog("profile saved")
+        Log.profile("profile saved")
         state = .hasSaved
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.onSaved()
@@ -166,7 +166,7 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     }
     
     func onSaveError(_ message: String) {
-        applog("profile save error")
+        Log.profile("profile save error")
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.onSaveError(message)
         }

@@ -13,10 +13,10 @@ class Log {
     
     private static var FIRE_ENABLED = false
     private static var PREFS_ENABLED = true
-    private static var OLDSCHOOL_ENABLED = false
-    private static var NEWSCHOOOL_ENABLED = false
+    private static var COREDATA_ENABLED = false
     private static var FRC_ENABLED = false
     private static var ARCH_ENABLED = true
+    private static var PROFILE_ENABLED = false
 
     static func arch(_ message: String) {
         log(message, ARCH_ENABLED)
@@ -26,6 +26,10 @@ class Log {
         log(message, FIRE_ENABLED)
     }
     
+    static func profile(_ message: String) {
+        log(message, PROFILE_ENABLED)
+    }
+
     static func prefs(_ message: String) {
         log(message, PREFS_ENABLED)
     }
@@ -34,12 +38,8 @@ class Log {
         log(message, FRC_ENABLED)
     }
 
-    static func oldschool(_ message: String) {
-        log(message, OLDSCHOOL_ENABLED)
-    }
-
-    static func newschool(_ message: String) {
-        log(message, NEWSCHOOOL_ENABLED)
+    static func coredata(_ message: String) {
+        log(message, COREDATA_ENABLED)
     }
 
     static func delimiter(_ title: String) {

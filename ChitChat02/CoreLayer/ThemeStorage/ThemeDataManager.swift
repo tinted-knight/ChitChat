@@ -23,10 +23,10 @@ class ThemeDataManager: IThemeDataManager {
             do {
                 if let encoded = try? JSONEncoder().encode(theme) {
                     try encoded.write(to: self.themeUrl())
-                    applog("theme saved: \(theme.name)")
+                    Log.profile("theme saved: \(theme.name)")
                 }
             } catch {
-                applog("save theme error")
+                Log.profile("save theme error")
             }
         }
     }
@@ -42,7 +42,7 @@ class ThemeDataManager: IThemeDataManager {
                 let theme = try JSONDecoder().decode(AppThemeData.self, from: data)
                 onDone(theme)
             } catch {
-                applog("error loading theme")
+                Log.profile("error loading theme")
                 onError()
             }
         }

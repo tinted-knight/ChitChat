@@ -61,7 +61,7 @@ class MessageService: IMessageService {
             Message.senderId: my.uuid
         ]
         remote.add(data: messageData) { (success) in
-            Log.newschool("message added \(success)")
+            Log.coredata("message added \(success)")
         }
     }
     
@@ -90,7 +90,7 @@ class MessageService: IMessageService {
         do {
             let toUpdate = try viewContext.fetch(request)
             toUpdate.forEach { (entity) in
-                Log.newschool("updating message \(entity.content.prefix(20))")
+                Log.coredata("updating message \(entity.content.prefix(20))")
                 if let content = messages.first(where: { $0.documentId == entity.documentId })?.content {
                     entity.content = content
                 }
@@ -108,7 +108,7 @@ class MessageService: IMessageService {
         do {
             let sacrifice = try viewContext.fetch(request)
             sacrifice.forEach { (entity) in
-                Log.newschool("deleting message \(entity.content.prefix(20))")
+                Log.coredata("deleting message \(entity.content.prefix(20))")
                 viewContext.delete(entity)
             }
             local.performDelete()
@@ -116,6 +116,6 @@ class MessageService: IMessageService {
     }
 
     private func onError(_ message: String) {
-        Log.newschool(message)
+        Log.coredata(message)
     }
 }

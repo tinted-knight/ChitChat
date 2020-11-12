@@ -195,7 +195,6 @@
 				39A2846D2558141B003C2484 /* ServiceLayer */,
 				39A2846C25581401003C2484 /* CoreLayer */,
 				3958B3BA253B00E700801E6D /* GoogleService-Info.plist */,
-				39B7FDC02530AFCA00B5F280 /* DataManager */,
 				3995892C25234DF7003C62C8 /* fonts */,
 				39E4D49D2523478A00BF6BC4 /* tools */,
 				394F8679250E518A00B703B3 /* Main.storyboard */,
@@ -252,6 +251,7 @@
 		39A2846C25581401003C2484 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
+				39F76FCF255D721A00AD526E /* ThemeStorage */,
 				39A284762558216F003C2484 /* Assembly */,
 				39B6A01D255949EF00EFE36E /* ProfileStorage */,
 				39A2847725582177003C2484 /* LocalStorage */,
@@ -384,14 +384,6 @@
 			path = ProfileStorage;
 			sourceTree = "<group>";
 		};
-		39B7FDC02530AFCA00B5F280 /* DataManager */ = {
-			isa = PBXGroup;
-			children = (
-				39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */,
-			);
-			path = DataManager;
-			sourceTree = "<group>";
-		};
 		39BDCFB72527614400ECECCC /* Themes */ = {
 			isa = PBXGroup;
 			children = (
@@ -467,6 +459,14 @@
 				3994BFB325248EB6001AB5E7 /* MessageCell.swift */,
 			);
 			path = MessageCell;
+			sourceTree = "<group>";
+		};
+		39F76FCF255D721A00AD526E /* ThemeStorage */ = {
+			isa = PBXGroup;
+			children = (
+				39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */,
+			);
+			path = ThemeStorage;
 			sourceTree = "<group>";
 		};
 		421B2EFD5D2930D3B39F3217 /* Pods */ = {

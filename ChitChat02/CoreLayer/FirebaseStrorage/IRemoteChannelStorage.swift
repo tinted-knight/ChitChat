@@ -55,7 +55,7 @@ class RemoteChannelStorage: IRemoteChannelStorage {
     func loadOnce(onData: @escaping ([Channel]) -> Void) {
         channels.order(by: Channel.name, descending: false).getDocuments { (snapshot, error) in
             if let error = error {
-                Log.newschool(error.localizedDescription)
+                Log.coredata(error.localizedDescription)
                 return
             }
             guard let snapshot = snapshot else { return }
@@ -65,7 +65,7 @@ class RemoteChannelStorage: IRemoteChannelStorage {
     }
     
     func getChannel(id channelId: String, onData: @escaping (Channel) -> Void, onError: @escaping (String) -> Void) {
-        Log.oldschool(#function)
+        Log.coredata(#function)
         channels.document(channelId).getDocument { (snapshot, error) in
             guard let snapshot = snapshot else { fatalError("channel is nil") }
             if let error = error {
@@ -73,7 +73,7 @@ class RemoteChannelStorage: IRemoteChannelStorage {
                 return
             }
             if let channel = Channel(from: snapshot) {
-                Log.oldschool("getChannel::onData, \(channel.name)")
+                Log.coredata("getChannel::onData, \(channel.name)")
                 onData(channel)
             }
         }

@@ -26,7 +26,7 @@ class GCDDataManager: IDataManager {
     private var avatarResult: SaveResult = .success
 
     func save(name: String?, description: String?, avatar: Data?) {
-        applog("gcd save")
+        Log.profile("gcd save")
 
         let group = DispatchGroup()
         if let avatar = avatar {
@@ -52,7 +52,7 @@ class GCDDataManager: IDataManager {
     }
 
     func load() {
-        applog("gcd load")
+        Log.profile("gcd load")
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
             guard let nameUrl = self?.nameUrl(), let descriptionUrl = self?.descriptionUrl() else {
                 self?.delegate?.onLoadError("load: find storage error")
@@ -60,9 +60,9 @@ class GCDDataManager: IDataManager {
             }
             do {
                 let name = try String(contentsOf: nameUrl)
-                applog("gcd load name: \(name)")
+                Log.profile("gcd load name: \(name)")
                 let description = try String(contentsOf: descriptionUrl)
-                applog("gcd load desc: \(description)")
+                Log.profile("gcd load desc: \(description)")
 
                 let loaded = UserModel(name: name, description: description, avatar: self?.avatarUrl())
                 self?.delegate?.onLoaded(loaded)
@@ -73,7 +73,7 @@ class GCDDataManager: IDataManager {
     }
     
     private func performAvatarTask(_ group: DispatchGroup, avatar: Data) {
-        applog("avatar task")
+        Log.profile("avatar task")
         group.enter()
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
             guard let avatarUrl = self?.avatarUrl() else {
@@ -93,7 +93,7 @@ class GCDDataManager: IDataManager {
     }
 
     private func perforNameTask(_ group: DispatchGroup, name: String) {
-        applog("name task: \(name)")
+        Log.profile("name task: \(name)")
         group.enter()
         queue.asyncAfter(deadline: .now() + doubleDelay) { [weak self] in
             guard let nameUrl = self?.nameUrl() else {
@@ -114,7 +114,7 @@ class GCDDataManager: IDataManager {
     }
 
     private func perforDescriptionTask(_ group: DispatchGroup, description: String) {
-        applog("description task")
+        Log.profile("description task")
         group.enter()
         queue.asyncAfter(deadline: .now() + fakeDelay) { [weak self] in
             guard let descUrl = self?.descriptionUrl() else {

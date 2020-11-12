@@ -43,7 +43,7 @@ class NewSchoolStorage: IStorage {
                 try container.viewContext.obtainPermanentIDs(for: Array(container.viewContext.insertedObjects))
                 try container.viewContext.save()
             } catch {
-                Log.newschool(error.localizedDescription)
+                Log.coredata(error.localizedDescription)
             }
         }
     }
@@ -59,7 +59,7 @@ class NewSchoolStorage: IStorage {
                     try context.obtainPermanentIDs(for: Array(context.insertedObjects))
                     try context.save()
                 } catch {
-                    Log.newschool("bg save error, \(error.localizedDescription)")
+                    Log.coredata("bg save error, \(error.localizedDescription)")
                 }
             }
         }
@@ -106,7 +106,7 @@ class LocalCache {
                 try container.viewContext.obtainPermanentIDs(for: Array(container.viewContext.insertedObjects))
                 try container.viewContext.save()
             } catch {
-                Log.newschool(error.localizedDescription)
+                Log.coredata(error.localizedDescription)
             }
         }
     }
@@ -121,7 +121,7 @@ class LocalCache {
                     try context.obtainPermanentIDs(for: Array(context.insertedObjects))
                     try context.save()
                 } catch {
-                    Log.newschool("bg save error, \(error.localizedDescription)")
+                    Log.coredata("bg save error, \(error.localizedDescription)")
                 }
             }
         }

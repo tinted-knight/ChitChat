@@ -17,7 +17,7 @@ class OperationDataManager: IDataManager {
     private var avatarOperation: ResultOperation = ResultOperation()
     
     func save(name: String?, description: String?, avatar: Data?) {
-        applog("operation save")
+        Log.prefs("operation save")
         if let name = name {
             nameOperation = saveStringOperation(name, to: nameUrl())
         }
@@ -73,7 +73,7 @@ class OperationDataManager: IDataManager {
     }
     
     func load() {
-        applog("operation load")
+        Log.prefs("operation load")
         let nameOp = loadOperation(from: nameUrl())
         let descOp = loadOperation(from: descriptionUrl())
         

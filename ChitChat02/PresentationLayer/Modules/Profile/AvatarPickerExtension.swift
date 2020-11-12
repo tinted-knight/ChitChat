@@ -56,7 +56,7 @@ extension ProfileViewController {
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
-        applog("\(info[.imageURL] ?? "nothing")")
+        Log.profile("\(info[.imageURL] ?? "nothing")")
         guard let image = info[.originalImage] as? UIImage else {
             showAlert(title: "Error", message: "Something has gone very wrong")
             return

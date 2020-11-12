@@ -9,14 +9,6 @@
 import UIKit
 import Firebase
 
-let APP_LOG_ENABLED = true
-
-func applog(_ message: String) {
-    if APP_LOG_ENABLED {
-        print(message)
-    }
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

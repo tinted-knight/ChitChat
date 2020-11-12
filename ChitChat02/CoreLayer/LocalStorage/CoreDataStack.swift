@@ -94,7 +94,7 @@ extension CoreDataStack {
                 do {
                     try context.obtainPermanentIDs(for: Array(context.insertedObjects))
                 } catch {
-                    Log.oldschool("obtainPermanentIDs error")
+                    Log.coredata("obtainPermanentIDs error")
                 }
                 self?.performSave(in: context)
             }
@@ -142,17 +142,17 @@ extension CoreDataStack {
         
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>,
             inserts.count > 0 {
-            Log.oldschool("Added objects: \(inserts.count)")
+            Log.coredata("Added objects: \(inserts.count)")
         }
         
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>,
             updates.count > 0 {
-            Log.oldschool("Updated objects: \(updates.count)")
+            Log.coredata("Updated objects: \(updates.count)")
         }
         
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>,
             deletes.count > 0 {
-            Log.oldschool("Deleted objects: \(deletes.count)")
+            Log.coredata("Deleted objects: \(deletes.count)")
         }
     }
     

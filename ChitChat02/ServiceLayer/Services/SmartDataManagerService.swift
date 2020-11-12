@@ -54,7 +54,7 @@ class SmartDataManagerService: IDataManagerService {
     }
 
     func save(user model: UserModel, avatar: Data? = nil, with type: DataManagerType) {
-        applog("smart will save \(model)")
+        Log.profile("smart will save \(model)")
         
         lastSavedUser = model
         lastSavedAvatar = avatar
@@ -86,23 +86,23 @@ class SmartDataManagerService: IDataManagerService {
 
 extension SmartDataManagerService: IDataManagerDelegate {
     func onLoaded(_ model: UserModel) {
-        applog("smart load, \(model)")
+        Log.profile("smart load, \(model)")
         user = model
         delegate?.onLoaded(model)
     }
     
     func onLoadError(_ message: String) {
-        applog("smart load error")
+        Log.profile("smart load error")
         delegate?.onLoadError(message)
     }
     
     func onSaved() {
-        applog("smart saved")
+        Log.profile("smart saved")
         delegate?.onSaved()
     }
     
     func onSaveError(_ message: String) {
-        applog("smart save error")
+        Log.profile("smart save error")
         delegate?.onSaveError(message)
     }
 }
