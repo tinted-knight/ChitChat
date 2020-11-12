@@ -95,7 +95,7 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     }
     
     func retry() {
-        //
+        profileService.retry()
     }
     
     func endEditing(name: String?, description: String, avatar: UIImage?) {

@@ -95,9 +95,19 @@ extension ProfileViewController {
             buttonUserEdit.isEnabled = false
             textUserName.isEnabled = false
             textUserDescription.isEditable = false
+            
+            textUserName.isHidden = true
+            textUserDescription.isHidden = true
+            profileImageView.isHidden = true
+            buttonEditPicture.isHidden = true
         } else {
             activityIndicator.stopAnimating()
             buttonUserEdit.isEnabled = true
+
+            textUserName.isHidden = false
+            textUserDescription.isHidden = false
+            profileImageView.isHidden = false
+            buttonEditPicture.isHidden = false
         }
     }
 }

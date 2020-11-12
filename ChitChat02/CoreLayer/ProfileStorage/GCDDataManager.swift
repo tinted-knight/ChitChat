@@ -83,7 +83,6 @@ class GCDDataManager: IDataManager {
             }
             do {
                 try avatar.write(to: avatarUrl)
-                //                    avatarResult = .error
                 self?.avatarResult = .success
                 group.leave()
             } catch {
