@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AvatarCollectionViewController" customModule="ChitChat02" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="02R-C8-w9V" id="3uU-52-KKQ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="yh3-PM-MVS"/>
             </connections>
         </placeholder>
@@ -18,17 +19,32 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AvatarCollection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGS-tj-EXo">
-                    <rect key="frame" x="144.5" y="437.5" width="125" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="02R-C8-w9V">
+                    <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ehr-2H-90S">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVR-In-YXz">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <items>
+                        <navigationItem title="AvatarCollection" id="3g7-ZG-mZD"/>
+                    </items>
+                </navigationBar>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="DGS-tj-EXo" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="A2e-gn-akr"/>
-                <constraint firstItem="DGS-tj-EXo" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iGr-SI-geh"/>
+                <constraint firstItem="02R-C8-w9V" firstAttribute="top" secondItem="sVR-In-YXz" secondAttribute="bottom" id="8rk-Kb-ECg"/>
+                <constraint firstItem="sVR-In-YXz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="GGF-H1-lBc"/>
+                <constraint firstItem="02R-C8-w9V" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="LUq-Jx-BoJ"/>
+                <constraint firstItem="sVR-In-YXz" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="TEv-yO-gZY"/>
+                <constraint firstItem="sVR-In-YXz" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="V9T-pB-0QP"/>
+                <constraint firstItem="02R-C8-w9V" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="hK9-Vu-ck0"/>
+                <constraint firstItem="02R-C8-w9V" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="zN7-S0-1VP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="132" y="154"/>

@@ -28,6 +28,8 @@
 		3958B3C1253B708B00801E6D /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3C0253B708B00801E6D /* AlertViewController.swift */; };
 		395BB5372562753600136F57 /* AvatarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB5362562753600136F57 /* AvatarCollectionViewController.swift */; };
 		395BB5392562771800136F57 /* AvatarCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 395BB5382562771800136F57 /* AvatarCollectionViewController.xib */; };
+		395BB53C2562833C00136F57 /* AvatarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB53A2562833C00136F57 /* AvatarViewCell.swift */; };
+		395BB53D2562833C00136F57 /* AvatarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 395BB53B2562833C00136F57 /* AvatarViewCell.xib */; };
 		396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */; };
 		397214B125587693001A8B89 /* FirestoreUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B025587693001A8B89 /* FirestoreUser.swift */; };
 		397214B3255876D9001A8B89 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B2255876D8001A8B89 /* FirestoreService.swift */; };
@@ -101,6 +103,8 @@
 		3958B3C0253B708B00801E6D /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		395BB5362562753600136F57 /* AvatarCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewController.swift; sourceTree = "<group>"; };
 		395BB5382562771800136F57 /* AvatarCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvatarCollectionViewController.xib; sourceTree = "<group>"; };
+		395BB53A2562833C00136F57 /* AvatarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarViewCell.swift; sourceTree = "<group>"; };
+		395BB53B2562833C00136F57 /* AvatarViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvatarViewCell.xib; sourceTree = "<group>"; };
 		396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		397214B025587693001A8B89 /* FirestoreUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUser.swift; sourceTree = "<group>"; };
 		397214B2255876D8001A8B89 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
@@ -227,6 +231,8 @@
 			children = (
 				395BB5362562753600136F57 /* AvatarCollectionViewController.swift */,
 				395BB5382562771800136F57 /* AvatarCollectionViewController.xib */,
+				395BB53A2562833C00136F57 /* AvatarViewCell.swift */,
+				395BB53B2562833C00136F57 /* AvatarViewCell.xib */,
 			);
 			path = AvatarCollection;
 			sourceTree = "<group>";
@@ -574,6 +580,7 @@
 				394F867D250E518A00B703B3 /* Assets.xcassets in Resources */,
 				394F867B250E518A00B703B3 /* Main.storyboard in Resources */,
 				39B6A01C2559480400EFE36E /* ProfileViewController.storyboard in Resources */,
+				395BB53D2562833C00136F57 /* AvatarViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,6 +694,7 @@
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
 				39ED61152521F76E006D8E0A /* ChannelCell.swift in Sources */,
 				39A284832558511F003C2484 /* IRemoteChannelStorage.swift in Sources */,
+				395BB53C2562833C00136F57 /* AvatarViewCell.swift in Sources */,
 				3948F9CA253B942600465D02 /* ThemeAndStuff.swift in Sources */,
 				39B7FDC22530AFF100B5F280 /* OperationDataManager.swift in Sources */,
 				393AEDE1254F3A270028B893 /* NewSchoolCoreData.swift in Sources */,
