@@ -15,7 +15,7 @@ enum ChannelError: Error {
 
 // MARK: Channel
 struct Channel: Hashable {
-    let indentifier: String
+    let identifier: String
     let name: String
     let lastMessage: String?
     let lastActivity: Date?
@@ -28,14 +28,28 @@ struct Channel: Hashable {
         let lastActivity = timestamp.dateValue()
         let lastMessage = document.data()[Channel.lastMessage] as? String
         
-        self.indentifier = id
+        self.identifier = id
         self.name = name
         self.lastMessage = lastMessage
         self.lastActivity = lastActivity
     }
     
+    init?(from document: DocumentSnapshot) {
+        guard let name = document.data()?[Channel.name] as? String else { return nil }
+        guard let timestamp = document.data()?[Channel.lastActivity] as? Timestamp else { return nil }
+
+        let id: String = document.documentID
+        let lastActivity = timestamp.dateValue()
+        let lastMessage = document.data()?[Channel.lastMessage] as? String
+        
+        self.identifier = id
+        self.name = name
+        self.lastMessage = lastMessage
+        self.lastActivity = lastActivity
+    }
+
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.indentifier)
+        hasher.combine(self.identifier)
     }
 }
 

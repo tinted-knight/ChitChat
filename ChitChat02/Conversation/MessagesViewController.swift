@@ -19,8 +19,6 @@ class MessagesViewController: UIViewController {
     var messageManager: MessageManager?
     var myData: UserData?
     
-    var onNewMessages: ((ChannelEntity) -> Void)?
-    
     var messages: [MessageCellModel] = []
     
     private let nonameContact = "Noname"

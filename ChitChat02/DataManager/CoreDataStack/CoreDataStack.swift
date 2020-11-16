@@ -59,11 +59,11 @@ class CoreDataStack {
         return context
     }()
     
-    private lazy var mainContext: NSManagedObjectContext = {
+    lazy var mainContext: NSManagedObjectContext = {
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.parent = self.writerContext
         context.automaticallyMergesChangesFromParent = true
-        context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context
     }()
     
@@ -71,7 +71,7 @@ class CoreDataStack {
         let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         context.parent = self.mainContext
         context.automaticallyMergesChangesFromParent = true
-        context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context
     }
 
@@ -83,35 +83,19 @@ class CoreDataStack {
         return context
     }
 }
-// MARK: Load
-extension CoreDataStack {
-    func load(_ completion: @escaping ([ChannelEntity: [MessageEntity]]) -> Void) {
-        mainContext.perform {
-            do {
-                let channels = try self.mainContext.fetch(ChannelEntity.fetchRequest()) as? [ChannelEntity] ?? []
-                Log.oldschool("channels loaded: \(channels.count)")
-                let messages = try self.mainContext.fetch(MessageEntity.fetchRequest()) as? [MessageEntity] ?? []
-                Log.oldschool("messages loaded: \(messages.count)")
-                var result: [ChannelEntity: [MessageEntity]] = [:]
-                channels.forEach { (channel) in
-                    let filtered = messages.filter { $0.channel.identifier == channel.identifier }
-                    result[channel] = filtered
-                }
-                completion(result)
-            } catch {
-                fatalError(error.localizedDescription)
-            }
-        }
-    }
-}
 // MARK: Save
 extension CoreDataStack {
-    func performSave(_ block:@escaping (NSManagedObjectContext) -> Void) {
+    func performSave(_ block: @escaping (NSManagedObjectContext) -> Void) {
         let context = saveContext()
         context.perform { [weak self] in
-            Log.oldschool("= isMainThread: \(Thread.isMainThread)")
+//            Log.oldschool("= isMainThread: \(Thread.isMainThread)")
             block(context)
             if context.hasChanges {
+                do {
+                    try context.obtainPermanentIDs(for: Array(context.insertedObjects))
+                } catch {
+                    Log.oldschool("obtainPermanentIDs error")
+                }
                 self?.performSave(in: context)
             }
         }
@@ -119,7 +103,7 @@ extension CoreDataStack {
     
     private func performSave(in context: NSManagedObjectContext) {
         context.performAndWait {
-            Log.oldschool("=|= isMainThread: \(Thread.isMainThread)")
+//            Log.oldschool("=|= isMainThread: \(Thread.isMainThread)")
             // вот здесь иногда выскакивает mainThread, видимо когда исполняется на mainContext
             do {
                 try context.save()
@@ -127,6 +111,15 @@ extension CoreDataStack {
             } catch {
                 assertionFailure(error.localizedDescription)
             }
+        }
+    }
+    
+    func delete(_ channel: ChannelEntity) {
+        mainContext.delete(channel)
+        do {
+            try mainContext.save()
+        } catch {
+            fatalError("cannot delete with mainContext")
         }
     }
 }

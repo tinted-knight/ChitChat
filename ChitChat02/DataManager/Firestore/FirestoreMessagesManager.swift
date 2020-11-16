@@ -8,58 +8,58 @@
 
 import Foundation
 import Firebase
+import CoreData
 
-class FirestoreMessageReader: FirestoreDataManager, MessagesReader {
-
-    private let channel: Channel
+class FirestoreMessageManager: FirestoreDataManager, RemoteMessageManager {
+    
+    private let viewContext: NSManagedObjectContext
+    private let channel: ChannelEntity
 
     var channelMessages: CollectionReference {
-        return db.collection(Channel.path).document(channel.indentifier).collection(Message.path)
+        return db.collection(Channel.path).document(channel.identifier).collection(Message.path)
     }
 
-    init(for channel: Channel) {
+    init(for channel: ChannelEntity, with context: NSManagedObjectContext) {
+        self.viewContext = context
         self.channel = channel
     }
-
-    func loadMessageList(onData: @escaping ([Message]) -> Void, onError: @escaping (String) -> Void) {
-        Log.fire("\(#function) from \(channel.name)")
+    
+    func loadMessageList(onAdded: @escaping ([Message]) -> Void,
+                         onModified: @escaping ([Message]) -> Void,
+                         onRemoved: @escaping ([Message]) -> Void,
+                         onError: @escaping (String) -> Void) {
         channelMessages.order(by: Message.created, descending: true).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 onError(error.localizedDescription)
                 return
             }
+            guard let snapshot = snapshot else { return }
 
-            let messages: [Message] = snapshot?.documents
-                .compactMap({ (document) in Message(from: document)}) ?? []
+            let added: [Message] = snapshot.documentChanges
+                .filter { (diff) in diff.type == .added}
+                .compactMap { Message(from: $0.document) }
+            if !added.isEmpty { onAdded(added)}
 
-            Log.fire("\(messages.count) valid messages of total \(snapshot?.documents.count ?? 0)")
-            onData(messages)
+            let modified: [Message] = snapshot.documentChanges
+                .filter { (diff) in diff.type == .modified}
+                .compactMap { Message(from: $0.document) }
+            if !modified.isEmpty { onModified(modified) }
+            
+            let removed: [Message] = snapshot.documentChanges
+                .filter { (diff) in diff.type == .removed}
+                .compactMap { Message(from: $0.document) }
+            if !removed.isEmpty { onRemoved(removed) }
         }
     }
-}
 
-class FirestoreMessageManager: FirestoreMessageReader, MessagesManager {
-    
-    private let userData: UserData
-
-    init(for channel: Channel, me user: UserData) {
-        self.userData = user
-        super.init(for: channel)
-    }
-    
-    func add(message: String) {
-        let newMessageData: [String: Any] = [
-            Message.content: message,
-            Message.created: Timestamp(date: Date()),
-            Message.senderName: userData.name,
-            Message.senderId: userData.uuid
-        ]
-        channelMessages.addDocument(data: newMessageData) { (error) in
+    func add(data: [String: Any], completion: @escaping (Bool) -> Void) {
+        channelMessages.addDocument(data: data) { (error) in
             if let error = error {
                 Log.fire("adding message error: \(error.localizedDescription)")
-                return
+                completion(false)
             } else {
                 Log.fire("adding message success")
+                completion(true)
             }
         }
     }

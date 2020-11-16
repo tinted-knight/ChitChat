@@ -14,6 +14,8 @@ class Log {
     private static var FIRE_ENABLED = false
     private static var PREFS_ENABLED = false
     private static var OLDSCHOOL_ENABLED = true
+    private static var NEWSCHOOOL_ENABLED = true
+    private static var FRC_ENABLED = false
 
     static func fire(_ message: String) {
         log(message, FIRE_ENABLED)
@@ -23,10 +25,18 @@ class Log {
         log(message, PREFS_ENABLED)
     }
     
+    static func frc(_ message: String) {
+        log(message, FRC_ENABLED)
+    }
+
     static func oldschool(_ message: String) {
         log(message, OLDSCHOOL_ENABLED)
     }
-    
+
+    static func newschool(_ message: String) {
+        log(message, NEWSCHOOOL_ENABLED)
+    }
+
     static func delimiter(_ title: String) {
         log("", OVERALL)
         log("/_/_/_/_/_/_/_/_/\(title)_/_/_/_/_/_/_/_/_/_/", OVERALL)

@@ -10,33 +10,15 @@ import Foundation
 import Firebase
 
 extension ConversationListViewController {
-    func loadChannelList() {
-        channelsManager.loadChannelList(onData: { [weak self] (values) in
-            guard let self = self else { return }
-
-            if !values.isEmpty {
-                self.channels = values
-            } else {
-                self.showEmpty()
-                return
-            }
-            self.channelsTableView.reloadData()
-            self.showLoaded()
-        }, onError: { [weak self] error in
-            self?.showAlert(title: "Channel load error", message: error)
-            self?.showError(error)
-        })
-    }
-    
     @objc func inputNewChannelName() {
         inputAlert(title: "New channel", message: "Input channel name") { [weak self] (text) in
             if !text.isEmpty {
-                self?.channelsManager.addChannel(name: text)
+                self?.channelsManager?.addChannel(name: text)
             }
         }
     }
 }
-// MARK: States loading, loaded, error, empty
+// MARK: - View states
 extension ConversationListViewController {
     func showLoading() {
         channelsTableView.isHidden = true
@@ -55,19 +37,6 @@ extension ConversationListViewController {
         channelsTableView.isHidden = false
         emptyLabel.isHidden = true
         loadingIndicator.stopAnimating()
-        processCoreData()
-    }
-    
-    func processCoreData() {
-        coreDataManager.checkSavedData { [weak self] (chatList) in
-            Log.oldschool("checkSavedData: ")
-            if !chatList.isEmpty {
-                Log.oldschool("     NOT empty")
-            } else {
-                Log.oldschool("     empty")
-            }
-            self?.coreDataManager.loadFromNetAndSaveLocally()
-        }
     }
     
     func showEmpty() {

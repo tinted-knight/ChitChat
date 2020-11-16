@@ -19,22 +19,13 @@ class ConversationListViewController: UIViewController {
     
     private lazy var simpleSectionHeader: UIView = UILabel()
 
-    var channels: [Channel] = []
-    
     var currentTheme: Theme = .black
     let themeDataManager = ThemeDataManager()
     
     var myData: UserData?
     
-    var channelsManager: ChannelsManager = FirestoreChannelManager()
-    
-    lazy var coreDataManager: CoreDataManager = {
-        guard let userData = self.myData else {
-            fatalError("myData is nil")
-        }
-       return CoreDataManager(coreDataStack: CoreDataStack(),
-                              channelsManager: FirestoreChannelManager())
-    }()
+    var channelsManager: ChannelManager?
+    let newSchool = NewSchoolCoreData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +34,10 @@ class ConversationListViewController: UIViewController {
         myData = loadUserData()
         
         prepareUi()
-        loadChannelList()
+        newSchool.createContainer { [weak self] (container) in
+            self?.channelsManager = SmartChannelManager(container)
+            self?.loadFromCache()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,25 +118,33 @@ extension ConversationListViewController {
 // MARK: UITableViewDataSource
 extension ConversationListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let channel = channelsManager?.frc.object(at: indexPath) else { return UITableViewCell() }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
             as? ConversationCell else {
                 return UITableViewCell()
         }
-        
-        cell.configure(with: channels[indexPath.row])
+
+        cell.configure(with: channel)
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        guard let sections = channelsManager?.frc.sections else { return 0 }
+        return sections.count
     }
-    
+
     private func simpleHeader(_ text: String) -> UIView {
         let view = UILabel()
         view.text = text
         return view
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = channelsManager?.frc.sections else { return nil }
+        return sections[section].name
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: headerReuseId) as? HeaderCell else {
             return simpleHeader("Channels")
@@ -150,7 +152,7 @@ extension ConversationListViewController: UITableViewDataSource {
         cell.configure(with: "Channels")
         return cell
     }
-    
+
     private func buildSectionHeader(_ tableView: UITableView, with text: String) -> UIView {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: headerReuseId) as? HeaderCell else {
             return simpleHeader("Channels")
@@ -160,13 +162,29 @@ extension ConversationListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return channels.count
+        guard let sections = channelsManager?.frc.sections else { return 0 }
+        return sections[section].numberOfObjects
     }
 }
 // MARK: UITableViewDelegate
 extension ConversationListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        openConversationScreen(for: channels[indexPath.row])
+        guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
+        guard let container = newSchool.container else { return }
+        guard let userData = myData else { return }
+        Log.oldschool("openConversation for channel \(channel.name), id = \(channel.identifier)")
+        openConversationScreen(for: channel,
+                               with: SmartMessageManager(for: channel,
+                                                         me: userData,
+                                                         container: container))
         tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let channel = channelsManager?.frc.fetchedObjects?[indexPath.row] else { return }
+        if editingStyle == .delete {
+            Log.oldschool("delete row, \(channel.name)")
+            channelsManager?.deleteChannel(channel)
+        }
     }
 }
