@@ -13,12 +13,19 @@ class AvatarViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var author: UILabel!
     
+    private(set) var hasLoaded: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.author.textColor = .white
     }
 
+    override func prepareForReuse() {
+        hasLoaded = false
+        super.prepareForReuse()
+    }
+    
 }
 
 extension AvatarViewCell {
@@ -30,6 +37,7 @@ extension AvatarViewCell {
             Log.net("cell image id = \(item.id)")
             if let image = image {
                 self?.image.image = image
+                self?.hasLoaded = true
             }
         }
     }

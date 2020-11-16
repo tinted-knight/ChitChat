@@ -68,7 +68,7 @@ extension AvatarCollectionViewController: UICollectionViewDataSource {
 extension AvatarCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? AvatarViewCell else { return }
-        guard let image = cell.image.image else { return }
+        guard cell.hasLoaded, let image = cell.image.image else { return }
         delegate?.onPicked(image)
         dismiss(animated: true, completion: nil)
     }
