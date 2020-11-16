@@ -26,6 +26,8 @@
 		3958B3BD253B284700801E6D /* MessagesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3958B3BC253B284700801E6D /* MessagesViewController.storyboard */; };
 		3958B3BF253B4CFA00801E6D /* MessagesVCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3BE253B4CFA00801E6D /* MessagesVCManager.swift */; };
 		3958B3C1253B708B00801E6D /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3C0253B708B00801E6D /* AlertViewController.swift */; };
+		395BB5372562753600136F57 /* AvatarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB5362562753600136F57 /* AvatarCollectionViewController.swift */; };
+		395BB5392562771800136F57 /* AvatarCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 395BB5382562771800136F57 /* AvatarCollectionViewController.xib */; };
 		396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */; };
 		397214B125587693001A8B89 /* FirestoreUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B025587693001A8B89 /* FirestoreUser.swift */; };
 		397214B3255876D9001A8B89 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B2255876D8001A8B89 /* FirestoreService.swift */; };
@@ -97,6 +99,8 @@
 		3958B3BC253B284700801E6D /* MessagesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MessagesViewController.storyboard; sourceTree = "<group>"; };
 		3958B3BE253B4CFA00801E6D /* MessagesVCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVCManager.swift; sourceTree = "<group>"; };
 		3958B3C0253B708B00801E6D /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		395BB5362562753600136F57 /* AvatarCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewController.swift; sourceTree = "<group>"; };
+		395BB5382562771800136F57 /* AvatarCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvatarCollectionViewController.xib; sourceTree = "<group>"; };
 		396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		397214B025587693001A8B89 /* FirestoreUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUser.swift; sourceTree = "<group>"; };
 		397214B2255876D8001A8B89 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
@@ -218,9 +222,19 @@
 			path = entities;
 			sourceTree = "<group>";
 		};
+		395BB5352562750D00136F57 /* AvatarCollection */ = {
+			isa = PBXGroup;
+			children = (
+				395BB5362562753600136F57 /* AvatarCollectionViewController.swift */,
+				395BB5382562771800136F57 /* AvatarCollectionViewController.xib */,
+			);
+			path = AvatarCollection;
+			sourceTree = "<group>";
+		};
 		396F5EA32517AF1F0070F2BD /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				395BB5352562750D00136F57 /* AvatarCollection */,
 				39ADD7D8255ABCEA00FC583A /* model */,
 				396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */,
 				39DE12C52531C4290068C875 /* SaveLoadExtension.swift */,
@@ -548,6 +562,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39ED611F25221658006D8E0A /* IncomeMessageCell.xib in Resources */,
+				395BB5392562771800136F57 /* AvatarCollectionViewController.xib in Resources */,
 				39ED61162521F76E006D8E0A /* ChannelCell.xib in Resources */,
 				39ED6125252219BA006D8E0A /* OutcomeMessageCell.xib in Resources */,
 				3958B3BD253B284700801E6D /* MessagesViewController.storyboard in Resources */,
@@ -675,6 +690,7 @@
 				3948F9CA253B942600465D02 /* ThemeAndStuff.swift in Sources */,
 				39B7FDC22530AFF100B5F280 /* OperationDataManager.swift in Sources */,
 				393AEDE1254F3A270028B893 /* NewSchoolCoreData.swift in Sources */,
+				395BB5372562753600136F57 /* AvatarCollectionViewController.swift in Sources */,
 				39EDD9F52542E7D000FE640B /* entitiy_extensions.swift in Sources */,
 				3948F9BE253B893700465D02 /* Log.swift in Sources */,
 				393AEDE6254F41A80028B893 /* ChannelService.swift in Sources */,

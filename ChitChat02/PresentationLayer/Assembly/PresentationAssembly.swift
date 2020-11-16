@@ -19,6 +19,8 @@ protocol IPresentationAssembly {
     func profileViewController() -> ProfileViewController
     
     func themesViewController() -> ThemesViewController
+    
+    func avatarCollectionViewController() -> AvatarCollectionViewController
 }
 
 class PresentationAssembly: IPresentationAssembly {
@@ -60,6 +62,7 @@ class PresentationAssembly: IPresentationAssembly {
         Log.arch("present ProfileVC")
         controller.model = getProfileModel
         controller.themeModel = getThemeModel
+        controller.presentationAssembly = self
         return controller
     }
     
@@ -68,6 +71,12 @@ class PresentationAssembly: IPresentationAssembly {
             fatalError("Cannot instantiate ThemesViewController")
         }
         controller.themeModel = getThemeModel
+        return controller
+    }
+    
+    func avatarCollectionViewController() -> AvatarCollectionViewController {
+        let controller = AvatarCollectionViewController()
+        
         return controller
     }
     

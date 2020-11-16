@@ -33,6 +33,8 @@ class ProfileViewController: UIViewController {
     var model: IProfileModel?
     
     var themeModel: IThemeModel?
+    
+    var presentationAssembly: PresentationAssembly?
 
     override func viewDidLoad() {
         prepareUi()
