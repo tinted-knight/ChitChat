@@ -17,6 +17,8 @@ protocol IServiceAssembly {
     
     var profileDataManager: IDataManagerService { get }
     
+    var avatarService: IAvatarService { get }
+    
     func messageService(for channel: ChannelEntity, userData: IFirestoreUser) -> IMessageService
 }
 
@@ -38,6 +40,8 @@ class ServiceAssembly: IServiceAssembly {
     
     lazy var profileDataManager: IDataManagerService = SmartDataManagerService(gcdManager: self.coreAssembly.gcdDataManager,
                                                                                operationManager: self.coreAssembly.operationDataManager)
+    
+    lazy var avatarService: IAvatarService = AvatarService(manager: AvatarRequestManager())
     
     func messageService(for channel: ChannelEntity, userData: IFirestoreUser) -> IMessageService {
         return MessageService(for: channel,

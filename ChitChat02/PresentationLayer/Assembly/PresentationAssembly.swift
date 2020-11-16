@@ -75,7 +75,7 @@ class PresentationAssembly: IPresentationAssembly {
     }
     
     func avatarCollectionViewController() -> AvatarCollectionViewController {
-        let controller = AvatarCollectionViewController()
+        let controller = AvatarCollectionViewController(getAvatarListModel())
         
         return controller
     }
@@ -101,4 +101,8 @@ class PresentationAssembly: IPresentationAssembly {
         return ProfileModel(dataManager: self.serviceAssembly.profileDataManager,
                             firestoreUserService: self.serviceAssembly.userDataService)
     }()
+    
+    private func getAvatarListModel() -> IAvatarListModel {
+        return AvatarListModel(with: serviceAssembly.avatarService)
+    }
 }

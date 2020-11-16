@@ -11,16 +11,26 @@ import UIKit
 class AvatarViewCell: UICollectionViewCell {
 
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var author: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.author.textColor = .white
     }
 
 }
 
 extension AvatarViewCell {
-    func configure(with model: String) {
-        Log.net("Cell configure with: \(model)")
+    
+    func configure(with item: AvatarInfo, model: IAvatarListModel) {
+        image.image = UIImage(named: "Placeholder")
+        author.text = item.author
+        model.load(id: item.id) { [weak self] (image) in
+            Log.net("cell image id = \(item.id)")
+            if let image = image {
+                self?.image.image = image
+            }
+        }
     }
 }

@@ -20,9 +20,10 @@ class AvatarCollectionViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private let urls: [String] = ["1", "2", "3", "4", "5", "6", "7"]
+    private var model: IAvatarListModel
     
-    init() {
+    init(_ model: IAvatarListModel) {
+        self.model = model
         super.init(nibName: "AvatarCollectionViewController", bundle: nil)
     }
     
@@ -33,6 +34,9 @@ class AvatarCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        model.delegate = self
+        model.loadData()
+        
         collectionView.register(UINib(nibName: "AvatarViewCell", bundle: nil), forCellWithReuseIdentifier: reuseId)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -41,7 +45,7 @@ class AvatarCollectionViewController: UIViewController {
 
 extension AvatarCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return urls.count
+        return model.values.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -49,7 +53,7 @@ extension AvatarCollectionViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.configure(with: urls[indexPath.row])
+        cell.configure(with: model.values[indexPath.row], model: model)
         return cell
     }
 }
@@ -79,5 +83,14 @@ extension AvatarCollectionViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
+    }
+}
+
+extension AvatarCollectionViewController: IAvatarListModelDelegate {
+    func onData(_ values: [AvatarInfo]) {
+        collectionView.reloadData()
+//        values.forEach { (avatar) in
+//            Log.net("\(avatar.id), \(avatar.author)")
+//        }
     }
 }
