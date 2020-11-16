@@ -20,7 +20,7 @@ protocol IPresentationAssembly {
     
     func themesViewController() -> ThemesViewController
     
-    func avatarCollectionViewController() -> AvatarCollectionViewController
+    func avatarCollectionViewController(_ delegate: AvatarCollectionDelegate) -> AvatarCollectionViewController
 }
 
 class PresentationAssembly: IPresentationAssembly {
@@ -74,8 +74,8 @@ class PresentationAssembly: IPresentationAssembly {
         return controller
     }
     
-    func avatarCollectionViewController() -> AvatarCollectionViewController {
-        let controller = AvatarCollectionViewController(getAvatarListModel())
+    func avatarCollectionViewController(_ delegate: AvatarCollectionDelegate) -> AvatarCollectionViewController {
+        let controller = AvatarCollectionViewController(getAvatarListModel(), delegate: delegate)
         
         return controller
     }

@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol AvatarCollectionDelegate: class {
+    func onPicked(_ image: UIImage)
+}
+
 class AvatarCollectionViewController: UIViewController {
     
     private let reuseId = "avatar-cell"
@@ -22,8 +26,11 @@ class AvatarCollectionViewController: UIViewController {
     
     private var model: IAvatarListModel
     
-    init(_ model: IAvatarListModel) {
+    private weak var delegate: AvatarCollectionDelegate?
+    
+    init(_ model: IAvatarListModel, delegate: AvatarCollectionDelegate) {
         self.model = model
+        self.delegate = delegate
         super.init(nibName: "AvatarCollectionViewController", bundle: nil)
     }
     
@@ -59,7 +66,12 @@ extension AvatarCollectionViewController: UICollectionViewDataSource {
 }
 
 extension AvatarCollectionViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? AvatarViewCell else { return }
+        guard let image = cell.image.image else { return }
+        delegate?.onPicked(image)
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension AvatarCollectionViewController: UICollectionViewDelegateFlowLayout {

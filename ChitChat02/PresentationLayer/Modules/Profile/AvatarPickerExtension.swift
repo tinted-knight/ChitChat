@@ -60,8 +60,17 @@ extension ProfileViewController {
     }
     
     private func chooseFromCollection() {
-        guard let controller = presentationAssembly?.avatarCollectionViewController() else { return }
+        guard let controller = presentationAssembly?.avatarCollectionViewController(self) else { return }
         present(controller, animated: true, completion: nil)
+    }
+}
+// MARK: AvatarCollectionDelegate
+extension ProfileViewController: AvatarCollectionDelegate {
+    func onPicked(_ image: UIImage) {
+        profileImageView.image = image
+        model?.endEditing(name: textUserName.text,
+                          description: textUserDescription.description,
+                          avatar: profileImageView.image)
     }
 }
 
