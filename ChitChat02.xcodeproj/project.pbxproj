@@ -80,6 +80,9 @@
 		39EDD9F32542E17400FE640B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EDD9F22542E17400FE640B /* CoreDataStack.swift */; };
 		39EDD9F52542E7D000FE640B /* entitiy_extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EDD9F42542E7D000FE640B /* entitiy_extensions.swift */; };
 		39EDD9FB2543337E00FE640B /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39EDD9F92543337E00FE640B /* Chat.xcdatamodeld */; };
+		39FE54812563D8E900F40A74 /* AvatarListParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE54802563D8E900F40A74 /* AvatarListParsers.swift */; };
+		39FE54852563D91B00F40A74 /* AvatarRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE54842563D91B00F40A74 /* AvatarRequestManager.swift */; };
+		39FE54872563D96300F40A74 /* PicsumBasedRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE54862563D96300F40A74 /* PicsumBasedRequests.swift */; };
 		69409207317BDCA09476EAA2 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69409ED40674C511CFCD83FA /* MessageService.swift */; };
 		69409FE6921DFD97F0165D7B /* IKeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6940947DFA41AE75B7AD3B9C /* IKeyValueStorage.swift */; };
 /* End PBXBuildFile section */
@@ -160,6 +163,9 @@
 		39EDD9F22542E17400FE640B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		39EDD9F42542E7D000FE640B /* entitiy_extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = entitiy_extensions.swift; sourceTree = "<group>"; };
 		39EDD9FA2543337E00FE640B /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
+		39FE54802563D8E900F40A74 /* AvatarListParsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarListParsers.swift; sourceTree = "<group>"; };
+		39FE54842563D91B00F40A74 /* AvatarRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarRequestManager.swift; sourceTree = "<group>"; };
+		39FE54862563D96300F40A74 /* PicsumBasedRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsumBasedRequests.swift; sourceTree = "<group>"; };
 		3B2FC54AEA21573BC155A8BC /* Pods-ChitChat02.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02.debug.xcconfig"; path = "Target Support Files/Pods-ChitChat02/Pods-ChitChat02.debug.xcconfig"; sourceTree = "<group>"; };
 		53147F9F7C0E3997A63E27F3 /* Pods-ChitChat02.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02.release.xcconfig"; path = "Target Support Files/Pods-ChitChat02/Pods-ChitChat02.release.xcconfig"; sourceTree = "<group>"; };
 		6940947DFA41AE75B7AD3B9C /* IKeyValueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IKeyValueStorage.swift; sourceTree = "<group>"; };
@@ -270,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				395BB54325628D7600136F57 /* IRequest.swift */,
+				39FE54862563D96300F40A74 /* PicsumBasedRequests.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -278,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				395BB54625628DA800136F57 /* IRequestManager.swift */,
+				39FE54842563D91B00F40A74 /* AvatarRequestManager.swift */,
 			);
 			path = RequestManager;
 			sourceTree = "<group>";
@@ -286,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				395BB54925628DE600136F57 /* IParser.swift */,
+				39FE54802563D8E900F40A74 /* AvatarListParsers.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -750,6 +759,7 @@
 				39B6A01F25594A4C00EFE36E /* IDataManager.swift in Sources */,
 				39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */,
 				3948F9C6253B8F6F00465D02 /* models.swift in Sources */,
+				39FE54812563D8E900F40A74 /* AvatarListParsers.swift in Sources */,
 				395BB54725628DA800136F57 /* IRequestManager.swift in Sources */,
 				393A0F6825594F920063ACC7 /* ProfileModel.swift in Sources */,
 				39B7FDC42530B00200B5F280 /* GCDDataManager.swift in Sources */,
@@ -766,11 +776,13 @@
 				39ED610B2521EB32006D8E0A /* ChannelsViewController.swift in Sources */,
 				39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */,
 				3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */,
+				39FE54872563D96300F40A74 /* PicsumBasedRequests.swift in Sources */,
 				3958B3BF253B4CFA00801E6D /* MessagesVCManager.swift in Sources */,
 				39A2848025583534003C2484 /* ChannelModel.swift in Sources */,
 				3958B3B9253AFFBE00801E6D /* Loading state.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
 				39ED61152521F76E006D8E0A /* ChannelCell.swift in Sources */,
+				39FE54852563D91B00F40A74 /* AvatarRequestManager.swift in Sources */,
 				39A284832558511F003C2484 /* IRemoteChannelStorage.swift in Sources */,
 				395BB53C2562833C00136F57 /* AvatarViewCell.swift in Sources */,
 				3948F9CA253B942600465D02 /* ThemeAndStuff.swift in Sources */,
