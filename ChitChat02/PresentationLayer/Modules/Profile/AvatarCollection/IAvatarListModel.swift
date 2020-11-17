@@ -20,6 +20,7 @@ protocol IAvatarListModel {
 }
 
 protocol IAvatarListModelDelegate: class {
+    func onLoading()
     func onData(_ values: [AvatarInfo])
 }
 
@@ -35,9 +36,11 @@ class AvatarListModel: IAvatarListModel {
     }
     
     func loadData() {
+        delegate?.onLoading()
         service.getList { [weak self] (values) in
             self?.values = values
-            DispatchQueue.main.async {
+            // fake: delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self?.delegate?.onData(values)
             }
         }
@@ -50,7 +53,7 @@ class AvatarListModel: IAvatarListModel {
                 return
             }
             // fake: delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 completion(image)
             }
         }

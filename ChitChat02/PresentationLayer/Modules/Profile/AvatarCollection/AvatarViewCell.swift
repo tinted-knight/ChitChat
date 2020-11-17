@@ -10,6 +10,9 @@ import UIKit
 
 class AvatarViewCell: UICollectionViewCell {
 
+    static let reuseId = "avatar-cell"
+    static let nibName = "AvatarViewCell"
+    
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var author: UILabel!
     
