@@ -37,7 +37,13 @@
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVR-In-YXz">
                     <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                     <items>
-                        <navigationItem title="AvatarCollection" id="3g7-ZG-mZD"/>
+                        <navigationItem title="AvatarCollection" id="3g7-ZG-mZD">
+                            <barButtonItem key="rightBarButtonItem" title="Close" id="9hs-Aj-55U">
+                                <connections>
+                                    <action selector="onCloseTap:" destination="-1" id="lfD-Ha-Oy7"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
                     </items>
                 </navigationBar>
             </subviews>

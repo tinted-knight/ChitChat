@@ -58,6 +58,10 @@ class AvatarCollectionViewController: UIViewController {
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.stopAnimating()
     }
+    
+    @IBAction func onCloseTap(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 // MARK: UICollectionViewDataSource
 extension AvatarCollectionViewController: UICollectionViewDataSource {
