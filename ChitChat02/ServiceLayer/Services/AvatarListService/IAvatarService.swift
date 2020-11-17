@@ -18,7 +18,7 @@ struct AvatarInfo {
 protocol IAvatarService {
     func getList(completion: @escaping ([AvatarInfo]) -> Void)
     
-    func loadImage(_ string: String, completion: @escaping (Data?) -> Void)
+    func loadImage(_ id: String, completion: @escaping (Data?) -> Void)
 }
 
 class AvatarService: IAvatarService {

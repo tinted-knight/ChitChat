@@ -41,7 +41,7 @@ class ServiceAssembly: IServiceAssembly {
     lazy var profileDataManager: IDataManagerService = SmartDataManagerService(gcdManager: self.coreAssembly.gcdDataManager,
                                                                                operationManager: self.coreAssembly.operationDataManager)
     
-    lazy var avatarService: IAvatarService = AvatarService(manager: AvatarRequestManager())
+    lazy var avatarService: IAvatarService = AvatarService(manager: self.coreAssembly.avatarCollectionManager)
     
     func messageService(for channel: ChannelEntity, userData: IFirestoreUser) -> IMessageService {
         return MessageService(for: channel,
