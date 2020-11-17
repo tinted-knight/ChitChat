@@ -245,11 +245,11 @@
 		395BB5352562750D00136F57 /* AvatarCollection */ = {
 			isa = PBXGroup;
 			children = (
+				39FE54882563DB2500F40A74 /* model */,
 				395BB5362562753600136F57 /* AvatarCollectionViewController.swift */,
 				395BB5382562771800136F57 /* AvatarCollectionViewController.xib */,
 				395BB53A2562833C00136F57 /* AvatarViewCell.swift */,
 				395BB53B2562833C00136F57 /* AvatarViewCell.xib */,
-				395BB54B2562AB8300136F57 /* IAvatarListModel.swift */,
 			);
 			path = AvatarCollection;
 			sourceTree = "<group>";
@@ -551,6 +551,14 @@
 				39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */,
 			);
 			path = ThemeStorage;
+			sourceTree = "<group>";
+		};
+		39FE54882563DB2500F40A74 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				395BB54B2562AB8300136F57 /* IAvatarListModel.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		421B2EFD5D2930D3B39F3217 /* Pods */ = {

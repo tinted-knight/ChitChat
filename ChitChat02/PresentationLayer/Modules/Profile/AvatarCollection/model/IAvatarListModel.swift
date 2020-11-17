@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+// MARK: Protocol
 protocol IAvatarListModel {
     var delegate: IAvatarListModelDelegate? { get set }
     
@@ -18,12 +18,12 @@ protocol IAvatarListModel {
     
     func load(id: String, completion: @escaping (UIImage?) -> Void)
 }
-
+// MARK: Delegate protocol
 protocol IAvatarListModelDelegate: class {
     func onLoading()
     func onData(_ values: [AvatarInfo])
 }
-
+// MARK: Implementation
 class AvatarListModel: IAvatarListModel {
     private let service: IAvatarService
     
