@@ -14,19 +14,19 @@ extension ProfileViewController {
     func showChooseDialog() {
         let alertController = UIAlertController(title: nil, message: "Think twice. Everyone all over the Internet will see your face.", preferredStyle: .actionSheet)
 
-        let cameraAction = UIAlertAction(title: "Make a foto", style: .default) { [weak self] _ in
+        let cameraAction = UIAlertAction(title: "Сфотографировать", style: .default) { [weak self] _ in
             self?.chooseFromCamera()
         }
 
-        let galleryAction = UIAlertAction(title: "From galley", style: .default) { [weak self] _ in
+        let galleryAction = UIAlertAction(title: "Выбрать из галереи", style: .default) { [weak self] _ in
             self?.chooseFromGallery()
         }
 
-        let collectionAction = UIAlertAction(title: "From collection", style: .default) { [weak self] _ in
+        let collectionAction = UIAlertAction(title: "Загрузить", style: .default) { [weak self] _ in
             self?.chooseFromCollection()
         }
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _ in
             // todo cancel handler
         }
 

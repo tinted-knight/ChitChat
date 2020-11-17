@@ -61,8 +61,8 @@ class SmartDataManagerService: IDataManagerService {
         
         self.dataManagerType = type
         dataManager.save(
-            name: model.name != user.name ? model.name : nil,
-            description: model.description != user.description ? model.description : nil,
+            name: model.name,
+            description: model.description,
             avatar: avatar
         )
     }

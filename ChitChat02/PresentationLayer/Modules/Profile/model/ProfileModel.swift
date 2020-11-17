@@ -119,7 +119,7 @@ class ProfileModel: IProfileModel, IDataManagerDelegate {
     
     private func isValid(name: String?, description: String) -> Bool {
         guard let name = name else { return false }
-        guard !name.isEmpty, !description.isEmpty else { return false }
+        guard !name.isEmpty else { return false }
         return true
     }
     
