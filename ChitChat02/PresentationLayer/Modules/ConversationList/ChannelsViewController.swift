@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChannelsViewController: UIViewController {
+class ChannelsViewController: FunController {
 
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var channelsTableView: UITableView!
@@ -25,7 +25,7 @@ class ChannelsViewController: UIViewController {
     
     init(presentationAssembly: PresentationAssembly, channelModel: IChannelModel,
          myDataModel: IFirestoreUser, themeModel: IThemeModel, transition: IViewControllerTransition,
-         nibName: String, bundle: Bundle?) {
+         funLayer: CAEmitterLayer, nibName: String, bundle: Bundle?) {
         
         self.presentationAssembly = presentationAssembly
         self.channelModel = channelModel
