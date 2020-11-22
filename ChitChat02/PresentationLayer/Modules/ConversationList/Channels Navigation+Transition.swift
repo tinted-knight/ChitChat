@@ -12,7 +12,6 @@ import UIKit
 extension ChannelsViewController {
     @objc func profileOnTap() {
         let controller = presentationAssembly.profileViewController()
-        controller.modalPresentationStyle = .fullScreen
         controller.transitioningDelegate = self
         navigationController?.present(controller, animated: true, completion: nil)
     }
