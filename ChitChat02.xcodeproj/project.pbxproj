@@ -61,6 +61,7 @@
 		39B7FDBD253062F500B5F280 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B7FDBC253062F500B5F280 /* UserModel.swift */; };
 		39B7FDC22530AFF100B5F280 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B7FDC12530AFF100B5F280 /* OperationDataManager.swift */; };
 		39B7FDC42530B00200B5F280 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B7FDC32530B00200B5F280 /* GCDDataManager.swift */; };
+		39B99B71256A70C50083F271 /* ButtonShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B70256A70C50083F271 /* ButtonShake.swift */; };
 		39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFB82527616C00ECECCC /* ThemesViewController.swift */; };
 		39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */; };
 		39BDCFBF252767B100ECECCC /* AppThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFBE252767B100ECECCC /* AppThemeData.swift */; };
@@ -144,6 +145,7 @@
 		39B7FDBC253062F500B5F280 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		39B7FDC12530AFF100B5F280 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
 		39B7FDC32530B00200B5F280 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
+		39B99B70256A70C50083F271 /* ButtonShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonShake.swift; sourceTree = "<group>"; };
 		39BDCFB82527616C00ECECCC /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		39BDCFBE252767B100ECECCC /* AppThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeData.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 		39A2846B255813D5003C2484 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				39B99B6F256A70A00083F271 /* Animations */,
 				3958B3C0253B708B00801E6D /* AlertViewController.swift */,
 				39A2847225581D30003C2484 /* Assembly */,
 				39A2847525581FCC003C2484 /* Modules */,
@@ -466,6 +469,14 @@
 				39B7FDC32530B00200B5F280 /* GCDDataManager.swift */,
 			);
 			path = ProfileStorage;
+			sourceTree = "<group>";
+		};
+		39B99B6F256A70A00083F271 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				39B99B70256A70C50083F271 /* ButtonShake.swift */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		39BDCFB72527614400ECECCC /* Themes */ = {
@@ -760,6 +771,7 @@
 				397214B3255876D9001A8B89 /* FirestoreService.swift in Sources */,
 				395BB54025628C5300136F57 /* IAvatarService.swift in Sources */,
 				39A2847425581D42003C2484 /* PresentationAssembly.swift in Sources */,
+				39B99B71256A70C50083F271 /* ButtonShake.swift in Sources */,
 				39ED61182521F7AE006D8E0A /* ChannelCellModel.swift in Sources */,
 				39ABED432534F83400EDCA7C /* SaveCompletionOperation.swift in Sources */,
 				395BB54C2562AB8300136F57 /* IAvatarListModel.swift in Sources */,

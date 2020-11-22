@@ -147,8 +147,13 @@ class ProfileViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    @objc private func setEditUser(_ sender: UIBarButtonItem) {
+    @objc private func setEditUser(_ sender: UIButton) {
         model?.switchEditState()
+        if let model = model, model.state == .modeEdit {
+            sender.shake()
+        } else {
+            sender.stopShaking()
+        }
     }
 
 }
