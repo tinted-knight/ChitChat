@@ -21,14 +21,17 @@ class ChannelsViewController: UIViewController {
 
     let presentationAssembly: PresentationAssembly
     
+    let transition: IViewControllerTransition
+    
     init(presentationAssembly: PresentationAssembly, channelModel: IChannelModel,
-         myDataModel: IFirestoreUser, themeModel: IThemeModel,
+         myDataModel: IFirestoreUser, themeModel: IThemeModel, transition: IViewControllerTransition,
          nibName: String, bundle: Bundle?) {
         
         self.presentationAssembly = presentationAssembly
         self.channelModel = channelModel
         self.myDataModel = myDataModel
         self.themeModel = themeModel
+        self.transition = transition
         
         super.init(nibName: nibName, bundle: bundle)
     }
@@ -105,16 +108,6 @@ extension ChannelsViewController {
 }
 // MARK: UI Actions
 extension ChannelsViewController {
-    @objc private func profileOnTap() {
-        let controller = presentationAssembly.profileViewController()
-        navigationController?.present(controller, animated: true, completion: nil)
-    }
-    
-    @objc private func settingsOnTap() {
-        let controller = presentationAssembly.themesViewController()
-        navigationController?.pushViewController(controller, animated: true)
-    }
-    
     @objc func inputNewChannelName() {
         inputAlert(title: "New channel", message: "Input channel name") { [weak self] (text) in
             if !text.isEmpty {
