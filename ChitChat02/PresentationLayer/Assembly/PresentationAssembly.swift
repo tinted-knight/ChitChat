@@ -42,7 +42,6 @@ class PresentationAssembly: IPresentationAssembly {
                                                 myDataModel: getFirestoreUser,
                                                 themeModel: getThemeModel,
                                                 transition: getViewControllerTransition,
-                                                funLayer: emblemLayer,
                                                 nibName: "ChannelsViewController",
                                                 bundle: nil)
         return controller
@@ -108,33 +107,5 @@ class PresentationAssembly: IPresentationAssembly {
         return AvatarListModel(with: serviceAssembly.avatarService)
     }
     
-    private lazy var getViewControllerTransition: IViewControllerTransition = AwesomeTransition()
-    
-    private lazy var emblemLayer: CAEmitterLayer = {
-        let funLayer = CAEmitterLayer()
-        funLayer.emitterSize = CGSize(width: 100.0, height: 0)
-        funLayer.emitterShape = .circle
-        funLayer.beginTime = CACurrentMediaTime()
-        funLayer.emitterCells = [self.emblemCell]
-        
-        return funLayer
-    }()
-    
-    private lazy var emblemCell: CAEmitterCell = {
-        var emblemCell = CAEmitterCell()
-        emblemCell.contents = UIImage(named: "Emblem")?.cgImage
-        emblemCell.scale = 0.05
-        emblemCell.emissionRange = CGFloat.pi
-        emblemCell.lifetime = 2.0
-        emblemCell.birthRate = 10
-        emblemCell.velocity = -30
-        emblemCell.velocityRange = 100
-        emblemCell.xAcceleration = 50
-        emblemCell.yAcceleration = 50
-        emblemCell.spin = -0.5
-        emblemCell.spinRange = 1.0
-        emblemCell.alphaSpeed = -0.5
-        
-        return emblemCell
-    }()
+    private lazy var getViewControllerTransition: IViewControllerTransition = PresentTransition()
 }

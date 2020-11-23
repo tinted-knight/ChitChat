@@ -19,19 +19,31 @@ extension ChannelsViewController {
     
     @objc func settingsOnTap() {
         let controller = presentationAssembly.themesViewController()
+        navigationController?.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
 }
 
-extension ChannelsViewController: UIViewControllerTransitioningDelegate {
+extension ChannelsViewController: UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController,
+                              animationControllerFor operation: UINavigationController.Operation,
+                              from fromVC: UIViewController,
+                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        simpleOver.presenting = (operation == .push)
+        return simpleOver
+    }
+    
     func animationController(forPresented presented: UIViewController,
                              presenting: UIViewController,
                              source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        print("transition to")
         transition.presenting = true
         return transition
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        print("transition from")
         transition.presenting = false
         return transition
     }

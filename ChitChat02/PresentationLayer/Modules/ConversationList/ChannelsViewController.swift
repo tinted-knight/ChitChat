@@ -23,9 +23,11 @@ class ChannelsViewController: FunController {
     
     let transition: IViewControllerTransition
     
+    let simpleOver = TopLeftRightBottom()
+    
     init(presentationAssembly: PresentationAssembly, channelModel: IChannelModel,
          myDataModel: IFirestoreUser, themeModel: IThemeModel, transition: IViewControllerTransition,
-         funLayer: CAEmitterLayer, nibName: String, bundle: Bundle?) {
+         nibName: String, bundle: Bundle?) {
         
         self.presentationAssembly = presentationAssembly
         self.channelModel = channelModel

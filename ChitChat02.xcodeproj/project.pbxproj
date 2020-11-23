@@ -36,6 +36,7 @@
 		395BB54A25628DE600136F57 /* IParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB54925628DE600136F57 /* IParser.swift */; };
 		395BB54C2562AB8300136F57 /* IAvatarListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB54B2562AB8300136F57 /* IAvatarListModel.swift */; };
 		396C8CA3256BF04D00EC697E /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396C8CA2256BF04D00EC697E /* UIWindow.swift */; };
+		396C8CA5256BFEC100EC697E /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396C8CA4256BFEC100EC697E /* PushTransition.swift */; };
 		396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */; };
 		397214B125587693001A8B89 /* FirestoreUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B025587693001A8B89 /* FirestoreUser.swift */; };
 		397214B3255876D9001A8B89 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B2255876D8001A8B89 /* FirestoreService.swift */; };
@@ -63,7 +64,7 @@
 		39B7FDC22530AFF100B5F280 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B7FDC12530AFF100B5F280 /* OperationDataManager.swift */; };
 		39B7FDC42530B00200B5F280 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B7FDC32530B00200B5F280 /* GCDDataManager.swift */; };
 		39B99B71256A70C50083F271 /* ButtonShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B70256A70C50083F271 /* ButtonShake.swift */; };
-		39B99B73256A7AB40083F271 /* AwesomeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B72256A7AB40083F271 /* AwesomeTransition.swift */; };
+		39B99B73256A7AB40083F271 /* PresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B72256A7AB40083F271 /* PresentTransition.swift */; };
 		39B99B75256A91900083F271 /* Channels Navigation+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B74256A91900083F271 /* Channels Navigation+Transition.swift */; };
 		39B99B77256A9A6C0083F271 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B76256A9A6C0083F271 /* Protocol.swift */; };
 		39B99B7A256A9ADE0083F271 /* FunController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B79256A9ADE0083F271 /* FunController.swift */; };
@@ -125,6 +126,7 @@
 		395BB54925628DE600136F57 /* IParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IParser.swift; sourceTree = "<group>"; };
 		395BB54B2562AB8300136F57 /* IAvatarListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAvatarListModel.swift; sourceTree = "<group>"; };
 		396C8CA2256BF04D00EC697E /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
+		396C8CA4256BFEC100EC697E /* PushTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
 		396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		397214B025587693001A8B89 /* FirestoreUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUser.swift; sourceTree = "<group>"; };
 		397214B2255876D8001A8B89 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
@@ -152,7 +154,7 @@
 		39B7FDC12530AFF100B5F280 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
 		39B7FDC32530B00200B5F280 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
 		39B99B70256A70C50083F271 /* ButtonShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonShake.swift; sourceTree = "<group>"; };
-		39B99B72256A7AB40083F271 /* AwesomeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeTransition.swift; sourceTree = "<group>"; };
+		39B99B72256A7AB40083F271 /* PresentTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentTransition.swift; sourceTree = "<group>"; };
 		39B99B74256A91900083F271 /* Channels Navigation+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Channels Navigation+Transition.swift"; sourceTree = "<group>"; };
 		39B99B76256A9A6C0083F271 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		39B99B79256A9ADE0083F271 /* FunController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunController.swift; sourceTree = "<group>"; };
@@ -486,7 +488,8 @@
 			children = (
 				39B99B78256A9A8F0083F271 /* Particles */,
 				39B99B70256A70C50083F271 /* ButtonShake.swift */,
-				39B99B72256A7AB40083F271 /* AwesomeTransition.swift */,
+				39B99B72256A7AB40083F271 /* PresentTransition.swift */,
+				396C8CA4256BFEC100EC697E /* PushTransition.swift */,
 			);
 			path = "Animations+Transitions";
 			sourceTree = "<group>";
@@ -824,6 +827,7 @@
 				3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */,
 				39FE54872563D96300F40A74 /* PicsumBasedRequests.swift in Sources */,
 				3958B3BF253B4CFA00801E6D /* MessagesVCManager.swift in Sources */,
+				396C8CA5256BFEC100EC697E /* PushTransition.swift in Sources */,
 				39A2848025583534003C2484 /* ChannelModel.swift in Sources */,
 				3958B3B9253AFFBE00801E6D /* Loading state.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
@@ -832,7 +836,7 @@
 				39A284832558511F003C2484 /* IRemoteChannelStorage.swift in Sources */,
 				395BB53C2562833C00136F57 /* AvatarViewCell.swift in Sources */,
 				3948F9CA253B942600465D02 /* ThemeAndStuff.swift in Sources */,
-				39B99B73256A7AB40083F271 /* AwesomeTransition.swift in Sources */,
+				39B99B73256A7AB40083F271 /* PresentTransition.swift in Sources */,
 				39B7FDC22530AFF100B5F280 /* OperationDataManager.swift in Sources */,
 				393AEDE1254F3A270028B893 /* NewSchoolCoreData.swift in Sources */,
 				395BB5372562753600136F57 /* AvatarCollectionViewController.swift in Sources */,
