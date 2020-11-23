@@ -27,7 +27,6 @@ extension FunViewController {
         let emitterLayer = view.layer.sublayers?.first(where: { (layer) -> Bool in
             layer is CAEmitterLayer
         })
-//        print("\(#function), \(emitterLayer != nil)")
         return emitterLayer != nil
     }
     

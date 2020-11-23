@@ -46,28 +46,35 @@ class FunController: UIViewController, FunViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleCustomTouch(_:)),
-                                               name: NSNotification.Name(rawValue: "TouchPhaseBeganCustomNotification"),
+                                               name: .touchPhaseBegan,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleCustomTouch(_:)),
-                                               name: NSNotification.Name(rawValue: "TouchPhaseMovedCustomNotification"),
+                                               name: .touchPhaseMoved,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleCustomTouch(_:)),
-                                               name: NSNotification.Name(rawValue: "TouchPhaseEndedCustomNotification"),
+                                               name: .touchPhaseEnded,
                                                object: nil)
     }
     
     @objc private func handleCustomTouch(_ event: NSNotification) {
-        print(event.name)
-//        guard let object = event.object as? UIEvent else {
-//            print("object is nil")
-//            return
-//        }
-//
-//        if let touch = object.allTouches?.first {
-//            let position = touch.location(in: view)
-//            startFun(at: position)
-//        }
+        guard let object = event.object as? UIEvent else {
+            fatalError("cutom handle touch object is nil")
+        }
+
+        if let touch = object.allTouches?.first {
+            let position = touch.location(in: view)
+            switch event.name {
+            case .touchPhaseBegan:
+                startFun(at: position)
+            case .touchPhaseMoved:
+                update(position: position)
+            case .touchPhaseEnded:
+                endFun()
+            default:
+                break
+            }
+        }
     }
 }
