@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ThemesViewController: FunController {
+class ThemesViewController: FunViewController {
     
     static func instance() -> ThemesViewController? {
         let storyboard = UIStoryboard(name: "ThemesViewController", bundle: nil)

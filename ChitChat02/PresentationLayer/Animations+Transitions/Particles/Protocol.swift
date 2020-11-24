@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-protocol FunViewController: UIViewController {
+protocol IFunController: UIViewController {
     var funLayer: CAEmitterLayer? { get }
 }
 
-extension FunViewController {
+extension IFunController {
     func startFun(at position: CGPoint) {
         funLayer?.emitterPosition = position
         funLayer?.birthRate = 1.0

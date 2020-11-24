@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChannelsViewController: FunController {
+class ChannelsViewController: FunViewController {
 
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var channelsTableView: UITableView!
@@ -84,8 +84,6 @@ extension ChannelsViewController {
     }
 
     private func setupNavBarButtons() {
-//        navigationController?.navigationBar.prefersLargeTitles = true
-        
         let profilePicture = UIImage(named: "ProfileIcon")?.withRenderingMode(.alwaysOriginal)
         let profileNavItem = UIBarButtonItem(
             image: profilePicture,
@@ -107,7 +105,7 @@ extension ChannelsViewController {
             action: #selector(inputNewChannelName)))
     }
 }
-// MARK: UI Actions
+// MARK: InputDialog
 extension ChannelsViewController {
     @objc func inputNewChannelName() {
         inputAlert(title: "New channel", message: "Input channel name") { [weak self] (text) in

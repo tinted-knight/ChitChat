@@ -15,6 +15,7 @@ extension Notification.Name {
     static let touchPhaseEnded = Notification.Name("TouchPhaseEnded-Notification")
 }
 
+// https://stackoverflow.com/a/7080925
 class CustomUIWindow: UIWindow {
     override func sendEvent(_ event: UIEvent) {
         super.sendEvent(event)

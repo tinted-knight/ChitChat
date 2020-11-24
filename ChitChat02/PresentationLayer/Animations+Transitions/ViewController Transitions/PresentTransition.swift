@@ -20,36 +20,24 @@ class TopLeftRightBottom: NSObject, IViewControllerTransition {
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
-        //        guard let fromView = transitionContext.view(forKey: .from) else {
-        //            print("from in nil")
-        //            return
-        //        }
+
         let fromView = transitionContext.view(forKey: .from)
-        //        guard let toView = transitionContext.view(forKey: .to) else {
-        //            print("to is nil")
-        //            return
-        //        }
         let toView = transitionContext.view(forKey: .to)
         
         let offScreenTopLeft = CGAffineTransform(translationX: -containerView.frame.width,
                                                  y: -containerView.frame.height)
         let offScreenRightBottom = CGAffineTransform(translationX: containerView.frame.width,
                                                      y: containerView.frame.height)
-        print("presenting = \(presenting)")
         if presenting {
             toView?.transform = offScreenTopLeft
         }
         
         if let toView = toView {
             containerView.addSubview(toView)
-        } else {
-            print("to == nil")
         }
         
         if let fromView = fromView {
             containerView.addSubview(fromView)
-        } else {
-            print("from == nil")
         }
 
         UIView.animate(withDuration: duration,

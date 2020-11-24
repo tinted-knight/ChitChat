@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ProfileViewController: FunController {
+class ProfileViewController: FunViewController {
 
     static func instance() -> ProfileViewController? {
         let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)

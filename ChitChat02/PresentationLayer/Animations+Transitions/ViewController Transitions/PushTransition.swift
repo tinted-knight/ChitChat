@@ -65,7 +65,7 @@ class RotatingCard: NSObject, IViewControllerTransition {
         toVC.view.layer.add(toAnimation, forKey: "to-anim")
         fromVC.view.layer.add(fromAnimation, forKey: "from-anim")
     }
-
+    // MARK: - Push animaitions
     private func pushFromAnimation(_ helper: ViewHelper) -> CAAnimationGroup {
         let scaleX = CABasicAnimation(keyPath: "transform.scale.x")
         scaleX.fromValue = 1.0
@@ -120,7 +120,7 @@ class RotatingCard: NSObject, IViewControllerTransition {
         
         return group
     }
-
+    // MARK: - Pop animaitions
     private func popFromAnimation(_ helper: ViewHelper) -> CAAnimationGroup {
         let position = CABasicAnimation(keyPath: "position")
         position.fromValue = helper.center

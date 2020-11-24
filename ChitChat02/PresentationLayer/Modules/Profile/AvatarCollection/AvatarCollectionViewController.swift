@@ -13,7 +13,7 @@ protocol AvatarCollectionDelegate: class {
     func onPicked(_ image: UIImage)
 }
 
-class AvatarCollectionViewController: FunController {
+class AvatarCollectionViewController: FunViewController {
     
     private let cellInRow: CGFloat = 3.0
     private let sectionInsets = UIEdgeInsets(top: 20.0,

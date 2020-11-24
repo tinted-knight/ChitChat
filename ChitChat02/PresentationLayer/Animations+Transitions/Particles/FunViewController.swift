@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FunController: UIViewController, FunViewController {
+class FunViewController: UIViewController, IFunController {
     private lazy var emblemCell: CAEmitterCell = {
         var emblemCell = CAEmitterCell()
         emblemCell.contents = UIImage(named: "Emblem")?.cgImage
@@ -59,9 +59,7 @@ class FunController: UIViewController, FunViewController {
     }
     
     @objc private func handleCustomTouch(_ event: NSNotification) {
-        guard let object = event.object as? UIEvent else {
-            fatalError("cutom handle touch object is nil")
-        }
+        guard let object = event.object as? UIEvent else { return }
 
         if let touch = object.allTouches?.first {
             let position = touch.location(in: view)
