@@ -19,7 +19,6 @@ extension ChannelsViewController {
     
     @objc func settingsOnTap() {
         let controller = presentationAssembly.themesViewController()
-        navigationController?.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
 }
@@ -30,8 +29,8 @@ extension ChannelsViewController: UIViewControllerTransitioningDelegate, UINavig
                               animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        simpleOver.presenting = (operation == .push)
-        return simpleOver
+        pushTransition.presenting = (operation == .push)
+        return pushTransition
     }
     
     func animationController(forPresented presented: UIViewController,

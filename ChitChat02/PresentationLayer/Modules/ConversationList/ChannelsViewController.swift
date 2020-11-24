@@ -23,7 +23,7 @@ class ChannelsViewController: FunController {
     
     let transition: IViewControllerTransition
     
-    let simpleOver = TopLeftRightBottom()
+    let pushTransition = RotatingCard()
     
     init(presentationAssembly: PresentationAssembly, channelModel: IChannelModel,
          myDataModel: IFirestoreUser, themeModel: IThemeModel, transition: IViewControllerTransition,
@@ -79,6 +79,7 @@ extension ChannelsViewController {
                                    forCellReuseIdentifier: ChannelCellModel.cellReuseId)
         
         setupNavBarButtons()
+        navigationController?.delegate = self
 
         themeModel.delegate = self
         themeModel.applyCurrent()
