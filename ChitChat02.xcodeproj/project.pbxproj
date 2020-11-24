@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		13E359B0661DA342B7FF4E23 /* Pods_ChitChat02.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FFDAB3F1F1D13B5B9E9DD7 /* Pods_ChitChat02.framework */; };
+		390077DB256D0D5E00B800D6 /* TransitionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390077DA256D0D5E00B800D6 /* TransitionProvider.swift */; };
 		390F4E18255ACCD100DEA323 /* ChannelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 390F4E17255ACCD100DEA323 /* ChannelsViewController.xib */; };
 		390F4E1C255ADB9A00DEA323 /* AvatarPickerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390F4E1B255ADB9A00DEA323 /* AvatarPickerExtension.swift */; };
 		393A0F6825594F920063ACC7 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393A0F6725594F920063ACC7 /* ProfileModel.swift */; };
@@ -95,6 +96,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		390077DA256D0D5E00B800D6 /* TransitionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionProvider.swift; sourceTree = "<group>"; };
 		390F4E17255ACCD100DEA323 /* ChannelsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelsViewController.xib; sourceTree = "<group>"; };
 		390F4E1B255ADB9A00DEA323 /* AvatarPickerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPickerExtension.swift; sourceTree = "<group>"; };
 		393A0F6725594F920063ACC7 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
@@ -205,6 +207,16 @@
 				98FFDAB3F1F1D13B5B9E9DD7 /* Pods_ChitChat02.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		390077D9256D0D3300B800D6 /* ViewController Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				39B99B72256A7AB40083F271 /* PresentTransition.swift */,
+				396C8CA4256BFEC100EC697E /* PushTransition.swift */,
+				390077DA256D0D5E00B800D6 /* TransitionProvider.swift */,
+			);
+			path = "ViewController Transitions";
 			sourceTree = "<group>";
 		};
 		394F8667250E518A00B703B3 = {
@@ -486,10 +498,9 @@
 		39B99B6F256A70A00083F271 /* Animations+Transitions */ = {
 			isa = PBXGroup;
 			children = (
+				390077D9256D0D3300B800D6 /* ViewController Transitions */,
 				39B99B78256A9A8F0083F271 /* Particles */,
 				39B99B70256A70C50083F271 /* ButtonShake.swift */,
-				39B99B72256A7AB40083F271 /* PresentTransition.swift */,
-				396C8CA4256BFEC100EC697E /* PushTransition.swift */,
 			);
 			path = "Animations+Transitions";
 			sourceTree = "<group>";
@@ -831,6 +842,7 @@
 				39A2848025583534003C2484 /* ChannelModel.swift in Sources */,
 				3958B3B9253AFFBE00801E6D /* Loading state.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
+				390077DB256D0D5E00B800D6 /* TransitionProvider.swift in Sources */,
 				39ED61152521F76E006D8E0A /* ChannelCell.swift in Sources */,
 				39FE54852563D91B00F40A74 /* AvatarRequestManager.swift in Sources */,
 				39A284832558511F003C2484 /* IRemoteChannelStorage.swift in Sources */,

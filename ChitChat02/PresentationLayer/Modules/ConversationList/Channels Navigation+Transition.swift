@@ -29,21 +29,19 @@ extension ChannelsViewController: UIViewControllerTransitioningDelegate, UINavig
                               animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        pushTransition.presenting = (operation == .push)
-        return pushTransition
+        transitions.pushTransition.presenting = (operation == .push)
+        return transitions.pushTransition
     }
     
     func animationController(forPresented presented: UIViewController,
                              presenting: UIViewController,
                              source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        print("transition to")
-        transition.presenting = true
-        return transition
+        transitions.presentTransition.presenting = true
+        return transitions.presentTransition
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        print("transition from")
-        transition.presenting = false
-        return transition
+        transitions.presentTransition.presenting = false
+        return transitions.presentTransition
     }
 }

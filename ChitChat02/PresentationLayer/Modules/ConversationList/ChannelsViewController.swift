@@ -21,19 +21,17 @@ class ChannelsViewController: FunController {
 
     let presentationAssembly: PresentationAssembly
     
-    let transition: IViewControllerTransition
-    
-    let pushTransition = RotatingCard()
+    let transitions: ITransitionProvider
     
     init(presentationAssembly: PresentationAssembly, channelModel: IChannelModel,
-         myDataModel: IFirestoreUser, themeModel: IThemeModel, transition: IViewControllerTransition,
+         myDataModel: IFirestoreUser, themeModel: IThemeModel, transitions: ITransitionProvider,
          nibName: String, bundle: Bundle?) {
         
         self.presentationAssembly = presentationAssembly
         self.channelModel = channelModel
         self.myDataModel = myDataModel
         self.themeModel = themeModel
-        self.transition = transition
+        self.transitions = transitions
         
         super.init(nibName: nibName, bundle: bundle)
     }

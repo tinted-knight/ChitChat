@@ -9,11 +9,7 @@
 import Foundation
 import UIKit
 
-protocol IViewControllerTransition: UIViewControllerAnimatedTransitioning {
-    var presenting: Bool { get set }
-}
-
-class PresentTransition: NSObject, IViewControllerTransition {
+class TopLeftRightBottom: NSObject, IViewControllerTransition {
     
     private let duration = 1.5
     var presenting = true
