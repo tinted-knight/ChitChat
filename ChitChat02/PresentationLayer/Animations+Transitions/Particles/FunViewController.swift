@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FunViewController: UIViewController, IFunController {
+class FunViewController: UIViewController {
     private lazy var emblemCell: CAEmitterCell = {
         var emblemCell = CAEmitterCell()
         emblemCell.contents = UIImage(named: "Emblem")?.cgImage
@@ -27,7 +27,7 @@ class FunViewController: UIViewController, IFunController {
         return emblemCell
     }()
 
-    lazy var funLayer: CAEmitterLayer? = {
+    private lazy var funLayer: CAEmitterLayer? = {
         let funLayer = CAEmitterLayer()
         funLayer.emitterSize = CGSize(width: 100.0, height: 0)
         funLayer.emitterShape = .circle
@@ -41,7 +41,7 @@ class FunViewController: UIViewController, IFunController {
         endFun()
         super.viewWillDisappear(animated)
     }
-
+    // MARK: - Touch Notification Handler
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self,
@@ -76,3 +76,28 @@ class FunViewController: UIViewController, IFunController {
         }
     }
 }
+// MARK: - Start/Stop Particles Emitter
+extension FunViewController {
+    private func startFun(at position: CGPoint) {
+        funLayer?.emitterPosition = position
+        funLayer?.birthRate = 1.0
+        
+        if !hasEmitterLayer(), let layer = funLayer {
+            view.layer.addSublayer(layer)
+        }
+    }
+    
+    private func hasEmitterLayer() -> Bool {
+        let emitterLayer = view.layer.sublayers?.first(where: { (layer) -> Bool in
+            layer is CAEmitterLayer
+        })
+        return emitterLayer != nil
+    }
+    
+    private func endFun() {
+        funLayer?.birthRate = 0.0
+    }
+    
+    private func update(position: CGPoint) {
+        funLayer?.emitterPosition = position
+    }}

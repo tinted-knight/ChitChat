@@ -67,7 +67,6 @@
 		39B99B71256A70C50083F271 /* ButtonShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B70256A70C50083F271 /* ButtonShake.swift */; };
 		39B99B73256A7AB40083F271 /* PresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B72256A7AB40083F271 /* PresentTransition.swift */; };
 		39B99B75256A91900083F271 /* Channels Navigation+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B74256A91900083F271 /* Channels Navigation+Transition.swift */; };
-		39B99B77256A9A6C0083F271 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B76256A9A6C0083F271 /* Protocol.swift */; };
 		39B99B7A256A9ADE0083F271 /* FunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B99B79256A9ADE0083F271 /* FunViewController.swift */; };
 		39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFB82527616C00ECECCC /* ThemesViewController.swift */; };
 		39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */; };
@@ -159,7 +158,6 @@
 		39B99B70256A70C50083F271 /* ButtonShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonShake.swift; sourceTree = "<group>"; };
 		39B99B72256A7AB40083F271 /* PresentTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentTransition.swift; sourceTree = "<group>"; };
 		39B99B74256A91900083F271 /* Channels Navigation+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Channels Navigation+Transition.swift"; sourceTree = "<group>"; };
-		39B99B76256A9A6C0083F271 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		39B99B79256A9ADE0083F271 /* FunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunViewController.swift; sourceTree = "<group>"; };
 		39BDCFB82527616C00ECECCC /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
@@ -511,7 +509,6 @@
 		39B99B78256A9A8F0083F271 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
-				39B99B76256A9A6C0083F271 /* Protocol.swift */,
 				39B99B79256A9ADE0083F271 /* FunViewController.swift */,
 				396C8CA2256BF04D00EC697E /* UIWindow.swift */,
 			);
@@ -859,7 +856,6 @@
 				39EDD9F52542E7D000FE640B /* entitiy_extensions.swift in Sources */,
 				3948F9BE253B893700465D02 /* Log.swift in Sources */,
 				393AEDE6254F41A80028B893 /* ChannelService.swift in Sources */,
-				39B99B77256A9A6C0083F271 /* Protocol.swift in Sources */,
 				3948F9C2253B8B9C00465D02 /* IRemoteMessageStorage.swift in Sources */,
 				69409207317BDCA09476EAA2 /* MessageService.swift in Sources */,
 				69409FE6921DFD97F0165D7B /* IKeyValueStorage.swift in Sources */,
