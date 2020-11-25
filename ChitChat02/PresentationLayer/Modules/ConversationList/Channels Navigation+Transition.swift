@@ -13,7 +13,6 @@ extension ChannelsViewController {
     @objc func profileOnTap() {
         let controller = presentationAssembly.profileViewController()
         controller.transitioningDelegate = transitionProvider
-//        controller.modalPresentationStyle = .fullScreen
         navigationController?.present(controller, animated: true, completion: nil)
     }
     

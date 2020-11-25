@@ -11,7 +11,7 @@ import UIKit
 
 class TopLeftRightBottom: NSObject, IViewControllerTransition {
     
-    private let duration = 1.5
+    private let duration = 0.5
     var presenting = true
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
