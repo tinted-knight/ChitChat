@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sCy-UI-Hgc">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="QgT-zt-zie">
+            <objects>
+                <viewController id="sCy-UI-Hgc" customClass="ProfileViewController" customModule="ChitChat02" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZNf-oU-Dds">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q8y-AL-TOu">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="My profile" id="2Cc-Xp-qmW">
+                                        <barButtonItem key="leftBarButtonItem" title="Edit" id="MLo-AD-7Fo">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qbf-OR-8FR">
+                                                <rect key="frame" x="20" y="7" width="83" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Edit"/>
+                                            </button>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Close" id="l0Y-i6-Sic">
+                                            <connections>
+                                                <action selector="onCloseTap:" destination="sCy-UI-Hgc" id="xKQ-Rf-0fg"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="zaQ-dJ-n50">
+                                <rect key="frame" x="0.0" y="88" width="414" height="707"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="240" image="Profile temp" translatesAutoresizingMaskIntoConstraints="NO" id="av0-mj-T4f">
+                                        <rect key="frame" x="103.5" y="16" width="207" height="207"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="av0-mj-T4f" secondAttribute="height" multiplier="1:1" id="c5l-pI-EJM"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jdg-xH-pSn">
+                                        <rect key="frame" x="16" y="239" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UdF-Ji-2cG">
+                                        <rect key="frame" x="16" y="289" width="382" height="312.5"/>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaG-q8-pZm">
+                                        <rect key="frame" x="280.5" y="193" width="30" height="30"/>
+                                        <state key="normal" title="Edit"/>
+                                        <connections>
+                                            <action selector="onEditButtonTap:" destination="sCy-UI-Hgc" eventType="touchUpInside" id="62P-oE-vaO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="UdF-Ji-2cG" firstAttribute="top" secondItem="jdg-xH-pSn" secondAttribute="bottom" constant="16" id="3PV-a6-LHA"/>
+                                    <constraint firstItem="YaG-q8-pZm" firstAttribute="trailing" secondItem="av0-mj-T4f" secondAttribute="trailing" id="A4l-bb-BlH"/>
+                                    <constraint firstItem="jdg-xH-pSn" firstAttribute="leading" secondItem="VT5-zx-uYv" secondAttribute="leading" constant="16" id="C4l-BL-W6S"/>
+                                    <constraint firstItem="av0-mj-T4f" firstAttribute="width" secondItem="av0-mj-T4f" secondAttribute="height" multiplier="1:1" id="Hx8-oV-9lW"/>
+                                    <constraint firstItem="UdF-Ji-2cG" firstAttribute="leading" secondItem="VT5-zx-uYv" secondAttribute="leading" constant="16" id="NkI-pR-wUO"/>
+                                    <constraint firstItem="jdg-xH-pSn" firstAttribute="top" secondItem="av0-mj-T4f" secondAttribute="bottom" constant="16" id="U2j-ht-Me9"/>
+                                    <constraint firstItem="YaG-q8-pZm" firstAttribute="bottom" secondItem="av0-mj-T4f" secondAttribute="bottom" id="WnW-1X-Mbf"/>
+                                    <constraint firstAttribute="bottom" secondItem="UdF-Ji-2cG" secondAttribute="bottom" id="Y0L-uk-FE7"/>
+                                    <constraint firstItem="VT5-zx-uYv" firstAttribute="trailing" secondItem="jdg-xH-pSn" secondAttribute="trailing" constant="16" id="YIt-zX-XtN"/>
+                                    <constraint firstItem="av0-mj-T4f" firstAttribute="top" secondItem="zaQ-dJ-n50" secondAttribute="top" constant="16" id="ZEc-nV-wB4"/>
+                                    <constraint firstItem="YaG-q8-pZm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zaQ-dJ-n50" secondAttribute="leading" id="fQJ-Eq-aTE"/>
+                                    <constraint firstAttribute="trailing" secondItem="UdF-Ji-2cG" secondAttribute="trailing" constant="16" id="ieD-p3-Ob6"/>
+                                    <constraint firstItem="VT5-zx-uYv" firstAttribute="bottom" secondItem="UdF-Ji-2cG" secondAttribute="bottom" constant="105.5" id="jCV-eO-LJl"/>
+                                    <constraint firstItem="av0-mj-T4f" firstAttribute="centerX" secondItem="zaQ-dJ-n50" secondAttribute="centerX" id="qvt-E3-qWN"/>
+                                    <constraint firstItem="VT5-zx-uYv" firstAttribute="trailing" secondItem="UdF-Ji-2cG" secondAttribute="trailing" constant="16" id="rC1-l2-ebM"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="JKK-Zp-Ysa"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="VT5-zx-uYv"/>
+                            </scrollView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="Peg-k8-aA3">
+                                <rect key="frame" x="16" y="811" width="382" height="35"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Su-bo-31s">
+                                        <rect key="frame" x="0.0" y="0.0" width="177.5" height="35"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <state key="normal" title="GCD"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZ5-sW-zVc">
+                                        <rect key="frame" x="204.5" y="0.0" width="177.5" height="35"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <state key="normal" title="Operation"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pm9-ex-9Du">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="5Lc-f6-NVa" firstAttribute="bottom" secondItem="Peg-k8-aA3" secondAttribute="bottom" constant="16" id="36W-2Z-kfz"/>
+                            <constraint firstItem="zaQ-dJ-n50" firstAttribute="top" secondItem="Q8y-AL-TOu" secondAttribute="bottom" id="BgE-jZ-6we"/>
+                            <constraint firstItem="Q8y-AL-TOu" firstAttribute="trailing" secondItem="5Lc-f6-NVa" secondAttribute="trailing" id="CFq-Gp-Ifx"/>
+                            <constraint firstItem="zaQ-dJ-n50" firstAttribute="leading" secondItem="5Lc-f6-NVa" secondAttribute="leading" id="EBn-nb-46J"/>
+                            <constraint firstItem="Peg-k8-aA3" firstAttribute="leading" secondItem="5Lc-f6-NVa" secondAttribute="leading" constant="16" id="QFH-Je-3ZE"/>
+                            <constraint firstItem="pm9-ex-9Du" firstAttribute="centerY" secondItem="ZNf-oU-Dds" secondAttribute="centerY" id="RMe-jc-Ao5"/>
+                            <constraint firstItem="Q8y-AL-TOu" firstAttribute="leading" secondItem="5Lc-f6-NVa" secondAttribute="leading" id="a7c-cx-S6H"/>
+                            <constraint firstItem="Peg-k8-aA3" firstAttribute="top" secondItem="zaQ-dJ-n50" secondAttribute="bottom" constant="16" id="atx-z4-rZt"/>
+                            <constraint firstItem="av0-mj-T4f" firstAttribute="width" secondItem="5Lc-f6-NVa" secondAttribute="width" multiplier="0.5" id="f6X-Sk-vvg"/>
+                            <constraint firstItem="Q8y-AL-TOu" firstAttribute="top" secondItem="5Lc-f6-NVa" secondAttribute="top" id="ky3-yL-hQ8"/>
+                            <constraint firstItem="5Lc-f6-NVa" firstAttribute="trailing" secondItem="zaQ-dJ-n50" secondAttribute="trailing" id="mpG-Hm-qZs"/>
+                            <constraint firstItem="pm9-ex-9Du" firstAttribute="centerX" secondItem="ZNf-oU-Dds" secondAttribute="centerX" id="xV3-27-uoM"/>
+                            <constraint firstItem="5Lc-f6-NVa" firstAttribute="trailing" secondItem="Peg-k8-aA3" secondAttribute="trailing" constant="16" id="yuc-If-xLb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5Lc-f6-NVa"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="pm9-ex-9Du" id="pQ8-Kb-qUw"/>
+                        <outlet property="buttonEditPicture" destination="YaG-q8-pZm" id="EfL-fy-NIO"/>
+                        <outlet property="buttonSave" destination="6Su-bo-31s" id="MvW-n7-nmk"/>
+                        <outlet property="buttonSaveOperation" destination="qZ5-sW-zVc" id="Xdf-ie-3Kd"/>
+                        <outlet property="buttonUserEdit" destination="qbf-OR-8FR" id="6fC-53-oVN"/>
+                        <outlet property="profileImageView" destination="av0-mj-T4f" id="7Zf-hx-cIa"/>
+                        <outlet property="scrollView" destination="zaQ-dJ-n50" id="VfK-pf-xuY"/>
+                        <outlet property="textUserDescription" destination="UdF-Ji-2cG" id="tTN-rb-l1I"/>
+                        <outlet property="textUserName" destination="jdg-xH-pSn" id="3jb-sR-JzJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SQl-c4-IMo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2278" y="608"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Profile temp" width="240" height="240"/>
+    </resources>
+</document>

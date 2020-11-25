@@ -11,7 +11,7 @@ protocol IMessageService {
     var channel: ChannelEntity { get }
     var frc: NSFetchedResultsController<MessageEntity> { get }
     
-    func fetchRemote(completion: @escaping () -> Void)
+    func fetchRemote()
     func add(message content: String)
 }
 
@@ -19,10 +19,10 @@ class MessageService: IMessageService {
 
     private let local: IStorage
     private let remote: IRemoteMessageStorage
-    private let my: UserData
+    private let my: IFirestoreUser
     let channel: ChannelEntity
 
-    init(for channel: ChannelEntity, me userData: UserData, local: IStorage, remote: IRemoteMessageStorage) {
+    init(for channel: ChannelEntity, me userData: IFirestoreUser, local: IStorage, remote: IRemoteMessageStorage) {
         self.local = local
         self.channel = channel
         self.my = userData
@@ -45,7 +45,7 @@ class MessageService: IMessageService {
                 cacheName: nil)
     }()
     
-    func fetchRemote(completion: @escaping () -> Void) {
+    func fetchRemote() {
         remote.loadMessageList(
             onAdded: insert(_:),
             onModified: update(_:),
@@ -57,11 +57,11 @@ class MessageService: IMessageService {
         let messageData: [String: Any] = [
             Message.content: content,
             Message.created: Timestamp(date: Date()),
-            Message.senderName: my.name,
+            Message.senderName: my.name(),
             Message.senderId: my.uuid
         ]
         remote.add(data: messageData) { (success) in
-            Log.newschool("message added \(success)")
+            Log.coredata("message added \(success)")
         }
     }
     
@@ -90,7 +90,7 @@ class MessageService: IMessageService {
         do {
             let toUpdate = try viewContext.fetch(request)
             toUpdate.forEach { (entity) in
-                Log.newschool("updating message \(entity.content.prefix(20))")
+                Log.coredata("updating message \(entity.content.prefix(20))")
                 if let content = messages.first(where: { $0.documentId == entity.documentId })?.content {
                     entity.content = content
                 }
@@ -108,7 +108,7 @@ class MessageService: IMessageService {
         do {
             let sacrifice = try viewContext.fetch(request)
             sacrifice.forEach { (entity) in
-                Log.newschool("deleting message \(entity.content.prefix(20))")
+                Log.coredata("deleting message \(entity.content.prefix(20))")
                 viewContext.delete(entity)
             }
             local.performDelete()
@@ -116,6 +116,6 @@ class MessageService: IMessageService {
     }
 
     private func onError(_ message: String) {
-        Log.newschool(message)
+        Log.coredata(message)
     }
 }
