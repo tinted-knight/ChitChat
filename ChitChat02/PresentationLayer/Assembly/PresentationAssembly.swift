@@ -41,6 +41,7 @@ class PresentationAssembly: IPresentationAssembly {
                                                 channelModel: getChannelModel(),
                                                 myDataModel: getFirestoreUser,
                                                 themeModel: getThemeModel,
+                                                transitions: getTransitionProvider,
                                                 nibName: "ChannelsViewController",
                                                 bundle: nil)
         return controller
@@ -105,4 +106,6 @@ class PresentationAssembly: IPresentationAssembly {
     private func getAvatarListModel() -> IAvatarListModel {
         return AvatarListModel(with: serviceAssembly.avatarService)
     }
+    
+    private lazy var getTransitionProvider: ITransitionProvider = TransitionProvider()
 }

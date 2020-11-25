@@ -51,6 +51,7 @@ extension ProfileViewController: IProfileModelDelegate {
     func showEditState(_ value: Bool) {
         if !value {
             buttonUserEdit.setTitle("Edit", for: .normal)
+            buttonUserEdit.stopShaking()
             
             textUserName.isEnabled = false
             textUserDescription.isEditable = false
