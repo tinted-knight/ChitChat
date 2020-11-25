@@ -72,6 +72,7 @@
 		39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFB82527616C00ECECCC /* ThemesViewController.swift */; };
 		39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */; };
 		39BDCFBF252767B100ECECCC /* AppThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFBE252767B100ECECCC /* AppThemeData.swift */; };
+		39D6E502256E82E600AFB71E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6E501256E82E600AFB71E /* Protocols.swift */; };
 		39DBBAFE254D8A17009F4B5D /* ChannelsTableViewDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */; };
 		39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C12531C1D20068C875 /* LoadOperation.swift */; };
 		39DE12C42531C2280068C875 /* SaveOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C32531C2280068C875 /* SaveOperations.swift */; };
@@ -163,6 +164,7 @@
 		39BDCFB82527616C00ECECCC /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		39BDCFBE252767B100ECECCC /* AppThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeData.swift; sourceTree = "<group>"; };
+		39D6E501256E82E600AFB71E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsTableViewDelegates.swift; sourceTree = "<group>"; };
 		39DE12C12531C1D20068C875 /* LoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
 		39DE12C32531C2280068C875 /* SaveOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOperations.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		390077D9256D0D3300B800D6 /* ViewController Transitions */ = {
 			isa = PBXGroup;
 			children = (
+				39D6E501256E82E600AFB71E /* Protocols.swift */,
 				39B99B72256A7AB40083F271 /* PresentTransition.swift */,
 				396C8CA4256BFEC100EC697E /* PushTransition.swift */,
 				390077DA256D0D5E00B800D6 /* TransitionProvider.swift */,
@@ -817,6 +820,7 @@
 				395BB54C2562AB8300136F57 /* IAvatarListModel.swift in Sources */,
 				39EDD9F32542E17400FE640B /* CoreDataStack.swift in Sources */,
 				39B6A01F25594A4C00EFE36E /* IDataManager.swift in Sources */,
+				39D6E502256E82E600AFB71E /* Protocols.swift in Sources */,
 				39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */,
 				3948F9C6253B8F6F00465D02 /* models.swift in Sources */,
 				39FE54812563D8E900F40A74 /* AvatarListParsers.swift in Sources */,

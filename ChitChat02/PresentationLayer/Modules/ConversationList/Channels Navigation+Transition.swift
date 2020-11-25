@@ -12,7 +12,7 @@ import UIKit
 extension ChannelsViewController {
     @objc func profileOnTap() {
         let controller = presentationAssembly.profileViewController()
-        controller.transitioningDelegate = self
+        controller.transitioningDelegate = transitionProvider
 //        controller.modalPresentationStyle = .fullScreen
         navigationController?.present(controller, animated: true, completion: nil)
     }
@@ -20,28 +20,5 @@ extension ChannelsViewController {
     @objc func settingsOnTap() {
         let controller = presentationAssembly.themesViewController()
         navigationController?.pushViewController(controller, animated: true)
-    }
-}
-
-extension ChannelsViewController: UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
-    
-    func navigationController(_ navigationController: UINavigationController,
-                              animationControllerFor operation: UINavigationController.Operation,
-                              from fromVC: UIViewController,
-                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transitions.pushTransition.presenting = (operation == .push)
-        return transitions.pushTransition
-    }
-    
-    func animationController(forPresented presented: UIViewController,
-                             presenting: UIViewController,
-                             source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transitions.presentTransition.presenting = true
-        return transitions.presentTransition
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transitions.presentTransition.presenting = false
-        return transitions.presentTransition
     }
 }

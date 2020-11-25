@@ -21,7 +21,7 @@ class ChannelsViewController: FunViewController {
 
     let presentationAssembly: PresentationAssembly
     
-    let transitions: ITransitionProvider
+    let transitionProvider: ITransitionProvider
     
     init(presentationAssembly: PresentationAssembly, channelModel: IChannelModel,
          myDataModel: IFirestoreUser, themeModel: IThemeModel, transitions: ITransitionProvider,
@@ -31,7 +31,7 @@ class ChannelsViewController: FunViewController {
         self.channelModel = channelModel
         self.myDataModel = myDataModel
         self.themeModel = themeModel
-        self.transitions = transitions
+        self.transitionProvider = transitions
         
         super.init(nibName: nibName, bundle: bundle)
     }
@@ -77,7 +77,7 @@ extension ChannelsViewController {
                                    forCellReuseIdentifier: ChannelCellModel.cellReuseId)
         
         setupNavBarButtons()
-        navigationController?.delegate = self
+        navigationController?.delegate = transitionProvider
 
         themeModel.delegate = self
         themeModel.applyCurrent()
