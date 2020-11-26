@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MessagesViewController: FunViewController {
+class MessagesViewController: UIViewController {
 
     static func instance() -> MessagesViewController? {
         let storyboard = UIStoryboard(name: "MessagesViewController", bundle: nil)

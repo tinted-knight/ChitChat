@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChannelsViewController: FunViewController {
+class ChannelsViewController: UIViewController {
 
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var channelsTableView: UITableView!
@@ -21,17 +21,13 @@ class ChannelsViewController: FunViewController {
 
     let presentationAssembly: PresentationAssembly
     
-    let transitions: ITransitionProvider
-    
     init(presentationAssembly: PresentationAssembly, channelModel: IChannelModel,
-         myDataModel: IFirestoreUser, themeModel: IThemeModel, transitions: ITransitionProvider,
-         nibName: String, bundle: Bundle?) {
+         myDataModel: IFirestoreUser, themeModel: IThemeModel, nibName: String, bundle: Bundle?) {
         
         self.presentationAssembly = presentationAssembly
         self.channelModel = channelModel
         self.myDataModel = myDataModel
         self.themeModel = themeModel
-        self.transitions = transitions
         
         super.init(nibName: nibName, bundle: bundle)
     }
@@ -77,7 +73,6 @@ extension ChannelsViewController {
                                    forCellReuseIdentifier: ChannelCellModel.cellReuseId)
         
         setupNavBarButtons()
-        navigationController?.delegate = self
 
         themeModel.delegate = self
         themeModel.applyCurrent()

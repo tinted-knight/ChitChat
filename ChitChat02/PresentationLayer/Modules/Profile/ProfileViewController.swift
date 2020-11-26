@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ProfileViewController: FunViewController {
+class ProfileViewController: UIViewController {
 
     static func instance() -> ProfileViewController? {
         let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
@@ -152,11 +152,6 @@ class ProfileViewController: FunViewController {
 
     @objc private func setEditUser(_ sender: UIButton) {
         model?.switchEditState()
-        if let model = model, model.state == .modeEdit {
-            sender.shake()
-        } else {
-            sender.stopShaking()
-        }
     }
 
 }

@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelega
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-        self.window = CustomUIWindow(frame: UIScreen.main.bounds)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         let channels = rootAssembly.presentationAssembly.channelsViewController()
         let navController = rootAssembly.presentationAssembly.navigationViewController(withRoot: channels)
         window?.rootViewController = navController
