@@ -13,18 +13,26 @@ import UIKit
 extension ProfileViewController {
     func showChooseDialog() {
         let alertController = UIAlertController(title: nil, message: "Think twice. Everyone all over the Internet will see your face.", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Make a foto", style: .default) { [weak self] _ in
+
+        let cameraAction = UIAlertAction(title: "Сфотографировать", style: .default) { [weak self] _ in
             self?.chooseFromCamera()
         }
-        let galleryAction = UIAlertAction(title: "From galley", style: .default) { [weak self] _ in
+
+        let galleryAction = UIAlertAction(title: "Выбрать из галереи", style: .default) { [weak self] _ in
             self?.chooseFromGallery()
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+
+        let collectionAction = UIAlertAction(title: "Загрузить", style: .default) { [weak self] _ in
+            self?.chooseFromCollection()
+        }
+
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _ in
             // todo cancel handler
         }
 
         alertController.addAction(cameraAction)
         alertController.addAction(galleryAction)
+        alertController.addAction(collectionAction)
         alertController.addAction(cancelAction)
 
         present(alertController, animated: true, completion: nil)
@@ -49,6 +57,20 @@ extension ProfileViewController {
         } else {
             showAlert(title: "Error", message: "No camera on device! You are in safe!")
         }
+    }
+    
+    private func chooseFromCollection() {
+        guard let controller = presentationAssembly?.avatarCollectionViewController(self) else { return }
+        present(controller, animated: true, completion: nil)
+    }
+}
+// MARK: AvatarCollectionDelegate
+extension ProfileViewController: AvatarCollectionDelegate {
+    func onPicked(_ image: UIImage) {
+        profileImageView.image = image
+        model?.endEditing(name: textUserName.text,
+                          description: textUserDescription.description,
+                          avatar: profileImageView.image)
     }
 }
 

@@ -12,11 +12,16 @@ class Log {
     private static var OVERALL = true
     
     private static var FIRE_ENABLED = false
-    private static var PREFS_ENABLED = true
+    private static var PREFS_ENABLED = false
     private static var COREDATA_ENABLED = false
     private static var FRC_ENABLED = false
-    private static var ARCH_ENABLED = true
+    private static var ARCH_ENABLED = false
     private static var PROFILE_ENABLED = false
+    private static var NET_ENABLED = true
+
+    static func net(_ message: String) {
+        log(message, NET_ENABLED)
+    }
 
     static func arch(_ message: String) {
         log(message, ARCH_ENABLED)

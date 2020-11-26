@@ -26,6 +26,15 @@
 		3958B3BD253B284700801E6D /* MessagesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3958B3BC253B284700801E6D /* MessagesViewController.storyboard */; };
 		3958B3BF253B4CFA00801E6D /* MessagesVCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3BE253B4CFA00801E6D /* MessagesVCManager.swift */; };
 		3958B3C1253B708B00801E6D /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3958B3C0253B708B00801E6D /* AlertViewController.swift */; };
+		395BB5372562753600136F57 /* AvatarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB5362562753600136F57 /* AvatarCollectionViewController.swift */; };
+		395BB5392562771800136F57 /* AvatarCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 395BB5382562771800136F57 /* AvatarCollectionViewController.xib */; };
+		395BB53C2562833C00136F57 /* AvatarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB53A2562833C00136F57 /* AvatarViewCell.swift */; };
+		395BB53D2562833C00136F57 /* AvatarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 395BB53B2562833C00136F57 /* AvatarViewCell.xib */; };
+		395BB54025628C5300136F57 /* IAvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB53F25628C5300136F57 /* IAvatarService.swift */; };
+		395BB54425628D7600136F57 /* IRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB54325628D7600136F57 /* IRequest.swift */; };
+		395BB54725628DA800136F57 /* IRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB54625628DA800136F57 /* IRequestManager.swift */; };
+		395BB54A25628DE600136F57 /* IParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB54925628DE600136F57 /* IParser.swift */; };
+		395BB54C2562AB8300136F57 /* IAvatarListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395BB54B2562AB8300136F57 /* IAvatarListModel.swift */; };
 		396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */; };
 		397214B125587693001A8B89 /* FirestoreUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B025587693001A8B89 /* FirestoreUser.swift */; };
 		397214B3255876D9001A8B89 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397214B2255876D8001A8B89 /* FirestoreService.swift */; };
@@ -60,6 +69,7 @@
 		39DE12C42531C2280068C875 /* SaveOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C32531C2280068C875 /* SaveOperations.swift */; };
 		39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C52531C4290068C875 /* SaveLoadExtension.swift */; };
 		39DE12C82531E5DA0068C875 /* ThemeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */; };
+		39EAA115256FC21600786DBB /* Channels Navigation+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EAA114256FC21600786DBB /* Channels Navigation+Transition.swift */; };
 		39ED610B2521EB32006D8E0A /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */; };
 		39ED610E2521EE62006D8E0A /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610D2521EE62006D8E0A /* MessagesViewController.swift */; };
 		39ED61152521F76E006D8E0A /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61132521F76E006D8E0A /* ChannelCell.swift */; };
@@ -71,6 +81,9 @@
 		39EDD9F32542E17400FE640B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EDD9F22542E17400FE640B /* CoreDataStack.swift */; };
 		39EDD9F52542E7D000FE640B /* entitiy_extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EDD9F42542E7D000FE640B /* entitiy_extensions.swift */; };
 		39EDD9FB2543337E00FE640B /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39EDD9F92543337E00FE640B /* Chat.xcdatamodeld */; };
+		39FE54812563D8E900F40A74 /* AvatarListParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE54802563D8E900F40A74 /* AvatarListParsers.swift */; };
+		39FE54852563D91B00F40A74 /* AvatarRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE54842563D91B00F40A74 /* AvatarRequestManager.swift */; };
+		39FE54872563D96300F40A74 /* PicsumBasedRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE54862563D96300F40A74 /* PicsumBasedRequests.swift */; };
 		69409207317BDCA09476EAA2 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69409ED40674C511CFCD83FA /* MessageService.swift */; };
 		69409FE6921DFD97F0165D7B /* IKeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6940947DFA41AE75B7AD3B9C /* IKeyValueStorage.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +110,15 @@
 		3958B3BC253B284700801E6D /* MessagesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MessagesViewController.storyboard; sourceTree = "<group>"; };
 		3958B3BE253B4CFA00801E6D /* MessagesVCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVCManager.swift; sourceTree = "<group>"; };
 		3958B3C0253B708B00801E6D /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		395BB5362562753600136F57 /* AvatarCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewController.swift; sourceTree = "<group>"; };
+		395BB5382562771800136F57 /* AvatarCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvatarCollectionViewController.xib; sourceTree = "<group>"; };
+		395BB53A2562833C00136F57 /* AvatarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarViewCell.swift; sourceTree = "<group>"; };
+		395BB53B2562833C00136F57 /* AvatarViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvatarViewCell.xib; sourceTree = "<group>"; };
+		395BB53F25628C5300136F57 /* IAvatarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAvatarService.swift; sourceTree = "<group>"; };
+		395BB54325628D7600136F57 /* IRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRequest.swift; sourceTree = "<group>"; };
+		395BB54625628DA800136F57 /* IRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRequestManager.swift; sourceTree = "<group>"; };
+		395BB54925628DE600136F57 /* IParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IParser.swift; sourceTree = "<group>"; };
+		395BB54B2562AB8300136F57 /* IAvatarListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAvatarListModel.swift; sourceTree = "<group>"; };
 		396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		397214B025587693001A8B89 /* FirestoreUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUser.swift; sourceTree = "<group>"; };
 		397214B2255876D8001A8B89 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
@@ -131,6 +153,7 @@
 		39DE12C32531C2280068C875 /* SaveOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOperations.swift; sourceTree = "<group>"; };
 		39DE12C52531C4290068C875 /* SaveLoadExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadExtension.swift; sourceTree = "<group>"; };
 		39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataManager.swift; sourceTree = "<group>"; };
+		39EAA114256FC21600786DBB /* Channels Navigation+Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Channels Navigation+Transition.swift"; sourceTree = "<group>"; };
 		39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 		39ED610D2521EE62006D8E0A /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		39ED61132521F76E006D8E0A /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
@@ -142,6 +165,9 @@
 		39EDD9F22542E17400FE640B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		39EDD9F42542E7D000FE640B /* entitiy_extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = entitiy_extensions.swift; sourceTree = "<group>"; };
 		39EDD9FA2543337E00FE640B /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
+		39FE54802563D8E900F40A74 /* AvatarListParsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarListParsers.swift; sourceTree = "<group>"; };
+		39FE54842563D91B00F40A74 /* AvatarRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarRequestManager.swift; sourceTree = "<group>"; };
+		39FE54862563D96300F40A74 /* PicsumBasedRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsumBasedRequests.swift; sourceTree = "<group>"; };
 		3B2FC54AEA21573BC155A8BC /* Pods-ChitChat02.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02.debug.xcconfig"; path = "Target Support Files/Pods-ChitChat02/Pods-ChitChat02.debug.xcconfig"; sourceTree = "<group>"; };
 		53147F9F7C0E3997A63E27F3 /* Pods-ChitChat02.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02.release.xcconfig"; path = "Target Support Files/Pods-ChitChat02/Pods-ChitChat02.release.xcconfig"; sourceTree = "<group>"; };
 		6940947DFA41AE75B7AD3B9C /* IKeyValueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IKeyValueStorage.swift; sourceTree = "<group>"; };
@@ -218,9 +244,67 @@
 			path = entities;
 			sourceTree = "<group>";
 		};
+		395BB5352562750D00136F57 /* AvatarCollection */ = {
+			isa = PBXGroup;
+			children = (
+				39FE54882563DB2500F40A74 /* model */,
+				395BB5362562753600136F57 /* AvatarCollectionViewController.swift */,
+				395BB5382562771800136F57 /* AvatarCollectionViewController.xib */,
+				395BB53A2562833C00136F57 /* AvatarViewCell.swift */,
+				395BB53B2562833C00136F57 /* AvatarViewCell.xib */,
+			);
+			path = AvatarCollection;
+			sourceTree = "<group>";
+		};
+		395BB53E25628C3700136F57 /* AvatarListService */ = {
+			isa = PBXGroup;
+			children = (
+				395BB53F25628C5300136F57 /* IAvatarService.swift */,
+			);
+			path = AvatarListService;
+			sourceTree = "<group>";
+		};
+		395BB54125628D6200136F57 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				395BB54825628DDC00136F57 /* Parser */,
+				395BB54525628D9A00136F57 /* RequestManager */,
+				395BB54225628D6A00136F57 /* Request */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		395BB54225628D6A00136F57 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				395BB54325628D7600136F57 /* IRequest.swift */,
+				39FE54862563D96300F40A74 /* PicsumBasedRequests.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		395BB54525628D9A00136F57 /* RequestManager */ = {
+			isa = PBXGroup;
+			children = (
+				395BB54625628DA800136F57 /* IRequestManager.swift */,
+				39FE54842563D91B00F40A74 /* AvatarRequestManager.swift */,
+			);
+			path = RequestManager;
+			sourceTree = "<group>";
+		};
+		395BB54825628DDC00136F57 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				395BB54925628DE600136F57 /* IParser.swift */,
+				39FE54802563D8E900F40A74 /* AvatarListParsers.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
 		396F5EA32517AF1F0070F2BD /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				395BB5352562750D00136F57 /* AvatarCollection */,
 				39ADD7D8255ABCEA00FC583A /* model */,
 				396F5EA62517AF8F0070F2BD /* ProfileViewController.swift */,
 				39DE12C52531C4290068C875 /* SaveLoadExtension.swift */,
@@ -251,6 +335,7 @@
 		39A2846C25581401003C2484 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
+				395BB54125628D6200136F57 /* Networking */,
 				39F76FCF255D721A00AD526E /* ThemeStorage */,
 				39A284762558216F003C2484 /* Assembly */,
 				39B6A01D255949EF00EFE36E /* ProfileStorage */,
@@ -330,6 +415,7 @@
 		39A2848425585A89003C2484 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				395BB53E25628C3700136F57 /* AvatarListService */,
 				39ABED402534D3C200EDCA7C /* SmartDataManagerService.swift */,
 				393AEDE5254F41A80028B893 /* ChannelService.swift */,
 				69409ED40674C511CFCD83FA /* MessageService.swift */,
@@ -424,6 +510,7 @@
 				3948F9C9253B942600465D02 /* ThemeAndStuff.swift */,
 				39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */,
 				390F4E17255ACCD100DEA323 /* ChannelsViewController.xib */,
+				39EAA114256FC21600786DBB /* Channels Navigation+Transition.swift */,
 			);
 			path = ConversationList;
 			sourceTree = "<group>";
@@ -469,6 +556,14 @@
 			path = ThemeStorage;
 			sourceTree = "<group>";
 		};
+		39FE54882563DB2500F40A74 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				395BB54B2562AB8300136F57 /* IAvatarListModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		421B2EFD5D2930D3B39F3217 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +594,7 @@
 				394F866E250E518A00B703B3 /* Resources */,
 				39494C1E253AF18B006853B9 /* ShellScript */,
 				5AA04DC4A9F7AEFA87599B88 /* [CP] Embed Pods Frameworks */,
+				395BB54D2562C57500136F57 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -548,6 +644,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39ED611F25221658006D8E0A /* IncomeMessageCell.xib in Resources */,
+				395BB5392562771800136F57 /* AvatarCollectionViewController.xib in Resources */,
 				39ED61162521F76E006D8E0A /* ChannelCell.xib in Resources */,
 				39ED6125252219BA006D8E0A /* OutcomeMessageCell.xib in Resources */,
 				3958B3BD253B284700801E6D /* MessagesViewController.storyboard in Resources */,
@@ -559,6 +656,7 @@
 				394F867D250E518A00B703B3 /* Assets.xcassets in Resources */,
 				394F867B250E518A00B703B3 /* Main.storyboard in Resources */,
 				39B6A01C2559480400EFE36E /* ProfileViewController.storyboard in Resources */,
+				395BB53D2562833C00136F57 /* AvatarViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +702,23 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		395BB54D2562C57500136F57 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nTAGS=\"todo:|fake:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
+		};
 		5AA04DC4A9F7AEFA87599B88 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -634,23 +749,29 @@
 				39A2847C25582A7A003C2484 /* ServiceAssembly.swift in Sources */,
 				3958B3C1253B708B00801E6D /* AlertViewController.swift in Sources */,
 				39A284792558238E003C2484 /* CoreAssembly.swift in Sources */,
+				395BB54425628D7600136F57 /* IRequest.swift in Sources */,
 				394F8674250E518A00B703B3 /* AppDelegate.swift in Sources */,
 				39DBBAFE254D8A17009F4B5D /* ChannelsTableViewDelegates.swift in Sources */,
 				390F4E1C255ADB9A00DEA323 /* AvatarPickerExtension.swift in Sources */,
 				39ABED452534F99100EDCA7C /* LoadCompletionOperation.swift in Sources */,
 				397214B82558807D001A8B89 /* ThemeModel.swift in Sources */,
+				395BB54A25628DE600136F57 /* IParser.swift in Sources */,
 				39BDCFBA2527616C00ECECCC /* ThemesViewController.swift in Sources */,
 				39EDD9FB2543337E00FE640B /* Chat.xcdatamodeld in Sources */,
 				39ADD7DE255AC60200FC583A /* ChannelEntity+CoreDataClass.swift in Sources */,
 				39ADD7DB255AC5B700FC583A /* MessageEntity+CoreDataProperties.swift in Sources */,
 				397214B3255876D9001A8B89 /* FirestoreService.swift in Sources */,
+				395BB54025628C5300136F57 /* IAvatarService.swift in Sources */,
 				39A2847425581D42003C2484 /* PresentationAssembly.swift in Sources */,
 				39ED61182521F7AE006D8E0A /* ChannelCellModel.swift in Sources */,
 				39ABED432534F83400EDCA7C /* SaveCompletionOperation.swift in Sources */,
+				395BB54C2562AB8300136F57 /* IAvatarListModel.swift in Sources */,
 				39EDD9F32542E17400FE640B /* CoreDataStack.swift in Sources */,
 				39B6A01F25594A4C00EFE36E /* IDataManager.swift in Sources */,
 				39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */,
 				3948F9C6253B8F6F00465D02 /* models.swift in Sources */,
+				39FE54812563D8E900F40A74 /* AvatarListParsers.swift in Sources */,
+				395BB54725628DA800136F57 /* IRequestManager.swift in Sources */,
 				393A0F6825594F920063ACC7 /* ProfileModel.swift in Sources */,
 				39B7FDC42530B00200B5F280 /* GCDDataManager.swift in Sources */,
 				39BDCFBF252767B100ECECCC /* AppThemeData.swift in Sources */,
@@ -666,15 +787,20 @@
 				39ED610B2521EB32006D8E0A /* ChannelsViewController.swift in Sources */,
 				39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */,
 				3994BFB425248EB6001AB5E7 /* MessageCell.swift in Sources */,
+				39FE54872563D96300F40A74 /* PicsumBasedRequests.swift in Sources */,
 				3958B3BF253B4CFA00801E6D /* MessagesVCManager.swift in Sources */,
 				39A2848025583534003C2484 /* ChannelModel.swift in Sources */,
 				3958B3B9253AFFBE00801E6D /* Loading state.swift in Sources */,
 				396F5EA72517AF8F0070F2BD /* ProfileViewController.swift in Sources */,
 				39ED61152521F76E006D8E0A /* ChannelCell.swift in Sources */,
+				39FE54852563D91B00F40A74 /* AvatarRequestManager.swift in Sources */,
+				39EAA115256FC21600786DBB /* Channels Navigation+Transition.swift in Sources */,
 				39A284832558511F003C2484 /* IRemoteChannelStorage.swift in Sources */,
+				395BB53C2562833C00136F57 /* AvatarViewCell.swift in Sources */,
 				3948F9CA253B942600465D02 /* ThemeAndStuff.swift in Sources */,
 				39B7FDC22530AFF100B5F280 /* OperationDataManager.swift in Sources */,
 				393AEDE1254F3A270028B893 /* NewSchoolCoreData.swift in Sources */,
+				395BB5372562753600136F57 /* AvatarCollectionViewController.swift in Sources */,
 				39EDD9F52542E7D000FE640B /* entitiy_extensions.swift in Sources */,
 				3948F9BE253B893700465D02 /* Log.swift in Sources */,
 				393AEDE6254F41A80028B893 /* ChannelService.swift in Sources */,
