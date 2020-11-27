@@ -25,8 +25,9 @@ class AvatarViewCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        hasLoaded = false
         super.prepareForReuse()
+        hasLoaded = false
+        image.image = nil
     }
     
 }
