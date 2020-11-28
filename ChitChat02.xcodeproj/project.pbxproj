@@ -12,7 +12,8 @@
 		390F4E1C255ADB9A00DEA323 /* AvatarPickerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390F4E1B255ADB9A00DEA323 /* AvatarPickerExtension.swift */; };
 		3928B8A12572A6F40077D948 /* LocalStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A02572A6F40077D948 /* LocalStorageMock.swift */; };
 		3928B8A32572C9230077D948 /* RemoteChannelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A22572C9230077D948 /* RemoteChannelMock.swift */; };
-		3928B8A52572D3E30077D948 /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A42572D3E30077D948 /* LocalStorageTests.swift */; };
+		3928B8A72572D5BD0077D948 /* ProfileDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A62572D5BD0077D948 /* ProfileDataManagerTests.swift */; };
+		3928B8A92572D5F50077D948 /* DataManagerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A82572D5F50077D948 /* DataManagerMocks.swift */; };
 		393A0F6825594F920063ACC7 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393A0F6725594F920063ACC7 /* ProfileModel.swift */; };
 		393AEDE1254F3A270028B893 /* NewSchoolCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */; };
 		393AEDE6254F41A80028B893 /* ChannelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE5254F41A80028B893 /* ChannelService.swift */; };
@@ -117,7 +118,8 @@
 		390F4E1B255ADB9A00DEA323 /* AvatarPickerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPickerExtension.swift; sourceTree = "<group>"; };
 		3928B8A02572A6F40077D948 /* LocalStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageMock.swift; sourceTree = "<group>"; };
 		3928B8A22572C9230077D948 /* RemoteChannelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChannelMock.swift; sourceTree = "<group>"; };
-		3928B8A42572D3E30077D948 /* LocalStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
+		3928B8A62572D5BD0077D948 /* ProfileDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManagerTests.swift; sourceTree = "<group>"; };
+		3928B8A82572D5F50077D948 /* DataManagerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerMocks.swift; sourceTree = "<group>"; };
 		393A0F6725594F920063ACC7 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSchoolCoreData.swift; sourceTree = "<group>"; };
 		393AEDE5254F41A80028B893 /* ChannelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelService.swift; sourceTree = "<group>"; };
@@ -591,7 +593,8 @@
 				39E6AE1925726B780070E5A0 /* Info.plist */,
 				3928B8A02572A6F40077D948 /* LocalStorageMock.swift */,
 				3928B8A22572C9230077D948 /* RemoteChannelMock.swift */,
-				3928B8A42572D3E30077D948 /* LocalStorageTests.swift */,
+				3928B8A62572D5BD0077D948 /* ProfileDataManagerTests.swift */,
+				3928B8A82572D5F50077D948 /* DataManagerMocks.swift */,
 			);
 			path = ChitChat02Tests;
 			sourceTree = "<group>";
@@ -977,9 +980,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3928B8A32572C9230077D948 /* RemoteChannelMock.swift in Sources */,
-				3928B8A52572D3E30077D948 /* LocalStorageTests.swift in Sources */,
+				3928B8A72572D5BD0077D948 /* ProfileDataManagerTests.swift in Sources */,
 				39E6AE1825726B780070E5A0 /* ChitChat02Tests.swift in Sources */,
 				3928B8A12572A6F40077D948 /* LocalStorageMock.swift in Sources */,
+				3928B8A92572D5F50077D948 /* DataManagerMocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
