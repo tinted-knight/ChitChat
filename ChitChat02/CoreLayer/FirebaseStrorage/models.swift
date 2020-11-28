@@ -19,7 +19,28 @@ struct Channel: Hashable {
     let name: String
     let lastMessage: String?
     let lastActivity: Date?
+
+    init(identifier: String, name: String, lastMessage: String, lastActivity: Date) {
+        self.identifier = identifier
+        self.name = name
+        self.lastMessage = lastMessage
+        self.lastActivity = lastActivity
+    }
     
+    init?(from data: NSDictionary, documentId: String) {
+        guard let name = data[Channel.name] as? String else { return nil }
+        guard let timestamp = data[Channel.lastActivity] as? Timestamp else { return nil }
+
+        let id: String = documentId
+        let lastActivity = timestamp.dateValue()
+        let lastMessage = data[Channel.lastMessage] as? String
+        
+        self.identifier = id
+        self.name = name
+        self.lastMessage = lastMessage
+        self.lastActivity = lastActivity
+    }
+
     init?(from document: QueryDocumentSnapshot) {
         guard let name = document.data()[Channel.name] as? String else { return nil }
         guard let timestamp = document.data()[Channel.lastActivity] as? Timestamp else { return nil }

@@ -10,16 +10,40 @@
 import XCTest
 
 class ChitChat02Tests: XCTestCase {
-    func testLocalStorage() throws {
-        // Arrange
-        let localStorageMock = LocalStorageMock()
-        let remoteChannelMock = RemoteChannelMock()
-        let channelService = ChannelService(local: localStorageMock, remote: remoteChannelMock)
+    
+    lazy var localStorageMock = LocalStorageMock()
+    lazy var remoteChannelMock = RemoteChannelMock()
+    lazy var channelService = ChannelService(local: self.localStorageMock,
+                                        remote: self.remoteChannelMock)
 
+    lazy var channelStub = Channel(identifier: "1001",
+                                   name: "Каналья",
+                                   lastMessage: "LastMessage",
+                                   lastActivity: Date(timeIntervalSince1970: 1606582800))
+
+    func testRemoteAdd() throws {
         // Act
-        channelService.setup { }
-
+        channelService.addChannel(channelStub.name)
+        
         // Assert
-        XCTAssertEqual(localStorageMock.createContainerCalls, 1)
+        XCTAssertEqual(remoteChannelMock.addChannelCalls, 1)
+        XCTAssertEqual(remoteChannelMock.addName, channelStub.name)
+    }
+
+    func testRemoteDelete() throws {
+        // Act
+        channelService.deleteChannel(channelStub.identifier)
+        
+        // Assert
+        XCTAssertEqual(remoteChannelMock.deleteChannelCalls, 1)
+        XCTAssertEqual(remoteChannelMock.deleteId, channelStub.identifier)
+    }
+    
+    func testRemoteLoad() throws {
+        // Act
+        channelService.fetchRemote()
+        
+        //Assert
+        XCTAssertEqual(remoteChannelMock.loadOnceCalls, 1)
     }
 }

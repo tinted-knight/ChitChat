@@ -15,7 +15,7 @@ protocol IChannelService {
     func setup(completion: @escaping () -> Void)
     func fetchRemote()
     func addChannel(_ name: String)
-    func deleteChannel(_ channel: ChannelEntity)
+    func deleteChannel(_ channelId: String)
 }
 
 class ChannelService: IChannelService {
@@ -87,8 +87,8 @@ class ChannelService: IChannelService {
         }
     }
     
-    func deleteChannel(_ channel: ChannelEntity) {
-        remote.deleteChannel(id: channel.identifier) { (success) in
+    func deleteChannel(_ channelId: String) {
+        remote.deleteChannel(id: channelId) { (success) in
             Log.coredata("delete channel \(success)")
         }
     }
