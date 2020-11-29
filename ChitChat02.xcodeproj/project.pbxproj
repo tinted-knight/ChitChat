@@ -14,6 +14,7 @@
 		3928B8A32572C9230077D948 /* RemoteChannelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A22572C9230077D948 /* RemoteChannelMock.swift */; };
 		3928B8A72572D5BD0077D948 /* ProfileDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A62572D5BD0077D948 /* ProfileDataManagerTests.swift */; };
 		3928B8A92572D5F50077D948 /* DataManagerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A82572D5F50077D948 /* DataManagerMocks.swift */; };
+		393949702573E01500A25CE4 /* ChitChat02UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939496F2573E01500A25CE4 /* ChitChat02UITests.swift */; };
 		393A0F6825594F920063ACC7 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393A0F6725594F920063ACC7 /* ProfileModel.swift */; };
 		393AEDE1254F3A270028B893 /* NewSchoolCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */; };
 		393AEDE6254F41A80028B893 /* ChannelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE5254F41A80028B893 /* ChannelService.swift */; };
@@ -102,6 +103,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		393949722573E01500A25CE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 394F8668250E518A00B703B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 394F866F250E518A00B703B3;
+			remoteInfo = ChitChat02;
+		};
 		39E6AE1A25726B780070E5A0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 394F8668250E518A00B703B3 /* Project object */;
@@ -120,6 +128,9 @@
 		3928B8A22572C9230077D948 /* RemoteChannelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChannelMock.swift; sourceTree = "<group>"; };
 		3928B8A62572D5BD0077D948 /* ProfileDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManagerTests.swift; sourceTree = "<group>"; };
 		3928B8A82572D5F50077D948 /* DataManagerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerMocks.swift; sourceTree = "<group>"; };
+		3939496D2573E01500A25CE4 /* ChitChat02UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChitChat02UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3939496F2573E01500A25CE4 /* ChitChat02UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChitChat02UITests.swift; sourceTree = "<group>"; };
+		393949712573E01500A25CE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		393A0F6725594F920063ACC7 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSchoolCoreData.swift; sourceTree = "<group>"; };
 		393AEDE5254F41A80028B893 /* ChannelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelService.swift; sourceTree = "<group>"; };
@@ -220,6 +231,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3939496A2573E01500A25CE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		394F866D250E518A00B703B3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -259,12 +277,22 @@
 			path = "ViewController Transitions";
 			sourceTree = "<group>";
 		};
+		3939496E2573E01500A25CE4 /* ChitChat02UITests */ = {
+			isa = PBXGroup;
+			children = (
+				3939496F2573E01500A25CE4 /* ChitChat02UITests.swift */,
+				393949712573E01500A25CE4 /* Info.plist */,
+			);
+			path = ChitChat02UITests;
+			sourceTree = "<group>";
+		};
 		394F8667250E518A00B703B3 = {
 			isa = PBXGroup;
 			children = (
 				394F8688250E659C00B703B3 /* README.md */,
 				394F8672250E518A00B703B3 /* ChitChat02 */,
 				39E6AE1625726B780070E5A0 /* ChitChat02Tests */,
+				3939496E2573E01500A25CE4 /* ChitChat02UITests */,
 				394F8671250E518A00B703B3 /* Products */,
 				421B2EFD5D2930D3B39F3217 /* Pods */,
 				1E9B44F04DC21C2392C6B2F5 /* Frameworks */,
@@ -276,6 +304,7 @@
 			children = (
 				394F8670250E518A00B703B3 /* ChitChat02.app */,
 				39E6AE1525726B780070E5A0 /* ChitChat02Tests.xctest */,
+				3939496D2573E01500A25CE4 /* ChitChat02UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -689,6 +718,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3939496C2573E01500A25CE4 /* ChitChat02UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 393949762573E01500A25CE4 /* Build configuration list for PBXNativeTarget "ChitChat02UITests" */;
+			buildPhases = (
+				393949692573E01500A25CE4 /* Sources */,
+				3939496A2573E01500A25CE4 /* Frameworks */,
+				3939496B2573E01500A25CE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				393949732573E01500A25CE4 /* PBXTargetDependency */,
+			);
+			name = ChitChat02UITests;
+			productName = ChitChat02UITests;
+			productReference = 3939496D2573E01500A25CE4 /* ChitChat02UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		394F866F250E518A00B703B3 /* ChitChat02 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 394F8684250E518A00B703B3 /* Build configuration list for PBXNativeTarget "ChitChat02" */;
@@ -739,6 +786,10 @@
 				LastUpgradeCheck = 1170;
 				ORGANIZATIONNAME = TimunInc;
 				TargetAttributes = {
+					3939496C2573E01500A25CE4 = {
+						CreatedOnToolsVersion = 11.7;
+						TestTargetID = 394F866F250E518A00B703B3;
+					};
 					394F866F250E518A00B703B3 = {
 						CreatedOnToolsVersion = 11.7;
 					};
@@ -763,11 +814,19 @@
 			targets = (
 				394F866F250E518A00B703B3 /* ChitChat02 */,
 				39E6AE1425726B780070E5A0 /* ChitChat02Tests */,
+				3939496C2573E01500A25CE4 /* ChitChat02UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3939496B2573E01500A25CE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		394F866E250E518A00B703B3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -897,6 +956,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		393949692573E01500A25CE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				393949702573E01500A25CE4 /* ChitChat02UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		394F866C250E518A00B703B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -990,6 +1057,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		393949732573E01500A25CE4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 394F866F250E518A00B703B3 /* ChitChat02 */;
+			targetProxy = 393949722573E01500A25CE4 /* PBXContainerItemProxy */;
+		};
 		39E6AE1B25726B780070E5A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 394F866F250E518A00B703B3 /* ChitChat02 */;
@@ -1017,6 +1089,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		393949742573E01500A25CE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ChitChat02UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.timun.chitchat.ChitChat02UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ChitChat02;
+			};
+			name = Debug;
+		};
+		393949752573E01500A25CE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ChitChat02UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.timun.chitchat.ChitChat02UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ChitChat02;
+			};
+			name = Release;
+		};
 		394F8682250E518A00B703B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1223,6 +1331,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		393949762573E01500A25CE4 /* Build configuration list for PBXNativeTarget "ChitChat02UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				393949742573E01500A25CE4 /* Debug */,
+				393949752573E01500A25CE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		394F866B250E518A00B703B3 /* Build configuration list for PBXProject "ChitChat02" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

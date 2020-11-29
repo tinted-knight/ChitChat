@@ -58,6 +58,9 @@ class ProfileViewController: FunViewController {
 
         scrollView.isScrollEnabled = false
         
+        textUserName.accessibilityIdentifier = "Text User Name"
+        textUserDescription.accessibilityIdentifier = "Text User Description"
+        
         applyTheme()
     }
     
