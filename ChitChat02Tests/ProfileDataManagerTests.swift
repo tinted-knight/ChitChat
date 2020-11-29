@@ -24,7 +24,7 @@ class ProfileDataManagerTests: XCTestCase {
         XCTAssertEqual(gcdMock.loadCalls, 0)
     }
     
-    func testGcdLoad() throws {
+    func testGCDLoad() throws {
         // Arrange
         let userStub = UserModel(name: "Ostap", description: "Son", avatar: nil)
 
@@ -78,10 +78,36 @@ class ProfileDataManagerTests: XCTestCase {
         dataManager.save(user: userStub, with: .operation)
         
         // Assert
+        // delegate has been set
+        XCTAssertNotNil(operationMock.delegate)
+        // load
         XCTAssertEqual(delegate.onLoadedCalls, 1)
         XCTAssertNotNil(delegate.onLoadedUser)
         let user = delegate.onLoadedUser!
         XCTAssertEqual(user.name, userLoadStub.name)
+        // save
+        XCTAssertEqual(delegate.onSavedCalls, 1)
+    }
+
+    func testGCDDelegate() throws {
+        // Arrange
+        let delegate = DelegateStub()
+        dataManager.delegate = delegate
+        let userStub = UserModel(name: "Ostap", description: "Son", avatar: nil)
+
+        // Act
+        dataManager.save(user: userStub, with: .gcd)
+        dataManager.load()
+        
+        // Assert
+        // delegate has been set
+        XCTAssertNotNil(gcdMock.delegate)
+        // load
+        XCTAssertEqual(delegate.onLoadedCalls, 1)
+        XCTAssertNotNil(delegate.onLoadedUser)
+        let user = delegate.onLoadedUser!
+        XCTAssertEqual(user.name, userLoadStub.name)
+        // save
         XCTAssertEqual(delegate.onSavedCalls, 1)
     }
 }
