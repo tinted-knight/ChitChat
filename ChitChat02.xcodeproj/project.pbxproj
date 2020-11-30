@@ -76,12 +76,14 @@
 		39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */; };
 		39BDCFBF252767B100ECECCC /* AppThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFBE252767B100ECECCC /* AppThemeData.swift */; };
 		39D6E502256E82E600AFB71E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6E501256E82E600AFB71E /* Protocols.swift */; };
+		39DA64872575251B00E305CD /* AvatarListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DA64862575251B00E305CD /* AvatarListTest.swift */; };
+		39DA64892575262C00E305CD /* RequestManagerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DA64882575262C00E305CD /* RequestManagerMocks.swift */; };
 		39DBBAFE254D8A17009F4B5D /* ChannelsTableViewDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */; };
 		39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C12531C1D20068C875 /* LoadOperation.swift */; };
 		39DE12C42531C2280068C875 /* SaveOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C32531C2280068C875 /* SaveOperations.swift */; };
 		39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C52531C4290068C875 /* SaveLoadExtension.swift */; };
 		39DE12C82531E5DA0068C875 /* ThemeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */; };
-		39E6AE1825726B780070E5A0 /* ChitChat02Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6AE1725726B780070E5A0 /* ChitChat02Tests.swift */; };
+		39E6AE1825726B780070E5A0 /* RemoteStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6AE1725726B780070E5A0 /* RemoteStorageTests.swift */; };
 		39ED610B2521EB32006D8E0A /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */; };
 		39ED610E2521EE62006D8E0A /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610D2521EE62006D8E0A /* MessagesViewController.swift */; };
 		39ED61152521F76E006D8E0A /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61132521F76E006D8E0A /* ChannelCell.swift */; };
@@ -195,13 +197,15 @@
 		39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		39BDCFBE252767B100ECECCC /* AppThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeData.swift; sourceTree = "<group>"; };
 		39D6E501256E82E600AFB71E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		39DA64862575251B00E305CD /* AvatarListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarListTest.swift; sourceTree = "<group>"; };
+		39DA64882575262C00E305CD /* RequestManagerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManagerMocks.swift; sourceTree = "<group>"; };
 		39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsTableViewDelegates.swift; sourceTree = "<group>"; };
 		39DE12C12531C1D20068C875 /* LoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
 		39DE12C32531C2280068C875 /* SaveOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOperations.swift; sourceTree = "<group>"; };
 		39DE12C52531C4290068C875 /* SaveLoadExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadExtension.swift; sourceTree = "<group>"; };
 		39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataManager.swift; sourceTree = "<group>"; };
 		39E6AE1525726B780070E5A0 /* ChitChat02Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChitChat02Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		39E6AE1725726B780070E5A0 /* ChitChat02Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChitChat02Tests.swift; sourceTree = "<group>"; };
+		39E6AE1725726B780070E5A0 /* RemoteStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteStorageTests.swift; sourceTree = "<group>"; };
 		39E6AE1925726B780070E5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 		39ED610D2521EE62006D8E0A /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
@@ -595,6 +599,15 @@
 			path = Themes;
 			sourceTree = "<group>";
 		};
+		39DA6485257524FC00E305CD /* AvatarList */ = {
+			isa = PBXGroup;
+			children = (
+				39DA64862575251B00E305CD /* AvatarListTest.swift */,
+				39DA64882575262C00E305CD /* RequestManagerMocks.swift */,
+			);
+			path = AvatarList;
+			sourceTree = "<group>";
+		};
 		39DE12C02531C1B20068C875 /* OperationDataManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -618,7 +631,8 @@
 		39E6AE1625726B780070E5A0 /* ChitChat02Tests */ = {
 			isa = PBXGroup;
 			children = (
-				39E6AE1725726B780070E5A0 /* ChitChat02Tests.swift */,
+				39DA6485257524FC00E305CD /* AvatarList */,
+				39E6AE1725726B780070E5A0 /* RemoteStorageTests.swift */,
 				39E6AE1925726B780070E5A0 /* Info.plist */,
 				3928B8A02572A6F40077D948 /* LocalStorageMock.swift */,
 				3928B8A22572C9230077D948 /* RemoteChannelMock.swift */,
@@ -1048,9 +1062,11 @@
 			files = (
 				3928B8A32572C9230077D948 /* RemoteChannelMock.swift in Sources */,
 				3928B8A72572D5BD0077D948 /* ProfileDataManagerTests.swift in Sources */,
-				39E6AE1825726B780070E5A0 /* ChitChat02Tests.swift in Sources */,
+				39E6AE1825726B780070E5A0 /* RemoteStorageTests.swift in Sources */,
 				3928B8A12572A6F40077D948 /* LocalStorageMock.swift in Sources */,
+				39DA64872575251B00E305CD /* AvatarListTest.swift in Sources */,
 				3928B8A92572D5F50077D948 /* DataManagerMocks.swift in Sources */,
+				39DA64892575262C00E305CD /* RequestManagerMocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

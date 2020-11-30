@@ -14,7 +14,7 @@ class ChitChat02UITests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testExample() throws {
+    func testTextFields() throws {
         let app = XCUIApplication()
         app.launch()
         

@@ -9,7 +9,7 @@
 @testable import ChitChat02
 import XCTest
 
-class ChitChat02Tests: XCTestCase {
+class RemoteStorageTests: XCTestCase {
     
     lazy var localStorageMock = LocalStorageMock()
     lazy var remoteChannelMock = RemoteChannelMock()
