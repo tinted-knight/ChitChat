@@ -11,9 +11,9 @@ import XCTest
 
 class ProfileDataManagerTests: XCTestCase {
     lazy var gcdMock = GCDMock()
-    lazy var  operationMock = OperationMock()
-    lazy var  dataManager = SmartDataManagerService(gcdManager: self.gcdMock,
-                                              operationManager: self.operationMock)
+    lazy var operationMock = OperationMock()
+    lazy var dataManager = SmartDataManagerService(gcdManager: self.gcdMock,
+                                                   operationManager: self.operationMock)
 
     func testDefaultLoad() throws {
         // Act

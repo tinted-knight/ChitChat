@@ -570,6 +570,25 @@
 			path = ProfileStorage;
 			sourceTree = "<group>";
 		};
+		39B8F64F25779F7C00E7E843 /* RemoteStorage */ = {
+			isa = PBXGroup;
+			children = (
+				39E6AE1725726B780070E5A0 /* RemoteStorageTests.swift */,
+				3928B8A22572C9230077D948 /* RemoteChannelMock.swift */,
+				3928B8A02572A6F40077D948 /* LocalStorageMock.swift */,
+			);
+			path = RemoteStorage;
+			sourceTree = "<group>";
+		};
+		39B8F65025779FE400E7E843 /* ProfileDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				3928B8A62572D5BD0077D948 /* ProfileDataManagerTests.swift */,
+				3928B8A82572D5F50077D948 /* DataManagerMocks.swift */,
+			);
+			path = ProfileDataManager;
+			sourceTree = "<group>";
+		};
 		39B99B6F256A70A00083F271 /* Animations+Transitions */ = {
 			isa = PBXGroup;
 			children = (
@@ -631,13 +650,10 @@
 		39E6AE1625726B780070E5A0 /* ChitChat02Tests */ = {
 			isa = PBXGroup;
 			children = (
+				39B8F65025779FE400E7E843 /* ProfileDataManager */,
+				39B8F64F25779F7C00E7E843 /* RemoteStorage */,
 				39DA6485257524FC00E305CD /* AvatarList */,
-				39E6AE1725726B780070E5A0 /* RemoteStorageTests.swift */,
 				39E6AE1925726B780070E5A0 /* Info.plist */,
-				3928B8A02572A6F40077D948 /* LocalStorageMock.swift */,
-				3928B8A22572C9230077D948 /* RemoteChannelMock.swift */,
-				3928B8A62572D5BD0077D948 /* ProfileDataManagerTests.swift */,
-				3928B8A82572D5F50077D948 /* DataManagerMocks.swift */,
 			);
 			path = ChitChat02Tests;
 			sourceTree = "<group>";

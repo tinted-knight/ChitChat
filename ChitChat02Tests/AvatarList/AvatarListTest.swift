@@ -26,8 +26,8 @@ class AvatarListTests: XCTestCase {
     
     func testLoadSingleImage() {
         // Arrange
-        let imageUrlString = "https://picsum.photos/id/1001/200/200"
         let imageId = "1001"
+        let imageUrlString = "https://picsum.photos/id/\(imageId)/200/200"
         // Act
         avatarService.loadImage(imageId) { (_) in }
         //Assert
