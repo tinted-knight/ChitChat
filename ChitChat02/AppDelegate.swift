@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelegate {
     
     var window: UIWindow?
     
@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window = CustomUIWindow(frame: UIScreen.main.bounds)
         let channels = rootAssembly.presentationAssembly.channelsViewController()
         let navController = rootAssembly.presentationAssembly.navigationViewController(withRoot: channels)
         window?.rootViewController = navController
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
+
     func applicationDidBecomeActive(_ application: UIApplication) {
     }
     

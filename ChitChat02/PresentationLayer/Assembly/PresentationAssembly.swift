@@ -19,6 +19,8 @@ protocol IPresentationAssembly {
     func profileViewController() -> ProfileViewController
     
     func themesViewController() -> ThemesViewController
+    
+    func avatarCollectionViewController(_ delegate: AvatarCollectionDelegate) -> AvatarCollectionViewController
 }
 
 class PresentationAssembly: IPresentationAssembly {
@@ -39,6 +41,7 @@ class PresentationAssembly: IPresentationAssembly {
                                                 channelModel: getChannelModel(),
                                                 myDataModel: getFirestoreUser,
                                                 themeModel: getThemeModel,
+                                                transitions: getTransitionProvider,
                                                 nibName: "ChannelsViewController",
                                                 bundle: nil)
         return controller
@@ -60,6 +63,7 @@ class PresentationAssembly: IPresentationAssembly {
         Log.arch("present ProfileVC")
         controller.model = getProfileModel
         controller.themeModel = getThemeModel
+        controller.presentationAssembly = self
         return controller
     }
     
@@ -68,6 +72,12 @@ class PresentationAssembly: IPresentationAssembly {
             fatalError("Cannot instantiate ThemesViewController")
         }
         controller.themeModel = getThemeModel
+        return controller
+    }
+    
+    func avatarCollectionViewController(_ delegate: AvatarCollectionDelegate) -> AvatarCollectionViewController {
+        let controller = AvatarCollectionViewController(getAvatarListModel(), delegate: delegate)
+        
         return controller
     }
     
@@ -92,4 +102,10 @@ class PresentationAssembly: IPresentationAssembly {
         return ProfileModel(dataManager: self.serviceAssembly.profileDataManager,
                             firestoreUserService: self.serviceAssembly.userDataService)
     }()
+    
+    private func getAvatarListModel() -> IAvatarListModel {
+        return AvatarListModel(with: serviceAssembly.avatarService)
+    }
+    
+    private lazy var getTransitionProvider: ITransitionProvider = TransitionProvider()
 }

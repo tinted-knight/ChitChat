@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: FunViewController {
 
     static func instance() -> ProfileViewController? {
         let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
@@ -33,6 +33,8 @@ class ProfileViewController: UIViewController {
     var model: IProfileModel?
     
     var themeModel: IThemeModel?
+    
+    var presentationAssembly: PresentationAssembly?
 
     override func viewDidLoad() {
         prepareUi()
@@ -91,6 +93,9 @@ class ProfileViewController: UIViewController {
                 selector: #selector(adjustForKeyboard(_:)),
                 name: UIResponder.keyboardWillChangeFrameNotification,
                 object: nil)
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tap)
     }
 
     // MARK: UI Actions
@@ -145,8 +150,13 @@ class ProfileViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    @objc private func setEditUser(_ sender: UIBarButtonItem) {
+    @objc private func setEditUser(_ sender: UIButton) {
         model?.switchEditState()
+        if let model = model, model.state == .modeEdit {
+            sender.shake()
+        } else {
+            sender.stopShaking()
+        }
     }
 
 }
@@ -155,6 +165,11 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITextViewDelegate, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeField = textField
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {

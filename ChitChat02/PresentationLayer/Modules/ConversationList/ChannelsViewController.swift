@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChannelsViewController: UIViewController {
+class ChannelsViewController: FunViewController {
 
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var channelsTableView: UITableView!
@@ -21,14 +21,17 @@ class ChannelsViewController: UIViewController {
 
     let presentationAssembly: PresentationAssembly
     
+    let transitionProvider: ITransitionProvider
+    
     init(presentationAssembly: PresentationAssembly, channelModel: IChannelModel,
-         myDataModel: IFirestoreUser, themeModel: IThemeModel,
+         myDataModel: IFirestoreUser, themeModel: IThemeModel, transitions: ITransitionProvider,
          nibName: String, bundle: Bundle?) {
         
         self.presentationAssembly = presentationAssembly
         self.channelModel = channelModel
         self.myDataModel = myDataModel
         self.themeModel = themeModel
+        self.transitionProvider = transitions
         
         super.init(nibName: nibName, bundle: bundle)
     }
@@ -74,14 +77,13 @@ extension ChannelsViewController {
                                    forCellReuseIdentifier: ChannelCellModel.cellReuseId)
         
         setupNavBarButtons()
+        navigationController?.delegate = transitionProvider
 
         themeModel.delegate = self
         themeModel.applyCurrent()
     }
 
     private func setupNavBarButtons() {
-//        navigationController?.navigationBar.prefersLargeTitles = true
-        
         let profilePicture = UIImage(named: "ProfileIcon")?.withRenderingMode(.alwaysOriginal)
         let profileNavItem = UIBarButtonItem(
             image: profilePicture,
@@ -103,18 +105,8 @@ extension ChannelsViewController {
             action: #selector(inputNewChannelName)))
     }
 }
-// MARK: UI Actions
+// MARK: InputDialog
 extension ChannelsViewController {
-    @objc private func profileOnTap() {
-        let controller = presentationAssembly.profileViewController()
-        navigationController?.present(controller, animated: true, completion: nil)
-    }
-    
-    @objc private func settingsOnTap() {
-        let controller = presentationAssembly.themesViewController()
-        navigationController?.pushViewController(controller, animated: true)
-    }
-    
     @objc func inputNewChannelName() {
         inputAlert(title: "New channel", message: "Input channel name") { [weak self] (text) in
             if !text.isEmpty {
