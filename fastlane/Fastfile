@@ -27,11 +27,19 @@ platform :ios do
     build_for_testing
     run_app_tests
     notify_discord(
-      title: "Build finished", 
-      text: ENV["FASTLANE_LANE_NAME"], 
+      title: "Build succeded", 
+      text: "ChitChat", 
       success: true
     )
   end
+end
+
+error do |ex|
+  notify_discord(
+    title: "Build failed", 
+    text: "ChitChat", 
+    success: false
+  )
 end
 
 desc "Message to Discord via WebHook"
