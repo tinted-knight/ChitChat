@@ -20,6 +20,11 @@ or alternatively using `brew install fastlane`
 fastlane notify_discord
 ```
 Message to Discord via WebHook
+### notify_test
+```
+fastlane notify_test
+```
+Test lane for Discord notification
 
 ----
 

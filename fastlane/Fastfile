@@ -34,12 +34,13 @@ platform :ios do
   end
 end
 
-error do |ex|
-  notify_discord(
-    title: "Build failed", 
-    text: "ChitChat", 
-    success: false
-  )
+error do
+  puts "ACHTUNG"
+  # notify_discord(
+  #   title: "Build failed", 
+  #   text: "ChitChat", 
+  #   success: false
+  # )
 end
 
 desc "Message to Discord via WebHook"
@@ -54,6 +55,14 @@ lane :notify_discord do |message|
       {
         name: "Timur",
         value: "from Travis"
+      },
+      {
+        name: "TRAVIS_COMMIT",
+        value: ENV['TRAVIS_COMMIT']
+      },
+      {
+        name: "TRAVIS_COMMIT_MESSAGE",
+        value: ENV['TRAVIS_COMMIT_MESSAGE']
       }
     ]
   )
@@ -64,16 +73,6 @@ lane :notify_test do
   notify_discord(
     title: "Build tested", 
     text: "ChitChat", 
-    success: true,
-    fields: [
-      {
-        name: "TRAVIS_COMMIT",
-        value: ENV['TRAVIS_COMMIT']
-      },
-      {
-        name: "TRAVIS_COMMIT_MESSAGE",
-        value: ENV['TRAVIS_COMMIT_MESSAGE']
-      },
-    ]
+    success: true
   )
 end
