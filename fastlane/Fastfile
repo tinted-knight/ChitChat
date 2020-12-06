@@ -1,6 +1,7 @@
 default_platform(:ios)
 
 repo_url = "https://github.com/tinted-knight/ChitChat/commit/"
+proj_title = "ChitChat (Timur)"
 
 platform :ios do
   derived_data = "DerivedData/"
@@ -29,8 +30,8 @@ platform :ios do
     build_for_testing
     run_app_tests
     notify_discord(
-      title: "Build succeded", 
-      text: "ChitChat", 
+      title: proj_title, 
+      text: "Build finished",
       success: true
     )
   end
@@ -50,24 +51,19 @@ lane :notify_discord do |message|
   discord_notifier(
     webhook_url: ENV['DISCORD_WEBHOOK_URL'],
     title: message[:title],
-    description: "[Commit](#{repo_url}#{ENV['TRAVIS_COMMIT']})",
+    description: message[:text] + 
+      "\n\n[Commit](#{repo_url}#{ENV['TRAVIS_COMMIT']})"\
+      "\n#{ENV['TRAVIS_COMMIT_MESSAGE']}",
     success: message[:success],
-    discord_user_id: ENV['MY_DISCORD_ID'],
-    fields: [
-      {
-        name: "Commit message",
-        value: ENV['TRAVIS_COMMIT_MESSAGE'],
-        inline: true
-      }
-    ]
+    discord_user_id: ENV['MY_DISCORD_ID']
   )
 end
 
 desc "Test lane for Discord notification"
 lane :notify_test do
   notify_discord(
-    title: "Build tested", 
-    text: "ChitChat", 
+    title: proj_title, 
+    text: "Test notification", 
     success: true
   )
 end
