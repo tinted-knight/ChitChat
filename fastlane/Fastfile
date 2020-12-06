@@ -58,3 +58,12 @@ lane :notify_discord do |message|
     ]
   )
 end
+
+desc "Test lane for Discord notification"
+lane :notify_test do
+  notify_discord(
+    title: "Build tested", 
+    text: "ChitChat", 
+    success: false
+  )
+end
