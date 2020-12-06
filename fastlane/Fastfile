@@ -1,5 +1,7 @@
 default_platform(:ios)
 
+repo_url = "https://github.com/tinted-knight/ChitChat/commit/"
+
 platform :ios do
   derived_data = "DerivedData/"
 
@@ -57,11 +59,11 @@ lane :notify_discord do |message|
         value: "from Travis"
       },
       {
-        name: "TRAVIS_COMMIT",
-        value: ENV['TRAVIS_COMMIT']
+        name: "[Commit](#{repo_url}#{ENV['TRAVIS_COMMIT']})",
+        value: ""
       },
       {
-        name: "TRAVIS_COMMIT_MESSAGE",
+        name: "Commit message",
         value: ENV['TRAVIS_COMMIT_MESSAGE']
       }
     ]
