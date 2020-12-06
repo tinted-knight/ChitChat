@@ -1,0 +1,52 @@
+default_platform(:ios)
+
+platform :ios do
+  derived_data = "DerivedData/"
+
+  desc "Installs CocoaPods deps and runs clean build"
+  lane :build_for_testing do
+    cocoapods
+    scan(
+      # clean: true,
+      build_for_testing: true,
+      derived_data_path: derived_data
+    )
+    end
+
+  desc "Only runs app tests."
+  lane :run_app_tests do
+    run_tests(
+      device: 'iPhone 11',
+      test_without_building: true,
+      derived_data_path: derived_data
+    )
+  end
+
+  desc "Combines two lanes `:build_for_testing` and `:run_app_tests`"
+  lane :build_and_test do
+    build_for_testing
+    run_app_tests
+    notify_discord(
+      title: "Build finished", 
+      text: ENV["FASTLANE_LANE_NAME"], 
+      success: true
+    )
+  end
+end
+
+desc "Message to Discord via WebHook"
+lane :notify_discord do |message|
+  discord_notifier(
+    webhook_url: ENV['DISCORD_WEBHOOK_URL'],
+    title: message[:title],
+    description: message[:text],
+    success: message[:success],
+    discord_user_id: ENV['MY_DISCORD_ID'],
+    fields: [
+      {
+        name: "Timur",
+        value: "from Travis"
+      }
+    ]
+  )
+end
