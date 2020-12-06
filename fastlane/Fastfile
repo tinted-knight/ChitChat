@@ -50,21 +50,14 @@ lane :notify_discord do |message|
   discord_notifier(
     webhook_url: ENV['DISCORD_WEBHOOK_URL'],
     title: message[:title],
-    description: message[:text],
+    description: "[Commit](#{repo_url}#{ENV['TRAVIS_COMMIT']})",
     success: message[:success],
     discord_user_id: ENV['MY_DISCORD_ID'],
     fields: [
       {
-        name: "Timur",
-        value: "from Travis"
-      },
-      {
-        name: "[Commit](#{repo_url}#{ENV['TRAVIS_COMMIT']})",
-        value: ""
-      },
-      {
         name: "Commit message",
-        value: ENV['TRAVIS_COMMIT_MESSAGE']
+        value: ENV['TRAVIS_COMMIT_MESSAGE'],
+        inline: true
       }
     ]
   )
