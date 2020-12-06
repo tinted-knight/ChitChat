@@ -64,6 +64,16 @@ lane :notify_test do
   notify_discord(
     title: "Build tested", 
     text: "ChitChat", 
-    success: false
+    success: true,
+    fields: [
+      {
+        name: "TRAVIS_COMMIT",
+        value: ENV['TRAVIS_COMMIT']
+      },
+      {
+        name: "TRAVIS_COMMIT_MESSAGE",
+        value: ENV['TRAVIS_COMMIT_MESSAGE']
+      },
+    ]
   )
 end
