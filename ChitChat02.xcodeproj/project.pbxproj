@@ -18,6 +18,8 @@
 		393A0F6825594F920063ACC7 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393A0F6725594F920063ACC7 /* ProfileModel.swift */; };
 		393AEDE1254F3A270028B893 /* NewSchoolCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */; };
 		393AEDE6254F41A80028B893 /* ChannelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE5254F41A80028B893 /* ChannelService.swift */; };
+		393EA9B82580D43900A31757 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393EA9B72580D43900A31757 /* Configuration.swift */; };
+		393EA9C12580E48C00A31757 /* ConfigurationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393EA9C02580E48C00A31757 /* ConfigurationTest.swift */; };
 		3948F9BE253B893700465D02 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9BD253B893700465D02 /* Log.swift */; };
 		3948F9C2253B8B9C00465D02 /* IRemoteMessageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9C1253B8B9C00465D02 /* IRemoteMessageStorage.swift */; };
 		3948F9C6253B8F6F00465D02 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3948F9C5253B8F6F00465D02 /* models.swift */; };
@@ -136,6 +138,9 @@
 		393A0F6725594F920063ACC7 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSchoolCoreData.swift; sourceTree = "<group>"; };
 		393AEDE5254F41A80028B893 /* ChannelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelService.swift; sourceTree = "<group>"; };
+		393EA9B62580D12B00A31757 /* ApiConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ApiConfig.xcconfig; sourceTree = "<group>"; };
+		393EA9B72580D43900A31757 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		393EA9C02580E48C00A31757 /* ConfigurationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationTest.swift; sourceTree = "<group>"; };
 		3948F9BD253B893700465D02 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		3948F9C1253B8B9C00465D02 /* IRemoteMessageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRemoteMessageStorage.swift; sourceTree = "<group>"; };
 		3948F9C5253B8F6F00465D02 /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
@@ -328,6 +333,7 @@
 				394F867E250E518A00B703B3 /* LaunchScreen.storyboard */,
 				394F8681250E518A00B703B3 /* Info.plist */,
 				39A2847025581CFE003C2484 /* RootAssembly.swift */,
+				393EA9B62580D12B00A31757 /* ApiConfig.xcconfig */,
 			);
 			path = ChitChat02;
 			sourceTree = "<group>";
@@ -643,6 +649,7 @@
 			isa = PBXGroup;
 			children = (
 				3948F9BD253B893700465D02 /* Log.swift */,
+				393EA9B72580D43900A31757 /* Configuration.swift */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -653,6 +660,7 @@
 				39B8F65025779FE400E7E843 /* ProfileDataManager */,
 				39B8F64F25779F7C00E7E843 /* RemoteStorage */,
 				39DA6485257524FC00E305CD /* AvatarList */,
+				393EA9C02580E48C00A31757 /* ConfigurationTest.swift */,
 				39E6AE1925726B780070E5A0 /* Info.plist */,
 			);
 			path = ChitChat02Tests;
@@ -1028,6 +1036,7 @@
 				39EDD9F32542E17400FE640B /* CoreDataStack.swift in Sources */,
 				39B6A01F25594A4C00EFE36E /* IDataManager.swift in Sources */,
 				39D6E502256E82E600AFB71E /* Protocols.swift in Sources */,
+				393EA9B82580D43900A31757 /* Configuration.swift in Sources */,
 				39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */,
 				3948F9C6253B8F6F00465D02 /* models.swift in Sources */,
 				39FE54812563D8E900F40A74 /* AvatarListParsers.swift in Sources */,
@@ -1078,6 +1087,7 @@
 			files = (
 				3928B8A32572C9230077D948 /* RemoteChannelMock.swift in Sources */,
 				3928B8A72572D5BD0077D948 /* ProfileDataManagerTests.swift in Sources */,
+				393EA9C12580E48C00A31757 /* ConfigurationTest.swift in Sources */,
 				39E6AE1825726B780070E5A0 /* RemoteStorageTests.swift in Sources */,
 				3928B8A12572A6F40077D948 /* LocalStorageMock.swift in Sources */,
 				39DA64872575251B00E305CD /* AvatarListTest.swift in Sources */,
@@ -1159,6 +1169,7 @@
 		};
 		394F8682250E518A00B703B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 393EA9B62580D12B00A31757 /* ApiConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

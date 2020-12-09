@@ -9,7 +9,17 @@
 import Foundation
 
 class PicsumRequest {
-    fileprivate let base = "https://picsum.photos"
+    fileprivate let base: String
+    
+    init() {
+        do {
+            let url: String = try Configuration.value(for: "API_URL_AVATAR_LIST")
+            base = "https://" + url
+            Log.net("Got key from xcconfig, \(url), \(base)")
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
 }
 
 class AvatarListRequest: PicsumRequest, IRequest {
@@ -36,6 +46,7 @@ class ImageRequest: PicsumRequest, IRequest {
     
     init(from id: String) {
         self.id = id
+        super.init()
     }
     
     lazy var urlRequest: URLRequest? = {

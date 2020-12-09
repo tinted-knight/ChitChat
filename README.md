@@ -1,6 +1,6 @@
 #  ChitChat
 
-[![Build Status](https://travis-ci.org/tinted-knight/ChitChat.svg?branch=master)](https://travis-ci.org/tinted-knight/ChitChat)
+[![Build Status](https://travis-ci.org/tinted-knight/ChitChat.svg?branch=week13_ci)](https://travis-ci.org/tinted-knight/ChitChat)
 
 ## About
 
