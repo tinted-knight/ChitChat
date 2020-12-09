@@ -29,7 +29,7 @@ Test lane for Discord notification
 ```
 fastlane setup_xc
 ```
-
+Writes API Url to xcconfig from env
 
 ----
 
