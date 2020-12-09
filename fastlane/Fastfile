@@ -68,6 +68,7 @@ lane :notify_test do
   )
 end
 
+desc "Writes API Url to xcconfig from env"
 lane :setup_xc do
   set_xcconfig_value(
     path: 'ChitChat02/ApiConfig.xcconfig',
