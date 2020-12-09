@@ -1,0 +1,12 @@
+//
+//  ApiConfig.xcconfig
+//  ChitChat02
+//
+//  Created by Timun on 09.12.2020.
+//  Copyright © 2020 TimunInc. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Pods/Target Support Files/Pods-ChitChat02/Pods-ChitChat02.debug.xcconfig"

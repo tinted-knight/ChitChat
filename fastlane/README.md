@@ -25,6 +25,11 @@ Message to Discord via WebHook
 fastlane notify_test
 ```
 Test lane for Discord notification
+### setup_xc
+```
+fastlane setup_xc
+```
+
 
 ----
 

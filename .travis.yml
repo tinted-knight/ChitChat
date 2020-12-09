@@ -7,4 +7,5 @@ before_install:
 install:
   - bundle install
 script:
+  - bundler exec fastlane setup_xc
   - bundler exec fastlane build_and_test

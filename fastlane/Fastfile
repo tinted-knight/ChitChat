@@ -67,3 +67,11 @@ lane :notify_test do
     success: true
   )
 end
+
+lane :setup_xc do
+  set_xcconfig_value(
+    path: 'ChitChat02/ApiConfig.xcconfig',
+    name: 'API_URL_AVATAR_LIST',
+    value: ENV['API_URL_AVATAR_LIST']
+  )
+end
