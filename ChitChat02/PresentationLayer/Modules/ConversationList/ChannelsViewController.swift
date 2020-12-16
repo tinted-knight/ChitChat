@@ -91,6 +91,7 @@ extension ChannelsViewController {
             target: self,
             action: #selector(profileOnTap)
         )
+        profileNavItem.accessibilityIdentifier = "Profile button"
         navigationItem.rightBarButtonItem = profileNavItem
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(

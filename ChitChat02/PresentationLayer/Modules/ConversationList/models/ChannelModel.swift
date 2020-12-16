@@ -73,6 +73,6 @@ class ChannelModel: IChannelModel {
     }
     
     func deleteChannel(_ channel: ChannelEntity) {
-        channelService.deleteChannel(channel)
+        channelService.deleteChannel(channel.identifier)
     }
 }

@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13E359B0661DA342B7FF4E23 /* Pods_ChitChat02.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FFDAB3F1F1D13B5B9E9DD7 /* Pods_ChitChat02.framework */; };
 		390077DB256D0D5E00B800D6 /* TransitionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390077DA256D0D5E00B800D6 /* TransitionProvider.swift */; };
 		390F4E18255ACCD100DEA323 /* ChannelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 390F4E17255ACCD100DEA323 /* ChannelsViewController.xib */; };
 		390F4E1C255ADB9A00DEA323 /* AvatarPickerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390F4E1B255ADB9A00DEA323 /* AvatarPickerExtension.swift */; };
+		3928B8A12572A6F40077D948 /* LocalStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A02572A6F40077D948 /* LocalStorageMock.swift */; };
+		3928B8A32572C9230077D948 /* RemoteChannelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A22572C9230077D948 /* RemoteChannelMock.swift */; };
+		3928B8A72572D5BD0077D948 /* ProfileDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A62572D5BD0077D948 /* ProfileDataManagerTests.swift */; };
+		3928B8A92572D5F50077D948 /* DataManagerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3928B8A82572D5F50077D948 /* DataManagerMocks.swift */; };
+		393949702573E01500A25CE4 /* ChitChat02UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939496F2573E01500A25CE4 /* ChitChat02UITests.swift */; };
 		393A0F6825594F920063ACC7 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393A0F6725594F920063ACC7 /* ProfileModel.swift */; };
 		393AEDE1254F3A270028B893 /* NewSchoolCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */; };
 		393AEDE6254F41A80028B893 /* ChannelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393AEDE5254F41A80028B893 /* ChannelService.swift */; };
@@ -72,11 +76,14 @@
 		39BDCFBD252765DA00ECECCC /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */; };
 		39BDCFBF252767B100ECECCC /* AppThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BDCFBE252767B100ECECCC /* AppThemeData.swift */; };
 		39D6E502256E82E600AFB71E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6E501256E82E600AFB71E /* Protocols.swift */; };
+		39DA64872575251B00E305CD /* AvatarListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DA64862575251B00E305CD /* AvatarListTest.swift */; };
+		39DA64892575262C00E305CD /* RequestManagerMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DA64882575262C00E305CD /* RequestManagerMocks.swift */; };
 		39DBBAFE254D8A17009F4B5D /* ChannelsTableViewDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */; };
 		39DE12C22531C1D20068C875 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C12531C1D20068C875 /* LoadOperation.swift */; };
 		39DE12C42531C2280068C875 /* SaveOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C32531C2280068C875 /* SaveOperations.swift */; };
 		39DE12C62531C4290068C875 /* SaveLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C52531C4290068C875 /* SaveLoadExtension.swift */; };
 		39DE12C82531E5DA0068C875 /* ThemeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */; };
+		39E6AE1825726B780070E5A0 /* RemoteStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E6AE1725726B780070E5A0 /* RemoteStorageTests.swift */; };
 		39ED610B2521EB32006D8E0A /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */; };
 		39ED610E2521EE62006D8E0A /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED610D2521EE62006D8E0A /* MessagesViewController.swift */; };
 		39ED61152521F76E006D8E0A /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ED61132521F76E006D8E0A /* ChannelCell.swift */; };
@@ -91,14 +98,41 @@
 		39FE54812563D8E900F40A74 /* AvatarListParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE54802563D8E900F40A74 /* AvatarListParsers.swift */; };
 		39FE54852563D91B00F40A74 /* AvatarRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE54842563D91B00F40A74 /* AvatarRequestManager.swift */; };
 		39FE54872563D96300F40A74 /* PicsumBasedRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FE54862563D96300F40A74 /* PicsumBasedRequests.swift */; };
+		3C5DF2F644BEA0C593FC131F /* Pods_ChitChat02.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277BCEF243CCE2B4B720D7FC /* Pods_ChitChat02.framework */; };
 		69409207317BDCA09476EAA2 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69409ED40674C511CFCD83FA /* MessageService.swift */; };
 		69409FE6921DFD97F0165D7B /* IKeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6940947DFA41AE75B7AD3B9C /* IKeyValueStorage.swift */; };
+		BC899A1A52077D07274FB02B /* Pods_ChitChat02Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA70B475D5C25A89B66480F6 /* Pods_ChitChat02Tests.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		393949722573E01500A25CE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 394F8668250E518A00B703B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 394F866F250E518A00B703B3;
+			remoteInfo = ChitChat02;
+		};
+		39E6AE1A25726B780070E5A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 394F8668250E518A00B703B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 394F866F250E518A00B703B3;
+			remoteInfo = ChitChat02;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		277BCEF243CCE2B4B720D7FC /* Pods_ChitChat02.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChitChat02.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		390077DA256D0D5E00B800D6 /* TransitionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionProvider.swift; sourceTree = "<group>"; };
 		390F4E17255ACCD100DEA323 /* ChannelsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelsViewController.xib; sourceTree = "<group>"; };
 		390F4E1B255ADB9A00DEA323 /* AvatarPickerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPickerExtension.swift; sourceTree = "<group>"; };
+		3928B8A02572A6F40077D948 /* LocalStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageMock.swift; sourceTree = "<group>"; };
+		3928B8A22572C9230077D948 /* RemoteChannelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChannelMock.swift; sourceTree = "<group>"; };
+		3928B8A62572D5BD0077D948 /* ProfileDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManagerTests.swift; sourceTree = "<group>"; };
+		3928B8A82572D5F50077D948 /* DataManagerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerMocks.swift; sourceTree = "<group>"; };
+		3939496D2573E01500A25CE4 /* ChitChat02UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChitChat02UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3939496F2573E01500A25CE4 /* ChitChat02UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChitChat02UITests.swift; sourceTree = "<group>"; };
+		393949712573E01500A25CE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		393A0F6725594F920063ACC7 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		393AEDE0254F3A270028B893 /* NewSchoolCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSchoolCoreData.swift; sourceTree = "<group>"; };
 		393AEDE5254F41A80028B893 /* ChannelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelService.swift; sourceTree = "<group>"; };
@@ -163,11 +197,16 @@
 		39BDCFBC252765DA00ECECCC /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		39BDCFBE252767B100ECECCC /* AppThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeData.swift; sourceTree = "<group>"; };
 		39D6E501256E82E600AFB71E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		39DA64862575251B00E305CD /* AvatarListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarListTest.swift; sourceTree = "<group>"; };
+		39DA64882575262C00E305CD /* RequestManagerMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManagerMocks.swift; sourceTree = "<group>"; };
 		39DBBAFD254D8A17009F4B5D /* ChannelsTableViewDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsTableViewDelegates.swift; sourceTree = "<group>"; };
 		39DE12C12531C1D20068C875 /* LoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
 		39DE12C32531C2280068C875 /* SaveOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOperations.swift; sourceTree = "<group>"; };
 		39DE12C52531C4290068C875 /* SaveLoadExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadExtension.swift; sourceTree = "<group>"; };
 		39DE12C72531E5DA0068C875 /* ThemeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataManager.swift; sourceTree = "<group>"; };
+		39E6AE1525726B780070E5A0 /* ChitChat02Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChitChat02Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		39E6AE1725726B780070E5A0 /* RemoteStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteStorageTests.swift; sourceTree = "<group>"; };
+		39E6AE1925726B780070E5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39ED610A2521EB32006D8E0A /* ChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 		39ED610D2521EE62006D8E0A /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		39ED61132521F76E006D8E0A /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
@@ -183,18 +222,39 @@
 		39FE54842563D91B00F40A74 /* AvatarRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarRequestManager.swift; sourceTree = "<group>"; };
 		39FE54862563D96300F40A74 /* PicsumBasedRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsumBasedRequests.swift; sourceTree = "<group>"; };
 		3B2FC54AEA21573BC155A8BC /* Pods-ChitChat02.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02.debug.xcconfig"; path = "Target Support Files/Pods-ChitChat02/Pods-ChitChat02.debug.xcconfig"; sourceTree = "<group>"; };
+		45FC4E689453102D78F534FF /* Pods-ChitChat-ChitChat02.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat-ChitChat02.debug.xcconfig"; path = "Target Support Files/Pods-ChitChat-ChitChat02/Pods-ChitChat-ChitChat02.debug.xcconfig"; sourceTree = "<group>"; };
 		53147F9F7C0E3997A63E27F3 /* Pods-ChitChat02.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02.release.xcconfig"; path = "Target Support Files/Pods-ChitChat02/Pods-ChitChat02.release.xcconfig"; sourceTree = "<group>"; };
+		620808B47D5DB3D02148F956 /* Pods-ChitChat-ChitChat02.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat-ChitChat02.release.xcconfig"; path = "Target Support Files/Pods-ChitChat-ChitChat02/Pods-ChitChat-ChitChat02.release.xcconfig"; sourceTree = "<group>"; };
 		6940947DFA41AE75B7AD3B9C /* IKeyValueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IKeyValueStorage.swift; sourceTree = "<group>"; };
 		69409ED40674C511CFCD83FA /* MessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
-		98FFDAB3F1F1D13B5B9E9DD7 /* Pods_ChitChat02.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChitChat02.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E29CC49B04C661E8C52EB69 /* Pods-ChitChat02Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02Tests.debug.xcconfig"; path = "Target Support Files/Pods-ChitChat02Tests/Pods-ChitChat02Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		A98A6221CB102883B03A2BEC /* Pods-ChitChat02-ChitChat02Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02-ChitChat02Tests.release.xcconfig"; path = "Target Support Files/Pods-ChitChat02-ChitChat02Tests/Pods-ChitChat02-ChitChat02Tests.release.xcconfig"; sourceTree = "<group>"; };
+		AA70B475D5C25A89B66480F6 /* Pods_ChitChat02Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChitChat02Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE9F72F264E5A00B148778CA /* Pods-ChitChat02Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02Tests.release.xcconfig"; path = "Target Support Files/Pods-ChitChat02Tests/Pods-ChitChat02Tests.release.xcconfig"; sourceTree = "<group>"; };
+		FBB3407BA57C5E659DD06CB3 /* Pods-ChitChat02-ChitChat02Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChitChat02-ChitChat02Tests.debug.xcconfig"; path = "Target Support Files/Pods-ChitChat02-ChitChat02Tests/Pods-ChitChat02-ChitChat02Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3939496A2573E01500A25CE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		394F866D250E518A00B703B3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13E359B0661DA342B7FF4E23 /* Pods_ChitChat02.framework in Frameworks */,
+				3C5DF2F644BEA0C593FC131F /* Pods_ChitChat02.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39E6AE1225726B780070E5A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC899A1A52077D07274FB02B /* Pods_ChitChat02Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +264,8 @@
 		1E9B44F04DC21C2392C6B2F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				98FFDAB3F1F1D13B5B9E9DD7 /* Pods_ChitChat02.framework */,
+				AA70B475D5C25A89B66480F6 /* Pods_ChitChat02Tests.framework */,
+				277BCEF243CCE2B4B720D7FC /* Pods_ChitChat02.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -220,11 +281,22 @@
 			path = "ViewController Transitions";
 			sourceTree = "<group>";
 		};
+		3939496E2573E01500A25CE4 /* ChitChat02UITests */ = {
+			isa = PBXGroup;
+			children = (
+				3939496F2573E01500A25CE4 /* ChitChat02UITests.swift */,
+				393949712573E01500A25CE4 /* Info.plist */,
+			);
+			path = ChitChat02UITests;
+			sourceTree = "<group>";
+		};
 		394F8667250E518A00B703B3 = {
 			isa = PBXGroup;
 			children = (
 				394F8688250E659C00B703B3 /* README.md */,
 				394F8672250E518A00B703B3 /* ChitChat02 */,
+				39E6AE1625726B780070E5A0 /* ChitChat02Tests */,
+				3939496E2573E01500A25CE4 /* ChitChat02UITests */,
 				394F8671250E518A00B703B3 /* Products */,
 				421B2EFD5D2930D3B39F3217 /* Pods */,
 				1E9B44F04DC21C2392C6B2F5 /* Frameworks */,
@@ -235,6 +307,8 @@
 			isa = PBXGroup;
 			children = (
 				394F8670250E518A00B703B3 /* ChitChat02.app */,
+				39E6AE1525726B780070E5A0 /* ChitChat02Tests.xctest */,
+				3939496D2573E01500A25CE4 /* ChitChat02UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -496,6 +570,25 @@
 			path = ProfileStorage;
 			sourceTree = "<group>";
 		};
+		39B8F64F25779F7C00E7E843 /* RemoteStorage */ = {
+			isa = PBXGroup;
+			children = (
+				39E6AE1725726B780070E5A0 /* RemoteStorageTests.swift */,
+				3928B8A22572C9230077D948 /* RemoteChannelMock.swift */,
+				3928B8A02572A6F40077D948 /* LocalStorageMock.swift */,
+			);
+			path = RemoteStorage;
+			sourceTree = "<group>";
+		};
+		39B8F65025779FE400E7E843 /* ProfileDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				3928B8A62572D5BD0077D948 /* ProfileDataManagerTests.swift */,
+				3928B8A82572D5F50077D948 /* DataManagerMocks.swift */,
+			);
+			path = ProfileDataManager;
+			sourceTree = "<group>";
+		};
 		39B99B6F256A70A00083F271 /* Animations+Transitions */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,6 +618,15 @@
 			path = Themes;
 			sourceTree = "<group>";
 		};
+		39DA6485257524FC00E305CD /* AvatarList */ = {
+			isa = PBXGroup;
+			children = (
+				39DA64862575251B00E305CD /* AvatarListTest.swift */,
+				39DA64882575262C00E305CD /* RequestManagerMocks.swift */,
+			);
+			path = AvatarList;
+			sourceTree = "<group>";
+		};
 		39DE12C02531C1B20068C875 /* OperationDataManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,6 +645,17 @@
 				3948F9BD253B893700465D02 /* Log.swift */,
 			);
 			path = tools;
+			sourceTree = "<group>";
+		};
+		39E6AE1625726B780070E5A0 /* ChitChat02Tests */ = {
+			isa = PBXGroup;
+			children = (
+				39B8F65025779FE400E7E843 /* ProfileDataManager */,
+				39B8F64F25779F7C00E7E843 /* RemoteStorage */,
+				39DA6485257524FC00E305CD /* AvatarList */,
+				39E6AE1925726B780070E5A0 /* Info.plist */,
+			);
+			path = ChitChat02Tests;
 			sourceTree = "<group>";
 		};
 		39ED61092521EB00006D8E0A /* ConversationList */ = {
@@ -614,6 +727,12 @@
 			children = (
 				3B2FC54AEA21573BC155A8BC /* Pods-ChitChat02.debug.xcconfig */,
 				53147F9F7C0E3997A63E27F3 /* Pods-ChitChat02.release.xcconfig */,
+				8E29CC49B04C661E8C52EB69 /* Pods-ChitChat02Tests.debug.xcconfig */,
+				AE9F72F264E5A00B148778CA /* Pods-ChitChat02Tests.release.xcconfig */,
+				FBB3407BA57C5E659DD06CB3 /* Pods-ChitChat02-ChitChat02Tests.debug.xcconfig */,
+				A98A6221CB102883B03A2BEC /* Pods-ChitChat02-ChitChat02Tests.release.xcconfig */,
+				45FC4E689453102D78F534FF /* Pods-ChitChat-ChitChat02.debug.xcconfig */,
+				620808B47D5DB3D02148F956 /* Pods-ChitChat-ChitChat02.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -629,6 +748,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3939496C2573E01500A25CE4 /* ChitChat02UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 393949762573E01500A25CE4 /* Build configuration list for PBXNativeTarget "ChitChat02UITests" */;
+			buildPhases = (
+				393949692573E01500A25CE4 /* Sources */,
+				3939496A2573E01500A25CE4 /* Frameworks */,
+				3939496B2573E01500A25CE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				393949732573E01500A25CE4 /* PBXTargetDependency */,
+			);
+			name = ChitChat02UITests;
+			productName = ChitChat02UITests;
+			productReference = 3939496D2573E01500A25CE4 /* ChitChat02UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		394F866F250E518A00B703B3 /* ChitChat02 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 394F8684250E518A00B703B3 /* Build configuration list for PBXNativeTarget "ChitChat02" */;
@@ -638,8 +775,8 @@
 				394F866D250E518A00B703B3 /* Frameworks */,
 				394F866E250E518A00B703B3 /* Resources */,
 				39494C1E253AF18B006853B9 /* ShellScript */,
-				5AA04DC4A9F7AEFA87599B88 /* [CP] Embed Pods Frameworks */,
 				395BB54D2562C57500136F57 /* ShellScript */,
+				39FFCAE7458DA9C8CE5E89C3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -649,6 +786,25 @@
 			productName = ChitChat02;
 			productReference = 394F8670250E518A00B703B3 /* ChitChat02.app */;
 			productType = "com.apple.product-type.application";
+		};
+		39E6AE1425726B780070E5A0 /* ChitChat02Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39E6AE1E25726B780070E5A0 /* Build configuration list for PBXNativeTarget "ChitChat02Tests" */;
+			buildPhases = (
+				C5826E4B2FD3EFE4C6BB04CB /* [CP] Check Pods Manifest.lock */,
+				39E6AE1125726B780070E5A0 /* Sources */,
+				39E6AE1225726B780070E5A0 /* Frameworks */,
+				39E6AE1325726B780070E5A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				39E6AE1B25726B780070E5A0 /* PBXTargetDependency */,
+			);
+			name = ChitChat02Tests;
+			productName = ChitChat02Tests;
+			productReference = 39E6AE1525726B780070E5A0 /* ChitChat02Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -660,8 +816,16 @@
 				LastUpgradeCheck = 1170;
 				ORGANIZATIONNAME = TimunInc;
 				TargetAttributes = {
+					3939496C2573E01500A25CE4 = {
+						CreatedOnToolsVersion = 11.7;
+						TestTargetID = 394F866F250E518A00B703B3;
+					};
 					394F866F250E518A00B703B3 = {
 						CreatedOnToolsVersion = 11.7;
+					};
+					39E6AE1425726B780070E5A0 = {
+						CreatedOnToolsVersion = 11.7;
+						TestTargetID = 394F866F250E518A00B703B3;
 					};
 				};
 			};
@@ -679,11 +843,20 @@
 			projectRoot = "";
 			targets = (
 				394F866F250E518A00B703B3 /* ChitChat02 */,
+				39E6AE1425726B780070E5A0 /* ChitChat02Tests */,
+				3939496C2573E01500A25CE4 /* ChitChat02UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3939496B2573E01500A25CE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		394F866E250E518A00B703B3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -702,6 +875,13 @@
 				394F867B250E518A00B703B3 /* Main.storyboard in Resources */,
 				39B6A01C2559480400EFE36E /* ProfileViewController.storyboard in Resources */,
 				395BB53D2562833C00136F57 /* AvatarViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39E6AE1325726B780070E5A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,7 +944,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nTAGS=\"todo:|fake:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
 		};
-		5AA04DC4A9F7AEFA87599B88 /* [CP] Embed Pods Frameworks */ = {
+		39FFCAE7458DA9C8CE5E89C3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -781,9 +961,39 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChitChat02/Pods-ChitChat02-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C5826E4B2FD3EFE4C6BB04CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChitChat02Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		393949692573E01500A25CE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				393949702573E01500A25CE4 /* ChitChat02UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		394F866C250E518A00B703B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -862,7 +1072,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		39E6AE1125726B780070E5A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3928B8A32572C9230077D948 /* RemoteChannelMock.swift in Sources */,
+				3928B8A72572D5BD0077D948 /* ProfileDataManagerTests.swift in Sources */,
+				39E6AE1825726B780070E5A0 /* RemoteStorageTests.swift in Sources */,
+				3928B8A12572A6F40077D948 /* LocalStorageMock.swift in Sources */,
+				39DA64872575251B00E305CD /* AvatarListTest.swift in Sources */,
+				3928B8A92572D5F50077D948 /* DataManagerMocks.swift in Sources */,
+				39DA64892575262C00E305CD /* RequestManagerMocks.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		393949732573E01500A25CE4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 394F866F250E518A00B703B3 /* ChitChat02 */;
+			targetProxy = 393949722573E01500A25CE4 /* PBXContainerItemProxy */;
+		};
+		39E6AE1B25726B780070E5A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 394F866F250E518A00B703B3 /* ChitChat02 */;
+			targetProxy = 39E6AE1A25726B780070E5A0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		394F8679250E518A00B703B3 /* Main.storyboard */ = {
@@ -884,6 +1121,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		393949742573E01500A25CE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ChitChat02UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.timun.chitchat.ChitChat02UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ChitChat02;
+			};
+			name = Debug;
+		};
+		393949752573E01500A25CE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ChitChat02UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.timun.chitchat.ChitChat02UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ChitChat02;
+			};
+			name = Release;
+		};
 		394F8682250E518A00B703B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1005,6 +1278,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ChitChat02/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1027,6 +1301,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ChitChat02/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1042,9 +1317,61 @@
 			};
 			name = Release;
 		};
+		39E6AE1C25726B780070E5A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E29CC49B04C661E8C52EB69 /* Pods-ChitChat02Tests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				HEADER_SEARCH_PATHS = "${PODS_ROOT}/Firebase/**";
+				INFOPLIST_FILE = ChitChat02Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.timun.chitchat.ChitChat02Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChitChat02.app/ChitChat02";
+			};
+			name = Debug;
+		};
+		39E6AE1D25726B780070E5A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE9F72F264E5A00B148778CA /* Pods-ChitChat02Tests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				INFOPLIST_FILE = ChitChat02Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.timun.chitchat.ChitChat02Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChitChat02.app/ChitChat02";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		393949762573E01500A25CE4 /* Build configuration list for PBXNativeTarget "ChitChat02UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				393949742573E01500A25CE4 /* Debug */,
+				393949752573E01500A25CE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		394F866B250E518A00B703B3 /* Build configuration list for PBXProject "ChitChat02" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1059,6 +1386,15 @@
 			buildConfigurations = (
 				394F8685250E518A00B703B3 /* Debug */,
 				394F8686250E518A00B703B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39E6AE1E25726B780070E5A0 /* Build configuration list for PBXNativeTarget "ChitChat02Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39E6AE1C25726B780070E5A0 /* Debug */,
+				39E6AE1D25726B780070E5A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
