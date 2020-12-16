@@ -1,0 +1,10 @@
+language: swift
+osx_image: xcode11.6
+xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 8
+before_install:
+  - gem install bundler
+  - brew install libsodium
+install:
+  - bundle install
+script:
+  - bundler exec fastlane build_and_test

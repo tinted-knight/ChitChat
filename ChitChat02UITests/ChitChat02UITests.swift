@@ -10,10 +10,6 @@ import XCTest
 
 class ChitChat02UITests: XCTestCase {
 
-    override func setUpWithError() throws {
-        continueAfterFailure = false
-    }
-
     func testTextFields() throws {
         let app = XCUIApplication()
         app.launch()
